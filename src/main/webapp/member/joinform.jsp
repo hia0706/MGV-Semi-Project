@@ -123,6 +123,7 @@
 				let extraAddr = '';
 				
 				// userSelectedType이 'R'(도로명주소)를 클릭했을 때 도로명 주소를 입력받고
+				if (data.userSelectedType === 'R') {
 					fullAddr = data.roadAddress;
 				} else { // userSelectedType이 'R'이 아닌 경우는 지번 주소를 넣는다.
 					fullAddr = data.jibunAddress;
