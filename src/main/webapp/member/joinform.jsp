@@ -42,12 +42,12 @@
    			<form class="border bg-light p-2" name="form1" method="post" action="insert.jsp">
    				<div class="form-group mb-2 w-75">
    					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" id="member-sex-1" name="sex"  value="M" checked="checked">
-  						<label class="form-check-label" for="inlineRadio1">남성</label>
+  						<input class="form-check-input" type="radio" id="male" name="sex"  value="M" checked="checked">
+  						<label class="form-check-label" for="male">남성</label>
 					</div>
 					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" id="member-sex" name="sex" value="F">
-  						<label class="form-check-label" for="inlineRadio2">여성</label>
+  						<input class="form-check-input" type="radio" id="female" name="sex" value="F">
+  						<label class="form-check-label" for="female">여성</label>
 					</div>
    				</div>
    				
