@@ -2,7 +2,9 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<title>
+	로그인 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
+</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +15,6 @@
 <jsp:include page="nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
-
 <div class="container">
 	<div class="row mb-3">
     	<div class="col-12">
