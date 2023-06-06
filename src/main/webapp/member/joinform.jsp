@@ -23,7 +23,7 @@
 <jsp:include page="../nav.jsp">
 	<jsp:param name="menu" value="회원가입"/>
 </jsp:include>
-<div class="container">
+<div class="container" style="max-width: 600px;">
 	<div class="row mb-3">
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">회원으로 등록하기</h1>
@@ -64,7 +64,7 @@
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호 확인</label>
-   					<input type="text" class="form-control" id="member-repwd" name="repassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
+   					<input type="text" class="form-control" id="member-repwd" name="checkPassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
@@ -85,15 +85,19 @@
    				<div class="form-group mb-2 w-75">
 				 <label class="form-label">주소</label><br />
 				 	<input type="text" maxlength="5" id="zipcode" name="zipcode" style="width:100px" placeholder="우편번호" readonly="readonly" /> 
-				 	<!-- <input type="button" value="우편번호검색" id="btn"> <br /> -->
-					<a id="btn" class="btn text-black btn-outline-primary btn-sm">우편번호검색</a>
+					<a id="btn" class="btn text-black btn-outline-primary btn-sm ">우편번호검색</a>
 					<br /> 
 				 <label class="form-label"></label><br />
 					<input type="text" class="form-control" name="address1" style="width:400px" placeholder="주소" readonly="readonly" />
 					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="상세주소" />
 				</div>
    				
-   				<div class="text-end mb-2 w-100">
+   				<div class="form-group mb-5 w-50">
+   					<label class="form-label">추천인 ID</label><br />
+   					<input type="text" id="member-referee" name="referee" style="width:300px" placeholder="추천인 ID를 입력하세요."/>
+   				</div>
+
+   				<div class="text-center mb-3">
    					<button type="submit" class="btn btn-primary">회원가입</button>
    					<button type="submit" class="btn btn-danger">취소</button>
    				</div>
