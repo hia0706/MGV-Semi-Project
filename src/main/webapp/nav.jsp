@@ -20,11 +20,19 @@
 <%
 	if (loginType != null) {
 %>
+		<div class="dropdown navbar-text me-5">
+			<a href="/mgv/member/detail.jsp">
+				<img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="30" height="30">
+			</a> 
+		  <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<strong class="text-white bolder"><%=loginId %>님</strong>
+		  </button>
+		  <ul class="dropdown-menu dropdown-menu-dark">
+			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
+			    <li><a class="dropdown-item" href="/mgv/member/orderlist.jsp">구매내역</a></li>
+		  </ul>
+		</div>
 		
-		<span class="navbar-text me-5">
-			<a href="/detail.jsp"></a><img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="50" height="50">
-			<strong class="nav-link text-white bolder"><%=loginId %>님</strong> 
-		</span>
 <%		
 	}
 %>      	
