@@ -20,8 +20,10 @@
 <%
 	if (loginType != null) {
 %>
+		
 		<span class="navbar-text me-5">
-			<strong class="text-white bolder"><%=loginId %></strong>님 환영합니다.
+			<a href="/detail.jsp"></a><img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="50" height="50">
+			<strong class="nav-link text-white bolder"><%=loginId %>님</strong> 
 		</span>
 <%		
 	}
@@ -32,7 +34,7 @@
 <%
 	if (loginId != null) {
 %>
-         	<li class="nav-item"><a class="nav-link " href="/mgv/logout.jsp">로그아웃</a></li>
+         	<li class="nav-item"><a class="nav-link " href="./logout.jsp">로그아웃</a></li>
 <%
 	} else {
 %>
