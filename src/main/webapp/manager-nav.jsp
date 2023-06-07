@@ -14,7 +14,7 @@
         </a>
     	<ul class="navbar-nav me-auto">
         	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/movie.jsp">영화 관리</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/theater.jsp">극장 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/teater.jsp">극장 관리</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/product.jsp">스토어 관리</a></li>    	
       	</ul>
 <%

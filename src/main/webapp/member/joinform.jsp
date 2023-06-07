@@ -78,17 +78,9 @@
    				</div>
    				
    				<div class="form-group mb-2 w-50">
-   					<label class="form-label" id="member-tel-1">연락처</label><br />
-   					<select>
-   						<option selected disabled>통신사</option>
-   						<option>SKT</option>
-   						<option>KT</option>
-   						<option>LGU+</option>
-   						<option>알뜰SKT</option>
-   						<option>알뜰KT</option>
-   						<option>알뜰LGU+</option>
-   					</select>
-   					<input type="text" maxlength="11" id="member-tel-2" name="tel" style="width:300px" placeholder="'-' 없이 휴대폰번호를 입력하세요."/>
+   					<label class="form-label">연락처</label><br />
+   					
+   					<input type="text" maxlength="11" id="member-tel" name="tel" style="width:300px" placeholder="'-' 없이 휴대폰번호를 입력하세요."/>
    				</div>
 
    				<div class="form-group mb-2 w-50">
