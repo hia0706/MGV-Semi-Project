@@ -46,8 +46,8 @@
 <%
 	} else {
 %>
-         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" id="login" onclick="login();" href="/mgv/loginform.jsp">로그인</a></li>
-        	<li class="nav-item"><a class="nav-link <%="회원가입".equals(menu) ? "active" : "" %>" id="join" onclick="join();" href="/mgv/member/joinform.jsp">회원가입</a></li>   
+         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" href="/mgv/loginform.jsp">로그인</a></li>
+        	<li class="nav-item"><a class="nav-link <%="회원가입".equals(menu) ? "active" : "" %>" href="/mgv/member/joinform.jsp">회원가입</a></li>   
 <%
 	}
 %>

@@ -22,7 +22,8 @@ public class MemberDao {
 												   member.getAddress1(),
 												   member.getAddress2(),
 												   member.getBirth(),
-												   member.getTel());
+												   member.getTel(),
+												   member.getReferee());
 	}
 	
 	public Member getMemberById(String id) {
