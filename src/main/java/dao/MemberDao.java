@@ -17,6 +17,7 @@ public class MemberDao {
 												   member.getCheckPassword(),
 												   member.getName(),
 												   member.getSex(),
+												   member.getEmail(),
 												   member.getZipcode(),
 												   member.getAddress1(),
 												   member.getAddress2(),
@@ -31,6 +32,7 @@ public class MemberDao {
 			member.setPassword(rs.getString("member_password"));
 			member.setSex(rs.getString("member_sex"));
 			member.setName(rs.getString("member_name"));
+			member.setEmail(rs.getString("member_email"));
 			member.setBirth(rs.getString("member_birth"));
 			member.setTel(rs.getString("member_tel"));
 			member.setZipcode(rs.getString("member_zipcode"));
