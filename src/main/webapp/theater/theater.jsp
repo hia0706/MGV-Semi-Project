@@ -86,7 +86,8 @@
 		</div>
 		<div class="theater_detail text-center bg-dark p-2 text-white bg-opacity-75">
 			<img alt="대학로" src="../images/theater1.jpg">
-			<div >...</div>
+			<div>
+			</div>
 		</div>
 	</div>
 </div>
