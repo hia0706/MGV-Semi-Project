@@ -81,6 +81,11 @@
    					<label class="form-label">연락처</label><br />
    					<input type="text" maxlength="11" id="member-tel" name="tel" style="width:300px" placeholder="'-' 없이 휴대폰번호를 입력하세요."/>
    				</div>
+
+   				<div class="form-group mb-2 w-50">
+   					<label class="form-label">email</label><br />
+   					<input type="text" maxlength="50" id="member-email" name="email" style="width:300px" placeholder="이메일을 입력해주세요."/>
+   				</div>
    				
    				<div class="form-group mb-2 w-75">
 				 <label class="form-label">주소</label><br />

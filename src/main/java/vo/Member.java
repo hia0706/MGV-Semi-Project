@@ -9,6 +9,7 @@ public class Member {
 	private String checkPassword;
 	private String name;
 	private String sex;
+	private String email;
 	private String zipcode;
 	private String address1;
 	private String address2;
@@ -58,6 +59,14 @@ public class Member {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 	public String getZipcode() {
