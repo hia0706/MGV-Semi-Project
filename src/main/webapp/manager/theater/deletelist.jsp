@@ -12,7 +12,7 @@
 		
 	// 전체 데이터 개수 조회
 	ManagerTheaterDao managerTheaterDao = new ManagerTheaterDao();
-	String disable = "N";
+	String disable = "Y";
 	int totalRows = managerTheaterDao.getTotalRows(disable);
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
@@ -37,7 +37,7 @@
 <div class="container my-3">
 	<div class="row mb-3">
     	<div class="col-12">
-        	<h1 class="border bg-light fs-4 p-2">극장 목록</h1>
+        	<h1 class="border bg-light fs-4 p-2">삭제된 극장 목록</h1>
       	</div>
    	</div>
 	<div class="row mb-3">
@@ -55,7 +55,7 @@
 				<tbody>
 <%
 	for(Theater theater : theaterList) {
-		if("N".equals(theater.getDisable())) {
+		if("Y".equals(theater.getDisable())) {
 %>
 					<tr class="align-middle">
 						<td><a href="detail.jsp?no=<%=theater.getNo() %>" class="text-black text-decoration-none"><%=theater.getNo() %></a></td>
@@ -74,7 +74,7 @@
 	
 	<div class="text-end">
     	<a href="form.jsp" class="btn btn-primary btn-sm">새 극장 등록</a>
-    	<a href="deletelist.jsp" class="btn btn-primary btn-sm">삭제된 극장</a>
+    	<a href="list.jsp" class="btn btn-primary btn-sm">등록된 극장</a>
     </div>
 	
 	<div class="row mb-3">
@@ -82,21 +82,21 @@
 						<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+						<a href="deletelist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 					</li>
 <%
 	for(int num = pagination.getBeginPage() ; num <= pagination.getEndPage(); num++) {
 %>	
 					
 					<li class = "page-item <%=pageNo == num ? "active" : "" %>">
-						<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
+						<a href="deletelist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
 					</li>
 <%
 	}
 %>
 					
 					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+						<a href="deletelist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 					</li>
 				</ul>
 			</nav>
