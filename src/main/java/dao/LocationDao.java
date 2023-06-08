@@ -8,7 +8,7 @@ import vo.Location;
 public class LocationDao {
 
 	public List<Location> getLocations() {
-		return DaoHelper.selectList("locationDao.getLocations", rs -> {
+		return DaoHelper.selectList("locationDao.getAllLocations", rs -> {
 			Location location = new Location();
 			location.setNo(rs.getInt("location_no"));
 			location.setName(rs.getString("location_name"));
