@@ -2,7 +2,7 @@ package vo;
 
 import java.util.Date;
 
-public class Products {
+public class Product {
 
 	private int no;
 	private String name;
@@ -12,9 +12,15 @@ public class Products {
 	private Date createDate;
 	private Date updateDate;
 	private String soldOut;
+	private String description;
 	private Order order;
+	private ProductCategory productCategory;
 	
-	public Products() {}
+	public Product() {}
+	
+	public Product(int no) {
+		this.no = no;
+	}
 
 	public int getNo() {
 		return no;
@@ -80,12 +86,28 @@ public class Products {
 		this.soldOut = soldOut;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Order getOrder() {
 		return order;
 	}
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
 	}
 	
 }
