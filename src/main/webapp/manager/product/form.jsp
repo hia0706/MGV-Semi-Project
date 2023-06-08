@@ -1,4 +1,12 @@
+<%@page import="java.util.List"%>
+<%@page import="dao.ProductCategoryDao"%>
+<%@page import="vo.ProductCategory"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%
+	// 모든 카테고리 목록정보를 조회하기
+	ProductCategoryDao productCategoryDao = new ProductCategoryDao();
+	List<ProductCategory> categories = productCategoryDao.getCategories();
+%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -10,7 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../../manager-nav.jsp">
+<jsp:include page="../../nav.jsp">
 	<jsp:param value="menu" name="스토어"/>
 </jsp:include>
 <div class="container">
@@ -23,7 +31,18 @@
    			<p>물품 정보를 입력하고 등록하세요.</p>
 
    			<form class="border bg-light p-2" name="form" method="post" action="insert.jsp">
-   				
+   				<div class="form-group mb-2">
+					<label class="form-label">카테고리</label>
+					<select class="form-select" name="catNo">
+<%
+	for (ProductCategory cat : categories) {
+%>	
+						<option value="<%=cat.getNo() %>"> <%=cat.getName() %></option>
+<%		
+	}
+%>
+					</select>
+				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">물품명</label>
    					<input type="text" class="form-control" id="product-name" name="name" style="width:300px" placeholder="물품명을 입력해주세요."/>
