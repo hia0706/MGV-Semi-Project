@@ -3,5 +3,5 @@
 	// 로그아웃 처리
 	session.invalidate();
 	
-	response.sendRedirect("home.jsp");
+	response.sendRedirect("/mgv/home.jsp");
 %>

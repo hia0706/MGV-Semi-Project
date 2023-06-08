@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="nav.jsp">
+<jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
 <div class="container">
@@ -27,7 +27,7 @@
    			<form class="border bg-light p-3" method="post" action="login.jsp">
    				<div class="form-group mb-2 w-75">
    					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" name="type"  value="MEMBER" checked="checked">
+  						<input class="form-check-input" type="radio" name="type" value="MEMBER" checked="checked">
   						<label class="form-check-label" for="inlineRadio1">회원</label>
 					</div>
    				</div>
@@ -38,7 +38,7 @@
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호</label>
-   					<input type="text" class="form-control" id="member-pwd" name="password" />
+   					<input type="password" class="form-control" id="member-pwd" name="password" />
    				</div>
    				<div class="text-end w-75">
    					<button type="submit" class="btn btn-primary">로그인</button>
