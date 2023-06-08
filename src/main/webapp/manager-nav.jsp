@@ -10,12 +10,12 @@
 		
 	<div class="container-fluid">
 		<a href="manager-home.jsp">
-           <img src="./images/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
+           <img src="/mgv/images/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
         </a>
     	<ul class="navbar-nav me-auto">
-        	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/movie.jsp">영화 관리</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/teater.jsp">극장 관리</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/product.jsp">스토어 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/movie/list.jsp">영화 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/theater/list.jsp">극장 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/product/list.jsp">스토어 관리</a></li>    	
       	</ul>
 <%
 	if (loginType != null) {
@@ -43,6 +43,6 @@
       	</ul>	
    	</div>
    			<a href="./home.jsp">
-           <img src="./images/manager.png" alt="mgv" width="5" height="5" class="" >
+           <img src="/mgv/images/manager.png" alt="mgv" width="5" height="5" class="" >
         	</a>	
 </nav>
