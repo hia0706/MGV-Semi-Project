@@ -2,7 +2,7 @@ package vo;
 
 import java.util.Date;
 
-public class Products {
+public class Product {
 
 	private int no;
 	private String name;
