@@ -66,7 +66,7 @@
 					<br /> 
 				 <label class="form-label"></label><br />
 					<input type="text" class="form-control" name="address1" style="width:400px" placeholder="도로명주소" readonly="readonly" />
-					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="지번주소" />
+					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="지번주소" readonly="readonly" />
 				</div>
    				
 
@@ -101,6 +101,7 @@ btn.addEventListener("click", () => {
 				parAddr = data.jibunAddress;
 			} else { // userSelectedType이 'R'이 아닌 경우는 지번 주소를 넣는다.
 				fullAddr = data.jibunAddress;
+				parAddr = data.jibunAddress;
 			}
 			
 			// userSelectedType이 'R'(도로명주소)일 때
