@@ -8,7 +8,7 @@ public class Member {
 	private String password;
 	private String checkPassword;
 	private String name;
-	private String sex;
+	private String gender;
 	private String email;
 	private String zipcode;
 	private String address1;
@@ -53,12 +53,12 @@ public class Member {
 		this.name = name;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 	public void setEmail(String email) {
