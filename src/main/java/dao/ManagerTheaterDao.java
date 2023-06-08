@@ -34,4 +34,13 @@ public class ManagerTheaterDao {
 			return rs.getInt("cnt");
 		}, disable);
 	}
+	
+	public void insertTheater(Theater theater) {
+		DaoHelper.update("managerTheaterDao.insertTheater", theater.getNo(),
+															theater.getLocation().getNo(),
+															theater.getName(),
+															theater.getAddress1(),
+															theater.getAddress2(),
+															theater.getTel());
+	}
 }
