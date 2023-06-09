@@ -19,15 +19,9 @@
 	
 	// 업무로직 수행
 	ProductDao productDao = ProductDao.getInstance();
-	// 해당 상품과 같은 이름의 상품이 존재하는지 체크
-	if (productDao.getProductByName(name) != null) {
-		// 해당 상품이 존재한다면 되돌아갈 URL
-		response.sendRedirect("product/form.jsp?err=dup");
-	}
-	
 	// 신규상품 등록
 	productDao.insertProduct(product);
 	
-	response.sendRedirect("product/form.jsp");
+	response.sendRedirect("form.jsp");
 	
 %>
