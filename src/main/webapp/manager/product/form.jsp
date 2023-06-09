@@ -33,7 +33,7 @@
    			<form class="border bg-light p-2" name="form" method="post" action="insert.jsp">
    				<div class="form-group mb-2">
 					<label class="form-label">카테고리</label>
-					<select class="form-select" name="catNo">
+					<select class="form-select" name="product-catNo">
 <%
 	for (ProductCategory cat : categories) {
 %>	
@@ -45,20 +45,20 @@
 				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">물품명</label>
-   					<input type="text" class="form-control" id="product-name" name="name" style="width:300px" placeholder="물품명을 입력해주세요."/>
+   					<input type="text" class="form-control" name="product-name" style="width:300px" placeholder="물품명을 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">물품가격</label>
-   					<input type="text" class="form-control" id="product-price" name="price" style="width:300px" placeholder="물품 가격을 입력해주세요."/>
+   					<input type="text" class="form-control" name="product-price" style="width:300px" placeholder="물품 가격을 입력해주세요."/>
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">물품 수량</label>
-   					<input type="text" class="form-control" id="product-stock" name="stock" style="width:300px" placeholder="물품 수량을 입력해주세요."/>
+   					<input type="text" class="form-control" name="product-stock" style="width:300px" placeholder="물품 수량을 입력해주세요."/>
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">물품 설명</label>
-   					<input type="text" class="form-control" id="product-description" name="description" style="width:500px" placeholder="상세 설명을 입력해주세요."/>
+   					<input type="text" class="form-control" name="product-description" style="width:500px" placeholder="상세 설명을 입력해주세요."/>
    				</div>
    				
 
