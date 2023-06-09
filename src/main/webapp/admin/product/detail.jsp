@@ -76,14 +76,14 @@
 			</table>
 			<div>
 				<!-- 
-					현재 URL = http://localhost/app3/product/detail.jsp?no=XXX'
+					현재 URL = http://localhost/mgv/admin/product/detail.jsp?no=XXX'
 					
-					목록 ->    http://localhost/app3/product/list.jsp
-					삭제 ->    http://localhost/app3/product/delete.jsp
+					목록 ->    http://localhost/mgv/admin/product/list.jsp
+					삭제 ->    http://localhost/mgv/admin/product/delete.jsp
 				 -->
 			</div>
 			<div class="text-end">
-				<a href="delete.jsp?no=<%=product.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
+				<a href="delete.jsp?name=<%=product.getName() %>" class="btn btn-danger btn-sm">삭제</a>
 				<a href="modifyForm.jsp?no=<%=product.getNo() %>" class="btn btn-warning btn-sm">수정</a>
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
 			</div>
