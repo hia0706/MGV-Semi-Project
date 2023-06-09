@@ -60,6 +60,10 @@ public class ProductDao {
 		}, begin, end);
 	}
 	
+	public void deleteProductByName(String name) {
+		DaoHelper.update("productDao.deleteProductByName", name);
+	}
+	
 	public int getTotalRows() {
 		return DaoHelper.selectOne("productDao.getTotalRows", rs -> {
 			return rs.getInt("cnt");
