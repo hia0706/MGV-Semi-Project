@@ -115,13 +115,5 @@ public class Movie {
 		this.releaseDate = releaseDate;
 	}
 	
-	public String getDisable() {
-		return disable;
-	}
-	
-	public void setDisable(String disable) {
-		this.disable = disable;
-	}
-	
 }
 
