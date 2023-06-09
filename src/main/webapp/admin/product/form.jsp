@@ -63,8 +63,8 @@
    				
 
    				<div class="text-end">
-   					<button type="submit" class="btn btn-primary">물품등록</button>
-   					<button type="reset" class="btn btn-danger">취소</button>
+   					<a href="list.jsp" type="reset" class="btn btn-secondary btn-sm">취소</a>
+   					<button type="submit" class="btn btn-primary btn-sm">물품등록</button>
    				</div>
    			</form>
    		</div>
