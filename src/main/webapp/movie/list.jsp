@@ -168,7 +168,7 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp">
-		<jsp:param name="menu" value="홈" />
+		<jsp:param name="menu" value="무비" />
 	</jsp:include>
 
 
