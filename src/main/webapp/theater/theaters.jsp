@@ -99,13 +99,15 @@
 				  <div class="tab-pane fade show active" id="theater-tab-pane-1" role="tabpanel" aria-labelledby="theater-1-tab" tabindex="0" >
 				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
 <%
-	
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==1){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark">CGV강남</a>
+					  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
-	
+		}
+	}
 %>				  
 					</ul>
 				  </div>
