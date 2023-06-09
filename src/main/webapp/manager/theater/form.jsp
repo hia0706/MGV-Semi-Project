@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../../manager-nav.jsp">
+<jsp:include page="../../manager/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
 <div class="container" style="max-width: 600px;">
@@ -66,11 +66,11 @@
 					<br /> 
 				 <label class="form-label"></label><br />
 					<input type="text" class="form-control" name="address1" style="width:400px" placeholder="도로명주소" readonly="readonly" />
-<<<<<<< HEAD
+
 					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="지번주소" readonly="readonly" />
-=======
+
 					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="지번주소"  readonly="readonly" />
->>>>>>> feature/hawon
+
 				</div>
    				
 

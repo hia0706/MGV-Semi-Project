@@ -5,10 +5,9 @@
 	// 회원으로 회원가입 시킨다.
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
-	String checkPassword = request.getParameter("checkPassword");
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");
-	String sex = request.getParameter("sex");
+	String gender = request.getParameter("gender");
 	String zipcode = request.getParameter("zipcode");
 	String address1 = request.getParameter("address1");
 	String address2 = request.getParameter("address2");
@@ -25,9 +24,8 @@
 	Member member = new Member();
 	member.setId(id);
 	member.setPassword(password);
-	member.setCheckPassword(checkPassword);
 	member.setName(name);
-	member.setSex(sex);
+	member.setGender(gender);
 	member.setEmail(email);
 	member.setZipcode(zipcode);
 	member.setAddress1(address1);

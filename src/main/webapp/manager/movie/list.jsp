@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../manager-nav.jsp">
+<jsp:include page="../../manager/nav.jsp">
    <jsp:param value="manu" name="영화"/>
 </jsp:include>
 
