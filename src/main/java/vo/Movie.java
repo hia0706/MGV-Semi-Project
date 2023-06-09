@@ -6,19 +6,53 @@ public class Movie {
 
 	private int no;
 	private int rank;
+	private int rankInten;
+	private int audiCnt;
 	private String title;
 	private String genre;
 	private String director;
 	private String cast;
 	private String description;
-	private Date releaseDate;
-	private String disable; 
-	
+	private String posterURL;
+	private String releaseDate;
+	private String isPlaying;
+	public String getIsPlaying() {
+		return isPlaying;
+	}
+
+	public void setIsPlaying(String isPlaying) {
+		this.isPlaying = isPlaying;
+	}
+
 
 	public Movie() {}
 
 	public int getNo() {
 		return no;
+	}
+
+	public String getPosterURL() {
+		return posterURL;
+	}
+
+	public int getRankInten() {
+		return rankInten;
+	}
+
+	public void setRankInten(int rankInten) {
+		this.rankInten = rankInten;
+	}
+
+	public int getAudiCnt() {
+		return audiCnt;
+	}
+
+	public void setAudiCnt(int audiCnt) {
+		this.audiCnt = audiCnt;
+	}
+
+	public void setPosterURL(String posterURL) {
+		this.posterURL = posterURL;
 	}
 
 	public void setNo(int no) {
@@ -73,11 +107,11 @@ public class Movie {
 		this.description = description;
 	}
 
-	public Date getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 	
