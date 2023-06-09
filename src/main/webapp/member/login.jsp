@@ -3,7 +3,6 @@
 <%@page import="javax.swing.RepaintManager"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	// 로그인처리
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
 	String type = request.getParameter("type");
