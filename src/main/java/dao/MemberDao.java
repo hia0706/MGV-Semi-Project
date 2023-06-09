@@ -14,9 +14,8 @@ public class MemberDao {
 	public void insertMember(Member member) {
 		DaoHelper.update("memberDao.insertMember", member.getId(),
 												   member.getPassword(),
-												   member.getCheckPassword(),
 												   member.getName(),
-												   member.getSex(),
+												   member.getGender(),
 												   member.getEmail(),
 												   member.getZipcode(),
 												   member.getAddress1(),
@@ -31,9 +30,10 @@ public class MemberDao {
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
 			member.setPassword(rs.getString("member_password"));
-			member.setSex(rs.getString("member_sex"));
+			member.setGender(rs.getString("member_gender"));
 			member.setName(rs.getString("member_name"));
 			member.setEmail(rs.getString("member_email"));
+			member.setType(rs.getString("member_type"));
 			member.setBirth(rs.getString("member_birth"));
 			member.setTel(rs.getString("member_tel"));
 			member.setZipcode(rs.getString("member_zipcode"));

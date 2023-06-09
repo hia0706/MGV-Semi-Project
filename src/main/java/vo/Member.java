@@ -7,8 +7,9 @@ public class Member {
 	private String id;
 	private String password;
 	private String checkPassword;
+	private String type;
 	private String name;
-	private String sex;
+	private String gender;
 	private String email;
 	private String zipcode;
 	private String address1;
@@ -44,6 +45,14 @@ public class Member {
 	public void setCheckPassword(String checkPassword) {
 		this.checkPassword = checkPassword;
 	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getType() {
+		return type;
+	}
 
 	public String getName() {
 		return name;
@@ -53,12 +62,12 @@ public class Member {
 		this.name = name;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 	public void setEmail(String email) {
