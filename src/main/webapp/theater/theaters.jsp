@@ -1,3 +1,5 @@
+<%@page import="vo.Theater"%>
+<%@page import="dao.TheaterDao"%>
 <%@page import="java.util.List"%>
 <%@page import="vo.Location"%>
 <%@page import="dao.LocationDao"%>
@@ -7,12 +9,15 @@
 	String loginId = (String)session.getAttribute("loginId");
 
 	// 지역정보 받아오기
-	LocationDao locationDao = new LocationDao();
+	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
 	
 	// 자주가는 극장 정보 가져오기
 	
 	// 극장정보 가져오기
+	TheaterDao theaterDao = TheaterDao.getInstance();
+	List<Theater> theaterList = theaterDao.getAllTheaters(); 
+	
 %>
 <!doctype html>
 <html lang="ko" >
@@ -34,16 +39,20 @@
         line-height: 22px;
         color:crimson;
     }
-    
-      .theater_detail textarea {
-    width: 38.3%;
-    border: none;
-    resize: none;
-  }
   	.list-group-item a{
   	text-decoration: none;
   	}
-
+  	.sect-city,.theater_wrap{
+  	width: 1000px;
+  	}
+  	.container
+  	{
+  	width: 1000px;
+  	padding: 0px;
+  	}
+	table{
+	font-size: 12pt;
+	}
 </style>
 </head>
 <body>
@@ -69,37 +78,46 @@
 						</ul>
 					</td>
 					<td>
-					<button type="button" class="btn btn-danger">자주가는 CGV 설정</button>
+					<button type="button" class="btn btn-danger">자주가는 극장 설정</button>
 					</td>
 				</tr>
 			</table>			
 		</div>
-		<div class="sect-city border" >
-			<ul class="nav nav-tabs " id="myTab" role="tablist" >
+			<div class="sect-city border" >
+				<ul class="nav nav-tabs " id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
 %>			
-			  <li class="nav-item col-md-auto" role="presentation">
-			    <button class="nav-link link-dark  col-md-auto" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
-			  </li>
+				  <li class="nav-item col-md-auto" role="presentation">
+				    <button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab" data-bs-toggle="tab" data-bs-target="#theater-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
+				  </li>
 <%
 	}
 %>			  
-			</ul>
-			<div class="tab-content" id="myTabContent">
-			  <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-			  	<ul class="list-group list-group-horizontal row row-cols-4 px-3">
-				  <li class="list-group-item col-3 border-start border-0 " >
-				  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark">CGV강남</a>
-				  </li>
-				 
-				 
 				</ul>
-			  </div>
-			  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-			  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-			  <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
-			</div>
+				<div class="tab-content" id="myTabContent">
+				  <div class="tab-pane fade show active" id="theater-tab-pane-1" role="tabpanel" aria-labelledby="theater-1-tab" tabindex="0" >
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark">CGV강남</a>
+					  </li>
+<%
+	
+%>				  
+					</ul>
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-2" role="tabpanel" aria-labelledby="theater-2-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-3" role="tabpanel" aria-labelledby="theater-3-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-4" role="tabpanel" aria-labelledby="theater-4-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-5" role="tabpanel" aria-labelledby="theater-5-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-6" role="tabpanel" aria-labelledby="theater-6-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-7" role="tabpanel" aria-labelledby="theater-7-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-8" role="tabpanel" aria-labelledby="theater-8-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-9" role="tabpanel" aria-labelledby="theater-9-tab" tabindex="0">...</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -107,23 +125,69 @@
 <div class="container">
 	<div>
 		<div>
-			<h4>극장
+			<h4>강남
 			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 -->
 			<i class="bi bi-heart-fill text-muted"></i>
 			</h4>
 		</div>
-		<div class="theater_detail text-center">
+<script type="text/javascript">
+<!-- theater_detail클래스에 속한 ul에 속한 a태그를 누르면 tab-cont-wrap에 href에 해당하는 div를 보이게 하고 다른 것들은 안보이게 바꾼다.-->
+function activeTab(num) {
+	let tabContents = document.querySelectorAll(".tab-cont");
+	let tabHeads = document.querySelectorAll(".tab-head");
+	tabHeads.forEach(function(el) {
+		el.classList.remove("active");
+	}) 
+	tabContents.forEach(function(el) {
+		el.style.display = "none";
+	})
+	document.getElementById("tab-menu-"+num).classList.add("active");
+	document.getElementById("tab-"+num).style.display = "block";
+}
+</script>		
+		<div class="theater_detail ">
 			<img alt="대학로" src="../images/theater1.jpg">
 			<div>
-				<textarea class="bg-dark p-2 text-white bg-opacity-75" rows="10" cols="30" disabled="disabled">2222222233333333334</textarea>
-				<textarea class="bg-dark p-2 text-white bg-opacity-75" rows="10" cols="30" disabled="disabled"></textarea>
+				<ul class="nav nav-tabs nav-fill ">
+				  <li class="nav-item ">
+				    <a id= "tab-menu-01" class="nav-link link-dark tab-head active" href="#tab01" title="극장정보 탭으로 이동" onclick="activeTab('01')">극장정보</a>
+				  </li>
+				  <li class="nav-item">
+				    <a id= "tab-menu-02" class="nav-link link-dark tab-head" href="#tab02" title="상영시간표 탭으로 이동"  onclick="activeTab('02')">상영시간표</a>
+				  </li>
+				  <li class="nav-item">
+				    <a id= "tab-menu-03" class="nav-link link-dark tab-head" href="#tab03" title="관람료 탭으로 이동"  onclick="activeTab('03')">관람료</a>
+				  </li>
+				</ul>
 			</div>
 		</div>
-		<div class="mx-auto" style="width: 500px;">
-			<div class="btn-group">
-			  <a href="" class="btn btn-danger active" aria-current="page">위치안내</a>
-			  <a href="" class="btn btn-danger">관람가격안내</a>
-			  <a href="" class="btn btn-danger">무엇무엇안내</a>
+		<div class="tab-cont-wrap">
+			<div id="tab-01" class="tab-cont" style="display: block;">
+				<table style="margin-left: 10px">
+						<tbody>
+							<tr>
+								<th>공지사항1</th>
+							</tr>
+						</tbody>
+				</table>
+			</div>
+			<div id="tab-02" class="tab-cont" style="display: none;">
+				<table style="margin-left: 10px">
+						<tbody>
+							<tr>
+								<th>공지사항2</th>
+							</tr>
+						</tbody>
+				</table>
+			</div>
+			<div id="tab-03" class="tab-cont" style="display: none;">
+				<table style="margin-left: 10px">
+						<tbody>
+							<tr>
+								<th>공지사항3</th>
+							</tr>
+						</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
