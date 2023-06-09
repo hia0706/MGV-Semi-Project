@@ -35,11 +35,14 @@
         color:crimson;
     }
     
-      textarea {
+      .theater_detail textarea {
     width: 38.3%;
     border: none;
     resize: none;
   }
+  	.list-group-item a{
+  	text-decoration: none;
+  	}
 
 </style>
 </head>
@@ -57,7 +60,7 @@
 					<td>
 						<ul class="list-group list-group-horizontal ">
 						  <li class="list-group-item" >
-						  	<a href="nothing.jsp" style="text-decoration: none;" class="link-dark">An item</a>
+						  	<a href="nothing.jsp"  class="link-dark">An item</a>
 						  </li>
 						  <li class="list-group-item">A second item</li>
 						  <li class="list-group-item ">A third item</li>
@@ -71,13 +74,13 @@
 				</tr>
 			</table>			
 		</div>
-		<div class="sect-city " >
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<div class="sect-city border" >
+			<ul class="nav nav-tabs " id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
 %>			
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link link-dark" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
+			  <li class="nav-item col-md-auto" role="presentation">
+			    <button class="nav-link link-dark  col-md-auto" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
 			  </li>
 <%
 	}
@@ -85,10 +88,12 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 			  <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-			  	<ul class="list-group list-group-horizontal row row-cols-4 px-4">
-				  <li class="list-group-item col-3" >
+			  	<ul class="list-group list-group-horizontal row row-cols-4 px-3">
+				  <li class="list-group-item col-3 border-start border-0 " >
 				  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark">CGV강남</a>
 				  </li>
+				 
+				 
 				</ul>
 			  </div>
 			  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
