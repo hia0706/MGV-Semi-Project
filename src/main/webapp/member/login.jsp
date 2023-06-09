@@ -8,28 +8,28 @@
 	String password = request.getParameter("password");
 	String type = request.getParameter("type");
 	
-	if ("MEMBER".equals(type)) {
-		MemberDao memberDao = MemberDao.getInstance();
-		Member member = memberDao.getMemberById(id);
-		if (member == null) {
-			response.sendRedirect("loginform.jsp?err=fail");
-			return;
-		} else if ("ADMIN".equals(type)) {
-		response.sendRedirect("/mgv/manager/home.jsp");
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	
+	if (member == null) {
+		response.sendRedirect("loginform.jsp?err=fail");
 		return;
-		}
-		
-		if (!member.getPassword().equals(password)) {
-			response.sendRedirect("loginform.jsp?err=fail");
-			return;
-		}
-		
-		session.setAttribute("loginId", member.getId());
-		session.setAttribute("loginType", "MEMBER");
-		
-		response.sendRedirect("/mgv/home.jsp");
 	}
 	
+	if (!member.getPassword().equals(password)) {
+		response.sendRedirect("loginform.jsp?err=fail");
+		return;
+	}
 	
+	session.setAttribute("loginId", member.getId());
+	
+	if ("MEMBER".equals(type)) {
+		session.setAttribute("loginType", "MEMBER");
+		
+	} else if ("ADMIN".equals(member.getType())) {
+		session.setAttribute("loginType", "ADMIN");
+	}
+		
+		response.sendRedirect("/mgv/home.jsp");
 	
 %>

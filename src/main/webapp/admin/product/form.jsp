@@ -1,6 +1,6 @@
-<%@page import="java.util.List"%>
-<%@page import="dao.ProductCategoryDao"%>
 <%@page import="vo.ProductCategory"%>
+<%@page import="dao.ProductCategoryDao"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	// 모든 카테고리 목록정보를 조회하기
@@ -62,7 +62,7 @@
    				</div>
    				
 
-   				<div class="text-center mb-3">
+   				<div class="text-end">
    					<button type="submit" class="btn btn-primary">물품등록</button>
    					<button type="reset" class="btn btn-danger">취소</button>
    				</div>

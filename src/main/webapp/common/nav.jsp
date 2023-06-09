@@ -54,15 +54,5 @@
 %>
       	</ul>
    	</div>
-   	
-<%
 
-%>
-	
-<%
-
-%>
-	        	<a href="/mgv/manager/loginform.jsp">
-	           <img src="/mgv/images/manager.png" alt="mgv" width="5" height="5" class="" >
-	        	</a>
 </nav>

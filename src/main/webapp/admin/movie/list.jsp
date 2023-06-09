@@ -1,13 +1,16 @@
+<%@page import="vo.Movie"%>
+<%@page import="dao.ManagerMovieDao"%>
 <%@page import="java.util.List"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	//세션에서 로그인된 사용자 정보를 조회한다
-	String loginType = (String) session.getAttribute("loginType");
-	String loginId = (String) session.getAttribute("loginId");
-	
-	
 
+	//세션에서 로그인된 사용자 정보를 조회한다
+	
+	ManagerMovieDao managerMovieDao = ManagerMovieDao.getInstance();
+
+	List<Movie> movieList = managerMovieDao.getMovies();
+	
 %>
 
 <!doctype html>
@@ -24,7 +27,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../manager/nav.jsp">
+<jsp:include page="../../admin/nav.jsp">
    <jsp:param value="manu" name="영화"/>
 </jsp:include>
 
@@ -46,38 +49,23 @@
 					</tr>
 				</thead>
 				<tbody>
+			
+<% for (Movie movie : movieList) { %>			
 				
 					<tr class="align-middle">
-						<td>1</td>
-						<td>범죄도시3</td>
-						<td>2023.05.31</td>
+						<td><%=movie.getRank() %></td>
+						<td><a href="detail.jsp?no=<%=movie.getNo() %>" class="text-black text-decoration-none"><%=movie.getTitle() %></td>
+						<td><%=movie.getReleaseDate() %></td>
 					</tr>
-					<tr class="align-middle">
-						<td>2</td>
-						<td>플래시</td>
-						<td>2023.06.14</td>
-					</tr>
-					<tr class="align-middle">
-						<td>3</td>
-						<td>트랜스포머-비스트의 서막</td>
-						<td>2023.06.06</td>
-					</tr>
-					<tr class="align-middle">
-						<td>4</td>
-						<td>엘리멘탈</td>
-						<td>2023.06.14</td>
-					</tr>
-					<tr class="align-middle">
-						<td>5</td>
-						<td>극장판 포켓몬스터 DP-아르세우스 초극의 시공으로</td>
-						<td>2023.05.31</td>
-					</tr>
-				
+					
+<% } %>			
+
+			
 				</tbody>
 			</table>
 			
 			<div class="text-end">
-					<a href="insert.jsp" class="btn btn-primary btn-sm">새 영화 등록</a>
+					<a href="insertform.jsp" class="btn btn-primary btn-sm">새 영화 등록</a>
 			</div>
 		</div>
 	</div>

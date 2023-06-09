@@ -33,6 +33,7 @@ public class MemberDao {
 			member.setGender(rs.getString("member_gender"));
 			member.setName(rs.getString("member_name"));
 			member.setEmail(rs.getString("member_email"));
+			member.setType(rs.getString("member_type"));
 			member.setBirth(rs.getString("member_birth"));
 			member.setTel(rs.getString("member_tel"));
 			member.setZipcode(rs.getString("member_zipcode"));
