@@ -14,9 +14,9 @@
            <img src="/mgv/images/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
         </a>
     	<ul class="navbar-nav me-auto">
-        	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/movie/list.jsp">영화 관리</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/theater/list.jsp">극장 관리</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/manager/product/list.jsp">스토어 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/movie/list.jsp">영화 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/theater/list.jsp">극장 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/product/list.jsp">스토어 관리</a></li>    	
       	</ul>
 <%
 	if (loginId != null) {
@@ -31,7 +31,6 @@
       	<!-- 장바구니 보류 -->
         	<%-- <li class="nav-item"><a class="nav-link <%="장바구니".equals(menu) ? "active" : "" %>" href="/movie/cart.jsp">장바구니</a></li>   --%>  	
          	<li class="nav-item"><a class="nav-link " href="/mgv/member/logout.jsp">로그아웃</a></li>
-
       	</ul>	
    	</div>
    			

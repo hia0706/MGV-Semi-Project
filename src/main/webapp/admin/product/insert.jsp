@@ -18,4 +18,10 @@
 	product.setProductCategory(new ProductCategory(catNo));
 	
 	// 업무로직 수행
+	ProductDao productDao = ProductDao.getInstance();
+	// 신규상품 등록
+	productDao.insertProduct(product);
+	
+	response.sendRedirect("form.jsp");
+	
 %>

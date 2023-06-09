@@ -12,7 +12,9 @@ public class Movie {
 	private String cast;
 	private String description;
 	private Date releaseDate;
+	private String disable; 
 	
+
 	public Movie() {}
 
 	public int getNo() {
@@ -79,4 +81,13 @@ public class Movie {
 		this.releaseDate = releaseDate;
 	}
 	
+	public String getDisable() {
+		return disable;
+	}
+	
+	public void setDisable(String disable) {
+		this.disable = disable;
+	}
+	
 }
+
