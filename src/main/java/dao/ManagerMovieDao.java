@@ -7,6 +7,7 @@ import vo.Movie;
 
 public class ManagerMovieDao {
 
+	
 	private static ManagerMovieDao instance = new ManagerMovieDao();
 	private ManagerMovieDao() {}
 	public static ManagerMovieDao getInstance() {
