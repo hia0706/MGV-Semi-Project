@@ -45,7 +45,7 @@
 			<p>전체 상품 목록을 확인하세요.</p>
 			<table class="table">
 				<thead>
-					<tr>
+					<tr class="table-dark">
 						<th>상품 카테고리</th>
 						<th>상품명</th>
 						<th>상품가격</th>
