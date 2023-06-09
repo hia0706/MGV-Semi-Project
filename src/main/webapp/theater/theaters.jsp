@@ -84,7 +84,7 @@
 			</table>			
 		</div>
 			<div class="sect-city border" >
-				<ul class="nav nav-tabs " id="myTab" role="tablist" >
+				<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
 %>			
