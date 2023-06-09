@@ -23,7 +23,7 @@ public class ProductDao {
 	}
 	
 	public Product getProductByName(String name) {
-		return DaoHelper.selectOne("", rs -> {
+		return DaoHelper.selectOne("productDao.getProductByName", rs -> {
 			Product product = new Product();
 			product.setNo(rs.getInt("product_no"));
 			product.setName(rs.getString("product_name"));
@@ -35,7 +35,7 @@ public class ProductDao {
 			product.setDescription(rs.getString("product_description"));
 			
 			ProductCategory cat = new ProductCategory();
-			cat.setNo(rs.getInt("cat_no"));
+			cat.setName(rs.getString("cat_name"));
 			product.setProductCategory(cat);
 			
 			return product;
