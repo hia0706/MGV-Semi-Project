@@ -1,4 +1,14 @@
+<%@page import="dao.ProductDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%
+	// 요청 URL : http://localhost/mgv/admin/product/detail.jsp
+	// 요청파라미터 조회
+	String name = request.getParameter("name");
+	
+	// 업무로직 수행
+	ProductDao productDao = ProductDao.getInstance();
+	
+%>
 <!doctype html>
 <html lang="ko">
 <head>
