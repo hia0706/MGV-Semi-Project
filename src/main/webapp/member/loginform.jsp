@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -40,7 +41,7 @@
    					<label class="form-label">비밀번호</label>
    					<input type="password" class="form-control" id="member-pwd" name="password" />
    				</div>
-   				<div class="text-end w-75">
+   				<div class="text-end w-75">				
    					<button type="submit" class="btn btn-primary">로그인</button>
    				</div>
    			</form>

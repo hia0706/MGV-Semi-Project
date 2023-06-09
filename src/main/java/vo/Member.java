@@ -7,6 +7,7 @@ public class Member {
 	private String id;
 	private String password;
 	private String checkPassword;
+	private String type;
 	private String name;
 	private String gender;
 	private String email;
@@ -43,6 +44,14 @@ public class Member {
 	
 	public void setCheckPassword(String checkPassword) {
 		this.checkPassword = checkPassword;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getType() {
+		return type;
 	}
 
 	public String getName() {
