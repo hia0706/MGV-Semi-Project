@@ -62,7 +62,7 @@
    				</div>
    				
 
-   				<div class="text-center mb-3">
+   				<div class="text-end">
    					<button type="submit" class="btn btn-primary">물품등록</button>
    					<button type="reset" class="btn btn-danger">취소</button>
    				</div>
