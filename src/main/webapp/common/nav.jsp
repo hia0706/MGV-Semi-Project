@@ -1,3 +1,4 @@
+<%@page import="vo.Member"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	String loginType = (String) session.getAttribute("loginType");
@@ -7,7 +8,7 @@
 
 %>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3 ">
-		<a href="home.jsp">
+		<a href="/mgv/home.jsp">
            <img src="/mgv/images/mgv.png" alt="mgv" width="80" height="50" class="">
         </a>
 	<div class="container">
@@ -42,18 +43,26 @@
 <%
 	if (loginId != null) {
 %>
-         	<li class="nav-item"><a class="nav-link " href="./logout.jsp">로그아웃</a></li>
+         	<li class="nav-item"><a class="nav-link " href="/mgv/member/logout.jsp">로그아웃</a></li>
 <%
 	} else {
 %>
-         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" href="/mgv/loginform.jsp">로그인</a></li>
+         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" href="/mgv/member/loginform.jsp">로그인</a></li>
         	<li class="nav-item"><a class="nav-link <%="회원가입".equals(menu) ? "active" : "" %>" href="/mgv/member/joinform.jsp">회원가입</a></li>   
 <%
 	}
 %>
       	</ul>
    	</div>
-	        	<a href="/mgv/manager-loginform.jsp">
+   	
+<%
+
+%>
+	
+<%
+
+%>
+	        	<a href="/mgv/manager/loginform.jsp">
 	           <img src="/mgv/images/manager.png" alt="mgv" width="5" height="5" class="" >
 	        	</a>
 </nav>

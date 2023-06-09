@@ -18,7 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../../nav.jsp">
+<jsp:include page="../nav.jsp">
 	<jsp:param value="menu" name="스토어"/>
 </jsp:include>
 <div class="container">

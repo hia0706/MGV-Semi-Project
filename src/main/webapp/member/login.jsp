@@ -14,7 +14,11 @@
 		if (member == null) {
 			response.sendRedirect("loginform.jsp?err=fail");
 			return;
+		} else if ("ADMIN".equals(type)) {
+		response.sendRedirect("/mgv/manager/home.jsp");
+		return;
 		}
+		
 		if (!member.getPassword().equals(password)) {
 			response.sendRedirect("loginform.jsp?err=fail");
 			return;
@@ -23,8 +27,9 @@
 		session.setAttribute("loginId", member.getId());
 		session.setAttribute("loginType", "MEMBER");
 		
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("/mgv/home.jsp");
 	}
+	
 	
 	
 %>

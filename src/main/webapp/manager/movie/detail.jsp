@@ -28,7 +28,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../../manager-nav.jsp">
+<jsp:include page="../../manager/nav.jsp">
 	<jsp:param name="menu" value="영화"/>
 </jsp:include>
 <div class="container">

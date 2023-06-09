@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<jsp:include page="../nav.jsp">
+<jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="회원가입"/>
 </jsp:include>
 <div class="container" style="max-width: 600px;">
@@ -44,11 +44,11 @@
    			<form class="border bg-light p-2" name="form1" method="post" action="insert.jsp">
    				<div class="form-group mb-2 w-75">
    					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" id="male" name="sex"  value="M" checked="checked">
+  						<input class="form-check-input" type="radio" id="male" name="gender"  value="M" checked="checked">
   						<label class="form-check-label" for="male">남성</label>
 					</div>
 					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" id="female" name="sex" value="F">
+  						<input class="form-check-input" type="radio" id="female" name="gender" value="F">
   						<label class="form-check-label" for="female">여성</label>
 					</div>
    				</div>
@@ -60,11 +60,11 @@
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호</label>
-   					<input type="text" class="form-control" id="member-pwd" name="password" style="width:300px" placeholder="비밀번호를 입력해주세요."/>
+   					<input type="password" class="form-control" id="member-pwd" name="password" style="width:300px" placeholder="비밀번호를 입력해주세요."/>
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호 확인</label>
-   					<input type="text" class="form-control" id="member-repwd" name="checkPassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
+   					<input type="password" class="form-control" id="member-repwd" name="checkPassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
@@ -74,7 +74,7 @@
    				
    				<div class="form-group mb-2 w-50">
    					<label class="form-label">생년월일</label><br />
-   					<input type="text" class="form-control" maxlength="8" id="member-birth" name="birth" style="width:300px" placeholder="19900101" />
+   					<input type="date" class="form-control" id="member-birth" name="birth" />
    				</div>
    				
    				<div class="form-group mb-2 w-50">
