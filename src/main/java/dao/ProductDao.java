@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import util.DaoHelper;
 import vo.Product;
 import vo.ProductCategory;
@@ -38,5 +40,21 @@ public class ProductDao {
 			
 			return product;
 		}, name);
+	}
+	
+	public List<Product> getProducts(int begin, int end) {
+		return DaoHelper.selectList("", rs -> {
+			Product product = new Product();
+			product.setName(rs.getString("product_name"));
+			product.setPrice(rs.getInt("product_price"));
+			product.setStock(rs.getInt("product_stock"));
+			product.setDescription(rs.getString("product_description"));
+			
+			ProductCategory cat = new ProductCategory();
+			cat.setNo(rs.getInt("cat_no"));
+			product.setProductCategory(cat);
+			
+			return product;
+		}, begin, end);
 	}
 }
