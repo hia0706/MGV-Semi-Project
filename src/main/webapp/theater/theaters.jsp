@@ -103,7 +103,7 @@
 		if(theater.getLocation().getNo()==1){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -111,14 +111,126 @@
 %>				  
 					</ul>
 				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-2" role="tabpanel" aria-labelledby="theater-2-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-3" role="tabpanel" aria-labelledby="theater-3-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-4" role="tabpanel" aria-labelledby="theater-4-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-5" role="tabpanel" aria-labelledby="theater-5-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-6" role="tabpanel" aria-labelledby="theater-6-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-7" role="tabpanel" aria-labelledby="theater-7-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-8" role="tabpanel" aria-labelledby="theater-8-tab" tabindex="0">...</div>
-				  <div class="tab-pane fade" id="theater-tab-pane-9" role="tabpanel" aria-labelledby="theater-9-tab" tabindex="0">...</div>
+				  <div class="tab-pane fade" id="theater-tab-pane-2" role="tabpanel" aria-labelledby="theater-2-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==2){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				  
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-3" role="tabpanel" aria-labelledby="theater-3-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==3){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				 
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-4" role="tabpanel" aria-labelledby="theater-4-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==4){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				  
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-5" role="tabpanel" aria-labelledby="theater-5-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==5){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				  
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-6" role="tabpanel" aria-labelledby="theater-6-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==6){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				  
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-7" role="tabpanel" aria-labelledby="theater-7-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==7){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				  
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-8" role="tabpanel" aria-labelledby="theater-8-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==8){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				 
+				  </div>
+				  <div class="tab-pane fade" id="theater-tab-pane-9" role="tabpanel" aria-labelledby="theater-9-tab" tabindex="0">
+				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
+<%
+	for(Theater theater:theaterList){
+		if(theater.getLocation().getNo()==9){
+%>			  	
+					  <li class="list-group-item col-3 border-0 " >
+					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  </li>
+<%
+		}
+	}
+%>				  
+					</ul>				  
+				  </div>
 				</div>
 			</div>
 		</div>
