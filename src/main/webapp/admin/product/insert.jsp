@@ -22,7 +22,7 @@
 	// 해당 상품과 같은 이름의 상품이 존재하는지 체크
 	if (productDao.getProductByName(name) != null) {
 		// 해당 상품이 존재한다면 되돌아갈 URL
-		response.sendRedirect("form.jsp?err=dup");
+		response.sendRedirect("product/form.jsp?err=dup");
 	}
 	
 	// 신규상품 등록
