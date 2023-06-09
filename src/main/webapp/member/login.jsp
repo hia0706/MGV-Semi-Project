@@ -25,11 +25,12 @@
 	
 	if ("MEMBER".equals(type)) {
 		session.setAttribute("loginType", "MEMBER");
+		response.sendRedirect("/mgv/home.jsp");
 		
 	} else if ("ADMIN".equals(member.getType())) {
 		session.setAttribute("loginType", "ADMIN");
+		response.sendRedirect("/mgv/admin/home.jsp");
 	}
 		
-		response.sendRedirect("/mgv/home.jsp");
 	
 %>

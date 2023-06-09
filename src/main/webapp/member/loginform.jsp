@@ -31,6 +31,10 @@
   						<input class="form-check-input" type="radio" name="type" value="MEMBER" checked="checked">
   						<label class="form-check-label" for="inlineRadio1">회원</label>
 					</div>
+   					<div class="form-check form-check-inline">
+  						<input class="form-check-input" type="radio" name="type" value="ADMIN" >
+  						<label class="form-check-label" for="inlineRadio1">관리자</label>
+					</div>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
