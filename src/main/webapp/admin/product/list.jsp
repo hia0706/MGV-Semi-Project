@@ -26,6 +26,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style type="text/css">
+	.btn.btn-xs {--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;}
+</style>
 </head>
 <body>
 <jsp:include page="../nav.jsp">
@@ -40,16 +43,9 @@
 	<div class="row mb-3">
 		<div class="col-12">
 			<p>전체 상품 목록을 확인하세요.</p>
-			<table class="table table-sm">
-				<colgroup>
-					<col width="10%">
-					<col width="30%">
-					<col width="20%">
-					<col width="20%">
-					<col width="20%">
-				</colgroup>
+			<table class="table">
 				<thead>
-					<tr>
+					<tr class="table-dark">
 						<th>상품 카테고리</th>
 						<th>상품명</th>
 						<th>상품가격</th>
