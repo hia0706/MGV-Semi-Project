@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
 <%
-	LocationDao locationDao = new LocationDao();
+	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
 %>
 <html lang="ko">
