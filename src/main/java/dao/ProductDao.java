@@ -43,18 +43,26 @@ public class ProductDao {
 	}
 	
 	public List<Product> getProducts(int begin, int end) {
-		return DaoHelper.selectList("", rs -> {
+		return DaoHelper.selectList("productDao.getProducts", rs -> {
 			Product product = new Product();
 			product.setName(rs.getString("product_name"));
 			product.setPrice(rs.getInt("product_price"));
 			product.setStock(rs.getInt("product_stock"));
+			product.setCreateDate(rs.getDate("product_create_date"));
+			product.setUpdateDate(rs.getDate("product_update_date"));
 			product.setDescription(rs.getString("product_description"));
 			
 			ProductCategory cat = new ProductCategory();
-			cat.setNo(rs.getInt("cat_no"));
+			cat.setName(rs.getString("cat_name"));
 			product.setProductCategory(cat);
 			
 			return product;
 		}, begin, end);
+	}
+	
+	public int getTotalRows() {
+		return DaoHelper.selectOne("productDao.getTotalRows", rs -> {
+			return rs.getInt("cnt");
+		});
 	}
 }
