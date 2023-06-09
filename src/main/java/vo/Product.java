@@ -8,7 +8,6 @@ public class Product {
 	private String name;
 	private int price;
 	private int stock;
-	private String type;
 	private Date createDate;
 	private Date updateDate;
 	private String soldOut;
@@ -52,14 +51,6 @@ public class Product {
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public Date getCreateDate() {
