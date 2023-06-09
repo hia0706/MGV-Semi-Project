@@ -40,9 +40,7 @@
     border: none;
     resize: none;
   }
-	.theater_wrap{
-	background-color: black;
-	}
+
 </style>
 </head>
 <body>
@@ -55,20 +53,20 @@
 		<div class="sect-favorite">
 			<table class="table">
 				<tr>
-					<td class="text-white align-middle">자주가는극장</td>
+					<td class="align-middle">자주가는극장</td>
 					<td>
 						<ul class="list-group list-group-horizontal ">
-						  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75" >
-						  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">An item</a>
+						  <li class="list-group-item" >
+						  	<a href="nothing.jsp" style="text-decoration: none;" class="link-dark">An item</a>
 						  </li>
-						  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75">A second item</li>
-						  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75">A third item</li>
-						  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75">A 4 item</li>
-						  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75">A 5 item</li>
+						  <li class="list-group-item">A second item</li>
+						  <li class="list-group-item ">A third item</li>
+						  <li class="list-group-item ">A 4 item</li>
+						  <li class="list-group-item ">A 5 item</li>
 						</ul>
 					</td>
 					<td>
-					<button type="button" class="btn btn-dark">자주가는 CGV 설정</button>
+					<button type="button" class="btn btn-danger">자주가는 CGV 설정</button>
 					</td>
 				</tr>
 			</table>			
@@ -79,7 +77,7 @@
 	for(Location location:locations){
 %>			
 			  <li class="nav-item" role="presentation">
-			    <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
+			    <button class="nav-link link-dark" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
 			  </li>
 <%
 	}
@@ -88,44 +86,8 @@
 			<div class="tab-content" id="myTabContent">
 			  <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 			  	<ul class="list-group list-group-horizontal row row-cols-4 px-4">
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV강남</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CGV명동역 씨네라이브러리</a>
-				  </li>
-				  <li class="list-group-item bg-dark p-2 text-white bg-opacity-75 col-3" >
-				  	<a href="nothing.jsp" style="text-decoration: none;" class="link-light">CINE de CHEF 용산아이파크몰</a>
+				  <li class="list-group-item col-3" >
+				  	<a href="nothing.jsp" style="text-decoration: none;"  class="link-dark">CGV강남</a>
 				  </li>
 				</ul>
 			  </div>
@@ -145,7 +107,7 @@
 			<i class="bi bi-heart-fill text-muted"></i>
 			</h4>
 		</div>
-		<div class="theater_detail text-center bg-dark p-2 text-white bg-opacity-75">
+		<div class="theater_detail text-center">
 			<img alt="대학로" src="../images/theater1.jpg">
 			<div>
 				<textarea class="bg-dark p-2 text-white bg-opacity-75" rows="10" cols="30" disabled="disabled">2222222233333333334</textarea>
