@@ -3,7 +3,6 @@
 <%@page import="javax.swing.RepaintManager"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	// 로그인처리
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
 	String type = request.getParameter("type");
@@ -25,11 +24,12 @@
 	
 	if ("MEMBER".equals(type)) {
 		session.setAttribute("loginType", "MEMBER");
+		response.sendRedirect("/mgv/home.jsp");
 		
 	} else if ("ADMIN".equals(member.getType())) {
 		session.setAttribute("loginType", "ADMIN");
+		response.sendRedirect("/mgv/admin/home.jsp");
 	}
 		
-		response.sendRedirect("/mgv/home.jsp");
 	
 %>
