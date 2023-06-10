@@ -59,7 +59,7 @@
 					<tr>
 						<th>판매여부</th>
 						<td><%="N".equals(product.getSoldOut()) ? "판매중" : "판매종료" %></td>
-						<th>재고수량</th>
+						<th>재고 수량</th>
 						<td><%=product.getStock() %></td>
 					</tr>
 					<tr>
