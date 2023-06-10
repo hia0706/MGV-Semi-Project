@@ -25,7 +25,7 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="회원가입"/>
 </jsp:include>
-<div class="container-fluid">
+<div class="container-fluid " >
 	<div class="row mb-3">
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">회원으로 등록하기</h1>
@@ -113,8 +113,8 @@
 	   					<label class="form-label">추천인 ID</label><br />
 	   					<input type="text" class="form-control" id="referee" name="referee" style="width:300px" placeholder="추천인 ID를 입력하세요."/>
 	   				</div>
-	   				<div class="text-center mb-3">
-	   					<button type="submit" class="btn btn-primary" onclick="return join()">가입하기</button>
+	   				<div class="text-center">
+	   					<button type="submit" class="btn btn-primary mb-3" onclick="return join()">가입하기</button>
 	   				</div>
 	   			</form>
 	   			

@@ -31,7 +31,7 @@ function join() {
 	// 비밀번호 유효성 검사
 	if(hangleCheck.test(pwd.value)){
 		alert("비밀번호에 한글을 사용할 수 없습니다.");
-		form.password.focus();
+		pwd.focus();
 		return false;
 	}
 	
@@ -41,9 +41,9 @@ function join() {
 		return false;
 	}
 	
-	if(form.pwd.value.search(/\s/) != -1){
+	if(pwd.value.search(/\s/) != -1){
 		alert("비밀번호에 공백 없이 입력해주세요.");
-		form.password.focus();
+		pwd.focus();
 		return false;
 	}
 	
