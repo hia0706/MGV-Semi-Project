@@ -1,30 +1,31 @@
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	// 요청 URL - localhost/app4/student/form.jsp
 	// 요청 URL - localhost/app4/student/form.jsp?err=dup
 	String err = request.getParameter("err");
-	
 %>
 <!doctype html>
 <html lang="ko">
 <head>
 <title>
-	회원가입 
+	회원가입 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
 </title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="/common/check.js"></script>
-</head>
-<body>
+<script src="../common/check.js"></script>
 
+</head>
+<body onLoad="document.form.id.focus()">
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="회원가입"/>
 </jsp:include>
-<div class="container" style="max-width: 600px;">
+<div class="container-fluid">
 	<div class="row mb-3">
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">회원으로 등록하기</h1>
@@ -42,74 +43,88 @@
 <%
 	}
 %>
-   			<form class="border bg-light p-2" name="form1" method="post" action="insert.jsp">
-   				<div class="form-group mb-2 w-75">
-   					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" id="male" name="gender"  value="M" checked="checked">
-  						<label class="form-check-label" for="male">남성</label>
+	   			  <form class="bg-light needs-validation was-validated" name="form" method="post" action="insert.jsp" style="ailgn: center;" novalidate>
+	   				<div class="form-group mb-2">
+	   					<div class="form-check form-check-inline">
+	  						<input class="form-check-input" type="radio" id="male" name="gender"  value="M" checked="checked">
+	  						<label class="form-check-label" for="male">남성</label>
+						</div>
+						<div class="form-check form-check-inline">
+	  						<input class="form-check-input" type="radio" id="female" name="gender" value="F">
+	  						<label class="form-check-label" for="female">여성</label>
+						</div>
+	   				</div>
+	   				<div class="form-group">
+	   					<label class="form-label">아이디</label>
+	   					<input type="text" class="form-control mb-2" id="id" name="id" style="width:300px" onKeyDown="key()" required>
+	   					<div class="invalid-feedback">
+			           		영문만 입력 가능
+			        	</div>
+	   				</div>
+	   				<div class="form-group">
+	   					<label for="pwd" class="form-label">비밀번호</label>
+	   					<input type="password" class="form-control" id="pwd" name="password" style="width:300px" onKeyDown="key()" required>
+	   					<div class="invalid-feedback">
+			           		6자 이상 대문자나 소문자, 숫자를 포함해야 합니다.
+			        	</div>
+	   				</div>
+	   				<div class="form-group">
+	   					<label class="form-label">비밀번호 확인</label>
+	   					<input type="password" class="form-control" id="repwd" name="checkPassword" style="width:300px" onKeyDown="key()" required>
+	   					<div class="invalid-feedback">
+			           		비밀번호를 다시 입력하세요.
+			        	</div>
+	   				</div>
+	   				<div class="form-group mb-2 ">
+	   					<label class="form-label">이름</label>
+	   					<input type="text" class="form-control" id="name" name="name" style="width:300px" onKeyDown="key()" required>
+	   					<div class="invalid-feedback">
+			           		한글만 입력 가능 (공백, 영문 불가능)
+			        	</div>
+	   				</div>
+	   				<div class="form-group mb-2 w-50">
+	   					<label class="form-label">생년월일</label><br />
+	   					<input type="date" class="form-control" id="birth" name="birth" style="width:300px" onKeyDown="key()" required>
+	   				</div>
+	   				<div class="form-group mb-2 ">
+	   					<label class="form-label">휴대폰 번호</label><br />
+	   					<input type="tel" class="form-control" maxlength="13" id="tel" name="tel" style="width:300px" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" onKeyDown="key()" placeholder="010-1234-5678" required>
+	   					<div class="invalid-feedback">
+			        	</div>
+	   				</div>
+	   				<div class="form-group row-2">
+	   					<label class="form-label">이메일</label><br />
+	   					<input type="email" class="form-control" id="email" name="email" style="width:300px" placeholder="name@example.com" onKeyDown="key()" required>
+	   					<div class="invalid-feedback">
+			           		@와 .이 포함되어야 합니다.
+			        	</div>
+	   				</div>
+	   				<div class="form-group mb-2">
+					 <label class="form-label">주소</label><br />
+					 	<input type="text" class="form-input" maxlength="5" id="zipcode" name="zipcode" style="width:100px;" placeholder="우편번호" required> 
+						<button type="button" id="btn" class="btn text-black btn-outline-primary btn-sm" >우편번호검색</button>
+						<br /> 
 					</div>
-					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" id="female" name="gender" value="F">
-  						<label class="form-check-label" for="female">여성</label>
+					<div class="form-group">
+						<input type="text" class="form-control mb-3" name="address1" style="width:400px" placeholder="주소" readonly="readonly" >
+						<input type="text" class="form-control" id="detailAddr" name="address2" style="width:300px" placeholder="상세주소" required>
 					</div>
-   				</div>
-   				
-   				<div class="form-group mb-2 w-75">
-   					<label class="form-label">아이디</label>
-   					<input type="text" class="form-control" id="id" name="id" style="width:300px" placeholder="아이디를 입력해주세요."/>
-   				</div>
-   				
-   				<div class="form-group mb-2 w-75">
-   					<label class="form-label">비밀번호</label>
-   					<input type="password" class="form-control" id="pwd" name="password" style="width:300px" placeholder="비밀번호를 입력해주세요."/>
-   				</div>
-   				<div class="form-group mb-2 w-75">
-   					<label class="form-label">비밀번호 확인</label>
-   					<input type="password" class="form-control" id="repwd" name="checkPassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
-   				</div>
-   				
-   				<div class="form-group mb-2 w-75">
-   					<label class="form-label">이름</label>
-   					<input type="text" class="form-control" id="name" name="name" style="width:300px" placeholder="이름을 입력해주세요."/>
-   				</div>
-   				
-   				<div class="form-group mb-2 w-50">
-   					<label class="form-label">생년월일</label><br />
-   					<input type="date" class="form-control" id="birth" name="birth" />
-   				</div>
-   				
-   				<div class="form-group mb-2 w-50">
-   					<label class="form-label">연락처</label><br />
-   					
-   					<input type="text" maxlength="11" id="tel" name="tel" style="width:300px" placeholder="'-' 없이 휴대폰번호를 입력하세요."/>
-   				</div>
-
-   				<div class="form-group mb-2 w-50">
-   					<label class="form-label">email</label><br />
-   					<input type="text" maxlength="50" id="email" name="email" style="width:300px" placeholder="이메일을 입력해주세요."/>
-   				</div>
-   				
-   				<div class="form-group mb-2 w-75">
-				 <label class="form-label">주소</label><br />
-				 	<input type="text" maxlength="5" id="zipcode" name="zipcode" style="width:100px" placeholder="우편번호" readonly="readonly" /> 
-					<a id="btn" class="btn text-black btn-outline-primary btn-sm ">우편번호검색</a>
-					<br /> 
-				 <label class="form-label"></label><br />
-					<input type="text" class="form-control" name="address1" style="width:400px" placeholder="주소" readonly="readonly" />
-					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="상세주소" />
-				</div>
-   				
-   				<div class="form-group mb-5 w-50">
-   					<label class="form-label">추천인 ID</label><br />
-   					<input type="text" id="member-referee" name="referee" style="width:300px" placeholder="추천인 ID를 입력하세요."/>
-   				</div>
-
-   				<div class="text-center mb-3">
-   					<button type="submit" class="btn btn-primary" onclick="alert('회원가입이 완료되었습니다.')" >회원가입</button>
-   					<button type="submit" class="btn btn-danger">취소</button>
-   				</div>
-   			</form>
-   			
+	   				<div class="form-group mb-3">
+	   					<label class="form-label">추천인 ID</label><br />
+	   					<input type="text" class="form-control" id="referee" name="referee" style="width:300px" placeholder="추천인 ID를 입력하세요."/>
+	   				</div>
+	   				<div class="text-center mb-3">
+	   					<button type="submit" class="btn btn-primary" onclick="return join()">가입하기</button>
+	   				</div>
+	   			</form>
+	   			
+<script type="text/javascript">
+function key(){ 
+	//id에서 엔터나 ↓키를 누르면 아래로 커서 이동
+	if(window.event.keyCode==13||window.event.keyCode==40){
+    	document.log.pwd.focus();
+   }
+</script>
 <!-- daum 우편번호찾기 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 우편번호찾기 -->
@@ -151,17 +166,15 @@
 				}
 
 				// 입력창에 우편번호 넣기
-				document.form1.zipcode.value = data.zonecode;
+				document.form.zipcode.value = data.zonecode;
 				// 입력창에 전체 주소 넣기
-				document.form1.address1.value = fullAddr;
+				document.form.address1.value = fullAddr;
 				// 우편번호, 전체주소 입력되면 상세주소로 커서 이동
-				document.form1.address2.focus();
-				
+				document.form.address2.focus();
         	}
 	    }).open();
 	});
 </script>
-   			
    		</div>
    	</div>
 </div>

@@ -4,6 +4,7 @@
 <%
 	String loginId = (String) request.getParameter("loginId");
 	String loginType = (String) request.getParameter("loginType");
+	String disabled = request.getParameter("disabled");
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
