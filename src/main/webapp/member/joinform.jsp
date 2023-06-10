@@ -17,6 +17,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="/common/check.js"></script>
 </head>
 <body>
 
@@ -55,37 +56,37 @@
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">아이디</label>
-   					<input type="text" class="form-control" id="member-id" name="id" style="width:300px" placeholder="아이디를 입력해주세요."/>
+   					<input type="text" class="form-control" id="id" name="id" style="width:300px" placeholder="아이디를 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호</label>
-   					<input type="password" class="form-control" id="member-pwd" name="password" style="width:300px" placeholder="비밀번호를 입력해주세요."/>
+   					<input type="password" class="form-control" id="pwd" name="password" style="width:300px" placeholder="비밀번호를 입력해주세요."/>
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호 확인</label>
-   					<input type="password" class="form-control" id="member-repwd" name="checkPassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
+   					<input type="password" class="form-control" id="repwd" name="checkPassword" style="width:300px" placeholder="비밀번호를 다시 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">이름</label>
-   					<input type="text" class="form-control" id="member-name" name="name" style="width:300px" placeholder="이름을 입력해주세요."/>
+   					<input type="text" class="form-control" id="name" name="name" style="width:300px" placeholder="이름을 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-50">
    					<label class="form-label">생년월일</label><br />
-   					<input type="date" class="form-control" id="member-birth" name="birth" />
+   					<input type="date" class="form-control" id="birth" name="birth" />
    				</div>
    				
    				<div class="form-group mb-2 w-50">
    					<label class="form-label">연락처</label><br />
    					
-   					<input type="text" maxlength="11" id="member-tel" name="tel" style="width:300px" placeholder="'-' 없이 휴대폰번호를 입력하세요."/>
+   					<input type="text" maxlength="11" id="tel" name="tel" style="width:300px" placeholder="'-' 없이 휴대폰번호를 입력하세요."/>
    				</div>
 
    				<div class="form-group mb-2 w-50">
    					<label class="form-label">email</label><br />
-   					<input type="text" maxlength="50" id="member-email" name="email" style="width:300px" placeholder="이메일을 입력해주세요."/>
+   					<input type="text" maxlength="50" id="email" name="email" style="width:300px" placeholder="이메일을 입력해주세요."/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
@@ -104,7 +105,7 @@
    				</div>
 
    				<div class="text-center mb-3">
-   					<button type="submit" class="btn btn-primary">회원가입</button>
+   					<button type="submit" class="btn btn-primary" onclick="alert('회원가입이 완료되었습니다.')" >회원가입</button>
    					<button type="submit" class="btn btn-danger">취소</button>
    				</div>
    			</form>

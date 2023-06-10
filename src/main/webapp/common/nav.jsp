@@ -26,7 +26,7 @@
 				<img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="30" height="30">
 			</a> 
 		  <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<strong class="text-white bolder"><%=loginId %>님</strong>
+				<strong class="text-white bolder <%=loginId.equals(menu) ? "active" : "" %>"><%=loginId %>님</strong>
 		  </button>
 		  <ul class="dropdown-menu dropdown-menu-dark">
 			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
