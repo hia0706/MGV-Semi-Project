@@ -61,7 +61,7 @@ for (Product product : productList) {
 %>
 					<tr>
 						<td><%=product.getProductCategory().getName()%></td>
-						<td><a href="detail.jsp?name=<%=product.getName()%>" class="text-black text-decoration-none"><%=product.getName()%></a></td>
+						<td><a href="detail.jsp?no=<%=product.getNo()%>" class="text-black text-decoration-none"><%=product.getName()%></a></td>
 						<td><%=product.getPrice()%></td>
 						<td><%=product.getStock()%>개</td>
 						<td><%=product.getCreateDate()%></td>
