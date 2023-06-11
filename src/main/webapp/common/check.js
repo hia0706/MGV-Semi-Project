@@ -120,7 +120,7 @@ function join() {
 
 	if (zipcode.value == '') {
 		alert("우편번호를 검색하세요.");
-		daumApi();
+		post();
 		return false;
 	}
 	if (detailAddr.value === '') {

@@ -1,7 +1,7 @@
 /**
  *  우편번호 찾기 api
  */
-function daumApi() {	
+function post() {	
 	new daum.Postcode({
     	oncomplete: function(data) {
 			console.log(data); 
