@@ -7,11 +7,20 @@
 	String menu = request.getParameter("menu");
 
 %>
+<style>
+ .navbar-nav > li {
+	  padding-left:10px;
+	  padding-right:10px;
+	  font-size: 18px;
+	  margin: 10px;
+ }
+
+</style>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3 ">
 		<a href="/mgv/home.jsp">
            <img src="/mgv/images/mgv.png" alt="mgv" width="80" height="50" class="">
         </a>
-	<div class="container">
+	<div class="container-fluid">
     	<ul class="navbar-nav me-auto">
         	<li class="nav-item"><a class="nav-link <%="홈".equals(menu) ? "active" : "" %>" href="/mgv/home.jsp">홈</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="무비".equals(menu) ? "active" : "" %>" href="/mgv/movie/list.jsp">무비</a></li>    	
@@ -26,7 +35,7 @@
 				<img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="30" height="30">
 			</a> 
 		  <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<strong class="text-white bolder"><%=loginId %>님</strong>
+				<strong class="text-white bolder <%=loginId.equals(menu) ? "active" : "" %>"><%=loginId %>님</strong>
 		  </button>
 		  <ul class="dropdown-menu dropdown-menu-dark">
 			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
@@ -54,5 +63,4 @@
 %>
       	</ul>
    	</div>
-
 </nav>

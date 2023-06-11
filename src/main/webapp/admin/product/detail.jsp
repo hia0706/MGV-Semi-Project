@@ -4,13 +4,13 @@
 <%
 	// 요청 URL : http://localhost/mgv/admin/product/detail.jsp
 	// 요청파라미터 조회
-	String name = request.getParameter("name");
+	int no = Integer.parseInt(request.getParameter("no"));
 	
 	// 업무로직 수행
 	ProductDao productDao = ProductDao.getInstance();
 	
 	// 상품 상세정보 조회하기
-	Product product = productDao.getProductByName(name);
+	Product product = productDao.getProductByNo(no);
 %>
 <!doctype html>
 <html lang="ko">
@@ -59,7 +59,7 @@
 					<tr>
 						<th>판매여부</th>
 						<td><%="N".equals(product.getSoldOut()) ? "판매중" : "판매종료" %></td>
-						<th>재고수량</th>
+						<th>재고 수량</th>
 						<td><%=product.getStock() %></td>
 					</tr>
 					<tr>
@@ -76,10 +76,10 @@
 			</table>
 			<div>
 				<!-- 
-					현재 URL = http://localhost/app3/product/detail.jsp?no=XXX'
+					현재 URL = http://localhost/mgv/admin/product/detail.jsp?no=XXX'
 					
-					목록 ->    http://localhost/app3/product/list.jsp
-					삭제 ->    http://localhost/app3/product/delete.jsp
+					목록 ->    http://localhost/mgv/admin/product/list.jsp
+					삭제 ->    http://localhost/mgv/admin/product/delete.jsp
 				 -->
 			</div>
 			<div class="text-end">
