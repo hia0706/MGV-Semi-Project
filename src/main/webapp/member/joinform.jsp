@@ -133,7 +133,7 @@
 										</div>
 									</div>
 									<div class="col-auto mb-2">
-										<button type="button" id="btn" class="btn text-black btn-outline-primary btn-m mb-3" onclick="post();">우편번호검색</button>
+										<button type="button" id="btn" class="btn text-black btn-outline-primary btn-m mb-3" onclick="daumApi();">우편번호검색</button>
 									</div>
 								</div>							
 							</div>

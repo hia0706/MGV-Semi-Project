@@ -14,7 +14,7 @@ function join() {
 	let detailAddr = document.getElementById("detailAddr");
 	let hangleCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
 			
-	if (id.value == "") {
+	if (id.value === '') {
 		alert("아이디를 입력하세요.");
 		id.focus();
 		return false;
@@ -35,7 +35,7 @@ function join() {
 		return false;
 	}
 	
-	if (pwd.value == "") {
+	if (pwd.value === '') {
 		alert("비밀번호를 입력하세요.");
 		pwd.focus();
 		return false;
@@ -54,7 +54,7 @@ function join() {
 		pwd.focus();
 		return false;
 	}
-	if (repwd.value == "") {
+	if (repwd.value === '') {
 		alert("비밀번호를 다시 확인하세요.");
 		repwd.focus();
 		return false;
@@ -65,7 +65,7 @@ function join() {
 	}
 	
 	// 이름, 생일 유효성 검사
-	if (name.value == "") {
+	if (name.value === '') {
 		alert("이름을 입력하세요.");
 		name.focus();
 		return false;
@@ -86,7 +86,7 @@ function join() {
 		return false;
 	}
 	
-	if (birth.value == "") {
+	if (birth.value === '') {
 		alert("생일을 입력하세요");
 		birth.focus();
 		return false;
@@ -104,7 +104,7 @@ function join() {
 		tel.focus();
 		return false;
 	}
-	if (tel.value == "") {
+	if (tel.value === '') {
 		alert("휴대폰번호를 입력하세요.");
 		tel.focus();
 		return false;
@@ -118,12 +118,12 @@ function join() {
 		return false;
 	}
 
-	if (zipcode.value == "") {
+	if (zipcode.value == '') {
 		alert("우편번호를 검색하세요.");
-		sample6_DaumPostcode();
+		daumApi();
 		return false;
 	}
-	if (detailAddr.value == "") {
+	if (detailAddr.value === '') {
 		alert("상세주소를 입력하세요.");
 		detailAddr.focus();
 		return false;
