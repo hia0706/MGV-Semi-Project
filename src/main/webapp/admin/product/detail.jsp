@@ -4,13 +4,13 @@
 <%
 	// 요청 URL : http://localhost/mgv/admin/product/detail.jsp
 	// 요청파라미터 조회
-	String name = request.getParameter("name");
+	int no = Integer.parseInt(request.getParameter("no"));
 	
 	// 업무로직 수행
 	ProductDao productDao = ProductDao.getInstance();
 	
 	// 상품 상세정보 조회하기
-	Product product = productDao.getProductByName(name);
+	Product product = productDao.getProductByNo(no);
 %>
 <!doctype html>
 <html lang="ko">
@@ -83,7 +83,7 @@
 				 -->
 			</div>
 			<div class="text-end">
-				<a href="delete.jsp?name=<%=product.getName() %>" class="btn btn-danger btn-sm">삭제</a>
+				<a href="delete.jsp?no=<%=product.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 				<a href="modifyForm.jsp?no=<%=product.getNo() %>" class="btn btn-warning btn-sm">수정</a>
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
 			</div>
