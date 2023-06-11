@@ -1,13 +1,20 @@
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	String loginId = (String) session.getAttribute("loginId");
 	String loginType = (String) session.getAttribute("loginType");
 	
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(loginId);
+	
 %>
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<title>
+	내 정보 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
+</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,30 +37,36 @@
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th class="table-dark" style="width: 15%;">아이디</th>
-						<td style="width: 35%;">hong</td>
+						<th class="table-dark " style="width: 15%;">아이디</th>
+						<td style="width: 35%;"><%=member.getId() %></td>
 						<th class="table-dark" style="width: 15%;">이름</th>
-						<td style="width: 35%;">홍길동</td>
+						<td style="width: 35%;"><%=member.getName() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 15%;">성별</th>
-						<td style="width: 35%;">남성</td>
+						<td style="width: 35%;"><%=member.getGender() %></td>
 						<th class="table-dark" style="width: 15%;">생년월일</th>
-						<td style="width: 35%;">900101</td>
+						<td style="width: 35%;"><%=member.getBirth() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 15%;">연락처</th>
-						<td style="width: 35%;">010-1234-1234</td>
+						<td style="width: 35%;"><%=member.getTel() %></td>
 						<th class="table-dark" style="width: 15%;">이메일</th>
-						<td style="width: 35%;">hong@gmail.com</td>
+						<td style="width: 35%;"><%=member.getEmail() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width:20%;">주소</th>
-						<td style="width: 10%;" colspan="3">15292, 경기 고양시 일산동구 호수로 596 (장항동, 엠비씨드림센터), 431-23</td>
+						<td style="width: 10%;" colspan="3"><%=member.getZipcode() + member.getAddress1() + member.getAddress2() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 15%;">가입일자</th>
-						<td style="width: 85%;" colspan="3">2023-06-01</td>
+						<td style="width: 85%;" colspan="3"><%=member.getCreateDate() %></td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">추천인</th>
+						<td style="width: 35%;"><%=member.getReferee() == null ? "" : member.getReferee() %></td>
+						<th class="table-dark" style="width: 15%;">탈퇴여부</th>
+						<td style="width: 35%;"><%=member.getDisabled() %></td>
 					</tr>
 				</tbody>
 			</table>
@@ -61,9 +74,9 @@
 	</div>
 	<div class="row mb-3">
 		<div class="col-12 text-end">
-			<a href="orderlist.jsp" class="btn btn-outline-primary">구매내역</a>
-			<a href="modify.jsp" class="btn btn-outline-warning">수정하기</a>
-			<a href="enable.jsp" class="btn btn-outline-danger">탈퇴하기</a>
+			<a href="orderlist.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">구매내역</a>
+			<a href="modifyform.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
+			<a href="disable.jsp" class="btn btn-outline-danger">탈퇴하기</a>
 		</div>
 	</div>
 	

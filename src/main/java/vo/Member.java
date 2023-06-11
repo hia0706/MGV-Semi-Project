@@ -19,6 +19,7 @@ public class Member {
 	private Date updateDate;
 	private Date createDate;
 	private String referee;
+	private String disabled;
 	
 	public Member() {}
 
@@ -142,5 +143,12 @@ public class Member {
 		this.referee = referee;
 	}
 	
+	public String getDisabled() {
+		return disabled;
+	}
+	
+	public void setDisabled(String disabled) {
+		this.disabled = disabled;
+	}
 	
 }

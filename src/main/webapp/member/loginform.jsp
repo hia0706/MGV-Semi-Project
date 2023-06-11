@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
+<%
+	String err = request.getParameter("err");
+	String job = request.getParameter("job");
+%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -16,7 +19,7 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
-<div class="container">
+<div class="container" style="max-width: 600px;">
 	<div class="row mb-3">
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">로그인</h1>
@@ -24,28 +27,38 @@
    	</div>
    	<div class="row mb-3">
    		<div class="col-12">
+   		
+<%
+	if ("fail".equals(err)) {
+%>		
+			<div class="alert alert-danger">
+				<strong>로그인 실패</strong> 아이디 혹은 비밀번호가 일치하지 않습니다.
+			</div>
+<%
+	} 
+%>
    			<p>아이디, 비밀번호를 입력하고 로그인하세요</p>
    			<form class="border bg-light p-3" method="post" action="login.jsp">
    				<div class="form-group mb-2 w-75">
    					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" name="type" value="MEMBER" checked="checked">
+  						<input class="form-check-input" type="radio" id="ck-type" name="type" value="MEMBER" checked="checked">
   						<label class="form-check-label" for="inlineRadio1">회원</label>
 					</div>
    					<div class="form-check form-check-inline">
-  						<input class="form-check-input" type="radio" name="type" value="ADMIN" >
+  						<input class="form-check-input" type="radio" id="ck-type" name="type" value="ADMIN" >
   						<label class="form-check-label" for="inlineRadio1">관리자</label>
 					</div>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">아이디</label>
-   					<input type="text" class="form-control" id="member-id" name="id" />
+   					<input type="text" class="form-control" id="id" name="id" />
    				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">비밀번호</label>
-   					<input type="password" class="form-control" id="member-pwd" name="password" />
+   					<input type="password" class="form-control" id="pwd" name="password" />
    				</div>
-   				<div class="text-end w-75">				
+   				<div class="text-end w-75">		
    					<button type="submit" class="btn btn-primary">로그인</button>
    				</div>
    			</form>
