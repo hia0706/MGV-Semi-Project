@@ -15,6 +15,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
 <title> 
 	회원 정보 수정 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
 </title>
@@ -23,6 +24,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="../common/postapi"></script>
 </head>
 <body>
 
@@ -54,7 +56,7 @@
 				<div class="form-group mb-2">
 				 <label class="form-label"></label><br />
 				 	<input type="text" maxlength="5" id="zipcode" name="zipcode" style="width:100px" placeholder="우편번호" readonly="readonly" /> 
-					<a id="btn" class="btn text-black btn-outline-primary btn-sm ">우편번호검색</a>
+					<a id="btn" class="btn text-black btn-outline-primary btn-m" onclick="postapi();">우편번호검색</a>
 					<br /> 
 				 <label class="form-label"></label><br />
 					<input type="text" class="form-control" name="address1" style="width:400px" placeholder="주소" readonly="readonly" />
@@ -62,7 +64,7 @@
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label"></label>
-					<input type="text" class="form-control" name="discountPrice" value="<%= %>"/>
+					<input type="text" class="form-control" name="" value="<%= %>"/>
 				</div>
 				
 				<div class="text-end">
@@ -77,6 +79,7 @@
 
 				</div>
 			</form>
+			
 		</div>
 	</div>
 </div>
