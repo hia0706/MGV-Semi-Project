@@ -9,8 +9,8 @@
 %>
 <style>
  .navbar-nav > li {
-	  margin: 10px 5px; 
-	  padding: 10px 20px;
+	  margin: 10px; 
+	  padding: 5px 1px;
 	  font-size: 18px;
  }
 
