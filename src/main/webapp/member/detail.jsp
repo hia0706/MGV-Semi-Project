@@ -89,7 +89,7 @@
 		<div class="col-12 text-end">
 			<a href="orderlist.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">구매내역</a>
 			<a href="modifyform.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
-			<a href="disable.jsp" class="btn btn-outline-danger">탈퇴하기</a>
+			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger">탈퇴하기</a>
 		</div>
 	</div>
 	
