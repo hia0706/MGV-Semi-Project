@@ -24,7 +24,16 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=683b3934429366d7f2da0e2094630435&libraries=services,clusterer,drawing"></script>
 <!-- 카카오맵api -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=683b3934429366d7f2da0e2094630435"></script>
+
+<style>
+	.bi-heart-fill{
+	font-size: 22px;
+	line-height: 22px;
+	color:crimson;
+	}
+</style>
 </head>
+
 <body>
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
@@ -122,7 +131,10 @@ geocoder.addressSearch('<%=ad %>', function(result, status) {
     var name = '<%=theater.getName()%>'; 
     var mapbtn = document.getElementById('map-btn');
 	mapbtn.addEventListener("click", function() {
-		window.location = "https://map.kakao.com/link/to/"+name+","+lat+","+lng;
+		window.open("https://map.kakao.com/link/to/"+name+","+lat+","+lng,
+				"빠른길찾기",
+		        "width=800, height=1200, top=50, left=50"
+		        )
 	});
 } 
 });
