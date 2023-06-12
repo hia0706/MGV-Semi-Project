@@ -6,10 +6,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	String loginId = (String) session.getAttribute("loginId");
+	String loginType = (String) session.getAttribute("loginType");
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
-	
 %>
 <!doctype html>
 <html lang="ko">
@@ -23,6 +23,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="../common/check.js"></script>
 <script src="../common/updatePostapi.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
@@ -55,38 +56,25 @@
 				<p>회원 정보를 확인하고, 수정하세요.</p>
 			
 				<form class="border bg-light needs-validation was-validated p-3" id="form" method="post" action="modify.jsp"> 
-					<input type="hidden" name="id" value="<%=member.getId() %>">
 					<div class="form-group mb-2">
 						<label class="form-label">이름</label>
-						<input type="text" class="form-control" name="name" value="<%=member.getName() %>" >
+						<input type="text" class="form-control" name="name" value="<%=member.getName() %>" required>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">비밀번호</label>
 						<input type="password" class="form-control" name="password" value="<%=member.getPassword() %>" required>
-						<div class="invalid-feedback">
-							6자 이상 대, 소문자, 숫자를 포함해야 합니다.
-						</div>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">생년월일</label><br /> 
 						<input type="date" class="form-control" name="birth" value="<%=member.getBirth() %>" required>
-						<div class="invalid-feedback">
-							생년월일을 입력하세요
-						</div>
 					</div>
 					<div class="form-group mb-2 ">
 						<label class="form-label">휴대폰 번호</label><br /> 
 						<input type="tel" class="form-control" maxlength="13" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="<%=member.getTel() %>" required>
-						<div class="invalid-feedback">
-							010-1234-5678
-						</div>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">이메일</label><br /> 
 						<input type="email" class="form-control" name="email" value="<%=member.getEmail() %>" required>
-						<div class="invalid-feedback">
-							name@example.com
-						</div>
 					</div>
 					<div class="form-group">
 						<label class="form-label">주소</label>
@@ -116,8 +104,8 @@
 						<input type="text" class="form-control mb-3" value="<%=member.getUpdateDate() %>" disabled/>
 					</div>
 					<div class="text-end mb-2 w-50">
-						<button type="reset" class="btn btn-secondary btn-sm">취소</button>				
-						<button type="submit" class="btn btn-primary btn-sm" >수정</button>
+						<button type="reset" class="btn btn-secondary btn-sm">취소</button>								
+						<button type="submit" class="btn btn-primary btn-sm">수정</button>
 					</div>
 				</form>
 			</div>	

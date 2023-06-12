@@ -88,8 +88,19 @@
 	<div class="row mb-3">
 		<div class="col-12 text-end">
 			<a href="orderlist.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">구매내역</a>
-			<a href="modifyform.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
+			<a href="pwdCheck.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
+			
+<%
+	if ("No".equals(member.getDisabled())) {
+%>
 			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger">탈퇴하기</a>
+<%
+	} else if ("Yes".equals(member.getDisabled())) {
+%>
+			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger disabled">탈퇴하기</a>
+<%
+	}
+%>			
 		</div>
 	</div>
 	
