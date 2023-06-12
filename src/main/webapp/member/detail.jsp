@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<th class="table-dark" style="width:10%;">주소</th>
-						<td style="width: 90%;" colspan="3"><%=member.getZipcode() +", " + member.getAddress1() + ", " + member.getAddress2() %></td>
+						<td style="width: 90%;" colspan="3"><%=member.getAddress1() + ", " + member.getAddress2() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 10%;">가입일자</th>

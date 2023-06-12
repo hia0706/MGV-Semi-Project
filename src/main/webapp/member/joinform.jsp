@@ -55,14 +55,14 @@
 	}
 %>
 				<div id="box">
-					<form class="bg-light needs-validation was-validated" name="form" method="post" action="insert.jsp" novalidate>
+					<form class="bg-light needs-validation was-validated p-3" name="form" method="post" action="insert.jsp" novalidate>
 						<div class="form-group mb-2">
 							<div class="form-check form-check-inline ">
-								<input class="form-check-input" type="radio" id="male" name="gender" value="M" checked="checked"> 
+								<input class="form-check-input" type="radio" id="male" name="gender" value="남성" checked="checked"> 
 									<label class="form-check-label" for="male">남성</label>
 							</div>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" id="female" name="gender" value="F"> 
+								<input class="form-check-input" type="radio" id="female" name="gender" value="여성"> 
 								<label class="form-check-label mb-2" for="female">여성</label>
 							</div>
 					<div class="row row-cols-auto">
@@ -79,7 +79,8 @@
 								<div class="col-auto">
 									<label for="pwd" class="form-label">비밀번호</label> 
 									<input type="password" class="form-control" id="pwd" name="password" style="width: 300px" required>
-									<div class="invalid-feedback">6자 이상 대, 소문자, 숫자를 포함해야 합니다.
+									<div class="invalid-feedback">
+										6자 이상 대, 소문자, 숫자를 포함해야 합니다.
 									</div>
 								</div>
 								
@@ -103,8 +104,8 @@
 							</div>
 							
 							<div class="form-group mb-2">
-								<label class="form-label">생년월일</label><br /> <input type="date"
-									class="form-control" id="birth" name="birth" onKeyDown="key()" style="width: 300px" required>
+								<label class="form-label">생년월일</label><br /> 
+								<input type="date" class="form-control" id="birth" name="birth" style="width: 300px" required>
 							</div>
 							
 							<div class="form-group mb-2 ">
@@ -127,20 +128,20 @@
 								<label class="form-label">주소</label><br /> 
 								<div class="form-group row">
 									<div class="col-auto">
-										<input type="text" class="form-control" maxlength="5" id="zipcode" name="zipcode" style="width: 150px" required>
+										<input type="text" class="form-control" maxlength="5" id="zipcode" name="zipcode" style="width: 150px" readonly="readonly">
 										<div class="invalid-feedback">
 											우편번호를 검색하세요
 										</div>
 									</div>
 									<div class="col-auto mb-2">
-										<button type="button" id="btn" class="btn text-black btn-outline-primary btn-m mb-3" onclick="post();">우편번호검색</button>
+										<input type="button" id="btn" class="btn text-black btn-outline-primary btn-m mb-3" value="우편번호검색" onclick="post();" />
 									</div>
 								</div>							
 							</div>
 	
 							<div class="form-group row" >
 								<div class="col-auto">
-									<input type="text" class="form-control" name="address1" style="width: 400px" placeholder="주소" readonly="readonly">
+									<input type="text" class="form-control" id="Addr" name="address1" style="width: 400px" placeholder="주소" readonly="readonly">
 								</div>
 								<div class="col-auto" >
 									<input type="text" class="form-control" id="detailAddr" name="address2" style="width: 300px" required>

@@ -17,6 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
+<body onLoad="document.form.id.focus()">
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
@@ -39,7 +40,7 @@
 	} 
 %>
    			<p>아이디, 비밀번호를 입력하고 로그인하세요</p>
-   			<form class="border bg-light p-3" method="post" action="login.jsp">
+   			<form class="border bg-light p-3" name="form" method="post" action="login.jsp">
    				<div class="form-group mb-2 w-75">
    					<div class="form-check form-check-inline">
   						<input class="form-check-input" type="radio" id="ck-type" name="type" value="MEMBER" checked="checked">
@@ -59,7 +60,7 @@
    					<label class="form-label">비밀번호</label>
    					<input type="password" class="form-control" id="pwd" name="password" />
    				</div>
-   				<div class="text-end w-75">		
+   				<div class="text-end mb-3 w-75">		
    					<button type="submit" class="btn btn-primary">로그인</button>
    				</div>
    			</form>
