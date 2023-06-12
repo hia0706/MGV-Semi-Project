@@ -82,18 +82,20 @@ public class ProductDao {
 			product.setStock(rs.getInt("product_stock"));
 			product.setCreateDate(rs.getDate("product_create_date"));
 			product.setUpdateDate(rs.getDate("product_update_date"));
+			product.setSoldOut(rs.getString("product_sold_out"));
 			product.setDescription(rs.getString("product_description"));
 			
 			ProductCategory cat = new ProductCategory();
+			cat.setNo(rs.getInt("cat_no"));
 			cat.setName(rs.getString("cat_name"));
 			product.setProductCategory(cat);
 			
 			return product;
-		}, begin, end);
+		},begin, end);
 	}
 	
-	public void deleteProductByName(String name) {
-		DaoHelper.update("productDao.deleteProductByName", name);
+	public void deleteProductByNo(int no) {
+		DaoHelper.update("productDao.deleteProductByNo", no);
 	}
 	
 	public int getTotalRows() {
