@@ -43,7 +43,11 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="MEMBER"/>
 </jsp:include>
-
+<script type="text/javascript">
+	function goBack() {
+		window.history.back();
+	}
+</script>
 <div id="box">
 	<div class="container">
 		<div class="row mb-3">
@@ -104,8 +108,8 @@
 						<input type="text" class="form-control mb-3" value="<%=member.getUpdateDate() %>" disabled/>
 					</div>
 					<div class="text-end mb-2 w-50">
-						<button type="reset" class="btn btn-secondary btn-sm">취소</button>								
-						<button type="submit" class="btn btn-primary btn-sm">수정</button>
+						<button type="button" class="btn btn-secondary btn-m" onclick="goBack();">이전</button>								
+						<button type="submit" class="btn btn-primary btn-m">수정</button>
 					</div>
 				</form>
 			</div>	

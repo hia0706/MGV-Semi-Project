@@ -21,7 +21,7 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
-<div class="container" style="max-width: 800px;">
+<div class="container" style="max-width: 600px;">
 	<div class="row mb-3">
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">로그인</h1>

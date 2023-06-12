@@ -19,6 +19,10 @@
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
+	if ("Yes".equals(member.getDisabled())) {
+		response.sendRedirect("detail.jsp?err=disabled");
+		return;
+	}
 	
 	member.setName(name);
 	member.setPassword(password);

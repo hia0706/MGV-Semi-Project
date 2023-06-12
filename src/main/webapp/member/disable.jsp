@@ -10,10 +10,6 @@
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
 	
-	if ("Yes".equals(member.getDisabled())) {
-		response.sendRedirect("detail.jsp?err=req&job=" + URLEncoder.encode("정보수정", "utf-8"));
-		return;
-	}
 	member.setDisabled("Yes");
 	
 	memberDao.updateMember(member);

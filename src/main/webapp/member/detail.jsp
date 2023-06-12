@@ -5,6 +5,8 @@
 	String loginId = (String) session.getAttribute("loginId");
 	String loginType = (String) session.getAttribute("loginType");
 	
+	String err = request.getParameter("err");
+	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
 	
@@ -31,6 +33,15 @@
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">회원 상세 정보</h1>
       	</div>
+<%
+	if ("정보수정".equals(err)) {
+%>		
+		<div class="alert alert-danger">
+			<strong>이용불가</strong> 탈퇴한 회원은 이용할 수 없습니다.
+		</div>
+<%
+	} 
+%>
    	</div>
 	<div class="row mb-3">
 		<div class="col-12">
@@ -87,17 +98,18 @@
 	</div>
 	<div class="row mb-3">
 		<div class="col-12 text-end">
-			<a href="orderlist.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">구매내역</a>
+			<a href="orderlist.jsp?id=<%=member.getId() %>" class="btn btn-outline-info">구매내역</a>
 			<a href="pwdCheck.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
 			
 <%
 	if ("No".equals(member.getDisabled())) {
 %>
-			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger">탈퇴하기</a>
+			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger">탈퇴</a>
 <%
 	} else if ("Yes".equals(member.getDisabled())) {
 %>
-			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger disabled">탈퇴하기</a>
+			 <!-- 1:1 문의 경로 (회원) -->
+			<a href="../center/oneonone.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">복구 문의</a>
 <%
 	}
 %>			
