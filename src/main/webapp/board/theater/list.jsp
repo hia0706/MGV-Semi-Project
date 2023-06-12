@@ -1,9 +1,10 @@
+<%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
-<%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
+<%@page import="vo.Theater"%>
 <%@page import="vo.Location"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LocationDao"%>
@@ -123,7 +124,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a href="detail.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getCommentCnt() %></td>
 						<td><%=board.getCreateDate() %></td>
