@@ -31,6 +31,8 @@
 	line-height: 22px;
 	color:crimson;
 	}
+	.container{
+	width: 900px;}
 </style>
 </head>
 
@@ -42,7 +44,7 @@
 	<div>
 		<div class="theater-cont-lab">
 			<h4>강남
-			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 -->
+			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 text-muted를 지운다. -->
 			<i class="bi bi-heart-fill text-muted"></i>
 			</h4>
 		</div>
@@ -64,13 +66,13 @@ function activeTab(num) {
 		<div class="theater_detail ">
 			<img alt="대학로" src="../images/theater1.jpg">
 			<div>
-				<ul class="nav nav-tabs nav-fill ">
+				<ul class="nav nav-tabs nav-fill" style="width: 980px">
 				  <li class="nav-item ">
 				    <a id= "tab-menu-01" class="nav-link link-dark tab-head active" href="#tab01" title="극장정보 탭으로 이동" onclick="activeTab('01')">극장정보</a>
 				  </li>
-				  <li class="nav-item">
+				<!--   <li class="nav-item">
 				    <a id= "tab-menu-02" class="nav-link link-dark tab-head" href="#tab02" title="상영시간표 탭으로 이동"  onclick="activeTab('02')">상영?시간표?</a>
-				  </li>
+				  </li> -->
 				  <li class="nav-item">
 				    <a id= "tab-menu-03" class="nav-link link-dark tab-head" href="#tab03" title="관람료 탭으로 이동"  onclick="activeTab('03')">관람료</a>
 				  </li>
