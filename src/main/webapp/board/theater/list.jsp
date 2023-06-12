@@ -15,7 +15,10 @@
 %>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
+<title>
+
+</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,88 +27,10 @@
 </head>
 <body>
 
-<%--
-
 <jsp:include page="../../../admin/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
 
---%>
-
-<%--nav파일 수정 전 확인 코드--%> 
-<%@page import="vo.Member"%>
-<%
-	String loginType = (String) session.getAttribute("loginType");
-	String loginId = (String) session.getAttribute("loginId");
-
-	String menu = request.getParameter("menu");
-
-%>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3 ">
-		<a href="/mgv/home.jsp">
-           <img src="/mgv/images/mgv.png" alt="mgv" width="80" height="50" class="">
-        </a>
-	<div class="container">
-    	
-    	<ul class="navbar-nav me-auto">
-        	<li class="nav-item"><a class="nav-link <%="홈".equals(menu) ? "active" : "" %>" href="/mgv/home.jsp">홈</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="무비".equals(menu) ? "active" : "" %>" href="/mgv/movie/list.jsp">무비</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="극장".equals(menu) ? "active" : "" %>" href="/mgv/theater/theaters.jsp">극장</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="스토어".equals(menu) ? "active" : "" %>" href="/mgv/product.jsp">스토어</a></li>    	
-        	<li class="nav-item dropdown">
-	            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	              게시판
-	            </a>
-	            <ul class="dropdown-menu">
-	              <li><a class="dropdown-item" href="#">극장</a></li>
-	              <li><a class="dropdown-item" href="#">영화</a></li>
-	              <li><a class="dropdown-item" href="#">스토어</a></li>
-<%--
-	              <li><hr class="dropdown-divider"></li>
-	              <li><a class="dropdown-item" href="#">공지사항</a></li>
-
- --%>            
-            	</ul>
-            </li>
-      	</ul>
-<%
-	if (loginType != null) {
-%>
-		<div class="dropdown navbar-text me-5">
-			<a href="/mgv/member/detail.jsp">
-				<img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="30" height="30">
-			</a> 
-		  <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<strong class="text-white bolder"><%=loginId %>님</strong>
-		  </button>
-		  <ul class="dropdown-menu dropdown-menu-dark">
-			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
-			    <li><a class="dropdown-item" href="/mgv/member/orderlist.jsp">구매내역</a></li>
-		  </ul>
-		</div>
-		
-<%		
-	}
-%>      	
-      	<ul class="navbar-nav">
-      	<!-- 장바구니 보류 -->
-        	<%-- <li class="nav-item"><a class="nav-link <%="장바구니".equals(menu) ? "active" : "" %>" href="/movie/cart.jsp">장바구니</a></li>   --%>  	
-<%
-	if (loginId != null) {
-%>
-         	<li class="nav-item"><a class="nav-link " href="/mgv/member/logout.jsp">로그아웃</a></li>
-<%
-	} else {
-%>
-         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" href="/mgv/member/loginform.jsp">로그인</a></li>
-        	<li class="nav-item"><a class="nav-link <%="회원가입".equals(menu) ? "active" : "" %>" href="/mgv/member/joinform.jsp">회원가입</a></li>   
-<%
-	}
-%>
-      	</ul>
-   	</div>
-
-</nav> 
 
 <%-- 극장 게시판 시작 --%>
  
@@ -153,20 +78,6 @@
 				
 <script type="text/javascript">
 
-		let location = document.getElementById("theater").value;
-		let theater = document.getElementById("theater02").value;
-	locationChoice(){
-			
-		let opt = [];
-		location.forEach( data => {
-			
-				opt.push(
-					`<option value= >`		
-				);
-			});
-		
-
-		}
 		
 
 </script>			
@@ -266,12 +177,6 @@
 					
 					<li class="page-item active">
 						<a href="list.jsp?page=1" class="page-link">1</a>
-					</li>
-					<li class="page-item">
-						<a href="list.jsp?page=2" class="page-link">2</a>
-					</li>
-					<li class="page-item">
-						<a href="list.jsp?page=3" class="page-link">3</a>
 					</li>
 					
 					<li class="page-item ">
