@@ -30,5 +30,5 @@
 	productDao.updateProduct(product);
 	
 	// 재요청 URL 응답
-	response.sendRedirect("detail.jsp?name=" + name);
+	response.sendRedirect("detail.jsp?no=" + no);
 %>
