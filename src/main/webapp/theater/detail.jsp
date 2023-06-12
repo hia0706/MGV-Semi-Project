@@ -26,6 +26,9 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=683b3934429366d7f2da0e2094630435"></script>
 </head>
 <body>
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="극장"/>
+</jsp:include>
 <div class="container">
 	<div>
 		<div class="theater-cont-lab">

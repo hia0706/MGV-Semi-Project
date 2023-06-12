@@ -135,6 +135,7 @@
 
 <div class="container ">
 	<div class="theater_wrap">
+		<h2>전체극장</h2>
 		<div class="sect-favorite">
 			<table class="table">
 				<tr>
