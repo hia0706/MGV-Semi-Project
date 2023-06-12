@@ -1,9 +1,10 @@
+<%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
-<%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
+<%@page import="vo.Theater"%>
 <%@page import="vo.Location"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LocationDao"%>
