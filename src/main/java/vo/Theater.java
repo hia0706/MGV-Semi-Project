@@ -7,7 +7,7 @@ public class Theater {
 	private String address1; // 일반주소
 	private String address2; // 도로명주소
 	private String tel;
-	private String disable;
+	private String disabled;
 	
 	public Theater() {}
 
@@ -59,11 +59,11 @@ public class Theater {
 		this.tel = tel;
 	}
 	
-	public String getDisable() {
-		return disable;
+	public String getDisabled() {
+		return disabled;
 	}
 	
-	public void setDisable(String disable) {
-		this.disable = disable;
+	public void setDisabled(String disable) {
+		this.disabled = disable;
 	}
 }

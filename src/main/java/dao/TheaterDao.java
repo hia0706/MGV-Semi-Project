@@ -21,7 +21,7 @@ public class TheaterDao {
 				theater.setName(rs.getString("theater_name"));
 				theater.setAddress1(rs.getString("theater_address1"));
 				theater.setAddress2(rs.getString("theater_address2"));
-				theater.setDisable(rs.getString("theater_disabled"));
+				theater.setDisabled(rs.getString("theater_disabled"));
 				theater.setTel(rs.getString("theater_tel"));
 				Location location = new Location();
 				location.setNo(rs.getInt("location_no"));
@@ -37,7 +37,7 @@ public class TheaterDao {
 			theater.setName(rs.getString("theater_name"));
 			theater.setAddress1(rs.getString("theater_address1"));
 			theater.setAddress2(rs.getString("theater_address2"));
-			theater.setDisable(rs.getString("theater_disabled"));
+			theater.setDisabled(rs.getString("theater_disabled"));
 			theater.setTel(rs.getString("theater_tel"));
 			Location location = new Location();
 			location.setNo(rs.getInt("location_no"));
@@ -45,4 +45,5 @@ public class TheaterDao {
 			return theater;
 		}, theaterNo);
 	}
+	
 }

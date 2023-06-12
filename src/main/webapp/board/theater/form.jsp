@@ -54,7 +54,7 @@
 								<label class="form-check-label mb-2" for="female">B</label>
 							</div>
 							<div class="form-check form-check-inline ">
-								<input class="form-check-input" type="radio" id="Cgrade" name="grade" value="C" checked="checked"> 
+								<input class="form-check-input" type="radio" id="Cgrade" name="grade" value="C" > 
 									<label class="form-check-label" for="Cgrade">C</label>
 							</div>
 							<div class="form-check form-check-inline">
