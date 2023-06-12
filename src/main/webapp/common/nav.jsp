@@ -1,4 +1,3 @@
-<%@page import="vo.Member"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	String loginType = (String) session.getAttribute("loginType");
