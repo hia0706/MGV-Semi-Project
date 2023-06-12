@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	// 모든 카테고리 목록정보를 조회하기
-	ProductCategoryDao productCategoryDao = new ProductCategoryDao();
+	ProductCategoryDao productCategoryDao = ProductCategoryDao.getInstance();
 	List<ProductCategory> categories = productCategoryDao.getCategories();
 %>
 <!doctype html>
