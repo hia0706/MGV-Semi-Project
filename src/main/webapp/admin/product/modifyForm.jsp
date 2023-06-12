@@ -71,14 +71,14 @@
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">판매여부</label>
-					<input type="text" class="form-control" name="stock" value="<%=product.getStock() %>"/>
+					<input type="text" class="form-control" name="soldOut" value="<%=product.getSoldOut() %>"/>
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">상품 설명</label>
 					<textarea class="form-control" rows="5" name="description"><%=product.getDescription() %></textarea>
 				</div>
 				<div class="text-end">
-					<a href="detail.jsp?name=<%=product.getName() %>" type="reset" class="btn btn-secondary btn-sm">취소</a>
+					<a href="detail.jsp?no=<%=product.getNo() %>" type="reset" class="btn btn-secondary btn-sm">취소</a>
 					<button type="submit" class="btn btn-primary btn-sm">수정</button>
 				</div>
 			</form>
