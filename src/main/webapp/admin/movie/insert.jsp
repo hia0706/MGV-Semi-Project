@@ -28,7 +28,7 @@
 	movie.setDirector(director);
 	movie.setCast(cast);
 	movie.setDescription(description);
-	movie.setReleaseDate(releaseDate);
+	//movie.setReleaseDate(releaseDate);
 	
 	// 업무로직 수행 - 새 영화정보를 저장시킨다. 
 	ManagerMovieDao managerMovieDao = ManagerMovieDao.getInstance();

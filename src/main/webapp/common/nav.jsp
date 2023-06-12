@@ -8,10 +8,9 @@
 %>
 <style>
  .navbar-nav > li {
-	  padding-left:10px;
-	  padding-right:10px;
+	  margin: 10px; 
+	  padding: 5px 1px;
 	  font-size: 18px;
-	  margin: 10px;
  }
 
 </style>
@@ -23,8 +22,23 @@
     	<ul class="navbar-nav me-auto">
         	<li class="nav-item"><a class="nav-link <%="홈".equals(menu) ? "active" : "" %>" href="/mgv/home.jsp">홈</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="무비".equals(menu) ? "active" : "" %>" href="/mgv/movie/list.jsp">무비</a></li>    	
-        	<li class="nav-item"><a class="nav-link <%="극장".equals(menu) ? "active" : "" %>" href="/mgv/theater/theaters.jsp">극장</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="극장".equals(menu) ? "active" : "" %>" href="/mgv/theater/theaters.jsp">극장</a></li>    
         	<li class="nav-item"><a class="nav-link <%="스토어".equals(menu) ? "active" : "" %>" href="/mgv/product.jsp">스토어</a></li>    	
+        	<li class="nav-item dropdown">
+	            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	              게시판
+	            </a>
+	            <ul class="dropdown-menu">
+	              <li><a class="dropdown-item" href="/mgv/board/theater/list.jsp">극장</a></li>
+	              <li><a class="dropdown-item" href="/mgv/board/movie/list.jsp">영화</a></li>
+	              <li><a class="dropdown-item" href="/mgv/board/store/list.jsp">스토어</a></li>
+<%--
+	              <li><hr class="dropdown-divider"></li>
+	              <li><a class="dropdown-item" href="#">공지사항</a></li>
+
+--%>            
+            	</ul>
+            </li>	
       	</ul>
 <%
 	if (loginType != null) {
@@ -60,6 +74,7 @@
 <%
 	}
 %>
+           	<li class="nav-item"><a class="nav-link <%="고객센터".equals(menu) ? "active" : "" %>" href="/mgv/center/home.jsp" style="font-size: 12px">고객센터</a></li>
       	</ul>
    	</div>
 </nav>

@@ -12,6 +12,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
 <title>
 	내 정보 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
 </title>
@@ -37,36 +38,48 @@
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th class="table-dark " style="width: 15%;">아이디</th>
-						<td style="width: 35%;"><%=member.getId() %></td>
-						<th class="table-dark" style="width: 15%;">이름</th>
-						<td style="width: 35%;"><%=member.getName() %></td>
+						<th class="table-dark " style="width: 10%;">아이디</th>
+						<td style="width: 40%;"><%=member.getId() %></td>
+						<th class="table-dark" style="width: 10%;">이름</th>
+						<td style="width: 40%;"><%=member.getName() %></td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width: 15%;">성별</th>
-						<td style="width: 35%;"><%=member.getGender() %></td>
-						<th class="table-dark" style="width: 15%;">생년월일</th>
-						<td style="width: 35%;"><%=member.getBirth() %></td>
+						<th class="table-dark" style="width: 10%;">성별</th>
+						<td style="width: 40%;"><%=member.getGender() %></td>
+						<th class="table-dark" style="width: 10%;">생년월일</th>
+						<td style="width: 40%;"><%=member.getBirth() %></td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width: 15%;">연락처</th>
-						<td style="width: 35%;"><%=member.getTel() %></td>
-						<th class="table-dark" style="width: 15%;">이메일</th>
-						<td style="width: 35%;"><%=member.getEmail() %></td>
+						<th class="table-dark" style="width: 10%;">연락처</th>
+						<td style="width: 40%;"><%=member.getTel() %></td>
+						<th class="table-dark" style="width: 10%;">이메일</th>
+						<td style="width: 40%;"><%=member.getEmail() %></td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width:20%;">주소</th>
-						<td style="width: 10%;" colspan="3"><%=member.getZipcode() + member.getAddress1() + member.getAddress2() %></td>
+						<th class="table-dark" style="width:10%;">주소</th>
+						<td style="width: 90%;" colspan="3"><%=member.getZipcode() +", " + member.getAddress1() + ", " + member.getAddress2() %></td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width: 15%;">가입일자</th>
-						<td style="width: 85%;" colspan="3"><%=member.getCreateDate() %></td>
+						<th class="table-dark" style="width: 10%;">가입일자</th>
+						<td style="width: 90%;" colspan="3"><%=member.getCreateDate() %></td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width: 15%;">추천인</th>
-						<td style="width: 35%;"><%=member.getReferee() == null ? "" : member.getReferee() %></td>
-						<th class="table-dark" style="width: 15%;">탈퇴여부</th>
-						<td style="width: 35%;"><%=member.getDisabled() %></td>
+						<th class="table-dark" style="width: 10%;">추천인</th>
+						<td style="width: 40%;"><%=member.getReferee() == null ? "" : member.getReferee() %></td>
+						<th class="table-dark" style="width: 10%;">탈퇴여부</th>
+						<td>
+<%
+	if ("No".equals(member.getDisabled())) {
+%>						
+							<span class="badge text-bg-success" style="width: 20%;">사용중</span>
+<%
+	} else if ("Yes".equals(member.getDisabled())) {
+%>
+							<span class="badge text-bg-secondary" style="width: 20%">탈퇴</span>
+<%
+	}	
+%>
+						</td>					
 					</tr>
 				</tbody>
 			</table>

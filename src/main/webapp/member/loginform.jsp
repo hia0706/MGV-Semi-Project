@@ -6,6 +6,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
 <title>
 	로그인 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
 </title>
@@ -19,7 +20,7 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
-<div class="container" style="max-width: 600px;">
+<div class="container" style="max-width: 800px;">
 	<div class="row mb-3">
     	<div class="col-12">
         	<h1 class="border bg-light fs-4 p-2">로그인</h1>
