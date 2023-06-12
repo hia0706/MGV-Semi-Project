@@ -46,7 +46,7 @@
 						<th class="table-dark" style="width: 15%;">제목</th>
 						<td style="width: 35%;"><%=movie.getTitle() %></td>
 						<th class="table-dark" style="width: 15%;">상영여부</th>
-						<td style="width: 35%;"><%="N".equals(movie.getDisable()) ? "상영중" : "예매중" %></td>
+						<td style="width: 35%;"><%="Y".equals(movie.getIsPlaying()) ? "상영중" : "상영종료" %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 15%;">감독</th>

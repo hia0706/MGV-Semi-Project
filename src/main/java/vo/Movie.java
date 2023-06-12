@@ -2,6 +2,8 @@ package vo;
 
 import java.util.Date;
 
+import util.DateUtils;
+
 public class Movie {
 
 	private int no;
@@ -14,8 +16,18 @@ public class Movie {
 	private String cast;
 	private String description;
 	private String posterURL;
-	private String releaseDate;
 	private String isPlaying;
+	private String rankOldAndNew;
+	private Date releaseDate;
+	private Date updateDate;
+	
+	public String getRankOldAndNew() {
+		return rankOldAndNew;
+	}
+	public void setRankOldAndNew(String rankOldAndNew) {
+		this.rankOldAndNew = rankOldAndNew;
+	}
+	
 	public String getIsPlaying() {
 		return isPlaying;
 	}
@@ -25,6 +37,12 @@ public class Movie {
 	}
 
 
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
 	public Movie() {}
 
 	public int getNo() {
@@ -107,12 +125,16 @@ public class Movie {
 		this.description = description;
 	}
 
-	public String getReleaseDate() {
+	public Date getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(String releaseDate) {
+	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+	
+	public String getStringFormattedDate() {
+		return DateUtils.toText(releaseDate);
 	}
 	
 }
