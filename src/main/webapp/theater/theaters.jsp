@@ -32,6 +32,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet" >
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=683b3934429366d7f2da0e2094630435&libraries=services,clusterer,drawing"></script>
+<!-- 카카오맵api -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=683b3934429366d7f2da0e2094630435"></script>	
+
 <style>
 
     .bi-heart-fill{
@@ -54,6 +59,7 @@
 	font-size: 12pt;
 	}
 </style>
+
 </head>
 <body>
 <jsp:include page="../common/nav.jsp">
@@ -238,7 +244,7 @@
 
 <div class="container">
 	<div>
-		<div>
+		<div class="theater-cont-lab">
 			<h4>강남
 			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 -->
 			<i class="bi bi-heart-fill text-muted"></i>
@@ -284,6 +290,51 @@ function activeTab(num) {
 							</tr>
 						</tbody>
 				</table>
+				<!-- 카카오지도 보여줄 영역 -->
+				<div id="map" style="width:400px;height:300px;"></div>
+<script type="text/javascript">
+<%
+	//선택한 극장번호로 극장정보 불러오기
+%>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+var places = new kakao.maps.services.Places();
+var geocoder = new kakao.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 undifined
+
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+    });
+    infowindow.open(map, marker);
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});
+</script>				
 			</div>
 			<div id="tab-02" class="tab-cont" style="display: none;">
 				<table style="margin-left: 10px">
