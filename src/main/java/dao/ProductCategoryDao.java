@@ -6,6 +6,12 @@ import util.DaoHelper;
 import vo.ProductCategory;
 
 public class ProductCategoryDao {
+	
+	private static ProductCategoryDao instance = new ProductCategoryDao();
+	private ProductCategoryDao() {}
+	public static ProductCategoryDao getInstance() {
+		return instance;
+	}
 
 	public List<ProductCategory> getCategories() {
 		return DaoHelper.selectList("productCategoryDao.getCategories", rs -> {
