@@ -14,6 +14,7 @@ public class ProductDao {
 		return instance;
 	}
 	
+	
 	public void updateProduct(Product product) {
 		DaoHelper.update("productDao.updateProduct", product.getName(),
 							 						 product.getPrice(),
@@ -30,6 +31,26 @@ public class ProductDao {
 													 product.getStock(),
 													 product.getDescription(),
 													 product.getProductCategory().getNo());
+	}
+	
+	public List<Product> getAllProducts() {
+		return DaoHelper.selectList("productDao.getAllProducts", rs -> {
+			Product pro = new Product();
+			pro.setNo(rs.getInt("product_no"));
+			pro.setName(rs.getString("product_name"));
+			pro.setPrice(rs.getInt("product_price"));
+			pro.setStock(rs.getInt("product_stock"));
+			pro.setCreateDate(rs.getDate("product_create_date"));
+			pro.setUpdateDate(rs.getDate("product_update_date"));
+			pro.setSoldOut(rs.getString("product_sold_out"));
+			
+			ProductCategory category = new ProductCategory();
+			category.setNo(rs.getInt("cat_no"));
+			category.setName(rs.getString("cat_name"));
+			pro.setProductCategory(category);
+			
+			return pro;
+		});
 	}
 	
 	public Product getProductByName(String name) {

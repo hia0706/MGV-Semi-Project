@@ -124,7 +124,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a href="detail.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getCommentCnt() %></td>
 						<td><%=board.getCreateDate() %></td>
