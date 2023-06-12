@@ -37,6 +37,24 @@
 				<strong>로그인 실패</strong> 아이디 혹은 비밀번호가 일치하지 않습니다.
 			</div>
 <%
+	} else if ("disabled".equals(err)) {
+		%>		
+		<div class="alert alert-danger">
+			<strong>로그인 실패</strong> 탈퇴한 회원은 로그인할 수 없습니다.
+		</div>
+<%
+	} else if ("admin".equals(err)) {
+		%>		
+		<div class="alert alert-danger">
+			<strong>로그인 실패</strong> 관리자 계정입니다. 관리자로 로그인 하세요.
+		</div>
+<%
+	} else if ("member".equals(err)) {
+		%>		
+		<div class="alert alert-danger">
+			<strong>로그인 실패</strong> 회원 계정은 관리자로 로그인할 수 없습니다.
+		</div>
+<%
 	} 
 %>
    			<p>아이디, 비밀번호를 입력하고 로그인하세요</p>
