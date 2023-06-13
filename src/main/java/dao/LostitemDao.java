@@ -13,6 +13,14 @@ public class LostitemDao {
 		return instance;
 	}
 	
+	public void updateLostitem(Lostitem lostitem) {
+		DaoHelper.update("lostitemDao.updateLostitem", lostitem.getTitle(),
+													   lostitem.getContent(),
+													   lostitem.getAnswered(),
+													   lostitem.getDeleted(),
+													   lostitem.getNo());
+	}
+	
 	public  Lostitem getLostitemByNo(int LostitemNo) {
 		return DaoHelper.selectOne("lostitemDao.getLostitemByNo", rs -> {
 			Lostitem lostitem = new Lostitem();
@@ -20,7 +28,7 @@ public class LostitemDao {
 			lostitem.setTitle(rs.getString("lostitem_title"));
 			lostitem.setContent(rs.getString("lostitem_content"));
 			lostitem.setAnswered(rs.getString("lostitem_answered"));
-			lostitem.setDeleted(rs.getString("losttem_deleted"));
+			lostitem.setDeleted(rs.getString("lostitem_deleted"));
 			lostitem.setCreateDate(rs.getDate("lostitem_create_date"));
 			
 			return lostitem;
@@ -34,7 +42,7 @@ public class LostitemDao {
 			lostitem.setTitle(rs.getString("lostitem_title"));
 			lostitem.setContent(rs.getString("lostitem_content"));
 			lostitem.setAnswered(rs.getString("lostitem_answered"));
-			lostitem.setDeleted(rs.getString("losttem_deleted"));
+			lostitem.setDeleted(rs.getString("lostitem_deleted"));
 			lostitem.setCreateDate(rs.getDate("lostitem_create_date"));
 			
 			return lostitem;
