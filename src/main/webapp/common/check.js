@@ -29,12 +29,6 @@ function join() {
 	}
 	
 	// 비밀번호 유효성 검사
-	if(hangleCheck.test(pwd.value)){
-		alert("비밀번호에 한글을 사용할 수 없습니다.");
-		pwd.focus();
-		return false;
-	}
-	
 	if (pwd.value === '') {
 		alert("비밀번호를 입력하세요.");
 		pwd.focus();
@@ -55,12 +49,12 @@ function join() {
 		return false;
 	}
 	if (repwd.value === '') {
-		alert("비밀번호를 다시 확인하세요.");
+		alert("비밀번호를 입력하세요.");
 		repwd.focus();
 		return false;
 	}
 	if (pwd.value != repwd.value) {
-		alert("비밀번호가 일치하지 않습니다.");
+		alert("비밀번호를 다시 확인하세요.");
 		return false;
 	}
 	
