@@ -1,3 +1,5 @@
+<%@page import="vo.TboardComment"%>
+<%@page import="dao.TboardCommentDao"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
 <%@page import="java.util.List"%>
@@ -15,8 +17,8 @@
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
 	
-//	commentDao commentDao = new commentDao();
-//	List<Comment> commentlistList = commentDao.getCommentsByBoardNo(no);
+    TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
+    List<TboardComment> comments = tboardCommentDao.getCommentByBoardNo(boardNo);
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -100,7 +102,7 @@
 	<div class="row mb-3">
    		<div class="col-12">
 			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
-				<input type="hidden" name="boardNo" value=<%=theaterBoard.getNo() %> />
+				<input type="hidden" name="no" value=<%=theaterBoard.getNo() %> />
  				<div class="row">
 					<div class="col-11">
 						<textarea rows="2" class="form-control" name="content"></textarea>
@@ -114,38 +116,35 @@
    	</div>
 	<div class="row mb-3">
    		<div class="col-12">
-<%--
-	for(Comment comment : commentlistList) {
---%>
-
-<%--
+<%
+	for(TboardComment comment : comments) {
+%>
+			
    			<div class="border p-2 mb-2">
 	   			<div class="d-flex justify-content-between mb-1">
-	   				<span><%=comment.getCustomer().getName() %></span> <span class="text-muted"><%=comment.getCreateDate() %></span>
+	   				<span><%=comment.getMember().getId() %></span> <span class="text-muted"><%=comment.getCreaeDate() %></span>
 	   			</div>
 	   			<div>
 	   				<%=comment.getContent() %>
-
- --%>
+				
 	   				
-<%--
-	if(comment.getCustomer().getId().equals(loginId)){
---%>
+<%
+	if(comment.getMember().getId().equals(loginId)){
+%>
 
-<%--
 
-	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getNo() %>" 
+
+	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
 	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
- --%>
-	   			
-<%--
+
+<%
 	}
---%>
+%>
 	   			</div>   			
    			</div>
-<%--
+<%
 	}
---%>   			
+%>   			
    		</div>
    	</div>
 </div>
