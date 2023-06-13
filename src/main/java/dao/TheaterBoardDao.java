@@ -7,6 +7,7 @@ import vo.Location;
 import vo.Member;
 import vo.Theater;
 import vo.TheaterBoard;
+import vo.TotalRows;
 
 public class TheaterBoardDao {
 
@@ -75,9 +76,20 @@ public class TheaterBoardDao {
 	public int getTotalRows() {
 		
 		return DaoHelper.selectOne("theaterBoardDao.getTotalRows", rs -> {
+			
 			return rs.getInt("cnt");
 		});
 	}
+	
+	public TotalRows getTotalRow() {
+		
+		return DaoHelper.selectOne("theaterBoardDao.getTotalRows", rs -> {
+			TotalRows totalRows = new TotalRows();
+			totalRows.setCnt(rs.getInt("cnt"));
+			return totalRows;
+		});
+	}
+	
 	
 	public List<TheaterBoard> getTheaterBoards(int begin, int end) {
 		
