@@ -60,7 +60,7 @@
 						<th class="table-dark" style="width: 15%;">개봉일</th>
 						<td style="width: 35%;"><%=movie.getReleaseDate() %></td>
 					</tr>
-				
+					<tr>
 						<th class="table-dark" style="width: 15%;">설명</th>
 						<td style="width: 85%; height: 100px;" colspan="3"><%=movie.getDescription() %></td>
 					</tr>
