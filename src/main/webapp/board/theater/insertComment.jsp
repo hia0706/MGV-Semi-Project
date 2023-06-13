@@ -7,7 +7,6 @@
 <%
 	// 세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
-	String type = request.getParameter("type");
 	
 	// 로그인 하지 않고 댓글 작성시 에러메세지 출력
 	
@@ -29,7 +28,7 @@
 	
 	// 정보가 담긴 댓글 객체를 insert 한다.
 	TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
-	tboardCommentDao.insertCommentToTboard(theaterBoard);
+	tboardCommentDao.insertCommentToTboard(tboardComment);
 	
 	// boardNo로 게시물을 조회한다.
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();

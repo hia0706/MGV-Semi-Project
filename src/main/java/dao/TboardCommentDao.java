@@ -1,7 +1,7 @@
 package dao;
 
 import util.DaoHelper;
-import vo.TheaterBoard;
+import vo.TboardComment;
 
 public class TboardCommentDao {
 	
@@ -11,9 +11,9 @@ public class TboardCommentDao {
 		return instance;
 	}
 	
-	public void insertCommentToTboard(TheaterBoard theaterBoard) {
-		DaoHelper.update("tboardCommentDao.insertComment", theaterBoard.getContent(),
-														   theaterBoard.getMember().getId(),
-														   theaterBoard.getNo());
+	public void insertCommentToTboard(TboardComment tboardComment) {
+		DaoHelper.update("tboardCommentDao.insertComment", tboardComment.getContent(),
+														   tboardComment.getMember().getId(),
+														   tboardComment.getTheaterBoard().getNo());
 	}
 }

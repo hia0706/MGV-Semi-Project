@@ -69,39 +69,17 @@
 	
 	<div class="row mb-3">
 		<div class="col-12">
-			<p>게시글 상세정보를 확인하세요.</p>
-			<table class="table table-bordered">
-				<colgroup>
-					<col width="10%">
-					<col width="40%">
-					<col width="10%">
-					<col width="40%">
-				</colgroup>
-				<tbody>
-					<tr>
-						<th class="table-dark">제목</th>
-						<td><%=theaterBoard.getName() %></td>
-						<th class="table-dark">작성자</th>
-						<td><%=theaterBoard.getMember().getId() %></td>
-					</tr>
-					<tr>
-						<th class="table-dark">조회수</th>
-						<td><%=theaterBoard.getReadCnt() %></td>
-						<th class="table-dark">댓글갯수</th>
-						<td><%=theaterBoard.getCommentCnt() %></td>
-					</tr>
-					<tr>
-						<th class="table-dark">등록일</th>
-						<td><%=theaterBoard.getCreateDate() %></td>
-						<th class="table-dark">최종수정일자</th>
-						<td><%=theaterBoard.getUpdateDate() %></td>
-					</tr>
-					<tr>
-						<th class="table-dark">내용</th>
-						<td colspan="10" style="" height="100px;"><%=theaterBoard.getContent() %></td>
-					</tr>
-				</tbody>
-			</table>
+			
+			<p style="font-size : 12px; line-height: 15%; float:right;">댓글 <strong><%=theaterBoard.getCommentCnt() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%; float:right;">조회수 <strong><%=theaterBoard.getReadCnt()%>&nbsp;</strong></p>
+			<p style="font-size : 10px; line-height: 15%;"><strong><%=theaterBoard.getLocation().getName() %>/<%=theaterBoard.getTheater().getName() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;">작성자<strong> <%=theaterBoard.getMember().getId() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;"><strong> <%=theaterBoard.getUpdateDate() %></strong></p>
+			<hr>
+			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
+				<p><%=theaterBoard.getContent() %></p>
+			</div>
+			
 			<div class="text-end">
 <%
 	if (theaterBoard.getMember().getId().equals(loginId)) {
