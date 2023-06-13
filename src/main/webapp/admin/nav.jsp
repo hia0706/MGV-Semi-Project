@@ -31,6 +31,8 @@
       	<!-- 장바구니 보류 -->
         	<%-- <li class="nav-item"><a class="nav-link <%="장바구니".equals(menu) ? "active" : "" %>" href="/movie/cart.jsp">장바구니</a></li>   --%>  	
          	<li class="nav-item"><a class="nav-link " href="/mgv/member/logout.jsp">로그아웃</a></li>
+         	
+         		<li class="nav-item"><a class="nav-link <%="고객센터".equals(menu) ? "active" : "" %>" href="/mgv/admin/center/home.jsp" style="font-size: 12px">고객센터</a></li>
       	</ul>	
    	</div>
    			
