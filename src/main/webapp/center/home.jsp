@@ -20,10 +20,28 @@
 
 <div class="container">
 	<div class="bg-light p-3">
-		<a href="lostitem/list.jsp">분실물 문의</a>
-		<a href="oneonone/insertform.jsp">1:1 문의</a>
-		<a href="faq/list.jsp">자주 묻는 질문</a>
-		<a href="notice/list.jsp">공지사항</a>
+		<a href="lostitem/list.jsp" class="text-black text-decoration-none">
+			<img src="../images/center/lostitem.png" width="50" height="50"><br>
+			<strong>분실물 문의</strong>
+		</a>
+		<br>
+		<br>
+		<a href="oneonone/insertform.jsp" class="text-black text-decoration-none">
+			<img src="../images/center/oneonone.png" width="50" height="50"><br>
+			<strong>1:1 문의</strong>
+		</a>
+		<br>
+		<br>
+		<a href="faq/list.jsp" class="text-black text-decoration-none">
+			<img src="../images/center/faq.png" width="50" height="50"><br>
+			<strong>자주 묻는 질문</strong>
+		</a>
+		<br>
+		<br>
+		<a href="notice/list.jsp" class="text-black text-decoration-none">
+			<img src="../images/center/notice.png" width="50" height="50"><br>
+			<strong>공지사항</strong>
+		</a>
 		
 
 	</div>

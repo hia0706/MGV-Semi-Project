@@ -11,7 +11,7 @@
 	// 로그인 하지 않고 댓글 작성시 에러메세지 출력
 	
 	// 요청파라미터 조회
-	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	int boardNo = Integer.parseInt(request.getParameter("no"));
 	String content = request.getParameter("content");
 	
 	// 댓글 객체 생성후 댓글 정보 담기
@@ -41,6 +41,6 @@
 	theaterBoardDao.updateTheaterBoard(theaterBoard2);
 	
 	// url 재요청
-	response.sendRedirect("detail.jsp?no"+boardNo);
+	response.sendRedirect("detail.jsp?no="+boardNo);
 	
 %>

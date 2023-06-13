@@ -1,3 +1,5 @@
+<%@page import="dao.MemberDao"%>
+<%@page import="vo.Member"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -5,6 +7,17 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	
+	//세션에서 로그인된 사용자 정보를 조회한다.
+	String id = (String) session.getAttribute("loginId");
+
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+
+	
+	if (member == null) {
+		response.sendRedirect("../../member/loginform.jsp?err=fail");
+		return;
+	}
 
 %>
 

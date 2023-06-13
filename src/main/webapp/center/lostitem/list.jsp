@@ -69,7 +69,7 @@
 				
 					<tr>
 						<td><%=lostitem.getNo() %></td>
-						<td>극장</td>
+						<td>MGV</td>
 						<td style="text-align:left">
 							<a href="detail.jsp?no=<%=lostitem.getNo() %>" class="text-black text-decoration-none">
 								<%=lostitem.getTitle() %>

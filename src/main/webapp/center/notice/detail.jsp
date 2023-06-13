@@ -1,10 +1,12 @@
+<%@page import="vo.Oneonone"%>
+<%@page import="dao.OneononeDao"%>
 <%@page import="vo.Lostitem"%>
 <%@page import="dao.LostitemDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 
-
+	
 	
 %>
 <!doctype html>
@@ -26,16 +28,23 @@
 <div class="container">
 	<div class="row mb-3">
     	<div class="col-12">
-        	<h1 class="fs-2 p-2">나의 문의내역</h1>
+        	<h1 class="fs-2 p-2">공지사항</h1>
       	</div>
    	</div>
-	<div class="clearfix">
-		<ul class="dot-list">
-			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
-		</ul>
-	</div>
 	
 		<hr>
+			<a style="font-size : 17px;">MGV 이용 약관 변경 안내<strong></strong></a><br>
+			<a style="font-size : 12px;">2023.06.13</a>
+		<hr>
+			<a>
+				[공지] MGV 이용약관 변경 안내<br><br>
+				안녕하세요, MGV 입니다<br><br>
+				MGV 이용약관이 변경됨에 따라 다음과 같이 안내해드립니다.<br><br>
+				변경된 내용은 2023년 6월 19일(월)부터 시행 예정이니 이용에 참고하여 주시기 바랍니다.<br><br>
+				
+				감사합니다.
+			</a>
+		
 		
 			
 
@@ -43,3 +52,13 @@
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

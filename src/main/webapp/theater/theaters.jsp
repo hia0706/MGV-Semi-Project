@@ -1,3 +1,5 @@
+<%@page import="dao.FavoriteTheaterDao"%>
+<%@page import="vo.FavoriteTheater"%>
 <%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="java.util.List"%>
@@ -13,6 +15,8 @@
 	List<Location> locations = locationDao.getLocations();
 	
 	// 자주가는 극장 정보 가져오기
+	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
+	List<FavoriteTheater> FTList = fTheaterDao.getFavoriteTheaterById(loginId);
 	
 	// 극장정보 가져오기
 	TheaterDao theaterDao = TheaterDao.getInstance();
@@ -60,8 +64,17 @@
   	.list-group-item a{
   	text-decoration: none;
   	}
-  	.sect-city,.theater_wrap{
+  	.list-group-item:hover{
+  		font-weight: 700;
+  	}
+  	.sect-city{
   	width: 1000px;
+  	border-radius: 10px;
+  	border: 3px solid #686571;
+  	}
+  	.sect-city ul li:active{
+  	background: #555;
+    border: 1px solid #555;
   	}
   	.container
   	{
@@ -78,6 +91,7 @@
     empty-cells: show;
 	}
 	.table-wrap {
+	width: 1000px;
     position: relative;
     border-top: 1px solid #555;
     }
@@ -123,8 +137,66 @@
 	.part-title {
 	margin-top: 100px;
 	}
-	
-}
+	.theater-choice-list .bg .circle {
+    display: table-cell;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 90px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #ebebeb;
+	}
+	.theater-choice-list {
+    overflow: hidden;
+    margin: 0;
+    padding: 20px 0 0 45px;
+	}
+	.box-gray.v1 {
+    border-radius: 5px;
+	}
+	.a-c {
+	    text-align: center!important;
+	}
+	.box-gray {
+	    padding: 20px;
+	    background-color: #f2f4f5;
+	}
+	.bootstrap-select:not(.input-group-btn), .bootstrap-select[class*=col-] {
+    float: none;
+    display: inline-block;
+    margin-left: 0;
+	}
+	.sect-favorite{
+	float: none;
+	display: inline-block;
+	margin-left: 0;
+	padding: 1em;
+	background-color: #f2f4f5;
+	border-radius: 0 0 10px 10px;
+	width: 100%;
+	height: 50px;
+	}
+	.sect-favorite ul{
+	display: inline-block;
+    margin: 0 20px;
+	}
+	 .sect-favorite ul li{
+	display: inline-block;
+    padding: 0 15px;
+    margin: 0 2px;
+    height: 25px;
+    line-height: 24px;
+    border-radius: 25px;
+    background-color: #fff;
+	}
+	a {
+	text-decoration: none;
+	}
+	.btn-jj{
+	float: right;
+	border-radius: 25px;
+	}
 </style>
 
 </head>
@@ -132,32 +204,17 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
-
+<script type="text/javascript">
+	function insert() {
+		window.open("insert.jsp",
+				"자주가는 극장 등록",
+				"width=800, height=1200, top=50, left=50");
+	}
+</script>
 <div class="container ">
 	<div class="theater_wrap">
 		<h2>전체극장</h2>
-		<div class="sect-favorite">
-			<table class="table">
-				<tr>
-					<td class="align-middle">자주가는극장</td>
-					<td>
-						<ul class="list-group list-group-horizontal ">
-						  <li class="list-group-item" >
-						  	<a href="nothing.jsp"  class="link-dark">An item</a>
-						  </li>
-						  <li class="list-group-item">A second item</li>
-						  <li class="list-group-item ">A third item</li>
-						  <li class="list-group-item ">A 4 item</li>
-						  <li class="list-group-item ">A 5 item</li>
-						</ul>
-					</td>
-					<td>
-					<button type="button" class="btn btn-danger">자주가는 극장 설정</button>
-					</td>
-				</tr>
-			</table>			
-		</div>
-			<div class="sect-city border" >
+			<div class="sect-city" >
 				<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
@@ -306,7 +363,52 @@
 					</ul>				  
 				  </div>
 				</div>
+			<div class="sect-favorite">
+				<span class="s1"><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
+<%
+	if(loginId==null){
+		
+%>
+				<button style="border-radius: 10px; margin-left: 10px;" onclick="login()">로그인하기</button>
+<script type="text/javascript">
+	function login() {
+		window.location="../member/loginform.jsp";
+	}
+</script>				
+<%
+	}else{
+%>				
+				<ul>
+<%
+		for(FavoriteTheater favoriteTheater:FTList){
+%>
+			  		<li>
+			  			<a href="detail.jsp?no=<%=favoriteTheater.getTheater().getNo() %>"  class="link-dark"><%=favoriteTheater.getTheater().getName() %></a>
+			  		</li>
+<%
+		}
+%>						  
+			  		<li>
+			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
+			  		</li>
+			  		<li>
+			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
+			  		</li>
+			  		<li>
+			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
+			  		</li>
+			  		
+				</ul>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				  자주가는 극장 관리
+				</button>
+<%
+	}
+%>				
+			</div>	
 			</div>
+			
 			<div class="part-title">
 				<h3 class="tit">극장 공지사항</h3>
 			</div>
@@ -342,5 +444,69 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="staticBackdropLabel">자주가는 극장 관리</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="box-gray v1 a-c">
+	            <div class="dropdown bootstrap-select w150px small bs3">
+		            <select title="" class="w150px small" name="areaList" tabindex="-98">
+			            <option value="10">서울</option>
+			            <option value="30">경기</option>
+			            <option value="35">인천</option>
+			            <option value="45">대전/충청/세종</option>
+			            <option value="55">부산/대구/경상</option>
+			            <option value="65">광주/전라</option>
+			            <option value="70">강원</option>
+		            </select>
+	            </div>
+	            <div class="dropdown bootstrap-select w150px small bs3">
+		            <select title="" class="w150px small" name="areaList" tabindex="-98">
+		            	<option selected disabled="disabled">지점을 선택해주세요</option>
+			            <option value="10">강남</option>
+			            <option value="30">강남</option>
+			            <option value="35">강남</option>
+			            <option value="45">강남</option>
+			            <option value="55">강남</option>
+			            <option value="65">강남</option>
+			            <option value="70">강남</option>
+		            </select>
+	            </div>
+	            <button id="btn-insert" type="button" class="button gray small ml05">추가</button>
+			</div>					            
+	      	<div class="theater-choice-list row">
+	               <div class="bg col-4">
+	                      <div class="circle " data-brch-no="1003">
+	                          <p class="txt" data-eng-nm="Dongdaemoon" data-kor-nm="동대문">동대문</p>
+	                          <button type="button" class="del">삭제</button>
+	                      </div>
+	               </div>
+	               <div class="bg col-4">
+	                      <div class="circle " data-brch-no="1372">
+	                          <p class="txt" data-eng-nm="Gangnam" data-kor-nm="강남">강남</p>
+	                          <button type="button" class="del">삭제</button>
+	                      </div>
+	               </div>
+	               <div class="bg col-4">
+	                      <div class="circle " data-brch-no="1341">
+	                          <p class="txt" data-eng-nm="Gangdong" data-kor-nm="강동">강동</p>
+	                          <button type="button" class="del">삭제</button>
+	                      </div>
+	               </div>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary">등록</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Modal -->
 </body>
 </html>

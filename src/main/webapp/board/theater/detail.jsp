@@ -1,3 +1,5 @@
+<%@page import="vo.TboardComment"%>
+<%@page import="dao.TboardCommentDao"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
 <%@page import="java.util.List"%>
@@ -14,9 +16,22 @@
 	// 업무로직수행 - 요청 파라미터로 전달받은 게시물번호에 해당하는 게시물 상세정보를 조회한다.
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
+	String grade = theaterBoard.getGrade();
+	String score = "";
+	if (grade.equals("A")){
+		score = "★★★★★";
+	} else if (grade.equals("B")){
+		score = "★★★★☆";
+	} else if (grade.equals("C")){
+		score = "★★★☆☆";
+	} else if (grade.equals("D")){
+		score = "★★☆☆☆";
+	} else if (grade.equals("E")){
+		score = "★☆☆☆☆";
+	}
 	
-//	commentDao commentDao = new commentDao();
-//	List<Comment> commentlistList = commentDao.getCommentsByBoardNo(no);
+    TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
+    List<TboardComment> comments = tboardCommentDao.getCommentByBoardNo(boardNo);
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -43,7 +58,7 @@
 <div class="container my-3">
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2">게시글 상세 정보</h1>
+			<h1 class="border bg-light fs-4 p-2"><%=theaterBoard.getName() %></h1>
 		</div>
 
 <%
@@ -77,6 +92,7 @@
 			<p style="font-size : 12px; line-height: 15%;"><strong> <%=theaterBoard.getUpdateDate() %></strong></p>
 			<hr>
 			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
+				<p><strong>별점 : <%=score %></strong></p>
 				<p><%=theaterBoard.getContent() %></p>
 			</div>
 			
@@ -89,7 +105,7 @@
 <%
 	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<a href="report.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-primary btn-sm">신고</a>
+				<a href="reportform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-primary btn-sm">신고</a>
 <%
 	}
 %>
@@ -100,7 +116,7 @@
 	<div class="row mb-3">
    		<div class="col-12">
 			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
-				<input type="hidden" name="boardNo" value=<%=theaterBoard.getNo() %> />
+				<input type="hidden" name="no" value=<%=theaterBoard.getNo() %> />
  				<div class="row">
 					<div class="col-11">
 						<textarea rows="2" class="form-control" name="content"></textarea>
@@ -114,38 +130,35 @@
    	</div>
 	<div class="row mb-3">
    		<div class="col-12">
-<%--
-	for(Comment comment : commentlistList) {
---%>
-
-<%--
+<%
+	for(TboardComment comment : comments) {
+%>
+			
    			<div class="border p-2 mb-2">
 	   			<div class="d-flex justify-content-between mb-1">
-	   				<span><%=comment.getCustomer().getName() %></span> <span class="text-muted"><%=comment.getCreateDate() %></span>
+	   				<span><%=comment.getMember().getId() %></span> <span class="text-muted"><%=comment.getCreaeDate() %></span>
 	   			</div>
 	   			<div>
 	   				<%=comment.getContent() %>
-
- --%>
+				
 	   				
-<%--
-	if(comment.getCustomer().getId().equals(loginId)){
---%>
+<%
+	if(comment.getMember().getId().equals(loginId)){
+%>
 
-<%--
 
-	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getNo() %>" 
+
+	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
 	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
- --%>
-	   			
-<%--
+
+<%
 	}
---%>
+%>
 	   			</div>   			
    			</div>
-<%--
+<%
 	}
---%>   			
+%>   			
    		</div>
    	</div>
 </div>

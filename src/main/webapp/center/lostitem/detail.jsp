@@ -35,7 +35,7 @@
    	</div>
 	<div class="clearfix">
 		<ul class="dot-list">
-			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+			<li>고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
 	</div>
 		<hr>
@@ -43,8 +43,21 @@
 			<a style="font-size : 12px;"><%=lostitem.getCreateDate() %></a>
 		<hr>
 			<a><%=lostitem.getContent() %></a>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		<hr>
+			<a>직원의 댓</a>
+		<hr>
 		
-		
+		<div style="text-align: center; padding:30px;">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
+				<a href="delete.jsp" class="btn btn-secondary btn-sm">삭제</a>
+		</div>
+	
 			
 
       

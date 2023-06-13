@@ -14,10 +14,9 @@ public class ManagerTheaterDao {
 			
 			theater.setNo(rs.getInt("theater_no"));
 			theater.setName(rs.getString("theater_name"));
-			theater.setAddress1(rs.getString("theater_address1"));
-			theater.setAddress2(rs.getString("theater_address2"));
+			theater.setAddress(rs.getString("theater_address"));
 			theater.setTel(rs.getString("theater_tel"));
-			theater.setDisable(rs.getString("theater_disable"));
+			theater.setDisabled(rs.getString("theater_disabled"));
 			
 			Location location = new Location();
 			location.setNo(rs.getInt("location_no"));
@@ -39,8 +38,7 @@ public class ManagerTheaterDao {
 		DaoHelper.update("managerTheaterDao.insertTheater", theater.getNo(),
 															theater.getLocation().getNo(),
 															theater.getName(),
-															theater.getAddress1(),
-															theater.getAddress2(),
+															theater.getAddress(),
 															theater.getTel());
 	}
 }
