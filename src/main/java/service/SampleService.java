@@ -16,11 +16,19 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import dao.ManagerMovieDao;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
+import util.DateUtils;
 import vo.Movie;
 
 public class SampleService {
-
+	private static SampleService instance = new SampleService();
+	private SampleService() {}
+	public static SampleService getInstance() {
+		return instance;
+	}
+	
+	
     private static final String API_KEY = "45ac471b35ca42c983d971a438b31d25";
     private static final String API_URL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=Y40OV2CFS1I2MTV081VG";
     private static final JSONParser JSON_PARSER = new JSONParser();
@@ -42,8 +50,11 @@ public class SampleService {
                 Movie movie = new Movie();
                 movie.setRank(Integer.parseInt((String) dailyBoxOffice.get("rank")));
                 movie.setTitle((String) dailyBoxOffice.get("movieNm"));
-                movie.setReleaseDate(dailyBoxOffice.get("openDt").toString());
+                movie.setReleaseDate(DateUtils.toDate(dailyBoxOffice.get("openDt").toString()));
                 movie.setAudiCnt(Integer.parseInt((String) dailyBoxOffice.get("audiAcc")));
+                movie.setNo(Integer.parseInt((String) dailyBoxOffice.get("movieCd")));
+                movie.setRankInten(Integer.parseInt((String) dailyBoxOffice.get("rankInten")));
+                movie.setRankOldAndNew((String) dailyBoxOffice.get("rankOldAndNew"));
                 movies.add(movie);
             }
 
@@ -53,14 +64,13 @@ public class SampleService {
                 		"%s&title=%s&releaseDts=%s", 
                 		API_URL, 
                 		URLEncoder.encode(movie.getTitle(), "UTF-8"), 
-                		URLEncoder.encode(movie.getReleaseDate().replace("-",""), "UTF-8")
+                		URLEncoder.encode(DateUtils.toText(movie.getReleaseDate()).replace("-",""), "UTF-8")
         		);
                 
                 URL url = new URL(apiUrl);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Content-type", "application/json");
-
                 BufferedReader rd;
                 if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
                     rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -75,9 +85,8 @@ public class SampleService {
                 }
                 rd.close();
                 conn.disconnect();
-
+                	
                 String movieDetail = sb.toString();
-                System.out.println(movieDetail);
                 Object obj = JSON_PARSER.parse(movieDetail);
                 JSONObject result = (JSONObject) obj;
                 JSONArray result1 = (JSONArray) result.get("Data");
@@ -86,7 +95,36 @@ public class SampleService {
                 result = (JSONObject) result1.get(0);
                 String posters = (String) result.get("posters");
                 String[] poster = posters.split("\\|");
+   
+                JSONObject directorResult = (JSONObject)result.get("directors");
+                JSONArray directorResultArray = (JSONArray)directorResult.get("director");
+                directorResult=(JSONObject)directorResultArray.get(0);
+                String directorName=(String)directorResult.get("directorNm");
+                
+                
+                JSONObject descriptionResult = (JSONObject)result.get("plots");
+                JSONArray descriptionResultArray = (JSONArray)descriptionResult.get("plot");
+                descriptionResult=(JSONObject)descriptionResultArray.get(0);
+                String description=(String)descriptionResult.get("plotText");
+               
+                JSONObject actor = (JSONObject)result.get("actors");
+                JSONArray actorArray = (JSONArray)actor.get("actor");
+                sb=new StringBuilder();
+                int actorIndex=0;
+                for (actorIndex=0; actorIndex< (actorArray.size()<3 ? actorArray.size()-1 : 2); actorIndex++ ) {
+                	actor= (JSONObject)actorArray.get(actorIndex);
+                	sb.append((String)actor.get("actorNm")+", ");
+                }
+                actor= (JSONObject)actorArray.get(actorIndex);
+            	sb.append((String)actor.get("actorNm"));
+            	String cast=sb.toString();
+            	
                 movie.setPosterURL(poster[0]);
+                movie.setGenre((String)result.get("genre"));
+                movie.setDirector(directorName);
+                movie.setDescription(description);
+                movie.setCast(cast);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
