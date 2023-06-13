@@ -16,6 +16,19 @@
 	// 업무로직수행 - 요청 파라미터로 전달받은 게시물번호에 해당하는 게시물 상세정보를 조회한다.
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
+	String grade = theaterBoard.getGrade();
+	String score = "";
+	if (grade.equals("A")){
+		score = "★★★★★";
+	} else if (grade.equals("B")){
+		score = "★★★★☆";
+	} else if (grade.equals("C")){
+		score = "★★★☆☆";
+	} else if (grade.equals("D")){
+		score = "★★☆☆☆";
+	} else if (grade.equals("E")){
+		score = "★☆☆☆☆";
+	}
 	
     TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
     List<TboardComment> comments = tboardCommentDao.getCommentByBoardNo(boardNo);
@@ -45,7 +58,7 @@
 <div class="container my-3">
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2">게시글 상세 정보</h1>
+			<h1 class="border bg-light fs-4 p-2"><%=theaterBoard.getName() %></h1>
 		</div>
 
 <%
@@ -79,6 +92,7 @@
 			<p style="font-size : 12px; line-height: 15%;"><strong> <%=theaterBoard.getUpdateDate() %></strong></p>
 			<hr>
 			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
+				<p><strong>별점 : <%=score %></strong></p>
 				<p><%=theaterBoard.getContent() %></p>
 			</div>
 			

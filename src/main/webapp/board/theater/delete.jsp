@@ -1,3 +1,5 @@
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
@@ -7,6 +9,13 @@
 	String loginId = (String) session.getAttribute("loginId");
 	
 	// 에러메세지 출력
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(loginId);
+   
+	if (member == null) {
+	   response.sendRedirect("../../member/loginform.jsp?err=fail");
+	   return;
+	}
 	
 	// 요청파라미터 조회
 	int boardNo = Integer.parseInt(request.getParameter("no"));
