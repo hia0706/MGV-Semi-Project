@@ -1,3 +1,5 @@
+<%@page import="dao.FavoriteTheaterDao"%>
+<%@page import="vo.FavoriteTheater"%>
 <%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="java.util.List"%>
@@ -13,6 +15,8 @@
 	List<Location> locations = locationDao.getLocations();
 	
 	// 자주가는 극장 정보 가져오기
+	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
+	List<FavoriteTheater> FTList = fTheaterDao.getFavoriteTheaterById(loginId);
 	
 	// 극장정보 가져오기
 	TheaterDao theaterDao = TheaterDao.getInstance();
@@ -132,7 +136,13 @@
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
-
+<script type="text/javascript">
+	function insert() {
+		window.open("insert.jsp",
+				"자주가는 극장 등록",
+				"width=800, height=1200, top=50, left=50");
+	}
+</script>
 <div class="container ">
 	<div class="theater_wrap">
 		<h2>전체극장</h2>
@@ -142,17 +152,19 @@
 					<td class="align-middle">자주가는극장</td>
 					<td>
 						<ul class="list-group list-group-horizontal ">
+<%
+	for(FavoriteTheater favoriteTheater:FTList){
+%>
 						  <li class="list-group-item" >
-						  	<a href="nothing.jsp"  class="link-dark">An item</a>
+						  	<a href="detail.jsp?no=<%=favoriteTheater.getTheater().getNo() %>"  class="link-dark"><%=favoriteTheater.getTheater().getName() %></a>
 						  </li>
-						  <li class="list-group-item">A second item</li>
-						  <li class="list-group-item ">A third item</li>
-						  <li class="list-group-item ">A 4 item</li>
-						  <li class="list-group-item ">A 5 item</li>
+<%
+	}
+%>						  
 						</ul>
 					</td>
 					<td>
-					<button type="button" class="btn btn-danger">자주가는 극장 설정</button>
+					<button type="button" class="btn btn-danger" onclick="insert()">자주가는 극장 설정</button>
 					</td>
 				</tr>
 			</table>			
