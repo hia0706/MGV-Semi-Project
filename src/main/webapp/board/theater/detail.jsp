@@ -105,7 +105,7 @@
 <%
 	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<a href="report.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-primary btn-sm">신고</a>
+				<a href="reportform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-primary btn-sm">신고</a>
 <%
 	}
 %>
