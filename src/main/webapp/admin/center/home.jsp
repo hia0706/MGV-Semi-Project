@@ -26,7 +26,7 @@
 		</a>
 		<br>
 		<br>
-		<a href="oneonone/insertform.jsp" class="text-black text-decoration-none">
+		<a href="oneonone/list.jsp" class="text-black text-decoration-none">
 			<img src="../../images/center/oneonone.png" width="50" height="50"><br>
 			<strong>1:1 문의</strong>
 		</a>

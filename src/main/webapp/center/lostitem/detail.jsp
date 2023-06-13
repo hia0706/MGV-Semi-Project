@@ -43,8 +43,21 @@
 			<a style="font-size : 12px;"><%=lostitem.getCreateDate() %></a>
 		<hr>
 			<a><%=lostitem.getContent() %></a>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		<hr>
+			<a>직원의 댓</a>
+		<hr>
 		
-		
+		<div style="text-align: center; padding:30px;">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
+				<a href="delete.jsp" class="btn btn-secondary btn-sm">삭제</a>
+		</div>
+	
 			
 
       
