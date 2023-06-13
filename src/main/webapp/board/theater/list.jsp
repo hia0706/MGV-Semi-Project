@@ -21,8 +21,6 @@
 	List<Theater> theaters = theaterDao.getAllTheaters();
 	
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	
-	TotalRows totalRow = theaterBoardDao.getTotalRow();
 	int totalRows = theaterBoardDao.getTotalRows();
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
@@ -64,7 +62,7 @@
 
 <%-- 게시판의 게시글 수 --%>			
 				<div class="board-list-util">
-					<p class="result-count"><strong>전체 <span id="totalCnt" class="font-gblue"><%=totalRow.getCnt() %></span>건</strong></p>
+					<p class="result-count"><strong>전체 <span id="totalCnt" class="font-gblue"><%=totalRows %></span>건</strong></p>
 
 <%-- 지역/극장을 선택하는 select --%>			
 					<select id="theater" title="지역 선택" class="selectpicker" onchange="locationChoice">
