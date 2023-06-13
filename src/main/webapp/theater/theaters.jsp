@@ -353,7 +353,7 @@
 				  </div>
 				</div>
 			<div class="sect-favorite">
-				<span class="s1">누구누구님이 자주가는극장</span>
+				<span class="s1"><%=loginId %>님이 자주가는극장</span>
 				<ul>
 <%
 	for(FavoriteTheater favoriteTheater:FTList){
