@@ -110,8 +110,8 @@ public class ManagerMovieDao {
 		});
 	}
 	
-	public void resertChart(int movieNo) {
-		DaoHelper.update("managermovieDao.resertChart", movieNo);
+	public void initChart(int movieNo) {
+		DaoHelper.update("managermovieDao.initChart", movieNo);
 	}
 	
 }

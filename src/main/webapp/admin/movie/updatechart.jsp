@@ -38,14 +38,14 @@
 	for (Movie movie: movies){
 		if (movieNos.contains(movie.getNo())){
 			managerMovieDao.updateMovie(movie);
+			movieNos.remove(movie.getNo());
 		}else {
 			managerMovieDao.insertMovie(movie);
 		}
-		movieNos.remove(movie.getNo());
 	}
 	
-	for (int x : movieNos){
-		managerMovieDao.resertChart(x);
+	for (int movieNo : movieNos){
+		managerMovieDao.initChart(movieNo);
 	}
 	
 
