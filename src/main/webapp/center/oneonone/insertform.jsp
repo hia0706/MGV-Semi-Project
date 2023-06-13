@@ -39,7 +39,7 @@
 	<div class="clearfix">
 		<ul class="dot-list">
 			<li>
-				<a href="../myhistory/home.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">나의 문의내역</a>
+				<a href="list.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">나의 문의내역</a>
 				<strong>고객님의 문의에 답변하는 직원은 고객 여러분의 가족 중 한 사람일 수 있습니다.</strong><br>
 				고객의 언어폭력(비하, 욕설, 협박, 성희롱 등)으로부터 직원을 보호하기 위해<br>
 				관련 법에 따라 수사기관에 필요한 조치를 요구할 수 있으며, 형법에 의해 처벌 대상이 될 수 있습니다.

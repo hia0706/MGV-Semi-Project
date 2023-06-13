@@ -1,3 +1,5 @@
+<%@page import="vo.Oneonone"%>
+<%@page import="dao.OneononeDao"%>
 <%@page import="vo.Lostitem"%>
 <%@page import="dao.LostitemDao"%>
 <%@page import="util.StringUtils"%>
@@ -6,9 +8,12 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+
+	// 세션에서 로그인된 사용자 아이디 조회
+	String id = (String) session.getAttribute("loginId");
 	
-
-
+	OneononeDao oneononeDao = OneononeDao.getInstance();
+	List<Oneonone> oneononeList = oneononeDao.getOneononesById(id);
 %>
 
 <!doctype html>
@@ -40,10 +45,14 @@
 <div class="container">
 	<div class="row mb-3">
     	<div class="col-12">
-        	<h1 class="fs-2 p-2">자주 묻는 질문</h1>
+        	<h1 class="fs-2 p-2">나의 문의내역</h1>
       	</div>
    	</div>
-	
+	<div class="clearfix">
+		<ul class="dot-list">
+			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+		</ul>
+	</div>
 			
 			<table class="table">
 				<thead>
@@ -51,30 +60,37 @@
 						<th style="width: 5%;">번호</th>
 						<th style="width: 10%;">극장</th>
 						<th style="width: 50%;">제목</th>
+						<th style="width: 10%;">접수상태</th>
 						<th style="width: 10%;">등록일</th>
 					</tr>
 				</thead>
 				<tbody>
 				
+<% for (Oneonone oneonone : oneononeList) { %>				
 				
 					<tr>
-						<td>1</td>
-						<td>MGV</td>
+						<td><%=oneonone.getNo() %></td>
+						<td>극장</td>
 						<td style="text-align:left">
-							<a href="detail.jsp?no=" class="text-black text-decoration-none">
-								자주 묻는 질문 제목
+							<a href="detail.jsp?no=<%=oneonone.getNo() %>" class="text-black text-decoration-none">
+								<%=oneonone.getTitle() %>
 							</a>
 						</td>
-					
 						
+<% if ("N".equals(oneonone.getAnswered())) { %>
+						<td>미답변</td>
+<% } else {%>
+						<td>답변완료</td>
+<% } %>
 
-
-						<td>2023.06.13</td>
+						<td><%=oneonone.getCreateDate() %></td>
 					</tr>
 
+<% } %>				
 					
 				</tbody>
 			</table>
+	
 </div>
 </body>
 </html>

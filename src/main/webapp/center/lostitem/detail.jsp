@@ -27,43 +27,25 @@
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
 
-<div class="container my-3">
+<div class="container">
 	<div class="row mb-3">
-		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2">문의글 상세 정보</h1>
-		</div>
+    	<div class="col-12">
+        	<h1 class="fs-2 p-2">나의 문의내역</h1>
+      	</div>
+   	</div>
+	<div class="clearfix">
+		<ul class="dot-list">
+			<li>고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
+		</ul>
 	</div>
-	<div class="row mb-3">
-		<div class="col-12">
-			<p>문의글 상세정보를 확인하세요.</p>
-			
-			
-			<table class="table table-bordered">
-				<colgroup>
-					<col width="10%">
-					<col width="40%">
-					<col width="10%">
-					<col width="40%">
-				</colgroup>
-				<tbody>
-					<tr>
-						<th>제목</th>
-						<td><%=lostitem.getTitle() %></td>
-						<th>등록일</th>
-						<td><%=lostitem.getCreateDate() %></td>
-					</tr>
-					<tr>
-						 <th>내용</th>
-	                 	 <td colspan="4" style="height: 100px;"><%=lostitem.getContent() %></td>
-              		</tr>
-				</tbody>
-			</table>
+		<hr>
+			<a style="font-size : 17px;"><strong><%=lostitem.getTitle() %></strong></a><br>
+			<a style="font-size : 12px;"><%=lostitem.getCreateDate() %></a>
+		<hr>
+			<a><%=lostitem.getContent() %></a>
 		
-		</div>
-	</div>
-	
-	
-</div>
+		
+			
 
       
 </div>
