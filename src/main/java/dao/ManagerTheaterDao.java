@@ -17,7 +17,7 @@ public class ManagerTheaterDao {
 			theater.setAddress1(rs.getString("theater_address1"));
 			theater.setAddress2(rs.getString("theater_address2"));
 			theater.setTel(rs.getString("theater_tel"));
-			theater.setDisable(rs.getString("theater_disable"));
+			theater.setDisabled(rs.getString("theater_disabled"));
 			
 			Location location = new Location();
 			location.setNo(rs.getInt("location_no"));
