@@ -70,6 +70,7 @@
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">지역</label>
 					<select class="form-select" name="locationNo">
+					<option value="" selected="selected" disabled="disabled">지역</option>
 <%
 	for (Location location : locations){
 %>
@@ -83,6 +84,7 @@
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">극장</label>
 					<select class="form-select" name="theaterNo">
+					<option value="" selected="selected" disabled="disabled">극장</option>
 <%
 	for (Theater theater : theaters){
 %>

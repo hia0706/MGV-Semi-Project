@@ -8,6 +8,8 @@
 	// 세션에서 로그인된 사용자 정보를 조회한다.
 	String id = (String) session.getAttribute("loginId");
 
+	
+
 	// 요청 파라미터값 조회
 	String name = request.getParameter("name");
 	String tel = request.getParameter("tel");
