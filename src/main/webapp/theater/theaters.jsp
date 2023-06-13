@@ -64,8 +64,17 @@
   	.list-group-item a{
   	text-decoration: none;
   	}
-  	.sect-city,.theater_wrap{
+  	.list-group-item:hover{
+  		font-weight: 700;
+  	}
+  	.sect-city{
   	width: 1000px;
+  	border-radius: 10px;
+  	border: 3px solid #686571;
+  	}
+  	.sect-city ul li:active{
+  	background: #555;
+    border: 1px solid #555;
   	}
   	.container
   	{
@@ -82,6 +91,7 @@
     empty-cells: show;
 	}
 	.table-wrap {
+	width: 1000px;
     position: relative;
     border-top: 1px solid #555;
     }
@@ -163,6 +173,7 @@
 	margin-left: 0;
 	padding: 1em;
 	background-color: #f2f4f5;
+	border-radius: 0 0 10px 10px;
 	width: 100%;
 	height: 50px;
 	}
@@ -203,7 +214,7 @@
 <div class="container ">
 	<div class="theater_wrap">
 		<h2>전체극장</h2>
-			<div class="sect-city border" >
+			<div class="sect-city" >
 				<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
@@ -353,16 +364,29 @@
 				  </div>
 				</div>
 			<div class="sect-favorite">
-				<span class="s1"><%=loginId %>님이 자주가는극장</span>
+				<span class="s1"><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
+<%
+	if(loginId==null){
+		
+%>
+				<button style="border-radius: 10px; margin-left: 10px;" onclick="login()">로그인하기</button>
+<script type="text/javascript">
+	function login() {
+		window.location="../member/loginform.jsp";
+	}
+</script>				
+<%
+	}else{
+%>				
 				<ul>
 <%
-	for(FavoriteTheater favoriteTheater:FTList){
+		for(FavoriteTheater favoriteTheater:FTList){
 %>
 			  		<li>
 			  			<a href="detail.jsp?no=<%=favoriteTheater.getTheater().getNo() %>"  class="link-dark"><%=favoriteTheater.getTheater().getName() %></a>
 			  		</li>
 <%
-	}
+		}
 %>						  
 			  		<li>
 			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
@@ -379,6 +403,9 @@
 				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 				  자주가는 극장 관리
 				</button>
+<%
+	}
+%>				
 			</div>	
 			</div>
 			
