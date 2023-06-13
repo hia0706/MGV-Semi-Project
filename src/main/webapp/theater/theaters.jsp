@@ -192,7 +192,7 @@
 		if(theater.getLocation().getNo()==2){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -207,7 +207,7 @@
 		if(theater.getLocation().getNo()==3){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -222,7 +222,7 @@
 		if(theater.getLocation().getNo()==4){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -237,7 +237,7 @@
 		if(theater.getLocation().getNo()==5){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -252,7 +252,7 @@
 		if(theater.getLocation().getNo()==6){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -267,7 +267,7 @@
 		if(theater.getLocation().getNo()==7){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -282,7 +282,7 @@
 		if(theater.getLocation().getNo()==8){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
@@ -297,7 +297,7 @@
 		if(theater.getLocation().getNo()==9){
 %>			  	
 					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="#theater-<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
+					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
 					  </li>
 <%
 		}
