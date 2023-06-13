@@ -83,13 +83,13 @@
 					<tr>
 						<td class="table-bg" style="width: 20%;">
 						<td class="table-bg" style="width: 20%;">
-							<img src="/mgv/images/minus.png" width="40" height="40">
+							<img src="/mgv/images/member/minus.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%;">
 							<strong>20000</strong>원
 						</td>
 						<td class="table-bg" style="width: 20%;">
-							<img src="/mgv/images/equal.png" width="40" height="40">
+							<img src="/mgv/images/member/equal.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%;">
 							<strong style="font-size: large; color: red;">18000</strong>원

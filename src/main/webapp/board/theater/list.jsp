@@ -1,3 +1,4 @@
+<%@page import="vo.TotalRows"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
@@ -21,7 +22,7 @@
 	
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	
-	// 전체 데이터 개수 조회하기
+	TotalRows totalRow = theaterBoardDao.getTotalRow();
 	int totalRows = theaterBoardDao.getTotalRows();
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
@@ -63,7 +64,7 @@
 
 <%-- 게시판의 게시글 수 --%>			
 				<div class="board-list-util">
-					<p class="result-count"><strong>전체 <span id="totalCnt" class="font-gblue">0</span>건</strong></p>
+					<p class="result-count"><strong>전체 <span id="totalCnt" class="font-gblue"><%=totalRow.getCnt() %></span>건</strong></p>
 
 <%-- 지역/극장을 선택하는 select --%>			
 					<select id="theater" title="지역 선택" class="selectpicker" onchange="locationChoice">
@@ -141,16 +142,21 @@
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-						<a href="list.jsp?page=1" class="page-link">이전</a>
+						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 					</li>
-					
-					<li class="page-item active">
-						<a href="list.jsp?page=1" class="page-link"><%=pageNo%></a>
+<%
+	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
+%>				
+					<li class="page-item <%=pageNo == num ? "active" : "" %>">
+						<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
 					</li>
 
+<%
+	}
+%>
 					
 					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-						<a href="list.jsp?page=2" class="page-link">다음</a>
+						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 					</li>
 				</ul>
 			</nav>
