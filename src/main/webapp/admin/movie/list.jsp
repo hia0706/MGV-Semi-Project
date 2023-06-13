@@ -1,17 +1,10 @@
-<%@page import="vo.Movie"%>
 <%@page import="dao.ManagerMovieDao"%>
-<%@page import="java.util.List"%>
-<%@page import="java.net.URLEncoder"%>
+<%@page import="service.SampleService"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-	//세션에서 로그인된 사용자 정보를 조회한다
-	
-	ManagerMovieDao managerMovieDao = ManagerMovieDao.getInstance();
-
-	List<Movie> movieList = managerMovieDao.getMovies();
-	
-%>
 
 <!doctype html>
 <html lang="ko">
@@ -30,16 +23,17 @@
 <jsp:include page="../../admin/nav.jsp">
    <jsp:param value="manu" name="영화"/>
 </jsp:include>
-
+<c:set var="managerMovieDao" value="<%= ManagerMovieDao.getInstance() %>" />
+<c:set var="movies" value="${managerMovieDao.getMovies()}" />
 <div class="container">
 	<div class="row mb-3">
     	<div class="col-12">
-        	<h1 class="border bg-light fs-4 p-2">상영중인 영화 목록</h1>
+        	<h1 class="border bg-light fs-4 p-2">전체 영화 목록</h1>
       	</div>
    	</div>
 	<div class="row mb-3">
 		<div class="col-12">
-			<p>상영중인 영화를 확인하세요.</p>
+			<p>전체 영화를 확인하세요.</p>
 			<table class="table">
 				<thead>
 					<tr class="table-dark">
@@ -50,22 +44,22 @@
 				</thead>
 				<tbody>
 			
-<% for (Movie movie : movieList) { %>			
+<c:forEach var="movie" items="${movies}">
 				
 					<tr class="align-middle">
-						<td><%=movie.getRank() %></td>
-						<td><a href="detail.jsp?no=<%=movie.getNo() %>" class="text-black text-decoration-none"><%=movie.getTitle() %></td>
-						<td><%=movie.getReleaseDate() %></td>
+						<td>${movie.rank}</td>
+						<td><a href="detail.jsp?no=${movie.no}" class="text-black text-decoration-none">${movie.title}</a></td>
+						<td>${movie.getStringFormattedDate()}</td>
 					</tr>
 					
-<% } %>			
+</c:forEach>	
 
 			
 				</tbody>
 			</table>
 			
 			<div class="text-end">
-					<a href="insertform.jsp" class="btn btn-primary btn-sm">새 영화 등록</a>
+					<a href="updatechart.jsp" class="btn btn-primary btn-sm">영화차트 업데이트</a>
 			</div>
 		</div>
 	</div>
