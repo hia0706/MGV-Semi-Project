@@ -9,7 +9,10 @@
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
-	
+	if (loginId == null) {
+		response.sendRedirect("../home.jsp");
+		return;
+	}
 %>
 <!doctype html>
 <html lang="ko">
