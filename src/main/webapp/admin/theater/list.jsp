@@ -55,7 +55,7 @@
 				<tbody>
 <%
 	for(Theater theater : theaterList) {
-		if("N".equals(theater.getDisable())) {
+		if("N".equals(theater.getDisabled())) {
 %>
 					<tr class="align-middle">
 						<td><a href="detail.jsp?no=<%=theater.getNo() %>" class="text-black text-decoration-none"><%=theater.getNo() %></a></td>

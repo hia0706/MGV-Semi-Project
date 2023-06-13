@@ -46,6 +46,7 @@
 			<table class="table">
 				<thead>
 					<tr class="table-dark">
+						<th>상품 번호</th>
 						<th>상품 카테고리</th>
 						<th>상품명</th>
 						<th>상품가격</th>
@@ -59,7 +60,8 @@
 <%
 for (Product product : productList) {
 %>
-					<tr>
+					<tr>						
+						<td><%=product.getNo()%></td>
 						<td><%=product.getProductCategory().getName()%></td>
 						<td><a href="detail.jsp?no=<%=product.getNo()%>" class="text-black text-decoration-none"><%=product.getName()%></a></td>
 						<td><%=product.getPrice()%></td>

@@ -14,6 +14,7 @@ public class ProductDao {
 		return instance;
 	}
 	
+	
 	public void updateProduct(Product product) {
 		DaoHelper.update("productDao.updateProduct", product.getName(),
 							 						 product.getPrice(),
@@ -73,8 +74,8 @@ public class ProductDao {
 		}, no);
 	}
 	
-	public List<Product> getProducts(int begin, int end) {
-		return DaoHelper.selectList("productDao.getProducts", rs -> {
+	public List<Product> getProductsByCatNo(int catNo) {
+		return DaoHelper.selectList("", rs -> {
 			Product product = new Product();
 			product.setNo(rs.getInt("product_no"));
 			product.setName(rs.getString("product_name"));
@@ -85,15 +86,37 @@ public class ProductDao {
 			product.setDescription(rs.getString("product_description"));
 			
 			ProductCategory cat = new ProductCategory();
+			cat.setNo(rs.getInt("cat_no"));
 			cat.setName(rs.getString("cat_name"));
 			product.setProductCategory(cat);
 			
 			return product;
-		}, begin, end);
+		}, catNo);
 	}
 	
-	public void deleteProductByName(String name) {
-		DaoHelper.update("productDao.deleteProductByName", name);
+	public List<Product> getProducts(int begin, int end) {
+		return DaoHelper.selectList("productDao.getProducts", rs -> {
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			product.setName(rs.getString("product_name"));
+			product.setPrice(rs.getInt("product_price"));
+			product.setStock(rs.getInt("product_stock"));
+			product.setCreateDate(rs.getDate("product_create_date"));
+			product.setUpdateDate(rs.getDate("product_update_date"));
+			product.setSoldOut(rs.getString("product_sold_out"));
+			product.setDescription(rs.getString("product_description"));
+			
+			ProductCategory cat = new ProductCategory();
+			cat.setNo(rs.getInt("cat_no"));
+			cat.setName(rs.getString("cat_name"));
+			product.setProductCategory(cat);
+			
+			return product;
+		},begin, end);
+	}
+	
+	public void deleteProductByNo(int no) {
+		DaoHelper.update("productDao.deleteProductByNo", no);
 	}
 	
 	public int getTotalRows() {
