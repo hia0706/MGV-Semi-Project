@@ -68,6 +68,111 @@
 %>
 				</ul>
 			</div>
+			<div class="tab-pane fade" id="category-tab-pane-2" role="tabpanel" aria-labelledby="category-2-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 2) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
+			<div class="tab-pane fade" id="category-tab-pane-3" role="tabpanel" aria-labelledby="category-3-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 3) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
+			<div class="tab-pane fade" id="category-tab-pane-4" role="tabpanel" aria-labelledby="category-4-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 4) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
+			<div class="tab-pane fade" id="category-tab-pane-5" role="tabpanel" aria-labelledby="category-5-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 5) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
+			<div class="tab-pane fade" id="category-tab-pane-6" role="tabpanel" aria-labelledby="category-6-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 6) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
+			<div class="tab-pane fade" id="category-tab-pane-7" role="tabpanel" aria-labelledby="category-7-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 7) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
+			<div class="tab-pane fade" id="category-tab-pane-8" role="tabpanel" aria-labelledby="category-8-tab" tabindex="0">
+				<ul class="list-group list-group-horizontal row row-cols-4" style="margin-left: 0;">
+<%
+	for (Product product : productList) {
+		if (product.getProductCategory().getNo() == 8) {
+%>
+					<li class="list-group-item col-3 border-0">
+						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
+					</li>	
+<%
+		}
+	}
+%>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
