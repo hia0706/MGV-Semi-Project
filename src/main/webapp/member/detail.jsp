@@ -13,10 +13,6 @@
 		response.sendRedirect("../loginform.jsp");
 		return;
 	}
-	if ("Yes".equals(member.getDisabled())) {
-		response.sendRedirect("../loginform.jsp?err=disabled");
-		return;
-	}
 	
 %>
 <!doctype html>
