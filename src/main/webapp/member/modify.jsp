@@ -35,6 +35,6 @@
 	
 	memberDao.updateMember(member);
 	
-	response.sendRedirect("detail.jsp?id=" + loginId);
+	response.sendRedirect("detail.jsp?id=" + member.getId());
 	
 %>

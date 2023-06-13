@@ -16,7 +16,7 @@
 </style>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3 ">
 		<a href="/mgv/home.jsp">
-           <img src="/mgv/images/mgv.png" alt="mgv" width="80" height="50" class="">
+           <img src="/mgv/images/member/mgv.png" alt="mgv" width="80" height="50" class="">
         </a>
 	<div class="container-fluid">
     	<ul class="navbar-nav me-auto">

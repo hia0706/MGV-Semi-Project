@@ -26,7 +26,6 @@
 	}
 	
 	session.setAttribute("loginId", member.getId());
-	session.setAttribute("loginPwd", member.getPassword());
 	
 	if ("MEMBER".equals(type)) {
 		if ("ADMIN".equals(member.getType())) {
