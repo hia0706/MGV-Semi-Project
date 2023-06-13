@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 
@@ -142,4 +143,27 @@ public class DaoHelper {
 	public static interface RowMapper<T> {
 		T mapRow(ResultSet rs) throws SQLException;
 	}
+	
+	public static <T> HashSet<T> selectSet(String key, RowMapper<T> rowMapper, Object...params) {
+		try {
+			HashSet<T> set = new HashSet<>();
+			Connection conn = ConnUtils.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(prop.getProperty(key));
+			setParams(pstmt, params);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				T t = rowMapper.mapRow(rs);
+				set.add(t);
+			}
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+			
+			return set;
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+	
 }

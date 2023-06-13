@@ -1,3 +1,5 @@
+<%@page import="vo.TboardComment"%>
+<%@page import="dao.TboardCommentDao"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
 <%@page import="java.util.List"%>
@@ -15,8 +17,8 @@
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
 	
-//	commentDao commentDao = new commentDao();
-//	List<Comment> commentlistList = commentDao.getCommentsByBoardNo(no);
+    TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
+    List<TboardComment> comments = tboardCommentDao.getCommentByBoardNo(boardNo);
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -69,39 +71,17 @@
 	
 	<div class="row mb-3">
 		<div class="col-12">
-			<p>게시글 상세정보를 확인하세요.</p>
-			<table class="table table-bordered">
-				<colgroup>
-					<col width="10%">
-					<col width="40%">
-					<col width="10%">
-					<col width="40%">
-				</colgroup>
-				<tbody>
-					<tr>
-						<th class="table-dark">제목</th>
-						<td><%=theaterBoard.getName() %></td>
-						<th class="table-dark">작성자</th>
-						<td><%=theaterBoard.getMember().getId() %></td>
-					</tr>
-					<tr>
-						<th class="table-dark">조회수</th>
-						<td><%=theaterBoard.getReadCnt() %></td>
-						<th class="table-dark">댓글갯수</th>
-						<td><%=theaterBoard.getCommentCnt() %></td>
-					</tr>
-					<tr>
-						<th class="table-dark">등록일</th>
-						<td><%=theaterBoard.getCreateDate() %></td>
-						<th class="table-dark">최종수정일자</th>
-						<td><%=theaterBoard.getUpdateDate() %></td>
-					</tr>
-					<tr>
-						<th class="table-dark">내용</th>
-						<td colspan="10" style="" height="100px;"><%=theaterBoard.getContent() %></td>
-					</tr>
-				</tbody>
-			</table>
+			
+			<p style="font-size : 12px; line-height: 15%; float:right;">댓글 <strong><%=theaterBoard.getCommentCnt() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%; float:right;">조회수 <strong><%=theaterBoard.getReadCnt()%>&nbsp;</strong></p>
+			<p style="font-size : 10px; line-height: 15%;"><strong><%=theaterBoard.getLocation().getName() %>/<%=theaterBoard.getTheater().getName() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;">작성자<strong> <%=theaterBoard.getMember().getId() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;"><strong> <%=theaterBoard.getUpdateDate() %></strong></p>
+			<hr>
+			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
+				<p><%=theaterBoard.getContent() %></p>
+			</div>
+			
 			<div class="text-end">
 <%
 	if (theaterBoard.getMember().getId().equals(loginId)) {
@@ -122,7 +102,7 @@
 	<div class="row mb-3">
    		<div class="col-12">
 			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
-				<input type="hidden" name="boardNo" value=<%=theaterBoard.getNo() %> />
+				<input type="hidden" name="no" value=<%=theaterBoard.getNo() %> />
  				<div class="row">
 					<div class="col-11">
 						<textarea rows="2" class="form-control" name="content"></textarea>
@@ -136,38 +116,35 @@
    	</div>
 	<div class="row mb-3">
    		<div class="col-12">
-<%--
-	for(Comment comment : commentlistList) {
---%>
-
-<%--
+<%
+	for(TboardComment comment : comments) {
+%>
+			
    			<div class="border p-2 mb-2">
 	   			<div class="d-flex justify-content-between mb-1">
-	   				<span><%=comment.getCustomer().getName() %></span> <span class="text-muted"><%=comment.getCreateDate() %></span>
+	   				<span><%=comment.getMember().getId() %></span> <span class="text-muted"><%=comment.getCreaeDate() %></span>
 	   			</div>
 	   			<div>
 	   				<%=comment.getContent() %>
-
- --%>
+				
 	   				
-<%--
-	if(comment.getCustomer().getId().equals(loginId)){
---%>
+<%
+	if(comment.getMember().getId().equals(loginId)){
+%>
 
-<%--
 
-	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getNo() %>" 
+
+	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
 	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
- --%>
-	   			
-<%--
+
+<%
 	}
---%>
+%>
 	   			</div>   			
    			</div>
-<%--
+<%
 	}
---%>   			
+%>   			
    		</div>
    	</div>
 </div>
