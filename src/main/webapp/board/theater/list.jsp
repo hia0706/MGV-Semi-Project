@@ -1,16 +1,33 @@
-<%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
+<%@page import="util.StringUtils"%>
+<%@page import="dto.Pagination"%>
+<%@page import="vo.TheaterBoard"%>
+<%@page import="dao.TheaterBoardDao"%>
+<%@page import="dao.TheaterDao"%>
+<%@page import="vo.Theater"%>
 <%@page import="vo.Location"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LocationDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
 <%
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
 
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	List<Theater> theaters = theaterDao.getAllTheaters();
+	
+	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
+	
+	// 전체 데이터 개수 조회하기
+	int totalRows = theaterBoardDao.getTotalRows();
+	
+	Pagination pagination = new Pagination(pageNo, totalRows);
+	
+	// 데이터 조회하기
+	List<TheaterBoard> theaterBoards = theaterBoardDao.getTheaterBoards(pagination.getBegin(), pagination.getEnd());
 
 %>
 <html lang="ko">
@@ -27,7 +44,7 @@
 </head>
 <body>
 
-<jsp:include page="../../../admin/nav.jsp">
+<jsp:include page="../../common/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
 
@@ -37,7 +54,7 @@
 <div class="container">
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2">게시글 목록</h1>
+			<h1 class="border bg-light fs-4 p-2">극장 게시판</h1>
 		</div>
 	</div>
 	<div class="row mb-3">
@@ -101,56 +118,26 @@
 				</thead>
 				<tbody>
 
-<%--
 
+<%
+	for(TheaterBoard board : theaterBoards) {
+%>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a href="detail.jsp?no=<%=board.getNo() %>"><%=board.getTitle() %></a></td>
-						<td><%=board.getCustomer().getName() %></td>
+						<td><a href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getCommentCnt() %></td>
 						<td><%=board.getCreateDate() %></td>
 					</tr>
- --%>
- 
- 					<tr>
-						<td>100</td>
-						<td><a href="detail.jsp?no=100">MGV 익선점 좋네요</a></td>
-						<td>작성자</td>
-						<td>100</td>
-						<td>2023-06-10</td>
-					</tr>
- 					<tr>
-						<td>100</td>
-						<td><a href="detail.jsp?no=100">MGV 익선점 좋네요</a></td>
-						<td>작성자</td>
-						<td>100</td>
-						<td>2023-06-10</td>
-					</tr>
- 					<tr>
-						<td>100</td>
-						<td><a href="detail.jsp?no=100">MGV 익선점 좋네요</a></td>
-						<td>작성자</td>
-						<td>100</td>
-						<td>2023-06-10</td>
-					</tr>
- 					<tr>
-						<td>100</td>
-						<td><a href="detail.jsp?no=100">MGV 익선점 좋네요</a></td>
-						<td>작성자</td>
-						<td>100</td>
-						<td>2023-06-10</td>
-					</tr>
- 					<tr>
-						<td>100</td>
-						<td><a href="detail.jsp?no=100">MGV 익선점 좋네요</a></td>
-						<td>작성자</td>
-						<td>100</td>
-						<td>2023-06-10</td>
-					</tr>
+
+<%
+	}
+%>
+ 					
 			
 				</tbody>
 			</table>
-<%--
+			
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
@@ -167,23 +154,8 @@
 					</li>
 				</ul>
 			</nav>
- --%>
+
 			
-			<nav>
-				<ul class="pagination justify-content-center">
-					<li class="page-item ">
-						<a href="list.jsp?page=1" class="page-link">이전</a>
-					</li>
-					
-					<li class="page-item active">
-						<a href="list.jsp?page=1" class="page-link">1</a>
-					</li>
-					
-					<li class="page-item ">
-						<a href="list.jsp?page=2" class="page-link">다음</a>
-					</li>
-				</ul>
-			</nav>
 			
 			<div class="text-end">
 				<a href="form.jsp" class="btn btn-primary btn-sm">새 게시글 등록</a>
