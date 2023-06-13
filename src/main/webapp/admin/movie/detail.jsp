@@ -19,42 +19,9 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 <html lang="ko">
 <head>
 <title></title>
-<style type="text/css">
-.movie-detail-page .bg-img {
-	left: 50%;
-	top: 0;
-	z-index: 1;
-	width: 1100px;
-	margin: 0 0 0 -550px;
-	height: 100%;
-	background-position: center 0;
-	background-repeat: no-repeat;
-	background-size: 100% auto;
-	opacity: .8;
-}
-
-body {
-	overflow: auto;
-	overflow-y: scroll;
-	letter-spacing: 0;
-	line-height: 1.5;
-	font-size: 15px;
-	color: #444;
-	font-weight: 400;
-	font-family: NanumBarunGothic, Dotum, '돋움', sans-serif;
-}
-
-.movie-detail-page {
-	position: relative;
-	z-index: 1;
-	height: 520px;
-	margin: 0 0 40px 0;
-	color: #ccc;
-	background-color: #151515;
-}
-</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="megabox.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -67,49 +34,90 @@ body {
 	<jsp:include page="../../admin/nav.jsp">
 		<jsp:param name="menu" value="영화" />
 	</jsp:include>
-	<div class="container">
-		<div class="row mb-3">
-			<div class="col-12">
-				<h1 class="border bg-light fs-4 p-2">영화 상세 정보</h1>
-			</div>
-
-			<div class="movie-detail-page">
-				<div class="movie-detail-page">
-					
-				</div>
-			</div>
+	<div class="row mb-3">
+		<div class="col-12">
+			<h1 class="border bg-light fs-4 p-2">영화 상세 정보</h1>
 		</div>
 
 	</div>
-	<div class="row mb-3">
-						<div class="col-12">
-							<table class="table table-bordered">
-								<tbody>
-									<tr>
-										<th class="table-dark" style="width: 15%;">제목</th>
-										<td style="width: 35%;"><%=movie.getTitle()%></td>
-										<th class="table-dark" style="width: 15%;">상영여부</th>
-										<td style="width: 35%;"><%="Y".equals(movie.getIsPlaying()) ? "상영중" : "상영종료"%></td>
-									</tr>
-									<tr>
-										<th class="table-dark" style="width: 15%;">감독</th>
-										<td style="width: 35%;"><%=movie.getDirector()%></td>
-										<th class="table-dark" style="width: 15%;">배우</th>
-										<td style="width: 35%;"><%=movie.getCast()%></td>
-									</tr>
-									<tr>
-										<th class="table-dark" style="width: 15%;">장르</th>
-										<td style="width: 35%;"><%=movie.getGenre()%></td>
-										<th class="table-dark" style="width: 15%;">개봉일</th>
-										<td style="width: 35%;"><%=movie.getReleaseDate()%></td>
-									</tr>
-									<tr>
-										<th class="table-dark" style="width: 15%;">설명</th>
-										<td style="width: 85%; height: 100px;" colspan="3"><%=movie.getDescription()%></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+
+
+	<div id="contents">
+		<div class="movie-detail-page">
+			<div class="bg-img"
+				style="background-image:url('<%=movie.getPosterURL()%>');">::after</div>
+			<div class="bg-pattern"></div>
+			<div class="bg-mask"></div>
+			<div class="movie-detail-cont">
+				<p class="d-day default"><%="Y".equals(movie.getIsPlaying()) ? "예매 가능" : "예매 불가"%></p>
+				<p class="title"><%=movie.getTitle()%></p>
+				<div class="info">
+					<div class="rate">
+						<p class="tit">전일 박스오피스 순위</p>
+						<p class="cont">
+							<em><%=movie.getRank()%></em>위
+						</p>
 					</div>
+
+					<div class="audience ">
+						<div class="tit ">
+							<span class="m-tooltip-wrap ">누적관객수 <!-- 2019-09-11 툴팁 보기 수정 -->
+							</span>
+						</div>
+						<p class="cont">
+							<em><%=movie.getAudiCnt()%></em> 명
+						</p>
+					</div>
+				</div>
+				<div class="poster">
+					<div class="wrap">
+						<img src="<%=movie.getPosterURL()%>">
+					</div>
+				</div>
+				<div class="reserve screen-type">
+						<a href="schedulemovie.jsp?no=<%=movie.getNo() %>" class="btn reserve">상영 등록</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="row mb-3">
+		<div class="col-12">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th class="table-dark" style="width: 15%;">제목</th>
+						<td style="width: 35%;"><%=movie.getTitle()%></td>
+						<th class="table-dark" style="width: 15%;">상영여부</th>
+						<td style="width: 35%;"><%="Y".equals(movie.getIsPlaying()) ? "상영중" : "상영종료"%></td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">감독</th>
+						<td style="width: 35%;"><%=movie.getDirector()%></td>
+						<th class="table-dark" style="width: 15%;">배우</th>
+						<td style="width: 35%;"><%=movie.getCast()%></td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">장르</th>
+						<td style="width: 35%;"><%=movie.getGenre()%></td>
+						<th class="table-dark" style="width: 15%;">개봉일</th>
+						<td style="width: 35%;"><%=movie.getReleaseDate()%></td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">설명</th>
+						<td style="width: 85%; height: 100px;" colspan="3"><%=movie.getDescription()%></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

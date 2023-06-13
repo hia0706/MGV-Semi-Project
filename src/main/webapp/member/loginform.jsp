@@ -55,7 +55,13 @@
 			<strong>로그인 실패</strong> 회원 계정은 관리자로 로그인할 수 없습니다.
 		</div>
 <%
-	} 
+	} else if ("req".equals(err)) {
+%>
+		<div class="alert alert-danger">
+			<strong>로그인 필요</strong> [<%=job %>]은 로그인 후 이용가능한 서비스입니다.
+		</div>
+<% 
+	}
 %>
    			<p>아이디, 비밀번호를 입력하고 로그인하세요</p>
    			<form class="border bg-light p-3" name="form" method="post" action="login.jsp">
