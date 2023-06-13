@@ -62,7 +62,7 @@
 						<td>MGV</td>
 						<td style="text-align:left">
 							<a href="detail.jsp?no=" class="text-black text-decoration-none">
-								자주 묻는 질문 제목
+								영화 관람등급은 어떻게 되나요?
 							</a>
 						</td>
 					
