@@ -8,7 +8,7 @@
 	// 극장번호로 극장정보 가져오기
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	Theater theater = theaterDao.getTheaterByNo(theaterNo);
-	String ad = theater.getAddress1();
+	String ad = theater.getAddress();
 %>
 <!doctype html>
 <html lang="ko">

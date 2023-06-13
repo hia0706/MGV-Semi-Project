@@ -74,8 +74,8 @@ public class ProductDao {
 		}, no);
 	}
 	
-	public List<Product> getProductsByCatNo(int catNo) {
-		return DaoHelper.selectList("", rs -> {
+	public List<Product> getAllProducts() {
+		return DaoHelper.selectList("productDao.getAllProducts", rs -> {
 			Product product = new Product();
 			product.setNo(rs.getInt("product_no"));
 			product.setName(rs.getString("product_name"));
@@ -91,7 +91,7 @@ public class ProductDao {
 			product.setProductCategory(cat);
 			
 			return product;
-		}, catNo);
+		});
 	}
 	
 	public List<Product> getProducts(int begin, int end) {

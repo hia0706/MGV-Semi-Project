@@ -21,9 +21,11 @@ public class FavoriteTheaterDao {
 			favoriteTheater.setNo(rs.getInt("favorite_no"));
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
+			favoriteTheater.setMember(member);
 			Theater theater = new Theater();
 			theater.setNo(rs.getInt("theater_no"));
 			theater.setName(rs.getString("theater_name"));
+			favoriteTheater.setTheater(theater);
 			return favoriteTheater;
 		}, memberId);
 	}
