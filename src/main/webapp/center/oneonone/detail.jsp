@@ -1,10 +1,15 @@
+<%@page import="vo.Oneonone"%>
+<%@page import="dao.OneononeDao"%>
 <%@page import="vo.Lostitem"%>
 <%@page import="dao.LostitemDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 
-
+	int no = Integer.parseInt(request.getParameter("no"));
+	
+	OneononeDao oneononeDao = OneononeDao.getInstance();
+	Oneonone oneonone = oneononeDao.getOneononeByNo(no);
 	
 %>
 <!doctype html>
@@ -34,8 +39,12 @@
 			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
 	</div>
-	
 		<hr>
+			<a style="font-size : 17px;"><strong><%=oneonone.getTitle() %></strong></a><br>
+			<a style="font-size : 12px;"><%=oneonone.getCreateDate() %></a>
+		<hr>
+			<a><%=oneonone.getContent() %></a>
+		
 		
 			
 
@@ -43,3 +52,13 @@
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

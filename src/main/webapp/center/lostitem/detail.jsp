@@ -35,7 +35,7 @@
    	</div>
 	<div class="clearfix">
 		<ul class="dot-list">
-			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+			<li>고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
 	</div>
 		<hr>
