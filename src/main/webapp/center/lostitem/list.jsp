@@ -1,3 +1,5 @@
+<%@page import="vo.Lostitem"%>
+<%@page import="dao.LostitemDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -5,6 +7,8 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	
+	LostitemDao lostitemDao = LostitemDao.getInstance();
+	List<Lostitem> lostitemList = lostitemDao.getLostitems();
 
 %>
 
@@ -28,11 +32,11 @@
 </head>
 <body>
 
-<%--
+
 <jsp:include page="../../common/nav.jsp">
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
---%>
+
 
 <div class="container">
 	<div class="row mb-3">
@@ -51,7 +55,7 @@
 			
 			<table class="table">
 				<thead>
-					<tr class="table-light"> 
+					<tr class="table-light" > 
 						<th style="width: 5%;">번호</th>
 						<th style="width: 10%;">극장</th>
 						<th style="width: 50%;">제목</th>
@@ -60,41 +64,29 @@
 					</tr>
 				</thead>
 				<tbody>
+				
+<% for (Lostitem lostitem : lostitemList) { %>				
+				
 					<tr>
-						<td>1</td>
-						<td>극장</td>
-						<td style="text-align:left">새로 개봉한 코난 극장판 보러갔다가 제가 아끼는 초호기 피규어를 잃어버려서 가슴이 무너집니다.</td>
+						<td><%=lostitem.getNo() %></td>
+						<td>MGV</td>
+						<td style="text-align:left">
+							<a href="detail.jsp?no=<%=lostitem.getNo() %>" class="text-black text-decoration-none">
+								<%=lostitem.getTitle() %>
+							</a>
+						</td>
+						
+<% if ("N".equals(lostitem.getAnswered())) { %>
 						<td>미답변</td>
-						<td>2023.06.11</td>
+<% } else {%>
+						<td>답변완료</td>
+<% } %>
+
+						<td><%=lostitem.getCreateDate() %></td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>극장</td>
-						<td style="text-align:left">새로 개봉한 코난 극장판 보러갔다가 제가 아끼는 초호기 피규어를 잃어버려서 가슴이 무너집니다.</td>
-						<td>미답변</td>
-						<td>2023.06.11</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>극장</td>
-						<td style="text-align:left">새로 개봉한 코난 극장판 보러갔다가 제가 아끼는 초호기 피규어를 잃어버려서 가슴이 무너집니다.</td>
-						<td>미답변</td>
-						<td>2023.06.11</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>극장</td>
-						<td style="text-align:left">새로 개봉한 코난 극장판 보러갔다가 제가 아끼는 초호기 피규어를 잃어버려서 가슴이 무너집니다.</td>
-						<td>미답변</td>
-						<td>2023.06.11</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>극장</td>
-						<td style="text-align:left">새로 개봉한 코난 극장판 보러갔다가 제가 아끼는 초호기 피규어를 잃어버려서 가슴이 무너집니다.</td>
-						<td>미답변</td>
-						<td>2023.06.11</td>
-					</tr>
+
+<% } %>				
+					
 				</tbody>
 			</table>
 	</div>

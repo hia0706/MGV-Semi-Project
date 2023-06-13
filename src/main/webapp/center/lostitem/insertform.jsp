@@ -1,3 +1,5 @@
+<%@page import="dao.MemberDao"%>
+<%@page import="vo.Member"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -5,6 +7,17 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	
+	//세션에서 로그인된 사용자 정보를 조회한다.
+	String id = (String) session.getAttribute("loginId");
+
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+
+	
+	if (member == null) {
+		response.sendRedirect("../../member/loginform.jsp?err=fail");
+		return;
+	}
 
 %>
 
@@ -25,11 +38,10 @@
 </head>
 <body>
 
-<%--
+
 <jsp:include page="../../common/nav.jsp">
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
---%>
 
 <div class="container">
 	<div class="row mb-3">
@@ -46,40 +58,51 @@
 		</ul>
 			
 				<div class="border bg-light p-3">
-				<form class="row g-3" method="post" action="insert.jsp">
-	 				<div class="col-md-12">
-						<label class="form-label">분실장소</label>
-						<input type="text" class="form-control" name="name" />
-					</div>
+				<form id="lostitem" class="row g-3" method="post" action="insert.jsp" >
+	 				
 	 				<div class="col-md-12">
 						<label class="form-label">이름</label>
-						<input type="text" class="form-control" name="name" />
+						<input type="text" class="form-control" name="name"/>
 					</div>
 					<div class="col-md-6">
 						<label class="form-label">연락처</label>
-						<input type="text" class="form-control" name="name" />
+						<input type="text" class="form-control" name="tel"/>
 					</div>
 					<div class="col-md-6">
 						<label class="form-label">이메일</label>
-						<input type="text" class="form-control" name="name" />
+						<input type="text" class="form-control" name="email"/>
 					</div>
 	 				<div class="col-md-12">
 						<label class="form-label">제목</label>
-						<input type="text" class="form-control" name="name" />
+						<input type="text" class="form-control" name="title"/>
 					</div>
 	  				<div class="col-md-12">
 						<label class="form-label">내용</label>
-						<textarea rows="10" class="form-control" name="description"></textarea>
+						<textarea rows="10" class="form-control" name="content"></textarea>
 					</div>
+					
+					
 				</form>
 			</div>
-			
 			<div style="text-align: center; padding:30px;">
-				<a href="course-list.jsp" class="btn btn-secondary btn-sm">등록</a>
+				<button type="button" class="btn btn-secondary btn-sm" onclick="formsubmit()">등록</button>
 			</div>
-		
-	
 	</div>
 </div>
+<script type="text/javascript">
+	function formsubmit() {
+		
+		let insertform = document.getElementById("lostitem");
+		insertform.submit();
+	}	
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+

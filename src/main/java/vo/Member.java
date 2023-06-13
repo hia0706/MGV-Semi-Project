@@ -22,6 +22,10 @@ public class Member {
 	private String disabled;
 	
 	public Member() {}
+	
+	public Member(String id) {
+		this.id = id;
+	}
 
 	public String getId() {
 		return id;
