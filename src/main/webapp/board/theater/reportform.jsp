@@ -47,7 +47,7 @@
 			<form class="border bg-light p-3" method="get" action="report.jsp" >
 				
 	
-				<div class="form-group mb-2" style= "width: 33%; padding:10px;">
+				<div class="form-group mb-2" style= "width: 33%; padding:5px;">
 					<label class="form-label">신고이유</label>
 					<select class="form-select" name="locationNo" id="selectbox" >
 
@@ -57,7 +57,7 @@
 				
 				<div class="form-group mb-2">
 					<label class="form-label">상세내용</label>
-					<textarea rows="10" class="form-control" name="content" ></textarea>
+					<textarea rows="5" class="form-control" name="content" ></textarea>
 				</div>
 
 
