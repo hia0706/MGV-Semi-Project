@@ -12,6 +12,7 @@ public class Product {
 	private Date updateDate;
 	private String soldOut;
 	private String description;
+	private String composition;
 	private Order order;
 	private ProductCategory productCategory;
 	
@@ -19,6 +20,14 @@ public class Product {
 	
 	public Product(int no) {
 		this.no = no;
+	}
+
+	public String getComposition() {
+		return composition;
+	}
+
+	public void setComposition(String composition) {
+		this.composition = composition;
 	}
 
 	public int getNo() {
