@@ -34,7 +34,7 @@ public class DateUtils {
 		try {
 			return YYYYMMDD.parse(text);
 		} catch (ParseException ex) {
-			throw new RuntimeException("["+text+"]", ex);			
+			throw new RuntimeException("데이트유틸 스트링 -> Date 변환 익셉션["+text+"]", ex);			
 		}
 	}
 }

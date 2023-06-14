@@ -64,6 +64,7 @@ public class ProductDao {
 			product.setUpdateDate(rs.getDate("product_update_date"));
 			product.setSoldOut(rs.getString("product_sold_out"));
 			product.setDescription(rs.getString("product_description"));
+			product.setComposition(rs.getString("product_composition"));
 			
 			ProductCategory cat = new ProductCategory();
 			cat.setNo(rs.getInt("cat_no"));

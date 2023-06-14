@@ -31,10 +31,8 @@
 	SampleService service=SampleService.getInstance();
 	List<Movie> movies= service.getMovies();
 	
-	
 	HashSet<Integer> movieNos= 	managerMovieDao.getMovieNos();
 	
-	Movie registeredMovie = null;
 	for (Movie movie: movies){
 		if (movieNos.contains(movie.getNo())){
 			managerMovieDao.updateMovie(movie);

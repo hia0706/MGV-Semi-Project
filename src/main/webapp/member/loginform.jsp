@@ -61,6 +61,12 @@
 			<strong>로그인 필요</strong> [<%=job %>]은/는 로그인 후 이용가능한 서비스입니다.
 		</div>
 <% 
+	} else if ("회원목록조회".equals(err)) {
+%>
+		<div class="alert alert-danger">
+			<strong>로그인 필요</strong> [<%=job %>]는 관리자만 이용가능합니다.
+		</div>
+<% 
 	}
 %>
    			<p>아이디, 비밀번호를 입력하고 로그인하세요</p>
@@ -75,6 +81,8 @@
   						<label class="form-check-label" for="inlineRadio1">관리자</label>
 					</div>
    				</div>
+   				
+   				<!-- 회원 넘버를 어떻게 추가해야할지 -->
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">아이디</label>
