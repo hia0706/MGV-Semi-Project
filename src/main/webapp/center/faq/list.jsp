@@ -1,5 +1,5 @@
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
+<%@page import="vo.Faq"%>
+<%@page import="dao.FaqDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -7,7 +7,8 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	
-
+	FaqDao faqDao = FaqDao.getInstance();
+	List<Faq> faqList = faqDao.getFaq();
 
 %>
 
@@ -55,23 +56,22 @@
 					</tr>
 				</thead>
 				<tbody>
-				
+	
+<% for (Faq faq : faqList) { %>				
 				
 					<tr>
-						<td>1</td>
+						<td><%=faq.getNo() %></td>
 						<td>MGV</td>
 						<td style="text-align:left">
-							<a href="detail.jsp?no=" class="text-black text-decoration-none">
-								영화 관람등급은 어떻게 되나요?
+							<a href="detail.jsp?no=<%=faq.getNo() %>" class="text-black text-decoration-none">
+								<%=faq.getTitle() %>
 							</a>
 						</td>
-					
-						
-
-
-						<td>2023.06.13</td>
+						<td><%=faq.getCreateDate() %></td>
 					</tr>
-
+					
+<% } %>				
+						
 					
 				</tbody>
 			</table>

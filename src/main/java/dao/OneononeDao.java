@@ -15,6 +15,14 @@ public class OneononeDao {
 		return instacne;
 	}
 	
+	public void updateOneonone(Oneonone oneonone) {
+		DaoHelper.update("oneononeDao.updateOneonone", oneonone.getTitle(),
+													   oneonone.getContent(),
+													   oneonone.getAnswered(),
+													   oneonone.getDeleted(),
+													   oneonone.getNo());
+	}
+	
 	public Oneonone getOneononeByNo(int oneononeNo) {
 		return DaoHelper.selectOne("oneononeDao.getOneononeByNo", rs -> {
 			Oneonone oneonone = new Oneonone();

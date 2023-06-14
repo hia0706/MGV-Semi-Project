@@ -1,12 +1,13 @@
-<%@page import="vo.Oneonone"%>
-<%@page import="dao.OneononeDao"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
+<%@page import="vo.Notice"%>
+<%@page import="dao.NoticeDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 
-	
+	int no = Integer.parseInt(request.getParameter("no"));
+
+	NoticeDao noticeDao = NoticeDao.getInstance();
+	Notice notice = noticeDao.getNoticeByNo(no);
 	
 %>
 <!doctype html>
@@ -33,21 +34,14 @@
    	</div>
 	
 		<hr>
-			<a style="font-size : 17px;">MGV 이용 약관 변경 안내<strong></strong></a><br>
-			<a style="font-size : 12px;">2023.06.13</a>
+			<a style="font-size : 17px;"><%=notice.getTitle() %><strong></strong></a><br>
+			<a style="font-size : 12px;"><%=notice.getCreateDate() %></a>
 		<hr>
-			<a>
-				[공지] MGV 이용약관 변경 안내<br><br>
-				안녕하세요, MGV 입니다<br><br>
-				MGV 이용약관이 변경됨에 따라 다음과 같이 안내해드립니다.<br><br>
-				변경된 내용은 2023년 6월 19일(월)부터 시행 예정이니 이용에 참고하여 주시기 바랍니다.<br><br>
-				
-				감사합니다.
-			</a>
-		
-		
-			
-
+			<a><%=notice.getContent() %></a>
+		<hr>
+		<div style="text-align: center; padding:30px;">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
+		</div>
       
 </div>
 </body>
