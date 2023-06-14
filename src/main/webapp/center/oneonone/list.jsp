@@ -1,3 +1,5 @@
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="vo.Oneonone"%>
 <%@page import="dao.OneononeDao"%>
 <%@page import="vo.Lostitem"%>
@@ -11,6 +13,14 @@
 
 	// 세션에서 로그인된 사용자 아이디 조회
 	String id = (String) session.getAttribute("loginId");
+
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	
+	if (member == null) {
+		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("문의내역 확인", "utf-8"));
+		return;
+}
 	
 	OneononeDao oneononeDao = OneononeDao.getInstance();
 	List<Oneonone> oneononeList = oneononeDao.getOneononesById(id);
