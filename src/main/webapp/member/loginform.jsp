@@ -76,6 +76,8 @@
 					</div>
    				</div>
    				
+   				<!-- 회원 넘버를 어떻게 추가해야할지 -->
+   				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">아이디</label>
    					<input type="text" class="form-control" id="id" name="id" />

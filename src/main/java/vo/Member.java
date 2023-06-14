@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Member {
 
+	private int no;
 	private String id;
 	private String password;
 	private String checkPassword;
@@ -26,7 +27,15 @@ public class Member {
 	public Member(String id) {
 		this.id = id;
 	}
-
+	
+	public void setNo(int no) {
+		this.no = no;
+	}
+	
+	public int getNo() {
+		return no;
+	}
+	
 	public String getId() {
 		return id;
 	}
