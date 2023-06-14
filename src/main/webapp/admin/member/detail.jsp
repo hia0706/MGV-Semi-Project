@@ -15,7 +15,7 @@
 <html lang="ko">
 <head>
 <link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
-<title>회원관리 &#60; 관리자</title>
+<title>회원상세정보 &#60; 관리자</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +102,7 @@
 			<a href="list.jsp" class="btn btn-outline-secondary">목록</a>
 			<a href="../center/oneonone/list.jsp?id=<%=member.getId() %>" class="btn btn-outline-info">문의내역</a>
 <%
-	if ("No".equals(member.getDisabled())) {
+	if ("Yes".equals(member.getDisabled())) {
 %>
 			<a href="enable.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">복구</a>
 <%
