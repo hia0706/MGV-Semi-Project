@@ -7,14 +7,13 @@
 <%
 	//세션에서 로그인한 사용자 정보 가져오기
 	String loginId = (String)session.getAttribute("loginId");
-	
-	// 로그인 했는지 확인.
-	if(loginId){
-		
-	}
+
 	// 파라미터 극장번호
 	int theaterNo = Integer.parseInt(request.getParameter("no"));
-
+	
+	// 오류코드 검증. 즐찾3개 넘으면 경고창. 이미 등록한 극장이면 경고창.
+	
+	
 	// 극장번호로 극장정보 가져오기
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	Theater theater = theaterDao.getTheaterByNo(theaterNo);
@@ -59,7 +58,13 @@
 		<div class="theater-cont-lab">
 			<h4>강남
 			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 text-muted를 지운다. -->
+<%
+	if(loginId!=null){
+%>			
 			<i  onclick="fn1(event)" class="bi bi-heart-fill <%=favoriteTheater!=null&&theaterNo==favoriteTheater.getTheater().getNo()?"":"text-muted" %>"></i>
+<%
+	}
+%>			
 			</h4>
 		</div>
 <script type="text/javascript">
@@ -68,19 +73,27 @@
 // 되어있으면 취소할지 확인
 function fn1(e) {
 	  let cur = e.currentTarget;
+	  let doDelete = 'Y'; // 삭제여부 기본값 y
 	  if(cur.classList.contains('text-muted')){
 		  if (confirm("등록하시겠습니까?")) {
-			    // 확인
-			    
+			 	doDelete = 'N';
 			  } else {
 			    // 취소
+			    return;
 			  } 
 	  }else{
 		  if (confirm("취소하시겠습니까?")) {
 			    // 확인
+			  	doDelete = 'Y'; 
 			  } else {
 			    // 취소
+			    return;
 			  } 
+	  }
+	  if(doDelete =='Y'){
+		  window.location="favoriteTheaterDelete.jsp?no=<%=theaterNo%>";
+	  }else if(doDelete =='N'){
+		  window.location="favoriteTheaterInsert.jsp?no=<%=theaterNo%>";
 	  }
 }
 <!-- theater_detail클래스에 속한 ul에 속한 a태그를 누르면 tab-cont-wrap에 href에 해당하는 div를 보이게 하고 다른 것들은 안보이게 바꾼다.-->
