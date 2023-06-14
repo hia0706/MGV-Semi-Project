@@ -59,4 +59,15 @@ public class StoreBoardDao {
 		}, begin, end);
 	}
 	
+	// insert
+	public void insertStoreBoard(StoreBoard storeBoard) {
+		
+		DaoHelper.update("storeBoardDao.insertTheaterBoard" ,storeBoard.getName(),
+															 storeBoard.getContent(),
+															 storeBoard.getGrade(),
+															 storeBoard.getMember().getId(),
+															 storeBoard.getProduct().getNo(),
+															 storeBoard.getCategory().getNo());	
+		
+	}
 }

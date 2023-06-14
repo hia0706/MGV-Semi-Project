@@ -9,12 +9,12 @@
 <%
 	// 세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
-/*	
+
 	if(loginId == null){
-		response.sendRedirect("../loginform.jsp?err=req&job="+URLEncoder.encode("게시물등록","utf-8"));
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("과정등록", "utf-8"));
 		return;
 	}
-*/
+
 	String name = request.getParameter("name");
 	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
 	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));

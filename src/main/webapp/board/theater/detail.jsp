@@ -129,7 +129,7 @@
 	}
 </script>
 
-	
+<%-- 댓글 --%>	
 	<div class="row mb-3">
    		<div class="col-12">
 			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
@@ -179,6 +179,8 @@
    		</div>
    	</div>
    	
+   	
+<%-- 신고 모달 --%>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
     	<div class="modal-content">
