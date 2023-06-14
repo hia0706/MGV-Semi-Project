@@ -17,7 +17,6 @@
 	// 자주가는 극장 정보 가져오기
 	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
 	List<FavoriteTheater> FTList = fTheaterDao.getFavoriteTheaterById(loginId);
-	
 	// 극장정보 가져오기
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	List<Theater> theaterList = theaterDao.getAllTheaters(); 
