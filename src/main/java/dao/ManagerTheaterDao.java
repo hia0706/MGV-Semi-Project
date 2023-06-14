@@ -29,7 +29,7 @@ public class ManagerTheaterDao {
 	
 	public int getTotalRows (String disable) {
 		
-		return DaoHelper.selectOne("managerTheaterDao.getTotalRowsByDisable", rs -> {
+		return DaoHelper.selectOne("managerTheaterDao.getTotalRowsByDisabled", rs -> {
 			return rs.getInt("cnt");
 		}, disable);
 	}

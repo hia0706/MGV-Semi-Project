@@ -1,4 +1,3 @@
-<%@page import="vo.TotalRows"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
