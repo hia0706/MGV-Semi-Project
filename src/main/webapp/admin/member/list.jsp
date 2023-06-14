@@ -1,6 +1,5 @@
 <%@page import="dto.Pagination"%>
 <%@page import="util.StringUtils"%>
-<%@page import="dao.AdminMemberDao"%>
 <%@page import="java.util.List"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
@@ -9,19 +8,20 @@
 	// 회원 목록
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 
-	AdminMemberDao adDao = AdminMemberDao.getInstance();
+	MemberDao memberDao = MemberDao.getInstance();
 	
-	int totalRows = adDao.getTotalRows();
+	int totalRows = memberDao.getTotalRows();
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 
-	List<Member> memberList = adDao.getMembers(pagination.getBegin(), pagination.getEnd());
+	List<Member> memberList = memberDao.getMembers(pagination.getBegin(), pagination.getEnd());
 	
 %>
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>회원관리 &#60; 관리자</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 </head>
 <body>
 <jsp:include page="../nav.jsp">
-	<jsp:param name="menu" value="상품"/>
+	<jsp:param name="menu" value="ADMIN"/>
 </jsp:include>
 <div class="container">
 <div class="row mb-3">
@@ -47,14 +47,14 @@
 			<table class="table">
 				<thead>
 					<tr class="table-dark">
-						<th>회원 번호</th>
 						<th>아이디</th>
 						<th>이름</th>
 						<th>생년월일</th>
 						<th>연락처</th>
+						<th>이메일</th>
+						<th>탈퇴여부</th>
 						<th>가입날짜</th>
 						<th>수정날짜</th>
-						<th>탈퇴여부</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,42 +62,14 @@
 	for (Member member : memberList) {
 %>
 					<tr>						
-<%-- 						<td><%=member.getNo()%></td>
-						<td><%=member.getId()%></td>
-						<td><%=member.getName()%></td>
+						<td><a href="detail.jsp?id=<%=member.getId() %>" class="text-black text-decoration-none"><%=member.getId()%></a></td>
+						<td><a href="detail.jsp?id=<%=member.getId() %>" class="text-black text-decoration-none"><%=member.getName()%></a></td>
 						<td><%=member.getBirth()%></td>
 						<td><%=member.getTel()%></td>
+						<td><%=member.getEmail()%></td>
+						<td><%="No".equals(member.getDisabled()) ? "사용중" : "탈퇴" %></td>
 						<td><%=member.getCreateDate()%></td>
 						<td><%=member.getUpdateDate()%></td>
-						<td><%="No".equals(member.getDisabled) ? "사용중" : "탈퇴" %></td> --%>
-						<td>1</td>
-						<td>hong</td>
-						<td>홍길동</td>
-						<td>1993-02-23</td>
-						<td>010-1234-1234</td>
-						<td>2023-06-14</td>
-						<td>2023-06-14</td>
-						<td>사용중</td>
-					</tr>
-					<tr>						
-						<td>2</td>
-						<td>hong</td>
-						<td>홍길동</td>
-						<td>1993-02-23</td>
-						<td>010-1234-1234</td>
-						<td>2023-06-14</td>
-						<td>2023-06-14</td>
-						<td>사용중</td>
-					</tr>
-					<tr>						
-						<td>3</td>
-						<td>hong</td>
-						<td>홍길동</td>
-						<td>1993-02-23</td>
-						<td>010-1234-1234</td>
-						<td>2023-06-14</td>
-						<td>2023-06-14</td>
-						<td>사용중</td>
 					</tr>
 <%
 }
@@ -126,9 +98,9 @@ for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++)
 			</nav>
 			
 			<div class="text-end">
-				<a href="#" class="btn btn-primary btn-sm">???</a>
-				<a href="#" class="btn btn-primary btn-sm">문의내역</a>
-				<a href="#" class="btn btn-primary btn-sm">???</a>
+				<a href="#" class="btn btn-primary btn-sm">판매내역</a>
+				<a href="../center/oneonone/list.jsp" class="btn btn-info btn-sm">문의내역</a>
+				<a href="#" class="btn btn-primary btn-sm">ㅇㅇㅇ</a>
 			</div>
 		</div>
 	</div>

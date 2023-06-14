@@ -11,7 +11,7 @@
 		
 	<div class="container-fluid">
 		<a href="/mgv/manager/home.jsp">
-           <img src="/mgv/images/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
+           <img src="/mgv/images/member/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
         </a>
     	<ul class="navbar-nav me-auto">
         	<li class="nav-item"><a class="nav-link <%="회원 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/member/list.jsp">회원 관리</a></li>    	
