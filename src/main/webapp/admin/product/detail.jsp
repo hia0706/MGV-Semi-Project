@@ -46,13 +46,13 @@
 				<tbody>
 					<tr>
 						<th>상품이름</th>
-						<td><%=product.getName() %></td>
+						<td><strong><%=product.getName() %></strong></td>
 						<th>카테고리</th>
 						<td><%=product.getProductCategory().getName() %></td>
 					</tr>
 					<tr>
 						<th>상품번호</th>
-						<td><Strong><%=product.getNo() %></Strong></td>
+						<td><%=product.getNo() %></td>
 						<th>가격</th>
 						<td><%=product.getPrice() %>원</td>
 					</tr>
@@ -67,6 +67,10 @@
 						<td><%=product.getUpdateDate() %></td>
 						<th>등록일자</th>
 						<td><%=product.getCreateDate() %></td>
+					</tr>
+					<tr>
+						<th>상품구성</th>
+						<td><%=product.getComposition() %></td>
 					</tr>
 					<tr>
 						<th>상품설명</th>

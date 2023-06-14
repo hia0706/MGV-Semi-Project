@@ -18,7 +18,7 @@ public class FavoriteTheaterDao {
 	public List<FavoriteTheater> getFavoriteTheaterById(String memberId) {
 		return DaoHelper.selectList("favoriteTheaterDao.getFavoriteTheaterById", rs->{
 			FavoriteTheater favoriteTheater = new FavoriteTheater();
-			favoriteTheater.setNo(rs.getInt("favorite_no"));
+			favoriteTheater.setCreateDate(rs.getDate("favorite_create_date"));
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
 			favoriteTheater.setMember(member);
@@ -33,7 +33,7 @@ public class FavoriteTheaterDao {
 	public FavoriteTheater getFavoriteTheaterByKey(String id, int theaterNo) {
 		return DaoHelper.selectOne("favoriteTheaterDao.getFavoriteTheaterByKey", rs->{
 			FavoriteTheater favoriteTheater = new FavoriteTheater();
-			favoriteTheater.setNo(rs.getInt("favorite_no"));
+			favoriteTheater.setCreateDate(rs.getDate("favorite_create_date"));
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
 			favoriteTheater.setMember(member);
@@ -43,4 +43,11 @@ public class FavoriteTheaterDao {
 			return favoriteTheater;
 		}, id,theaterNo);
 	}
+	
+	public void deleteFavoriteTheater(FavoriteTheater favoriteTheater){  
+		DaoHelper.update("favoriteTheaterDao.deleteFavoriteTheater", favoriteTheater.getMember().getId(), favoriteTheater.getTheater().getNo());
+	};
+	public void insertFavoriteTheater(FavoriteTheater favoriteTheater){  
+		DaoHelper.update("favoriteTheaterDao.insertFavoriteTheater", favoriteTheater.getMember().getId(), favoriteTheater.getTheater().getNo());
+	};	
 }
