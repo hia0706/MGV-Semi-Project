@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
 <%@page import="dao.TboardCommentDao"%>
@@ -8,6 +9,10 @@
 	String loginId = (String) session.getAttribute("loginId");
 
 	// 에러메세지 출력
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("과정등록", "utf-8"));
+		return;
+	}
 	
 	// 요청파라미터 조회
 	int boardNo = Integer.parseInt(request.getParameter("no"));

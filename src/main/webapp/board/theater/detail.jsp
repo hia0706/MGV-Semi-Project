@@ -71,21 +71,13 @@
 	if("id".equals(err)){
 %>
 		<div class="alert alert-danger">
-			<strong>다른 사용자의 게시글을 삭제할 수 없습니다.</strong>
+			<strong>다른 사용자의 게시글을 [<%=job %>]할 수 없습니다.</strong>
 		</div>
 <%
 	}
 %>
 		
-<%
-	if("req".equals(err)){
-%>
-		<div class="alert alert-danger">
-			<strong>로그인 필요</strong> [<%=job %>]은 로그인 후 사용가능한 서비스 입니다.
-		</div>
-<%
-	}
-%>
+
 	</div>
 	
 	<div class="row mb-3">

@@ -7,16 +7,13 @@
 <%@page import="vo.TheaterBoard"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	//세션에서 로그인된 고객의 아이디 조회하기
+
+	// 세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
 
-	// 에러메세지 출력
-	MemberDao memberDao = MemberDao.getInstance();
-	Member savedmember = memberDao.getMemberById(loginId);
-   
-	if (savedmember == null) {
-	   response.sendRedirect("../../member/loginform.jsp?err=fail");
-	   return;
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시물수정", "utf-8"));
+		return;
 	}
 	
 	// 요청파라미터 조회
@@ -30,7 +27,7 @@
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard savedTheaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
 	if (!savedTheaterBoard.getMember().getId().equals(loginId)){
-		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("댓글삭제", "utf-8"));
+		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("수정", "utf-8"));
 	}
 	
 	TheaterBoard theaterBoard = new TheaterBoard();

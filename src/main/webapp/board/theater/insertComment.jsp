@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="dao.TboardCommentDao"%>
 <%@page import="dao.TheaterBoardDao"%>
@@ -6,16 +7,12 @@
 <%@page import="vo.TboardComment"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	// 세션에서 로그인된 고객의 아이디 조회하기
+	//세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
-	
-	// 로그인 하지 않고 댓글 작성시 에러메세지 출력
-	MemberDao memberDao = MemberDao.getInstance();
-	Member savedMember = memberDao.getMemberById(loginId);
-	
-	if (savedMember == null) {
-	   response.sendRedirect("../../member/loginform.jsp?err=fail");
-	   return;
+
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("댓글등록", "utf-8"));
+		return;
 	}
 	
 	// 요청파라미터 조회
