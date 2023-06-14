@@ -1,0 +1,62 @@
+package dao;
+
+import java.util.List;
+
+import util.DaoHelper;
+import vo.Member;
+import vo.Product;
+import vo.ProductCategory;
+import vo.StoreBoard;
+
+
+public class StoreBoardDao {
+
+	private static StoreBoardDao instance = new StoreBoardDao();
+	private StoreBoardDao() {}
+	public static StoreBoardDao getInstance() {
+		return instance;
+	}
+	
+	// 전체 데이터 행의 갯수
+	public int getTotalRows() {
+		
+		return DaoHelper.selectOne("storeBoardDao.getTotalRows", rs -> {
+			return rs.getInt("cnt");
+		});
+		
+	}
+	
+	// select
+	public List<StoreBoard> getAllStoreBoards(int begin, int end) {
+		
+		return DaoHelper.selectList("storeBoardDao.getBoard", rs -> {
+			StoreBoard storeBoard = new StoreBoard();
+			
+			storeBoard.setNo(rs.getInt("board_no"));
+			storeBoard.setName(rs.getString("board_name"));
+			storeBoard.setContent(rs.getString("board_content"));
+			storeBoard.setGrade(rs.getString("board_grade"));
+			storeBoard.setCreateDate(rs.getDate("board_create_date"));
+			storeBoard.setUpdateDate(rs.getDate("board_update_date"));
+			storeBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			storeBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			storeBoard.setDeleted(rs.getString("board_deleted"));
+			storeBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			storeBoard.setMember(member);
+			
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			storeBoard.setProduct(product);
+			
+			ProductCategory category = new ProductCategory();
+			category.setNo(rs.getInt("cat_no"));
+			storeBoard.setCategory(category);
+			
+			return storeBoard;	
+		}, begin, end);
+	}
+	
+}
