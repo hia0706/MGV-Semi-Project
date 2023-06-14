@@ -67,7 +67,19 @@
 						<td><%=member.getBirth()%></td>
 						<td><%=member.getTel()%></td>
 						<td><%=member.getEmail()%></td>
-						<td><%="No".equals(member.getDisabled()) ? "사용중" : "탈퇴" %></td>
+						<td>
+<%
+	if ("No".equals(member.getDisabled())) {
+%>						
+							<span class="badge text-bg-success" >사용중</span>
+<%
+	} else if ("Yes".equals(member.getDisabled())) {
+%>
+							<span class="badge text-bg-secondary">탈퇴</span>
+<%
+	}	
+%>
+						</td>	
 						<td><%=member.getCreateDate()%></td>
 						<td><%=member.getUpdateDate()%></td>
 					</tr>

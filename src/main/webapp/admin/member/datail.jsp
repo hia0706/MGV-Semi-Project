@@ -1,18 +1,15 @@
 <%@page import="java.net.URLEncoder"%>
-<%@page import="dao.AdminMemberDao"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	String loginId = (String) session.getAttribute("loginId");
-	String loginType = (String) session.getAttribute("loginType");
-	
 	String err = request.getParameter("err");
-	
-	AdminMemberDao adDao = AdminMemberDao.getInstance();
-	Member member = adDao.getMemberById(loginId);
-	if (loginId == null) {
-		response.sendRedirect("../loginform.jsp?req&job=" + URLEncoder.encode("회원목록", ("utf-8")));
+	String id = request.getParameter("id");	
+
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getDetailMemberById(id);
+	if (id == null) {
+		response.sendRedirect("../loginform.jsp?err&job=" + URLEncoder.encode("회원목록조회", ("utf-8")));
 		return;
 	}
 	
@@ -20,10 +17,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
-<title>
-	내 정보 &#60; 회원서비스 | 영화 그 이상의 감동. MGV
-</title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>회원관리 &#60; 관리자</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,14 +41,18 @@
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th class="table-dark " style="width: 10%;">아이디</th>
-						<td style="width: 40%;"><%=member.getId() %></td>
-						<th class="table-dark" style="width: 10%;">이름</th>
-						<td style="width: 40%;"><%=member.getName() %></td>
-					</tr>
+						<th class="table-dark" style="width: 10%;">아이디</th>
+						<td style="width: 90%;"><%=member.getId() %></td>
+					</tr>	
 					<tr>
+						<th class="table-dark " style="width: 10%;">이름</th>
+						<td style="width: 40%;"><%=member.getName() %></td>
 						<th class="table-dark" style="width: 10%;">성별</th>
 						<td style="width: 40%;"><%=member.getGender() %></td>
+					</tr>
+					<tr>
+						<th class="table-dark " style="width: 10%;">비밀번호</th>
+						<td style="width: 40%;"><%=member.getPassword() %></td>
 						<th class="table-dark" style="width: 10%;">생년월일</th>
 						<td style="width: 40%;"><%=member.getBirth() %></td>
 					</tr>
@@ -68,6 +67,8 @@
 						<td style="width: 90%;" colspan="3"><%=member.getAddress1() + ", " + member.getAddress2() %></td>
 					</tr>
 					<tr>
+						<th class="table-dark" style="width: 10%;">가입일자</th>
+						<td style="width: 90%;" colspan="3"><%=member.getCreateDate() %></td>
 						<th class="table-dark" style="width: 10%;">가입일자</th>
 						<td style="width: 90%;" colspan="3"><%=member.getCreateDate() %></td>
 					</tr>
@@ -95,8 +96,8 @@
 	</div>
 	<div class="row mb-3">
 		<div class="col-12 text-end">
-			<a href="list.jsp?id=<%=member.getId() %>" class="btn btn-outline-secondary">목록</a>
-			<a href="../admin/center/notice/list.jsp?id=<%=member.getId() %>" class="btn btn-outline-info">문의내역</a>
+			<a href="list.jsp" class="btn btn-outline-secondary">목록</a>
+			<a href="../admin/center/oneonone/list.jsp?id=<%=member.getId() %>" class="btn btn-outline-info">문의내역</a>
 <%
 	if ("No".equals(member.getDisabled())) {
 %>
