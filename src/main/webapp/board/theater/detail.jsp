@@ -117,7 +117,9 @@
 	
 <script type="text/javascript">
 	function reportform(){
-		open("reportform.jsp", "popup", "width=600, height=500")
+		open("reportform.jsp?no=<%=boardNo %>", "popup", "width=600, height=500")
+		
+		
 	}
 </script>
 
