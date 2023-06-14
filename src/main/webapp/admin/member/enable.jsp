@@ -6,8 +6,13 @@
 	String loginId = (String) session.getAttribute("loginId");
 	String loginType = (String) session.getAttribute("loginType");	
 
+<<<<<<< HEAD
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
+=======
+	MemberDao amDao = MemberDao.getInstance();
+	Member member = amDao.getMemberById(loginId);
+>>>>>>> develop
 	if(loginId == null) {
 		response.sendRedirect("../member/loginform.jsp?req&job=" + URLEncoder.encode("탈퇴복구", "utf-8"));
 		return;
@@ -17,6 +22,7 @@
 		return;
 	}
 	
+<<<<<<< HEAD
 	member.setDisabled("No");
 	
 	memberDao.updateMember(member);
@@ -25,4 +31,6 @@
 	
 	
 	
+=======
+>>>>>>> develop
 %>

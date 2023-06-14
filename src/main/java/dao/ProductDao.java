@@ -21,6 +21,7 @@ public class ProductDao {
 							 						 product.getStock(),
 							 						 product.getSoldOut(),
 							 						 product.getDescription(),
+							 						 product.getComposition(),
 							 						 product.getProductCategory().getNo(),
 							 						 product.getNo());
 	}
@@ -30,6 +31,7 @@ public class ProductDao {
 													 product.getPrice(),
 													 product.getStock(),
 													 product.getDescription(),
+													 product.getComposition(),
 													 product.getProductCategory().getNo());
 	}
 	
@@ -44,6 +46,7 @@ public class ProductDao {
 			product.setUpdateDate(rs.getDate("product_update_date"));
 			product.setSoldOut(rs.getString("product_sold_out"));
 			product.setDescription(rs.getString("product_description"));
+			product.setComposition(rs.getString("product_composition"));
 			
 			ProductCategory cat = new ProductCategory();
 			cat.setName(rs.getString("cat_name"));
@@ -64,6 +67,7 @@ public class ProductDao {
 			product.setUpdateDate(rs.getDate("product_update_date"));
 			product.setSoldOut(rs.getString("product_sold_out"));
 			product.setDescription(rs.getString("product_description"));
+			product.setComposition(rs.getString("product_composition"));
 			
 			ProductCategory cat = new ProductCategory();
 			cat.setNo(rs.getInt("cat_no"));
@@ -84,6 +88,7 @@ public class ProductDao {
 			product.setCreateDate(rs.getDate("product_create_date"));
 			product.setUpdateDate(rs.getDate("product_update_date"));
 			product.setDescription(rs.getString("product_description"));
+			product.setComposition(rs.getString("product_composition"));
 			
 			ProductCategory cat = new ProductCategory();
 			cat.setNo(rs.getInt("cat_no"));
@@ -105,6 +110,7 @@ public class ProductDao {
 			product.setUpdateDate(rs.getDate("product_update_date"));
 			product.setSoldOut(rs.getString("product_sold_out"));
 			product.setDescription(rs.getString("product_description"));
+			product.setComposition(rs.getString("product_composition"));
 			
 			ProductCategory cat = new ProductCategory();
 			cat.setNo(rs.getInt("cat_no"));

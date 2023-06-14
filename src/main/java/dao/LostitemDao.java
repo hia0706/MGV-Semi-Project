@@ -2,8 +2,11 @@ package dao;
 
 import java.util.List;
 
+import org.apache.catalina.core.FrameworkListener;
+
 import util.DaoHelper;
 import vo.Lostitem;
+import vo.Member;
 
 public class LostitemDao {
 	
@@ -30,6 +33,7 @@ public class LostitemDao {
 			lostitem.setAnswered(rs.getString("lostitem_answered"));
 			lostitem.setDeleted(rs.getString("lostitem_deleted"));
 			lostitem.setCreateDate(rs.getDate("lostitem_create_date"));
+			lostitem.setMember(new Member(rs.getString("member_id")));
 			
 			return lostitem;
 		}, LostitemNo);

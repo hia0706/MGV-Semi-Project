@@ -53,7 +53,7 @@
 						<th>상품 재고</th>
 						<th>상품 입고날짜</th>
 						<th>상품 수정날짜</th>
-						<th>상품 내용</th>
+						<th>상품 구성</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,12 +63,12 @@ for (Product product : productList) {
 					<tr>						
 						<td><%=product.getNo()%></td>
 						<td><%=product.getProductCategory().getName()%></td>
-						<td><a href="detail.jsp?no=<%=product.getNo()%>" class="text-black text-decoration-none"><%=product.getName()%></a></td>
+						<td><strong><a href="detail.jsp?no=<%=product.getNo()%>" class="text-black text-decoration-none"><%=product.getName()%></a></strong></td>
 						<td><%=product.getPrice()%></td>
 						<td><%=product.getStock()%>개</td>
 						<td><%=product.getCreateDate()%></td>
 						<td><%=product.getUpdateDate()%></td>
-						<td><%=product.getDescription()%></td>
+						<td><%=product.getComposition()%></td>
 					</tr>
 <%
 }
