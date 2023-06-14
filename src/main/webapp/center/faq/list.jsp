@@ -1,7 +1,5 @@
 <%@page import="vo.Faq"%>
 <%@page import="dao.FaqDao"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>

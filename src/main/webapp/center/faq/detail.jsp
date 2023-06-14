@@ -38,7 +38,11 @@
 			<a style="font-size : 12px;"><%=faq.getCreateDate() %></a>
 		<hr>
 			<a><%=faq.getContent() %></a>
+		<hr>
 		
+		<div style="text-align: center; padding:30px;">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
+		</div>
 </div>
 </body>
 </html>
