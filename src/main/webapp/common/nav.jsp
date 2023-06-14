@@ -45,7 +45,7 @@
 %>
 		<div class="dropdown navbar-text me-5">
 			<a href="/mgv/member/detail.jsp">
-				<img src="/mgv/images/myprofile.png" alt="<%=loginId %>" width="30" height="30">
+				<img src="/mgv/images/member/myprofile.png" alt="<%=loginId %>" width="30" height="30">
 			</a> 
 		  <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				<strong class="text-white bolder <%=loginId.equals(menu) ? "active" : "" %>"><%=loginId %>님</strong>
