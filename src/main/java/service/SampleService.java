@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -16,7 +15,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import dao.ManagerMovieDao;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import util.DateUtils;
 import vo.Movie;
@@ -50,7 +48,10 @@ public class SampleService {
                 Movie movie = new Movie();
                 movie.setRank(Integer.parseInt((String) dailyBoxOffice.get("rank")));
                 movie.setTitle((String) dailyBoxOffice.get("movieNm"));
-                movie.setReleaseDate(DateUtils.toDate(dailyBoxOffice.get("openDt").toString()));
+                String stringDate= dailyBoxOffice.get("openDt").toString();
+                if (!stringDate.isBlank() && !stringDate.isEmpty()) {
+                	movie.setReleaseDate(DateUtils.toDate(stringDate));
+                }
                 movie.setAudiCnt(Integer.parseInt((String) dailyBoxOffice.get("audiAcc")));
                 movie.setNo(Integer.parseInt((String) dailyBoxOffice.get("movieCd")));
                 movie.setRankInten(Integer.parseInt((String) dailyBoxOffice.get("rankInten")));
@@ -59,11 +60,12 @@ public class SampleService {
             }
 
             for (Movie movie : movies) {
-            	
+            	String movieTitle=movie.getTitle();
+            		movieTitle=movieTitle.replace("무삭제","");
                 String apiUrl = String.format(
                 		"%s&title=%s&releaseDts=%s", 
                 		API_URL, 
-                		URLEncoder.encode(movie.getTitle(), "UTF-8"), 
+                		URLEncoder.encode(movieTitle, "UTF-8"), 
                 		URLEncoder.encode(DateUtils.toText(movie.getReleaseDate()).replace("-",""), "UTF-8")
         		);
                 
@@ -95,7 +97,11 @@ public class SampleService {
                 result = (JSONObject) result1.get(0);
                 String posters = (String) result.get("posters");
                 String[] poster = posters.split("\\|");
-   
+                sb= new StringBuilder();
+                for (int i=0; i<(poster.length<4? poster.length : 3); i++) {
+                	sb.append(poster[i]+" ");
+                }
+                posters=sb.toString();
                 JSONObject directorResult = (JSONObject)result.get("directors");
                 JSONArray directorResultArray = (JSONArray)directorResult.get("director");
                 directorResult=(JSONObject)directorResultArray.get(0);
@@ -119,7 +125,8 @@ public class SampleService {
             	sb.append((String)actor.get("actorNm"));
             	String cast=sb.toString();
             	
-                movie.setPosterURL(poster[0]);
+            	
+                movie.setPosterURL(posters);
                 movie.setGenre((String)result.get("genre"));
                 movie.setDirector(directorName);
                 movie.setDescription(description);

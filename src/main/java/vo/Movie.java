@@ -136,6 +136,22 @@ public class Movie {
 	public String getStringFormattedDate() {
 		return DateUtils.toText(releaseDate);
 	}
-	
+	public String getMainPoster() {
+        String[] poster = posterURL.split(" ");
+        if (poster.length==0) {
+        	return null;
+        }
+        return poster[0];
+	}
+	public String getSubPoster() {
+		  String[] poster = posterURL.split(" ");
+		  if (poster.length==0) {
+	        	return null;
+	        }
+		if (poster.length>1) {
+			return poster[1];
+		}
+		return poster[0];
+	}
 }
 

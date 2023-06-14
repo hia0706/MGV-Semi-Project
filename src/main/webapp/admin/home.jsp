@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
 <title>MGR 관리자 페이지</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
 <title>
 	영화 그 이상의 감동. MGV
 </title>

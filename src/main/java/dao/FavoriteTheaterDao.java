@@ -29,4 +29,18 @@ public class FavoriteTheaterDao {
 			return favoriteTheater;
 		}, memberId);
 	}
+	
+	public FavoriteTheater getFavoriteTheaterByKey(String id, int theaterNo) {
+		return DaoHelper.selectOne("favoriteTheaterDao.getFavoriteTheaterByKey", rs->{
+			FavoriteTheater favoriteTheater = new FavoriteTheater();
+			favoriteTheater.setNo(rs.getInt("favorite_no"));
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			favoriteTheater.setMember(member);
+			Theater theater = new Theater();
+			theater.setNo(rs.getInt("theater_no"));
+			favoriteTheater.setTheater(theater);
+			return favoriteTheater;
+		}, id,theaterNo);
+	}
 }

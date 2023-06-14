@@ -26,7 +26,7 @@ public class Member {
 	public Member(String id) {
 		this.id = id;
 	}
-
+	
 	public String getId() {
 		return id;
 	}
