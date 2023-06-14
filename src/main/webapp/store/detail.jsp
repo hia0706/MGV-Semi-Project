@@ -93,14 +93,12 @@
 	</div>
 	</div>
 	<div class="box-pulldown">
-		<div class="tit">
 			<button type="button" class="btn-toggle">
 				구매 후 취소
 			</button>
-		</div>
 		<div class="dotList02">
                     
-                ■ 연장/취소/환불 안내<br>
+            ■ 연장/취소/환불 안내<br>
 			본 상품은 구매일로부터 10일 이내에 취소 가능합니다.<br>
 			- 유효기간은 본 상품의 유효기간 내에서 연장 신청이 가능하며, 1회 연장 시 3개월(92일) 단위로 연장됩니다.<br>
 			- 구매일로부터 5년까지 유효기간 연장이 가능합니다.<br>
