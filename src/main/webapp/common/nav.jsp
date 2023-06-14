@@ -52,6 +52,7 @@
 		  </button>
 		  <ul class="dropdown-menu dropdown-menu-dark">
 			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
+			    <li><a class="dropdown-item" href="/mgv/member/user-cart.jsp">장바구니</a></li>			    
 			    <li><a class="dropdown-item" href="/mgv/member/orderlist.jsp">구매내역</a></li>
 		  </ul>
 		</div>
