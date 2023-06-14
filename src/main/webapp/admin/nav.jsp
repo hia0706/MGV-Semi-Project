@@ -10,7 +10,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
 		
 	<div class="container-fluid">
-		<a href="/mgv/manager/home.jsp">
+		<a href="/mgv/admin/home.jsp">
            <img src="/mgv/images/member/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
         </a>
     	<ul class="navbar-nav me-auto">
