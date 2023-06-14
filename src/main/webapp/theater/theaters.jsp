@@ -388,15 +388,7 @@
 <%
 		}
 %>						  
-			  		<li>
-			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
-			  		</li>
-			  		<li>
-			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
-			  		</li>
-			  		<li>
-			  			<a href="detail.jsp?no=1"  class="link-dark">대학로</a>
-			  		</li>
+			  		
 			  		
 				</ul>
 				<!-- Button trigger modal -->
@@ -455,14 +447,14 @@
 	      <div class="modal-body">
 	      	<div class="box-gray v1 a-c">
 	            <div class="dropdown bootstrap-select w150px small bs3">
-		            <select title="" class="w150px small" name="areaList" tabindex="-98">
-			            <option value="10">서울</option>
-			            <option value="30">경기</option>
-			            <option value="35">인천</option>
-			            <option value="45">대전/충청/세종</option>
-			            <option value="55">부산/대구/경상</option>
-			            <option value="65">광주/전라</option>
-			            <option value="70">강원</option>
+		            <select title="" class="w150px small" name="locationList" tabindex="-98">
+<%
+	for(Location location:locations){
+%>		            
+			            <option value="<%=location.getNo()%>"><%=location.getName()%></option>
+<%
+	}
+%>			            
 		            </select>
 	            </div>
 	            <div class="dropdown bootstrap-select w150px small bs3">
@@ -480,24 +472,19 @@
 	            <button id="btn-insert" type="button" class="button gray small ml05">추가</button>
 			</div>					            
 	      	<div class="theater-choice-list row">
+<%
+	for(FavoriteTheater fTheater:FTList){
+%>	      	
 	               <div class="bg col-4">
-	                      <div class="circle " data-brch-no="1003">
-	                          <p class="txt" data-eng-nm="Dongdaemoon" data-kor-nm="동대문">동대문</p>
+	                      <div class="circle " data-brch-no=<%=fTheater.getTheater().getNo() %>>
+	                          <p class="txt" data-eng-nm="Dongdaemoon" data-kor-nm="<%=fTheater.getTheater().getName() %>"><%=fTheater.getTheater().getName() %></p>
 	                          <button type="button" class="del">삭제</button>
 	                      </div>
 	               </div>
-	               <div class="bg col-4">
-	                      <div class="circle " data-brch-no="1372">
-	                          <p class="txt" data-eng-nm="Gangnam" data-kor-nm="강남">강남</p>
-	                          <button type="button" class="del">삭제</button>
-	                      </div>
-	               </div>
-	               <div class="bg col-4">
-	                      <div class="circle " data-brch-no="1341">
-	                          <p class="txt" data-eng-nm="Gangdong" data-kor-nm="강동">강동</p>
-	                          <button type="button" class="del">삭제</button>
-	                      </div>
-	               </div>
+<%
+	}
+%>	               
+	               
 	        </div>
 	      </div>
 	      <div class="modal-footer">
