@@ -19,32 +19,33 @@
 </jsp:include>
 
 <div class="container">
-	<div class="bg-light p-3">
-		<a href="lostitem/list.jsp" class="text-black text-decoration-none">
-			<img src="../images/center/lostitem.png" width="50" height="50"><br>
-			<strong>분실물 문의</strong>
-		</a>
-		<br>
-		<br>
-		<a href="oneonone/insertform.jsp" class="text-black text-decoration-none">
-			<img src="../images/center/oneonone.png" width="50" height="50"><br>
-			<strong>1:1 문의</strong>
-		</a>
-		<br>
-		<br>
-		<a href="faq/list.jsp" class="text-black text-decoration-none">
-			<img src="../images/center/faq.png" width="50" height="50"><br>
-			<strong>자주 묻는 질문</strong>
-		</a>
-		<br>
-		<br>
-		<a href="notice/list.jsp" class="text-black text-decoration-none">
-			<img src="../images/center/notice.png" width="50" height="50"><br>
-			<strong>공지사항</strong>
-		</a>
-		
-
+	<div class="row mb-3 bg-light p-3">
+		<div class="col-3 text-center">
+			<a href="lostitem/list.jsp" class="text-black text-decoration-none">
+				<img src="../images/center/lostitem.png" width="50" height="50"><br>
+				<strong>분실물 문의</strong>
+			</a>		
+		</div>
+		<div class="col-3 text-center">
+			<a href="oneonone/insertform.jsp" class="text-black text-decoration-none">
+				<img src="../images/center/oneonone.png" width="50" height="50"><br>
+				<strong>1:1 문의</strong>
+			</a>
+		</div>
+		<div class="col-3 text-center">
+			<a href="faq/list.jsp" class="text-black text-decoration-none">
+				<img src="../images/center/faq.png" width="50" height="50"><br>
+				<strong>자주 묻는 질문</strong>
+			</a>
+		</div>
+		<div class="col-3 text-center">
+			<a href="notice/list.jsp" class="text-black text-decoration-none">
+				<img src="../images/center/notice.png" width="50" height="50"><br>
+				<strong>공지사항</strong>
+			</a>
+		</div>
 	</div>
+	
 </div>
 </body>
 </html>
