@@ -76,16 +76,18 @@
 <%
 	}
 %>
-		
+	
 <%
-	if("req".equals(err)){
+	if("Cid".equals(err)){
 %>
 		<div class="alert alert-danger">
-			<strong>로그인 필요</strong> [<%=job %>]은 로그인 후 사용가능한 서비스 입니다.
+			<strong>다른 사용자의 댓글을 삭제할 수 없습니다.</strong>
 		</div>
 <%
 	}
 %>
+		
+
 	</div>
 	
 	<div class="row mb-3">
