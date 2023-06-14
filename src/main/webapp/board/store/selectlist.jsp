@@ -1,3 +1,8 @@
+<%@page import="vo.Product"%>
+<%@page import="vo.ProductCategory"%>
+<%@page import="dao.ProductCategoryDao"%>
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
@@ -14,35 +19,40 @@
 <%
 	
 	// 요청 파라미터 조회
-	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
-	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));	
+	int catNo = Integer.parseInt(request.getParameter("catNo"));
+	int productNo = Integer.parseInt(request.getParameter("productNo"));	
 
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	
-	LocationDao locationDao = LocationDao.getInstance();
-	List<Location> locations = locationDao.getLocations();
+	// 품목 셀렉트 박스 목록
+	ProductCategoryDao productCategoryDao = ProductCategoryDao.getInstance();
+	List<ProductCategory> categories = productCategoryDao.getCategories();
+	
+	// 상품이름 셀렉트 박스 목록
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();	
 
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	List<Theater> theaters = theaterDao.getAllTheaters();
 	
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
+	// 현제 페이지에서 출력되는 게시물 수 조회하기
 	int totalRows = 0;
 	
-	if (theaterNo == 0){
-		totalRows = theaterBoardDao.getTotalRowsByLocation(locationNo);
-	} else if (theaterNo != 0){
-		totalRows = theaterBoardDao.getTotalRowsByTheater(theaterNo);
+	if (productNo == 0){
+		totalRows = storeBoardDao.getTotalRowsByCatNo(catNo);
+	} else if (productNo != 0){
+		totalRows = storeBoardDao.getTotalRowsByProduct(productNo);
 	} 
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	
 	// 데이터 조회하기
-	List<TheaterBoard> theaterBoards = new ArrayList<TheaterBoard>();
+	List<StoreBoard> storeBoards = new ArrayList<StoreBoard>();
 	
-	if (theaterNo == 0){
-		theaterBoards = theaterBoardDao.getTheaterBoardsByLocationNo(locationNo, pagination.getBegin(), pagination.getEnd());
-	} else if (theaterNo != 0){
-		theaterBoards = theaterBoardDao.getTheaterBoardByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
+	if (productNo == 0){
+		storeBoards = storeBoardDao.getAllStoreBoardsByCatNo(catNo, pagination.getBegin(), pagination.getEnd());
+	} else if (productNo != 0){
+		storeBoards = storeBoardDao.getAllStoreBoardsByProductNo(productNo, pagination.getBegin(), pagination.getEnd());
 	} 
 	
 %>
@@ -84,36 +94,36 @@
 				
 <%--검색  --%>				
 				<form method="get" action="selectlist.jsp" >
-<%-- 지역/극장을 선택하는 select --%>			
-					<select id="theater" title="지역 선택" class="selectpicker" name="locationNo" >
-						<option value= 0 >지역 선택</option>
+				
+					<select id="theater" title="품목 선택" class="selectpicker" name="catNo" >
+						<option value= 0 >품목 선택</option>
 												
 <%
-	for(Location location : locations){
+	for(ProductCategory category : categories){
 %>
-					<option value="<%=location.getNo() %>"><%=location.getName() %></option>
+						<option value="<%=category.getNo() %>"><%=category.getName() %></option>
 <%
 	}
 %>
 						
-					</select>
-
-					<select id="theater02" title="극장 선택" class="selectpicker ml07" name="theaterNo" >
-						<option value= 0 >극장 선택</option>
+						</select>
+	
+						<select id="theater02" title="상품 선택" class="selectpicker ml07" name="productNo" >
+							<option value= 0 >상품 선택</option>
 						
 <%
-	for(Theater theater : theaters){
+	for(Product product : products){
 %>
-					<option value="<%=theater.getNo() %>"><%=theater.getName() %></option>
+						<option value="<%=product.getNo() %>"><%=product.getName() %></option>
 <%
 	}
-%>						
-					</select>
-					<button type="submit" id="searchBtn" class="btn-search-input" >검색</button>
-				</form>
+%>								
+						</select>
+						<button type="submit" id="searchBtn" class="btn-search-input" >검색</button>
+					</form>
 				
-
-
+	
+			
 			<table class="table table-sm">
 				<colgroup>
 					<col width="5%">
@@ -135,7 +145,7 @@
 
 
 <%
-	for(TheaterBoard board : theaterBoards) {
+	for(StoreBoard board : storeBoards) {
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
