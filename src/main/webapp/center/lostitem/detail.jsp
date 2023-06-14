@@ -55,7 +55,7 @@
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
-				<a href="delete.jsp" class="btn btn-secondary btn-sm">삭제</a>
+				<a href="delete.jsp?no=<%=lostitem.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
 		</div>
 	
 			
