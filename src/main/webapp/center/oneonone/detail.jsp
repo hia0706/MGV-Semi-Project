@@ -44,7 +44,20 @@
 			<a style="font-size : 12px;"><%=oneonone.getCreateDate() %></a>
 		<hr>
 			<a><%=oneonone.getContent() %></a>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		<hr>
+			<a>직원의 댓</a>
+		<hr>
 		
+		<div style="text-align: center; padding:30px;">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
+				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
+		</div>
 		
 			
 
