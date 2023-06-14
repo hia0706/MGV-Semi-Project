@@ -1,5 +1,5 @@
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
+<%@page import="vo.Notice"%>
+<%@page import="dao.NoticeDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -7,7 +7,8 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	
-
+	NoticeDao noticeDao = NoticeDao.getInstance();
+	List<Notice> noticeList = noticeDao.getNotice();
 
 %>
 
@@ -55,23 +56,21 @@
 					</tr>
 				</thead>
 				<tbody>
-				
+	
+<% for (Notice notice : noticeList) { %>				
 				
 					<tr>
-						<td>1</td>
+						<td><%=notice.getNo() %></td>
 						<td>MGV</td>
 						<td style="text-align:left">
-							<a href="detail.jsp?no=" class="text-black text-decoration-none">
-								메가박스 이용 약관 변경 안내
+							<a href="detail.jsp?no=<%=notice.getNo() %>" class="text-black text-decoration-none">
+								<%=notice.getTitle() %>
 							</a>
 						</td>
-					
-						
-
-
-						<td>2023.06.13</td>
+						<td><%=notice.getCreateDate() %></td>
 					</tr>
 
+<% } %>				
 					
 				</tbody>
 			</table>

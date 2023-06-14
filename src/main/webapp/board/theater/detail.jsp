@@ -105,7 +105,8 @@
 <%
 	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<a href="reportform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-primary btn-sm">신고</a>
+				<button class="btn btn-primary btn-sm"  onclick="reportform();">신고</button>
+				
 <%
 	}
 %>
@@ -113,6 +114,14 @@
 			</div>
 		</div>
 	</div>
+	
+<script type="text/javascript">
+	function reportform(){
+		open("reportform.jsp", "popup", "width=600, height=500")
+	}
+</script>
+
+	
 	<div class="row mb-3">
    		<div class="col-12">
 			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
