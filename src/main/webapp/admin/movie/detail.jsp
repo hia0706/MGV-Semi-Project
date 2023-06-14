@@ -36,7 +36,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 </head>
 <body>
 
-	<jsp:include page="../../admin/nav.jsp">
+	<jsp:include page="../nav.jsp">
 		<jsp:param name="menu" value="영화" />
 	</jsp:include>
 	<div class="row mb-3">

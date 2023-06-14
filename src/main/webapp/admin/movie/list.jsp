@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../admin/nav.jsp">
+<jsp:include page="../nav.jsp">
    <jsp:param value="menu" name="영화"/>
 </jsp:include>
 <c:set var="managerMovieDao" value="<%= ManagerMovieDao.getInstance() %>" />
