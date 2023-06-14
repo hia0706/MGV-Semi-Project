@@ -2,6 +2,10 @@
 <%@page import="dao.ManagerMovieDao"%>
 <%@page import="java.util.List"%>
 <%@page import="java.net.URLEncoder"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
 //세션에서 로그인된 사용자 정보를 조회한다
@@ -31,6 +35,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
+
 	<jsp:include page="../../admin/nav.jsp">
 		<jsp:param name="menu" value="영화" />
 	</jsp:include>
@@ -45,7 +50,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 	<div id="contents">
 		<div class="movie-detail-page">
 			<div class="bg-img"
-				style="background-image:url('<%=movie.getPosterURL()%>');">::after</div>
+				style="background-image:url('<%=movie.getSubPoster()%>');">::after</div>
 			<div class="bg-pattern"></div>
 			<div class="bg-mask"></div>
 			<div class="movie-detail-cont">
@@ -65,17 +70,17 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 							</span>
 						</div>
 						<p class="cont">
-							<em><%=movie.getAudiCnt()%></em> 명
+							<em><fmt:formatNumber value="<%=movie.getAudiCnt() %>"/></em> 명
 						</p>
 					</div>
 				</div>
 				<div class="poster">
 					<div class="wrap">
-						<img src="<%=movie.getPosterURL()%>">
+						<img src="<%=movie.getMainPoster()%>">
 					</div>
 				</div>
 				<div class="reserve screen-type">
-						<a href="schedulemovie.jsp?no=<%=movie.getNo() %>" class="btn reserve">상영 등록</a>
+						<a href="schedule.jsp?no=<%=movie.getNo() %>" class="btn reserve">상영 등록</a>
 				</div>
 			</div>
 		</div>

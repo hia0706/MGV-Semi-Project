@@ -97,7 +97,11 @@ public class SampleService {
                 result = (JSONObject) result1.get(0);
                 String posters = (String) result.get("posters");
                 String[] poster = posters.split("\\|");
-   
+                sb= new StringBuilder();
+                for (int i=0; i<(poster.length<4? poster.length : 3); i++) {
+                	sb.append(poster[i]+" ");
+                }
+                posters=sb.toString();
                 JSONObject directorResult = (JSONObject)result.get("directors");
                 JSONArray directorResultArray = (JSONArray)directorResult.get("director");
                 directorResult=(JSONObject)directorResultArray.get(0);
@@ -122,7 +126,7 @@ public class SampleService {
             	String cast=sb.toString();
             	
             	
-                movie.setPosterURL(poster[0]);
+                movie.setPosterURL(posters);
                 movie.setGenre((String)result.get("genre"));
                 movie.setDirector(directorName);
                 movie.setDescription(description);
