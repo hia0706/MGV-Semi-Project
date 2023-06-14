@@ -22,7 +22,7 @@
 	
 	// 요청파라미터 조회
 	int boardNo = Integer.parseInt(request.getParameter("no"));
-	String content = request.getParameter("content");
+	String content = request.getParameter("reasonContent");
 	int reasonNo = Integer.parseInt(request.getParameter("reasonNo"));
 	
 	// 조회된 게시물 번호로 게시물을 조회한다
