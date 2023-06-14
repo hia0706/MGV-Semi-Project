@@ -31,7 +31,7 @@
 		<c:forEach var="movie" items="${movies}">
 			<div style='display: inline-block;margin-right:100px;'>
 				<p style="background:#fb4357; color: white; font-weight:bold; text-align: center">순위: ${movie.rank}</p>
-				<p><img src="${movie.posterURL}" style='height:260px;'></p>
+				<p><img src="${movie.getMainPoster()}" style='height:260px;'></p>
 				<p>
 					<strong>
 		                <c:choose>

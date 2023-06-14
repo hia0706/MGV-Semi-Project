@@ -10,10 +10,11 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
 		
 	<div class="container-fluid">
-		<a href="/mgv/manager/home.jsp">
-           <img src="/mgv/images/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
+		<a href="/mgv/admin/home.jsp">
+           <img src="/mgv/images/member/mgv.png" alt="mgv" width="70" height="50" class="d-inline-block align-text-top">
         </a>
     	<ul class="navbar-nav me-auto">
+        	<li class="nav-item"><a class="nav-link <%="회원 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/member/list.jsp">회원 관리</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/movie/list.jsp">영화 관리</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/theater/list.jsp">극장 관리</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/product/list.jsp">스토어 관리</a></li>    	
