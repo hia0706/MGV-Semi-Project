@@ -17,11 +17,10 @@
 	List<ProductCategory> categories = productCategoryDao.getCategories();
 	
 	// 상품이름 셀렉트 박스 목록
-	ProductDao productDao = ProductDao.getInstance();
-	List<Product> products = productDao.getAllProducts();
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();	
 
 	// totalrows (de, re ='N')
-	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
 	int totalRows = storeBoardDao.getTotalRows();
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);

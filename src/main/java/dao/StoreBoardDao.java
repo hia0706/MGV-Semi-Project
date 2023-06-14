@@ -70,4 +70,16 @@ public class StoreBoardDao {
 															 storeBoard.getCategory().getNo());	
 		
 	}
+	
+	// product
+	public List<Product> getProducts() {
+		return DaoHelper.selectList("storeBoardDao.getAllproducts", rs -> {
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			product.setName(rs.getString("product_name"));
+			
+			
+			return product;
+		});
+	}
 }

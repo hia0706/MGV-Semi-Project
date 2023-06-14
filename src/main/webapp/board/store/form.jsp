@@ -1,3 +1,4 @@
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="dao.ProductDao"%>
 <%@page import="vo.Product"%>
 <%@page import="dao.ProductCategoryDao"%>
@@ -10,8 +11,8 @@
 	List<ProductCategory> categories = productCategoryDao.getCategories();
 	
 	// 상품이름 셀렉트 박스 목록
-	ProductDao productDao = ProductDao.getInstance();
-	List<Product> products = productDao.getAllProducts();
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();
 
 %>
 <!doctype html>
