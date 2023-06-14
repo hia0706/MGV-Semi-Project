@@ -1,3 +1,5 @@
+<%@page import="vo.SboardComment"%>
+<%@page import="dao.SboardCommentDao"%>
 <%@page import="vo.StoreBoard"%>
 <%@page import="dao.StoreBoardDao"%>
 <%@page import="vo.ReportReason"%>
@@ -30,8 +32,8 @@
 		score = "★☆☆☆☆";
 	}
 	
-//    TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
-//    List<TboardComment> comments = tboardCommentDao.getCommentByBoardNo(boardNo);
+	  SboardCommentDao sboardCommentDao = SboardCommentDao.getInstance();
+      List<SboardComment> comments = sboardCommentDao.getCommentByBoardNo(boardNo);
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -145,38 +147,34 @@
    	</div>
 	<div class="row mb-3">
    		<div class="col-12">
-<%--
-	for(TboardComment comment : comments) {
---%>
+<%
+	for(SboardComment comment : comments) {
+%>
 
-<%--
    			<div class="border p-2 mb-2">
 	   			<div class="d-flex justify-content-between mb-1">
 	   				<span><%=comment.getMember().getId() %></span> <span class="text-muted"><%=comment.getCreaeDate() %></span>
 	   			</div>
 	   			<div>
 	   				<%=comment.getContent() %>
-				
- --%>			
+							
 	   				
-<%--
+<%
 	if(comment.getMember().getId().equals(loginId)){
---%>
+%>
 
 
-<%-- 
-	   				<a href="deleteComment.jsp?no=<%=storeBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
+					<a href="deleteComment.jsp?no=<%=storeBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
 	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
---%>
 
-<%--
+<%
 	}
---%>
+%>
 	   			</div>   			
    			</div>
-<%--
+<%
 	}
---%>   			
+%>   			
    		</div>
    	</div>
    	
