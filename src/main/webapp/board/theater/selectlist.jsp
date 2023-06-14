@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
@@ -11,6 +12,11 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
 <%
+	
+	// 요청 파라미터 조회
+	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
+	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));	
+
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	
 	LocationDao locationDao = LocationDao.getInstance();
@@ -20,13 +26,25 @@
 	List<Theater> theaters = theaterDao.getAllTheaters();
 	
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	int totalRows = theaterBoardDao.getTotalRows();
+	int totalRows = 0;
+	
+	if (theaterNo == 0){
+		totalRows = theaterBoardDao.getTotalRowsByLocation(locationNo);
+	} else if (theaterNo != 0){
+		totalRows = theaterBoardDao.getTotalRowsByTheater(theaterNo);
+	} 
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	
 	// 데이터 조회하기
-	List<TheaterBoard> theaterBoards = theaterBoardDao.getTheaterBoards(pagination.getBegin(), pagination.getEnd());
-
+	List<TheaterBoard> theaterBoards = new ArrayList<TheaterBoard>();
+	
+	if (theaterNo == 0){
+		theaterBoards = theaterBoardDao.getTheaterBoardsByLocationNo(locationNo, pagination.getBegin(), pagination.getEnd());
+	} else if (theaterNo != 0){
+		theaterBoards = theaterBoardDao.getTheaterBoardByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
+	} 
+	
 %>
 <html lang="ko">
 <head>
@@ -64,12 +82,11 @@
 					<p class="result-count"><strong>전체 <span id="totalCnt" class="font-gblue"><%=totalRows %></span>건</strong></p>
 				</div>
 				
-<%--검색 : 각 select에 name을 설정하고, method를 get으로 설정하면 된다  --%>				
+<%--검색  --%>				
 				<form method="get" action="selectlist.jsp" >
-				
 <%-- 지역/극장을 선택하는 select --%>			
 					<select id="theater" title="지역 선택" class="selectpicker" name="locationNo" >
-						<option value= 0 >지역 선택</option>
+						<option value= 0>지역 선택</option>
 												
 <%
 	for(Location location : locations){
@@ -82,7 +99,7 @@
 					</select>
 
 					<select id="theater02" title="극장 선택" class="selectpicker ml07" name="theaterNo" >
-						<option value= 0 >극장 선택</option>
+						<option value= 0>극장 선택</option>
 						
 <%
 	for(Theater theater : theaters){
@@ -95,7 +112,8 @@
 					<button type="submit" id="searchBtn" class="btn-search-input" >검색</button>
 				</form>
 				
-	
+
+</script>			
 			
 			<table class="table table-sm">
 				<colgroup>
