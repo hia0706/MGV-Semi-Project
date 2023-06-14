@@ -1,7 +1,17 @@
+<%@page import="vo.FavoriteTheater"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.FavoriteTheaterDao"%>
 <%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+	//세션에서 로그인한 사용자 정보 가져오기
+	String loginId = (String)session.getAttribute("loginId");
+	
+	// 로그인 했는지 확인.
+	if(loginId){
+		
+	}
 	// 파라미터 극장번호
 	int theaterNo = Integer.parseInt(request.getParameter("no"));
 
@@ -9,6 +19,10 @@
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	Theater theater = theaterDao.getTheaterByNo(theaterNo);
 	String ad = theater.getAddress();
+	
+	// 자주가는 극장 정보 가져오기
+	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
+	FavoriteTheater favoriteTheater = fTheaterDao.getFavoriteTheaterByKey(loginId, theaterNo);
 %>
 <!doctype html>
 <html lang="ko">
@@ -45,10 +59,30 @@
 		<div class="theater-cont-lab">
 			<h4>강남
 			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 text-muted를 지운다. -->
-			<i class="bi bi-heart-fill text-muted"></i>
+			<i  onclick="fn1(event)" class="bi bi-heart-fill <%=favoriteTheater!=null&&theaterNo==favoriteTheater.getTheater().getNo()?"":"text-muted" %>"></i>
 			</h4>
 		</div>
 <script type="text/javascript">
+// 즐겨찾기 등록된 극장인지 확인
+// 안되어있으면 등록할지 확인
+// 되어있으면 취소할지 확인
+function fn1(e) {
+	  let cur = e.currentTarget;
+	  if(cur.classList.contains('text-muted')){
+		  if (confirm("등록하시겠습니까?")) {
+			    // 확인
+			    
+			  } else {
+			    // 취소
+			  } 
+	  }else{
+		  if (confirm("취소하시겠습니까?")) {
+			    // 확인
+			  } else {
+			    // 취소
+			  } 
+	  }
+}
 <!-- theater_detail클래스에 속한 ul에 속한 a태그를 누르면 tab-cont-wrap에 href에 해당하는 div를 보이게 하고 다른 것들은 안보이게 바꾼다.-->
 function activeTab(num) {
 	let tabContents = document.querySelectorAll(".tab-cont");
