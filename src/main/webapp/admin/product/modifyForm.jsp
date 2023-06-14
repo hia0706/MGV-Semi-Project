@@ -74,6 +74,10 @@
 					<input type="text" class="form-control" name="soldOut" value="<%=product.getSoldOut() %>"/>
 				</div>
 				<div class="form-group mb-2">
+					<label class="form-label">상품 구성</label>
+					<input type="text" class="form-control" name="soldOut" value="<%=product.getComposition() %>"/>
+				</div>
+				<div class="form-group mb-2">
 					<label class="form-label">상품 설명</label>
 					<textarea class="form-control" rows="5" name="description"><%=product.getDescription() %></textarea>
 				</div>
