@@ -21,20 +21,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
 		let count = 1;
 		
 		$('#plus').click(function() {
 			$('#count').text(++count);
+			changePrice();
 		})
 		
 		$('#minus').click(function() {
 			if (count > 1) {
 				$('#count').text(--count);
 			}
+			changePrice();
 		})
+		
+		function changePrice() {
+			let price = document.querySelector("#price").textContent;
+			let count = document.querySelector("#count").textContent;
+			
+			let totalPrice = price*count
+			
+			$("#totalPrice").text(totalPrice);
+		}
 	})
-	
-	
 	
 </script>
 </head>
@@ -53,7 +63,7 @@
 <%
 	if (product.getNo() == productNo) {
 %>
-		<img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" width="30%">
+		<img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="30%">
 <%
 	}
 %>
@@ -71,7 +81,7 @@
 				<th>상품이름</th>
 				<td><%=product.getName() %></td>
 				<th>상품가격</th>
-				<td><Strong><%=product.getPrice() %>원</Strong></td>
+				<td><strong id="price"><%=product.getPrice() %></strong><strong>원</strong></td>
 			</tr>
 			<tr>
 				<th>상품구성</th>
@@ -79,28 +89,28 @@
 				<th>구매 수량</th>
 				<th class="align-middle">
 					<button type="button" class="btn btn-outline-dark btn-sm" id="minus" title="수량감소" ><i class="bi bi-dash"></i></button>
-					<span id="count">1</span>
+						<span id="count">1</span>
 					<button type="button" class="btn btn-outline-dark btn-sm" id="plus" title="수량증가"><i class="bi bi-plus"></i></button>
 				</th>
 			</tr>
 			<tr>
-				<th colspan="4">총 금액</th>
+				<th>총 금액</th>
+				<th><strong id="totalPrice"><%=product.getPrice() %></strong>원</th>
 			</tr>
 		</tbody>
 	</table>
 	<div class="text-end">
+		<a href="#" class="btn btn-outline-secondary btn-sm">장바구니 담기</a>
 		<a href="purchase.jsp" class="btn btn-outline-primary btn-sm">바로 구매</a>
 	</div>
 	</div>
 	<div class="box-pulldown">
-		<div class="tit">
 			<button type="button" class="btn-toggle">
 				구매 후 취소
 			</button>
-		</div>
 		<div class="dotList02">
-                    
-                ■ 연장/취소/환불 안내<br>
+		<br>       
+            ■ 연장/취소/환불 안내<br>
 			본 상품은 구매일로부터 10일 이내에 취소 가능합니다.<br>
 			- 유효기간은 본 상품의 유효기간 내에서 연장 신청이 가능하며, 1회 연장 시 3개월(92일) 단위로 연장됩니다.<br>
 			- 구매일로부터 5년까지 유효기간 연장이 가능합니다.<br>
@@ -109,7 +119,6 @@
 			- 본 상품은 현금으로 환불이 불가합니다.<br>
 			- 환불 요청한 포인트 중 소멸 포인트가 포함되어있다면 환불 요청한 월의 말일까지 사용 가능한 포인트로 돌아갑니다.<br>
 			&nbsp;※ 2020년 2월 4일 이후 구매 상품에 한하여 유효기간 연장 신청이 가능합니다.
-                    
         </div>
 	</div>
 </div>
