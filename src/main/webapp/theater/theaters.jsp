@@ -17,10 +17,6 @@
 	// 자주가는 극장 정보 가져오기
 	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
 	List<FavoriteTheater> FTList = fTheaterDao.getFavoriteTheaterById(loginId);
-	// 극장정보 가져오기
-	TheaterDao theaterDao = TheaterDao.getInstance();
-	List<Theater> theaterList = theaterDao.getAllTheaters(); 
-	
 %>
 <!doctype html>
 <html lang="ko" >
@@ -33,169 +29,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet" >
+<link rel="stylesheet" href="style.css"> <!-- 극장정보 스타일시트 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <style>
-	body {
-    overflow: auto;
-    overflow-y: scroll;
-    letter-spacing: 0;
-    line-height: 1.5;
-    font-size: 15px;
-    color: #444;
-    font-weight: 400;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
-	}
-	.theater-list ul li {
-    position: relative;
-    float: left;
-    width: 25%;
-    line-height: 26px;
-    text-align: left;
-    padding-left: 40px;
-	}
-    .bi-heart-fill{
-        font-size: 22px;
-        line-height: 22px;
-        color:crimson;
-    }
-  	.list-group-item a{
-  	text-decoration: none;
-  	}
-  	.list-group-item:hover{
-  		font-weight: 700;
-  	}
-  	.sect-city{
-  	width: 1000px;
-  	border-radius: 10px;
-  	border: 3px solid #686571;
-  	}
-  	.sect-city ul li:active{
-  	background: #555;
-    border: 1px solid #555;
-  	}
-  	.container
-  	{
-  	width: 1000px;
-  	padding: 0px;
-  	}
-	.table-wrap table{
-	font-size: 12pt;
-    width: 100%;
-    margin: 0;
-    border: 0;
-    table-layout: fixed;
-    border-collapse: collapse;
-    empty-cells: show;
-	}
-	.table-wrap {
-	width: 1000px;
-    position: relative;
-    border-top: 1px solid #555;
-    }
-    h3.tit {
-    margin: 0;
-    padding: 0 0 16px 0;
-    font-size: 1.6em;
-    font-weight: 400;
-    color: #503396;
-    line-height: 1.1;
-	}
-	.board-list>thead>tr>th {
-    height: 45px;
-    padding: 3px 10px;
-    color: #222;
-    border: 1px solid #eaeaea;
-    border-width: 0 0 1px 0;
-    background-color: #f2f4f5;
-    text-align: center;
-	}
-	.board-list>tbody>tr>th {
-    text-align: left;
-    font-weight: 400;
-	}
-	.board-list>tbody>tr>td, .board-list>tbody>tr>th {
-    height: 45px;
-    padding: 10px;
-    border: 1px solid #eaeaea;
-    border-width: 0 0 1px 0;
-    text-align: center;
-	}
-	th {
-    display: table-cell;
-    vertical-align: inherit;
-    font-weight: bold;
-    text-align: internal-center;
-	}
-	table {
-    border-collapse: separate;
-    text-indent: initial;
-    border-spacing: 2px;
-	}
-	.part-title {
-	margin-top: 100px;
-	}
-	.theater-choice-list .bg .circle {
-    display: table-cell;
-    position: relative;
-    width: 90px;
-    height: 90px;
-    border-radius: 90px;
-    vertical-align: middle;
-    text-align: center;
-    background-color: #ebebeb;
-	}
-	.theater-choice-list {
-    overflow: hidden;
-    margin: 0;
-    padding: 20px 0 0 45px;
-	}
-	.box-gray.v1 {
-    border-radius: 5px;
-	}
-	.a-c {
-	    text-align: center!important;
-	}
-	.box-gray {
-	    padding: 20px;
-	    background-color: #f2f4f5;
-	}
-	.bootstrap-select:not(.input-group-btn), .bootstrap-select[class*=col-] {
-    float: none;
-    display: inline-block;
-    margin-left: 0;
-	}
-	.sect-favorite{
-	float: none;
-	display: inline-block;
-	margin-left: 0;
-	padding: 1em;
-	background-color: #f2f4f5;
-	border-radius: 0 0 10px 10px;
-	width: 100%;
-	height: 50px;
-	}
-	.sect-favorite ul{
-	display: inline-block;
-    margin: 0 20px;
-	}
-	 .sect-favorite ul li{
-	display: inline-block;
-    padding: 0 15px;
-    margin: 0 2px;
-    height: 25px;
-    line-height: 24px;
-    border-radius: 25px;
-    background-color: #fff;
-	}
-	a {
-	text-decoration: none;
-	}
-	.btn-jj{
-	float: right;
-	border-radius: 25px;
-	}
+	
 </style>
 
 </head>
@@ -209,14 +48,15 @@
 				"자주가는 극장 등록",
 				"width=800, height=1200, top=50, left=50");
 	}
-	function locationSelect(e) {
+	function locationSelect(no) {
 		// locationNo로 영화관탭생성
-		let el = e.currentTarget;
-		let locNo = el.value;
+		let el = document.getElementById("theater-tab-"+no);
+		let locNo = no;
 		let htmlContent ="<div class='tab-pane fade show active' id='theater-tab-pane-"+locNo+"' role='tabpanel' aria-labelledby='theater-"+locNo+"-tab' tabindex='0' ><ul class='list-group list-group-horizontal row row-cols-4' style='margin-left: 0;'></ul></div>";
 		document.querySelector("#myTabContent").innerHTML=htmlContent;
 		theaterTab(locNo);
 	}
+
 	function theaterTab(no) {
 		// select 박스에서 선택된값 조회하기
 		let locNo = no;
@@ -238,41 +78,67 @@
 					`;
 				});
 				
-				document.querySelector("#theater-tab-pane-"+locNo," ul").innerHTML = htmlContents;
+				document.querySelector("#theater-tab-pane-"+locNo+" ul").innerHTML = htmlContents;
+			}
+		};
+		xhr.open("GET", "theaterTab.jsp?no="+locNo);
+		xhr.send(null);
+	}
+	//
+	function refreshTheaters() {
+		// select 박스에서 선택된값 조회하기
+		let locNo = document.getElementById("locationList").value;
+		
+		// ajax 요청
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				let text = xhr.responseText;
+				let arr = JSON.parse(text);
+				
+				let htmlContents = "<option selected disabled>지점을 선택해주세요</option>";
+				arr.forEach(function(item, index) {
+					console.log(item.id);
+					htmlContents += `
+			            <option value="\${item.no}">\${item.name}</option>
+					`;
+				});
+				
+				document.querySelector("#areaList").innerHTML = htmlContents;
 			}
 		};
 		xhr.open("GET", "theaterTab.jsp?no="+locNo);
 		xhr.send(null);
 	}
 	
+	/* 처음 페이지가 로드되면 실행. */
+	window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
+		    locationSelect(1);
+
+	};
+	
+
 </script>
 <div class="container ">
 	<div class="theater_wrap">
-		<h2>전체극장</h2>
+		<h2 class="tit">전체극장</h2>
 			<div class="sect-city" >
 				<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
 %>			
-				  <li class="nav-item col-md-auto" role="presentation">
-				    <button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab" data-bs-toggle="tab" 
+					<li class="nav-item col-md-auto" role="presentation">
+				    	<button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab-<%=location.getNo() %>" data-bs-toggle="tab" 
 				    		data-bs-target="#theater-tab-pane-<%=location.getNo() %>" type="button" role="tab" 
-				    		aria-controls="home-tab-pane" aria-selected="true" onclick="locationSelect(event);" value="<%=location.getNo() %>">
+				    		aria-controls="home-tab-pane" aria-selected="true" onclick="locationSelect(<%=location.getNo() %>);" value="<%=location.getNo() %>">
 				    		<%=location.getName() %>
-				    </button>
-				  </li>
+				    	</button>
+					</li>
 <%
 	}
 %>			  
 				</ul>
 				<div class="tab-content theater-list" id="myTabContent">
-					
-					
-						
-							
-								  
-						
-								  
 				</div> 
 			</div>
 			<div class="sect-favorite">
@@ -300,8 +166,6 @@
 <%
 		}
 %>						  
-			  		
-			  		
 				</ul>
 				<!-- Button trigger modal -->
 				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -347,7 +211,6 @@
 				</table>
 			</div>
 		</div>
-	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -359,7 +222,8 @@
 	      <div class="modal-body">
 	      	<div class="box-gray v1 a-c">
 	            <div class="dropdown bootstrap-select w150px small bs3">
-		            <select title="" class="w150px small" name="locationList" tabindex="-98">
+		            <select id="locationList" class="w150px small" name="locationList" tabindex="-98" onchange="refreshTheaters();">
+		            	<option value="" selected disabled>지역을 선택해주세요.</option>
 <%
 	for(Location location:locations){
 %>		            
@@ -370,15 +234,8 @@
 		            </select>
 	            </div>
 	            <div class="dropdown bootstrap-select w150px small bs3">
-		            <select title="" class="w150px small" name="areaList" tabindex="-98">
+		            <select id="areaList" class="w150px small" name="areaList" tabindex="-98">
 		            	<option selected disabled="disabled">지점을 선택해주세요</option>
-			            <option value="10">강남</option>
-			            <option value="30">강남</option>
-			            <option value="35">강남</option>
-			            <option value="45">강남</option>
-			            <option value="55">강남</option>
-			            <option value="65">강남</option>
-			            <option value="70">강남</option>
 		            </select>
 	            </div>
 	            <button id="btn-insert" type="button" class="button gray small ml05">추가</button>
