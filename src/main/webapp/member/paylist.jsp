@@ -24,21 +24,21 @@
 			</div>
 		</div>
 		<div class="container mb-3 p-3">
-			<table id="status" onchange="refreshStatus();">
+			<table >
 				<tbody>
 					<tr>
 						<td>
 						<label class="p-3">구분</label>
-							<div class="form-check form-check-inline mb-2">
-								<input class="form-check form-check-input" type="radio" name="status" id="all" value="A" checked="checked">
+							<div class="form-check form-check-inline mb-2" id="status" onchange="refreshStatus();">
+								<input class="form-check form-check-input" type="radio" name="status" id="all" value="전체" checked="checked">
 								<label class="form-check-label" for="all">전체</label>
 							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check form-check-input " type="radio" name="status" id="buy" value="B">
+							<div class="form-check form-check-inline" id="status" onchange="refreshStatus();">
+								<input class="form-check form-check-input " type="radio" name="status" id="buy" value="구매완료">
 								<label class="form-check-label" for="buy">구매내역</label>
 							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check form-check-input " type="radio" name="status" id="cancel" value="C">
+							<div class="form-check form-check-inline" id="status" onchange="refreshStatus();">
+								<input class="form-check form-check-input " type="radio" name="status" id="cancel" value="구매취소">
 								<label class="form-check-label" for="cancel">취소내역</label>
 							</div>
 						</td>
@@ -52,7 +52,7 @@
 			<div class="col-12">
 				<table class="table" id="table-payments">
 					<thead>
-						<tr>
+						<tr class="table-dark">
 							<th>결제일</th>
 							<th>상품번호</th>
 							<th>상품명</th>

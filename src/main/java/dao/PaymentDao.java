@@ -22,7 +22,16 @@ public class PaymentDao {
 	}
 	
 	// 페이징
-	public List<Payment> getPayments(int begin, int end) {
+	public List<Payment> getAllPayments(int begin, int end) {
+		return DaoHelper.selectList("", rs -> {
+			Payment payment = new Payment();
+			
+			
+			return payment;
+		}, begin, end);
+	}
+	
+	public List<Payment> getStatusPayments(int begin, int end) {
 		return DaoHelper.selectList("", rs -> {
 			Payment payment = new Payment();
 			
