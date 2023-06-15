@@ -34,8 +34,14 @@
 						<th id="name" style="width: 15%;">상품명</th>
 						<th id="price" style="width: 15%;">판매금액</th>
 						<th id="amount" style="width: 15%;">수량</th>
-						<th id="totalPrice" style="width: 15%;">총 구매금액</th>
-						<th id="delete" style="width: 15%;">삭제</th>
+						<th id="totalPrice" style="width: 15%;">구매금액</th>
+						<th>취소</th>
+					</tr>
+					<tr>
+						<td style="width: 25%;">팝콘</td>
+						<td style="width: 25%;"><strong>20000</strong>원</td>
+						<td style="width: 25%;">1</td>
+						<td style="width: 25%;"><strong>18000</strong>원</td>
 					</tr>
 				</tbody>
 			</table>
