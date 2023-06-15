@@ -24,6 +24,8 @@ public class TheaterBoardDao {
 															 theaterBoard.getCommentCnt(),
 															 theaterBoard.getDeleted(),
 															 theaterBoard.getReport(),
+															 theaterBoard.getLocation().getNo(),
+															 theaterBoard.getTheater().getNo(),
 															 theaterBoard.getNo());
 	}
 	

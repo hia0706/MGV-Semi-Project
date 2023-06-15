@@ -6,7 +6,6 @@ import util.DaoHelper;
 import vo.Member;
 import vo.Movie;
 import vo.MovieBoard;
-import vo.StoreBoard;
 
 public class MovieBoardDao {
 	
@@ -63,6 +62,35 @@ public class MovieBoardDao {
 		}, begin, end);
 	}
 	
+	public MovieBoard getMovieBoardByBoardNo(int boardNo) {
+		return DaoHelper.selectOne("movieBoarDao.getBoardByNo", rs -> {
+			MovieBoard movieBoard = new MovieBoard();
+			
+			movieBoard.setNo(rs.getInt("board_no"));
+			movieBoard.setName(rs.getString("board_name"));
+			movieBoard.setContent(rs.getString("board_content"));
+			movieBoard.setGrade(rs.getString("board_grade"));
+			movieBoard.setCreateDate(rs.getDate("board_create_date"));
+			movieBoard.setUpdateDate(rs.getDate("board_update_date"));
+			movieBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			movieBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			movieBoard.setDeleted(rs.getString("board_deleted"));
+			movieBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			movieBoard.setMember(member);
+			
+			Movie movie = new Movie();
+			movie.setNo(rs.getInt("movie_no"));
+			movie.setTitle(rs.getString("movie_title"));
+			movieBoard.setMovie(movie);
+			
+			return movieBoard;	
+		}, boardNo);
+		
+	}
+	
 	
 	// insert, update
 	public void insertMovieBoard(MovieBoard movieBoard) {
@@ -73,6 +101,20 @@ public class MovieBoardDao {
 														   movieBoard.getMember().getId(),
 														   movieBoard.getMovie().getNo());
 	}
+	
+	public void updateMovieBoard(MovieBoard movieBoard) {
+		
+		DaoHelper.update("movieBoardDao.updateBoardByNo", movieBoard.getName(),
+														  movieBoard.getContent(),
+														  movieBoard.getGrade(),
+														  movieBoard.getReadCnt(),
+														  movieBoard.getCommentCnt(),
+													   	  movieBoard.getDeleted(),
+														  movieBoard.getReport(),
+														  movieBoard.getMovie().getNo(),
+														  movieBoard.getNo());
+	} 
+	
 	
 	// movie관련
 	public List<Movie> getMovies() {
