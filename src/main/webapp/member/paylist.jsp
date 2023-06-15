@@ -134,8 +134,8 @@
 					</nav>
 				
 					<div class="text-end">
-						<a href="form.jsp" class="btn btn-warning btn-sm">장바구니</a>
-						<a href="form.jsp" class="btn btn-primary btn-sm">스토어</a>
+						<a href="user-cart.jsp" class="btn btn-warning btn-sm">장바구니</a>
+						<a href="../store/store.jsp" class="btn btn-primary btn-sm">스토어</a>
 					</div>
 				
 			</div>
