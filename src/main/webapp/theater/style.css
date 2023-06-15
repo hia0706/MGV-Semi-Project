@@ -1,0 +1,163 @@
+@charset "UTF-8";
+body {
+    overflow: auto;
+    overflow-y: scroll;
+    letter-spacing: 0;
+    line-height: 1.5;
+    font-size: 15px;
+    color: #444;
+    font-weight: 400;
+    font-family: sans-serif;
+	}
+	.theater-list ul li {
+    position: relative;
+    float: left;
+    width: 25%;
+    line-height: 26px;
+    text-align: left;
+    padding-left: 40px;
+	}
+    .bi-heart-fill{
+        font-size: 22px;
+        line-height: 22px;
+        color:crimson;
+    }
+  	.list-group-item a{
+  	text-decoration: none;
+  	}
+  	.list-group-item:hover{
+  		font-weight: 700;
+  	}
+  	.sect-city{
+  	width: 1000px;
+  	border-radius: 10px;
+  	border: 3px solid #686571;
+  	}
+  	.sect-city ul li:active{
+  	background: #555;
+    border: 1px solid #555;
+  	}
+  	.container
+  	{
+  	width: 1000px;
+  	padding: 0px;
+  	}
+	.table-wrap table{
+	font-size: 12pt;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+    empty-cells: show;
+	}
+	.table-wrap {
+	width: 1000px;
+    position: relative;
+    border-top: 1px solid #555;
+    }
+    h2{
+	color: #503396;
+	}
+    h3.tit {
+    margin: 0;
+    padding: 0 0 16px 0;
+    font-size: 1.6em;
+    font-weight: 400;
+    color: #503396;
+    line-height: 1.1;
+	}
+	.board-list>thead>tr>th {
+    height: 45px;
+    padding: 3px 10px;
+    color: #222;
+    border: 1px solid #eaeaea;
+    border-width: 0 0 1px 0;
+    background-color: #f2f4f5;
+    text-align: center;
+	}
+	.board-list>tbody>tr>th {
+    text-align: left;
+    font-weight: 400;
+	}
+	.board-list>tbody>tr>td, .board-list>tbody>tr>th {
+    height: 45px;
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-width: 0 0 1px 0;
+    text-align: center;
+	}
+	th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: internal-center;
+	}
+	table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+	}
+	.part-title {
+	margin-top: 100px;
+	}
+	.theater-choice-list .bg .circle {
+    display: table-cell;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 90px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #ebebeb;
+	}
+	.theater-choice-list {
+    overflow: hidden;
+    margin: 0;
+    padding: 20px 0 0 45px;
+	}
+	.box-gray.v1 {
+    border-radius: 5px;
+	}
+	.a-c {
+	    text-align: center!important;
+	}
+	.box-gray {
+	    padding: 20px;
+	    background-color: #f2f4f5;
+	}
+	.bootstrap-select:not(.input-group-btn), .bootstrap-select[class*=col-] {
+    float: none;
+    display: inline-block;
+    margin-left: 0;
+	}
+	.sect-favorite{
+	float: none;
+	display: inline-block;
+	margin-left: 0;
+	padding: 1em;
+	background-color: #f2f4f5;
+	border-radius: 0 0 10px 10px;
+	width: 100%;
+	height: 50px;
+	}
+	.sect-favorite ul{
+	display: inline-block;
+    margin: 0 20px;
+	}
+	 .sect-favorite ul li{
+	display: inline-block;
+    padding: 0 15px;
+    margin: 0 2px;
+    height: 25px;
+    line-height: 24px;
+    border-radius: 25px;
+    background-color: #fff;
+	}
+	a {
+	text-decoration: none;
+	}
+	.btn-jj{
+	float: right;
+	border-radius: 25px;
+	}
