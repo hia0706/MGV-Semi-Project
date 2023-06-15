@@ -1,3 +1,5 @@
+<%@page import="dao.FaqDao"%>
+<%@page import="vo.Faq"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Member"%>
 <%@page import="util.StringUtils"%>
@@ -12,12 +14,16 @@
 
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
-
 	
 	if (member == null) {
 		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
+	
+	int no = Integer.parseInt(request.getParameter("no"));
+	
+	FaqDao faqDao = FaqDao.getInstance();
+	Faq faq = faqDao.getFaqByNo(no);
 
 %>
 
@@ -58,15 +64,15 @@
 			
 				<div class="border bg-light p-3">
 				<form id="modify" class="row g-3" method="post" action="modify.jsp" >
+	 				<input type="hidden" name="no" value="<%=no %>">
 	 				
-	 				
-	 				<div class="col-md-12">
+	 				<div class="form-group mb-2">
 						<label class="form-label">제목</label>
-						<input type="text" class="form-control" name="title"/>
+						<input type="text" class="form-control" name="title" value="<%=faq.getTitle() %>"/>
 					</div>
-	  				<div class="col-md-12">
+	  				<div class="form-group mb-2">
 						<label class="form-label">내용</label>
-						<textarea rows="10" class="form-control" name="content"></textarea>
+						<textarea rows="10" class="form-control" name="content"><%=faq.getContent() %></textarea>
 					</div>
 					
 					
@@ -80,8 +86,8 @@
 <script type="text/javascript">
 	function formsubmit() {
 		
-		let insertform = document.getElementById("modify");
-		insertform.submit();
+		let modifyform = document.getElementById("modify");
+		modifyform.submit();
 	}	
 </script>
 </body>
