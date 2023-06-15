@@ -15,6 +15,20 @@ public class OneononeDao {
 		return instacne;
 	}
 	
+	public List<Oneonone> getAllOneonones() {
+		return DaoHelper.selectList("oneononeDao.getAllOneonones", rs -> {
+			Oneonone oneonone = new Oneonone();
+			oneonone.setNo(rs.getInt("oneonone_no"));
+			oneonone.setTitle(rs.getString("oneonone_title"));
+			oneonone.setContent(rs.getString("oneonone_content"));
+			oneonone.setAnswered(rs.getString("oneonone_answered"));
+			oneonone.setDeleted(rs.getString("oneonone_deleted"));
+			oneonone.setCreateDate(rs.getDate("oneonone_create_date"));
+			
+			return oneonone;
+		});
+	}
+	
 	public void updateOneonone(Oneonone oneonone) {
 		DaoHelper.update("oneononeDao.updateOneonone", oneonone.getTitle(),
 													   oneonone.getContent(),

@@ -1,10 +1,10 @@
-<%@page import="vo.LostitemComment"%>
-<%@page import="dao.LostitemCommentDao"%>
+<%@page import="vo.OneononeComment"%>
+<%@page import="dao.OneononeCommentDao"%>
+<%@page import="vo.Oneonone"%>
+<%@page import="dao.OneononeDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
@@ -23,13 +23,13 @@
 	// 분실물 문의글 번호 조회
 	int no = Integer.parseInt(request.getParameter("no"));
 	
-	LostitemDao lostitemDao = LostitemDao.getInstance();
-	Lostitem lostitem = lostitemDao.getLostitemByNo(no);
+	OneononeDao oneononeDao = OneononeDao.getInstance();
+	Oneonone oneonone = oneononeDao.getOneononeByNo(no);
+	
 	
 	// 해당 문의글의 커멘트목록 조회
-	LostitemCommentDao lostitemcommentDao = LostitemCommentDao.getInstance();
-	List<LostitemComment> lostitemcommentList = lostitemcommentDao.getCommentsByLostitemNo(no);
-
+	OneononeCommentDao oneononeCommentDao = OneononeCommentDao.getInstance();
+	List<OneononeComment> oneononecommentList = oneononeCommentDao.getCommentsByOneononeNo(no);
 	
 %>
 <!doctype html>
@@ -60,10 +60,10 @@
 		</ul>
 	</div>
 		<hr>
-			<a style="font-size : 17px;"><strong><%=lostitem.getTitle() %></strong></a><br>
-			<a style="font-size : 12px;"><%=lostitem.getCreateDate() %></a>
+			<a style="font-size : 17px;"><strong><%=oneonone.getTitle() %></strong></a><br>
+			<a style="font-size : 12px;"><%=oneonone.getCreateDate() %></a>
 		<hr>
-			<a><%=lostitem.getContent() %></a>
+			<a><%=oneonone.getContent() %></a>
 			<br>
 			<br>
 			<br>
@@ -72,7 +72,7 @@
 			<br>
 		<hr>
 			<form  method="post" action="insertComment.jsp">
-				<input type="hidden" name="no" value="<%=lostitem.getNo() %>" />
+				<input type="hidden" name="no" value="<%=oneonone.getNo() %>" />
  				<div class="row">
 					<div class="col-11">
 						<textarea rows="2" class="form-control" name="content"></textarea>
@@ -87,15 +87,15 @@
 		<div class="row mb-3">
    			<div class="col-12">
    		
-<% for (LostitemComment lostitemComment : lostitemcommentList) { %>   		
+<% for (OneononeComment oneononeComment : oneononecommentList) { %>   		
    		
    				<div class="border p-2 mb-2">
 	   			
 	   				<div>
-	   					<%=lostitemComment.getContent() %>
+	   					<%=oneononeComment.getContent() %>
 	   				
-<%  if (lostitemComment.getMember().getId().equals(id)) { %>	   				
-	   				<a href="deleteComment.jsp?no=<%=no %>&cno=<%=lostitemComment.getNo() %>" 
+<%  if (oneononeComment.getMember().getId().equals(id)) { %>	   				
+	   				<a href="deleteComment.jsp?no=<%=no %>&cno=<%=oneononeComment.getNo() %>" 
 	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
 	   					
 <%  } %>	 
@@ -111,7 +111,7 @@
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
-				<a href="delete.jsp?no=<%=lostitem.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
+				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
 		</div>
 	
 			
