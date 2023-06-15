@@ -6,6 +6,7 @@ import util.DaoHelper;
 import vo.Member;
 import vo.Movie;
 import vo.MovieBoard;
+import vo.StoreBoard;
 
 public class MovieBoardDao {
 	
@@ -60,6 +61,17 @@ public class MovieBoardDao {
 			
 			return movieBoard;	
 		}, begin, end);
+	}
+	
+	
+	// insert, update
+	public void insertMovieBoard(MovieBoard movieBoard) {
+		
+		DaoHelper.update("movieBoardDao.insertMovieBoard" ,movieBoard.getName(),
+														   movieBoard.getContent(),
+														   movieBoard.getGrade(),
+														   movieBoard.getMember().getId(),
+														   movieBoard.getMovie().getNo());
 	}
 	
 	// movie관련
