@@ -2,6 +2,8 @@
 <%@page import="dao.ProductDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+	// 회원아이디 가져오기
+	String loginId = (String) session.getAttribute("loginId");
 	// 요청파라미터 상품번호
 	int productNo = Integer.parseInt(request.getParameter("no"));
 
@@ -44,6 +46,24 @@
 			
 			$("#totalPrice").text(totalPrice);
 		}
+		
+	})
+	
+	$(function() {
+		$('#addCart').click(function() {
+<%
+			if (loginId == null) {
+%>
+				alert("로그인이 필요한 서비스입니다.");
+<%
+			} else {
+%>
+				alert("장바구니에 상품이 추가되었습니다.");
+				history.back();
+<%
+			}
+%>
+		})
 	})
 	
 </script>
@@ -100,8 +120,8 @@
 		</tbody>
 	</table>
 	<div class="text-end">
-		<a href="#" class="btn btn-outline-secondary btn-sm">장바구니 담기</a>
-		<a href="purchase.jsp" class="btn btn-outline-primary btn-sm">바로 구매</a>
+		<a href="detail.jsp?no=<%=product.getNo() %>" class="btn btn-outline-secondary btn-sm" id="addCart">장바구니 담기</a>
+		<a href="purchase.jsp" class="btn btn-outline-primary btn-sm" id="buy">바로 구매</a>
 	</div>
 	</div>
 	<div class="box-pulldown">

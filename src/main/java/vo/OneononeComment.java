@@ -2,21 +2,16 @@ package vo;
 
 import java.util.Date;
 
-public class Oneonone {
+public class OneononeComment {
 
 	private int no;
-	private String title;
 	private String content;
-	private String answered;
 	private String deleted;
 	private Date createDate;
+	private Oneonone oneonone;
 	private Member member;
 	
-	public Oneonone () {}
-	
-	public Oneonone(int no) {
-		this.no = no;
-	}
+	public OneononeComment() {}
 
 	public int getNo() {
 		return no;
@@ -26,28 +21,12 @@ public class Oneonone {
 		this.no = no;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getAnswered() {
-		return answered;
-	}
-
-	public void setAnswered(String answered) {
-		this.answered = answered;
 	}
 
 	public String getDeleted() {
@@ -64,6 +43,14 @@ public class Oneonone {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Oneonone getOneonone() {
+		return oneonone;
+	}
+
+	public void setOneonone(Oneonone oneonone) {
+		this.oneonone = oneonone;
 	}
 
 	public Member getMember() {
