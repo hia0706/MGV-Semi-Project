@@ -16,12 +16,12 @@
 	
 	
 	if (member == null) {
-		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("커멘트 삭제", "utf-8"));
+		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터", "utf-8"));
 		return;
 	}
 
 	//요청 파라미터값 조회
-	int lostitemNo = Integer.parseInt(request.getParameter("lostitemNo"));
+	int no = Integer.parseInt(request.getParameter("no"));
 	int cno = Integer.parseInt(request.getParameter("cno")); 
 	
 	
@@ -34,5 +34,5 @@
 		
 	
 	// detail.jsp를 재요청하는 URL을 응답으로 보낸다.
-	response.sendRedirect("detail.jsp?no=" +lostitemNo);
+	response.sendRedirect("detail.jsp?no=" +no);
 %>
