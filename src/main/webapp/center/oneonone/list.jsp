@@ -2,8 +2,6 @@
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Oneonone"%>
 <%@page import="dao.OneononeDao"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
