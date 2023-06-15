@@ -209,6 +209,42 @@
 				"자주가는 극장 등록",
 				"width=800, height=1200, top=50, left=50");
 	}
+	function locationSelect(e) {
+		// locationNo로 영화관탭생성
+		let el = e.currentTarget;
+		let locNo = el.value;
+		let htmlContent ="<div class='tab-pane fade show active' id='theater-tab-pane-"+locNo+"' role='tabpanel' aria-labelledby='theater-"+locNo+"-tab' tabindex='0' ><ul class='list-group list-group-horizontal row row-cols-4' style='margin-left: 0;'></ul></div>";
+		document.querySelector("#myTabContent").innerHTML=htmlContent;
+		theaterTab(locNo);
+	}
+	function theaterTab(no) {
+		// select 박스에서 선택된값 조회하기
+		let locNo = no;
+		
+		// ajax 요청
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				let text = xhr.responseText;
+				let arr = JSON.parse(text);
+				
+				let htmlContents = "";
+				arr.forEach(function(item, index) {
+					console.log(item.id);
+					htmlContents += `
+						<li class="list-group-item col-3 border-0 " >
+						<a href="detail.jsp?no=\${item.no}" style="text-decoration: none;"  class="link-dark">\${item.name}</a>
+						</li>
+					`;
+				});
+				
+				document.querySelector("#theater-tab-pane-"+locNo," ul").innerHTML = htmlContents;
+			}
+		};
+		xhr.open("GET", "theaterTab.jsp?no="+locNo);
+		xhr.send(null);
+	}
+	
 </script>
 <div class="container ">
 	<div class="theater_wrap">
@@ -219,149 +255,26 @@
 	for(Location location:locations){
 %>			
 				  <li class="nav-item col-md-auto" role="presentation">
-				    <button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab" data-bs-toggle="tab" data-bs-target="#theater-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
+				    <button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab" data-bs-toggle="tab" 
+				    		data-bs-target="#theater-tab-pane-<%=location.getNo() %>" type="button" role="tab" 
+				    		aria-controls="home-tab-pane" aria-selected="true" onclick="locationSelect(event);" value="<%=location.getNo() %>">
+				    		<%=location.getName() %>
+				    </button>
 				  </li>
 <%
 	}
 %>			  
 				</ul>
 				<div class="tab-content theater-list" id="myTabContent">
-				  <div class="tab-pane fade show active" id="theater-tab-pane-1" role="tabpanel" aria-labelledby="theater-1-tab" tabindex="0" >
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==1){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-2" role="tabpanel" aria-labelledby="theater-2-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==2){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-3" role="tabpanel" aria-labelledby="theater-3-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==3){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				 
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-4" role="tabpanel" aria-labelledby="theater-4-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==4){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-5" role="tabpanel" aria-labelledby="theater-5-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==5){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-6" role="tabpanel" aria-labelledby="theater-6-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==6){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-7" role="tabpanel" aria-labelledby="theater-7-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==7){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-8" role="tabpanel" aria-labelledby="theater-8-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==8){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				 
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-9" role="tabpanel" aria-labelledby="theater-9-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==9){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				</div>
+					
+					
+						
+							
+								  
+						
+								  
+				</div> 
+			</div>
 			<div class="sect-favorite">
 				<span class="s1"><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
 <%
