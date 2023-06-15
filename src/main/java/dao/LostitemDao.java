@@ -39,7 +39,17 @@ public class LostitemDao {
 		}, LostitemNo);
 	}
 	
-	public List<Lostitem> getLostitems() {
+
+	public void insertLostitem(Lostitem lostitem) {
+		DaoHelper.update("lostitemDao.insertLostitem", lostitem.getTitle(),
+													   lostitem.getContent(),
+													   lostitem.getMember().getId(),
+													   lostitem.getMember().getEmail(),
+													   lostitem.getMember().getTel(),
+													   lostitem.getMember().getName());
+	}
+	
+	public List<Lostitem> getLostitems(int begin, int end) {
 		return DaoHelper.selectList("lostitemDao.getLostitems", rs -> {
 			Lostitem lostitem = new Lostitem();
 			lostitem.setNo(rs.getInt("lostitem_no"));
@@ -50,15 +60,29 @@ public class LostitemDao {
 			lostitem.setCreateDate(rs.getDate("lostitem_create_date"));
 			
 			return lostitem;
+		}, begin, end);
+	}
+	
+	public int getTotalRows() {
+		return DaoHelper.selectOne("lostitemDao.getTotalRows", rs -> {
+			return rs.getInt("cnt");
 		});
 	}
-
-	public void insertLostitem(Lostitem lostitem) {
-		DaoHelper.update("lostitemDao.insertLostitem", lostitem.getTitle(),
-													   lostitem.getContent(),
-													   lostitem.getMember().getId(),
-													   lostitem.getMember().getEmail(),
-													   lostitem.getMember().getTel(),
-													   lostitem.getMember().getName());
-	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
