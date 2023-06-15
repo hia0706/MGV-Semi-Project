@@ -123,7 +123,7 @@
 		
 				<div class="text-end">
 					<button type="reset" class="btn btn-secondary btn-sm">취소</button>
-					<button type="submit" class="btn btn-primary btn-sm">수정</button>
+					<button type="submit" class="btn btn-primary btn-sm" onclick="null();">수정</button>
 				</div>
 			</form>
 		</div>
@@ -165,6 +165,15 @@
 		xhr.open("GET", "cat.jsp?no=" + catNo);
 		// 3. 서버로 요청 보내기
 		xhr.send(null);
+		
+		function null(){
+			
+			let productNo = document.getElementById("product").value;
+			if(productNo === null){
+				alert("상품은 필수 입력칸 입니다.");
+				
+			}
+		}
 	}
 </script>
 </body>

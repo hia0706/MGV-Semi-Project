@@ -1,9 +1,7 @@
+<%@page import="vo.MboardComment"%>
+<%@page import="dao.MboardCommentDao"%>
 <%@page import="vo.MovieBoard"%>
 <%@page import="dao.MovieBoardDao"%>
-<%@page import="vo.SboardComment"%>
-<%@page import="dao.SboardCommentDao"%>
-<%@page import="vo.StoreBoard"%>
-<%@page import="dao.StoreBoardDao"%>
 <%@page import="vo.ReportReason"%>
 <%@page import="dao.ReportDao"%>
 <%@page import="java.util.List"%>
@@ -35,8 +33,8 @@
 		score = "★☆☆☆☆";
 	}
 	
-	  SboardCommentDao sboardCommentDao = SboardCommentDao.getInstance();
-      List<SboardComment> comments = sboardCommentDao.getCommentByBoardNo(boardNo);
+	  MboardCommentDao mboardCommentDao = MboardCommentDao.getInstance();
+      List<MboardComment> comments = mboardCommentDao.getCommentByBoardNo(boardNo);
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -153,7 +151,7 @@
 	<div class="row mb-3">
    		<div class="col-12">
 <%
-	for(SboardComment comment : comments) {
+	for(MboardComment comment : comments) {
 %>
 
    			<div class="border p-2 mb-2">
