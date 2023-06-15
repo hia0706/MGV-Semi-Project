@@ -14,6 +14,15 @@
 	// 세션에 속성으로 저장된 로그인한 고객의 아이디 조회하기
 	String id = (String) session.getAttribute("loginId");
 	
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	
+	
+	if (member == null) {
+		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("커멘트 삭제", "utf-8"));
+		return;
+	}
+	
 	// lostitemComment객체를 생성해서 요청파라미터 값 밑 관리자정보 저장하기
 	LostitemComment lostitemComment = new LostitemComment();
 	lostitemComment.setContent(content);

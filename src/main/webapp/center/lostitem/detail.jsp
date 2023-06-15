@@ -1,3 +1,5 @@
+<%@page import="vo.LostitemComment"%>
+<%@page import="dao.LostitemCommentDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
@@ -22,6 +24,10 @@
 	
 	LostitemDao lostitemDao = LostitemDao.getInstance();
 	Lostitem lostitem = lostitemDao.getLostitemByNo(no);
+	
+	// 해당 문의글의 커멘트목록 조회
+	LostitemCommentDao lostitemcommentDao = LostitemCommentDao.getInstance();
+	List<LostitemComment> lostitemcommentList = lostitemcommentDao.getCommentsByLostitemNo(no);
 
 	
 %>
@@ -64,8 +70,14 @@
 			<br>
 			<br>
 		<hr>
-			<a>직원의 댓</a>
+		
+<% for (LostitemComment lostitemComment : lostitemcommentList) { %>   		
+   		
+	   			
+	   				<a> ㄴ <%=lostitemComment.getContent() %></a>
 		<hr>
+
+<% } %>	
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>

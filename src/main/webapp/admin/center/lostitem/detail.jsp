@@ -84,15 +84,15 @@
 			</form>   	
 		<hr>
 		
-			<div class="row mb-3">
-   		<div class="col-12">
+		<div class="row mb-3">
+   			<div class="col-12">
    		
 <% for (LostitemComment lostitemComment : lostitemcommentList) { %>   		
    		
-   			<div class="border p-2 mb-2">
+   				<div class="border p-2 mb-2">
 	   			
-	   			<div>
-	   				<%=lostitemComment.getContent() %>
+	   				<div>
+	   					<%=lostitemComment.getContent() %>
 	   				
 <%  if (lostitemComment.getMember().getId().equals(id)) { %>	   				
 	   				<a href="deleteComment.jsp?no=<%=no %>&cno=<%=lostitemComment.getNo() %>" 
@@ -100,8 +100,8 @@
 	   					
 <%  } %>	 
 	 
-	   			</div>   			
-   			</div>
+	   				</div>   			
+   				</div>
    	
 <% } %>	   	
    		</div>

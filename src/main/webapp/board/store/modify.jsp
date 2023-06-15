@@ -1,3 +1,7 @@
+<%@page import="vo.Product"%>
+<%@page import="vo.ProductCategory"%>
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="dao.TheaterBoardDao"%>
@@ -19,37 +23,38 @@
 	// 요청파라미터 조회
 	int boardNo = Integer.parseInt(request.getParameter("no"));
 	String name = request.getParameter("name");
-	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
-	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+	int catNo = Integer.parseInt(request.getParameter("catNo"));
+	int productNo = Integer.parseInt(request.getParameter("productNo"));
 	String content = request.getParameter("content");
 	
 	// 다른사용자의 게시물을 수정하려 시도했을시 에러메세지 출력
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	TheaterBoard savedTheaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
-	if (!savedTheaterBoard.getMember().getId().equals(loginId)){
-		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("수정", "utf-8"));
-		// 게시물을 작성한 사용자가 맞으면 게시물 수정을 진행한다.
-	} else if (savedTheaterBoard.getMember().getId().equals(loginId)) {
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	StoreBoard savedStoreBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
 	
-		// 수정된 게시물 정보를 담을 게시물 객체를 생성하고, 요청 파라미터로 받은 수정 정보를 담는다.
-		TheaterBoard theaterBoard = new TheaterBoard();
-		theaterBoard.setName(name);
-		theaterBoard.setContent(content);
+	if (!savedStoreBoard.getMember().getId().equals(loginId)){
+		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("수정", "utf-8"));
 		
-		Location location = new Location();
-		location.setNo(locationNo);
-		theaterBoard.setLocation(location);
+	// 게시물을 작성한 사용자가 맞으면 게시물 수정을 진행한다.
+	} else if (savedStoreBoard.getMember().getId().equals(loginId)) {
+	
+		// 요청 파라미터로 받은 수정 정보를 위에서 게시물 번호로 조회한 객체에 저장한다.
+		savedStoreBoard.setName(name);
+		savedStoreBoard.setContent(content);
 		
-		Theater theater = new Theater();
-		theater.setNo(theaterNo);
-		theaterBoard.setTheater(theater);
+		ProductCategory category = new ProductCategory();
+		category.setNo(catNo);
+		savedStoreBoard.setCategory(category);
+		
+		Product product = new Product();
+		product.setNo(productNo);
+		savedStoreBoard.setProduct(product);
 		
 		Member member = new Member();
 		member.setId(loginId);
-		theaterBoard.setMember(member);
+		savedStoreBoard.setMember(member);
 		
 		// 수정된 게시물 정보를 담은 게시물 정보를 DB에 UPDATE 한다.
-		theaterBoardDao.updateTheaterBoard(theaterBoard);
+		storeBoardDao.updatStoreBoard(savedStoreBoard);
 		
 		// URL 재요청
 		response.sendRedirect("detail.jsp?no="+boardNo);
