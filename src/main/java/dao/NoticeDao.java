@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import util.DaoHelper;
 import vo.Notice;
 
@@ -11,6 +10,19 @@ public class NoticeDao {
 	private NoticeDao() {}
 	public static NoticeDao getInstance() {
 		return instance;
+	}
+	
+	public void updatenotice(Notice notice) {
+		DaoHelper.update("noticedao.updatenotice", notice.getTitle(),
+													 notice.getContent(),
+												  	 notice.getDeleted(),
+													 notice.getNo());
+	}
+	
+	public void insertnotice(Notice notice) {
+		DaoHelper.update("noticedao.insertnotice", notice.getTitle(),
+													 notice.getContent(),
+													 notice.getMember().getId());
 	}
 	
 	public Notice getNoticeByNo(int noticeNo) {

@@ -47,7 +47,7 @@
 <body>
 
 
-<jsp:include page="../..//nav.jsp">
+<jsp:include page="../../nav.jsp">
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
 
