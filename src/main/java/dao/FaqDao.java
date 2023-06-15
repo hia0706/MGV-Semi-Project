@@ -41,7 +41,7 @@ public class FaqDao {
 		}, faqNo);
 	}
 
-	public List<Faq> getFaq() {
+	public List<Faq> getFaq(int begin, int end) {
 		return DaoHelper.selectList("faqDao.getFaq", rs -> {
 			Faq faq = new Faq();
 			faq.setNo(rs.getInt("faq_no"));
@@ -52,6 +52,12 @@ public class FaqDao {
 			faq.setCreateDate(rs.getDate("faq_create_date")); 
 			
 			return faq;
+		}, begin, end);
+	}
+	
+	public int getTotalRows() {
+		return DaoHelper.selectOne("faqDao.getTotalRows", rs -> {
+			return rs.getInt("cnt");
 		});
 	}
 }
