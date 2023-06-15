@@ -7,16 +7,13 @@
 <%@page import="vo.TheaterBoard"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	//세션에서 로그인된 고객의 아이디 조회하기
+
+	// 세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
 
-	// 에러메세지 출력
-	MemberDao memberDao = MemberDao.getInstance();
-	Member savedmember = memberDao.getMemberById(loginId);
-   
-	if (savedmember == null) {
-	   response.sendRedirect("../../member/loginform.jsp?err=fail");
-	   return;
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시물수정", "utf-8"));
+		return;
 	}
 	
 	// 요청파라미터 조회
@@ -30,26 +27,31 @@
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard savedTheaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
 	if (!savedTheaterBoard.getMember().getId().equals(loginId)){
-		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("댓글삭제", "utf-8"));
-	}
+		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("수정", "utf-8"));
+		// 게시물을 작성한 사용자가 맞으면 게시물 수정을 진행한다.
+	} else if (savedTheaterBoard.getMember().getId().equals(loginId)) {
 	
-	TheaterBoard theaterBoard = new TheaterBoard();
-	theaterBoard.setName(name);
-	theaterBoard.setContent(content);
-	
-	Location location = new Location();
-	location.setNo(locationNo);
-	theaterBoard.setLocation(location);
-	
-	Theater theater = new Theater();
-	theater.setNo(theaterNo);
-	theaterBoard.setTheater(theater);
-	
-	Member member = new Member();
-	member.setId(loginId);
-	theaterBoard.setMember(member);
-	
-	theaterBoardDao.updateTheaterBoard(theaterBoard);
-	
-	response.sendRedirect("detail.jsp?no="+boardNo);
+		// 수정된 게시물 정보를 담을 게시물 객체를 생성하고, 요청 파라미터로 받은 수정 정보를 담는다.
+		TheaterBoard theaterBoard = new TheaterBoard();
+		theaterBoard.setName(name);
+		theaterBoard.setContent(content);
+		
+		Location location = new Location();
+		location.setNo(locationNo);
+		theaterBoard.setLocation(location);
+		
+		Theater theater = new Theater();
+		theater.setNo(theaterNo);
+		theaterBoard.setTheater(theater);
+		
+		Member member = new Member();
+		member.setId(loginId);
+		theaterBoard.setMember(member);
+		
+		// 수정된 게시물 정보를 담은 게시물 정보를 DB에 UPDATE 한다.
+		theaterBoardDao.updateTheaterBoard(theaterBoard);
+		
+		// URL 재요청
+		response.sendRedirect("detail.jsp?no="+boardNo);
+		}
 %>

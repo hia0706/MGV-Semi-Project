@@ -1,3 +1,8 @@
+<%@page import="vo.OneononeComment"%>
+<%@page import="dao.OneononeCommentDao"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="vo.Oneonone"%>
 <%@page import="dao.OneononeDao"%>
 <%@page import="vo.Lostitem"%>
@@ -6,10 +11,25 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 
+	//세션에서 로그인된 사용자 정보를 조회한다.
+	String id = (String) session.getAttribute("loginId");
+
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	
+	if (member == null) {
+		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("문의내역 확인", "utf-8"));
+		return;
+	}
+
 	int no = Integer.parseInt(request.getParameter("no"));
 	
 	OneononeDao oneononeDao = OneononeDao.getInstance();
 	Oneonone oneonone = oneononeDao.getOneononeByNo(no);
+	
+	// 해당 문의글의 커멘트목록 조회
+	OneononeCommentDao oneononeCommentDao = OneononeCommentDao.getInstance();
+	List<OneononeComment> oneononecommentList = oneononeCommentDao.getCommentsByOneononeNo(no);
 	
 %>
 <!doctype html>
@@ -51,16 +71,18 @@
 			<br>
 			<br>
 		<hr>
-			<a>직원의 댓</a>
+		
+<% for (OneononeComment oneononeComment : oneononecommentList) { %>   		
+	   			
+	   			<a> ㄴ <%=oneononeComment.getContent() %></a>
+
 		<hr>
+<% } %>	
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
 				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
 		</div>
-		
-			
-
       
 </div>
 </body>

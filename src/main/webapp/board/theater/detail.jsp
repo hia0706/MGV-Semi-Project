@@ -71,17 +71,17 @@
 	if("id".equals(err)){
 %>
 		<div class="alert alert-danger">
-			<strong>다른 사용자의 게시글을 삭제할 수 없습니다.</strong>
+			<strong>다른 사용자의 게시글을 [<%=job %>]할 수 없습니다.</strong>
 		</div>
 <%
 	}
 %>
 		
 <%
-	if("req".equals(err)){
+	if("Cid".equals(err)){
 %>
 		<div class="alert alert-danger">
-			<strong>로그인 필요</strong> [<%=job %>]은 로그인 후 사용가능한 서비스 입니다.
+			<strong>다른 사용자의 댓글을 삭제할 수 없습니다.</strong>
 		</div>
 <%
 	}
@@ -185,7 +185,7 @@
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        		<h1 class="modal-title fs-5" id="exampleModalLabel">게시물 신고</h1>
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       		</div>
       		<div class="modal-body">

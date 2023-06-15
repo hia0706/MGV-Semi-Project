@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="vo.TheaterBoard"%>
 <%@page import="dao.TheaterBoardDao"%>
 <%@page import="dao.TboardCommentDao"%>
@@ -8,6 +9,10 @@
 	String loginId = (String) session.getAttribute("loginId");
 
 	// 에러메세지 출력
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("댓글삭제", "utf-8"));
+		return;
+	}
 	
 	// 요청파라미터 조회
 	int boardNo = Integer.parseInt(request.getParameter("no"));
@@ -19,7 +24,7 @@
 	
 	// 다른 사람의 댓글을 삭제하려고 하면 에러메세지 출력
 	if(!loginId.equals(tboardComment.getMember().getId())){
-		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id");
+		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=Cid");
 		return;
 	}
 	

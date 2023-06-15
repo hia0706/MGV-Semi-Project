@@ -13,6 +13,20 @@ public class FaqDao {
 		return instance;
 	}
 	
+	
+	public void updateFaq(Faq faq) {
+		DaoHelper.update("faqDao.updateFaq", faq.getTitle(),
+											 faq.getContent(),
+											 faq.getDeleted(),
+											 faq.getNo());
+	}
+	
+	public void insertFaq(Faq faq) {
+		DaoHelper.update("faqDao.insertFaq", faq.getTitle(),
+											 faq.getContent(),
+											 faq.getMember().getId());
+	}
+	
 	public Faq getFaqByNo(int faqNo) {
 		return DaoHelper.selectOne("faqDao.getFaqByNo", rs -> {
 			Faq faq = new Faq();

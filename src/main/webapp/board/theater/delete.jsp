@@ -9,12 +9,9 @@
 	String loginId = (String) session.getAttribute("loginId");
 	
 	// 에러메세지 출력
-	MemberDao memberDao = MemberDao.getInstance();
-	Member member = memberDao.getMemberById(loginId);
-   
-	if (member == null) {
-	   response.sendRedirect("../../member/loginform.jsp?err=fail");
-	   return;
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("삭제", "utf-8"));
+		return;
 	}
 	
 	// 요청파라미터 조회
@@ -26,13 +23,13 @@
 	
 	// 해당 게시물의 작성자가 아닌 다른 사용자가 게시물을 삭제하려 했을 때 에러메세지를 출력한다.
 	if (!theaterBoard.getMember().getId().equals(loginId)){
-		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("댓글삭제", "utf-8"));
+		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("삭제", "utf-8"));
+	} else if (theaterBoard.getMember().getId().equals(loginId)){
+	
+		// 해당 게시물의 작성자가 맞을 경우엔 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
+		theaterBoard.setDeleted("Y");
+		theaterBoardDao.updateTheaterBoard(theaterBoard);
+		
+		response.sendRedirect("list.jsp");
 	}
-	
-	// 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다.
-	theaterBoard.setDeleted("Y");
-	theaterBoardDao.updateTheaterBoard(theaterBoard);
-	
-	response.sendRedirect("list.jsp");
-	
 %>
