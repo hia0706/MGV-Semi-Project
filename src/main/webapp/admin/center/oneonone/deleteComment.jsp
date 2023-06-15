@@ -1,10 +1,8 @@
+<%@page import="dao.OneononeCommentDao"%>
+<%@page import="vo.OneononeComment"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="dao.MemberDao"%>
-<%@page import="dao.LostitemDao"%>
-<%@page import="dao.LostitemCommentDao"%>
 <%@page import="vo.Member"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="vo.LostitemComment"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 
@@ -25,13 +23,12 @@
 	int cno = Integer.parseInt(request.getParameter("cno")); 
 	
 	
-	// lostitemComment객체를 생성해서 요청파라미터 값 밑 관리자정보 저장하기
-	LostitemCommentDao lostitemCommentDao = LostitemCommentDao.getInstance();
-	LostitemComment lostitemComment = lostitemCommentDao.getCommentByNo(cno);
+	// oneononeComment 생성해서 요청파라미터 값 및 관리자정보 저장하기
+	OneononeCommentDao oneononeCommentDao = OneononeCommentDao.getInstance();
+	OneononeComment oneononeComment = oneononeCommentDao.getCommentByNo(cno);
 	
-	lostitemComment.setDeleted("Y");
-	lostitemCommentDao.updateCommentByNo(lostitemComment); 
-		
+	oneononeComment.setDeleted("Y");
+	oneononeCommentDao.updateCommentByNo(oneononeComment);
 	
 	// detail.jsp를 재요청하는 URL을 응답으로 보낸다.
 	response.sendRedirect("detail.jsp?no=" +no);

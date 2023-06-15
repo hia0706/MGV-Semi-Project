@@ -1,12 +1,10 @@
 <%@page import="vo.OneononeComment"%>
 <%@page import="dao.OneononeCommentDao"%>
+<%@page import="vo.Oneonone"%>
+<%@page import="dao.OneononeDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
-<%@page import="vo.Oneonone"%>
-<%@page import="dao.OneononeDao"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
@@ -18,14 +16,16 @@
 	Member member = memberDao.getMemberById(id);
 	
 	if (member == null) {
-		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("문의내역 확인", "utf-8"));
+		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 
+	// 분실물 문의글 번호 조회
 	int no = Integer.parseInt(request.getParameter("no"));
 	
 	OneononeDao oneononeDao = OneononeDao.getInstance();
 	Oneonone oneonone = oneononeDao.getOneononeByNo(no);
+	
 	
 	// 해당 문의글의 커멘트목록 조회
 	OneononeCommentDao oneononeCommentDao = OneononeCommentDao.getInstance();
@@ -44,7 +44,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../../common/nav.jsp">
+<jsp:include page="../../nav.jsp">
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
 
@@ -56,7 +56,7 @@
    	</div>
 	<div class="clearfix">
 		<ul class="dot-list">
-			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+			<li>고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
 	</div>
 		<hr>
@@ -71,18 +71,51 @@
 			<br>
 			<br>
 		<hr>
-		
-<% for (OneononeComment oneononeComment : oneononecommentList) { %>   		
-	   			
-	   			<a> ㄴ <%=oneononeComment.getContent() %></a>
-
+			<form  method="post" action="insertComment.jsp">
+				<input type="hidden" name="no" value="<%=oneonone.getNo() %>" />
+ 				<div class="row">
+					<div class="col-11">
+						<textarea rows="2" class="form-control" name="content"></textarea>
+					</div>
+					<div class="col-1">
+						<button class="btn btn-outline-secondary h-100">등록</button>
+					</div>
+				</div>
+			</form>   	
 		<hr>
-<% } %>	
+		
+		<div class="row mb-3">
+   			<div class="col-12">
+   		
+<% for (OneononeComment oneononeComment : oneononecommentList) { %>   		
+   		
+   				<div class="border p-2 mb-2">
+	   			
+	   				<div>
+	   					<%=oneononeComment.getContent() %>
+	   				
+<%  if (oneononeComment.getMember().getId().equals(id)) { %>	   				
+	   				<a href="deleteComment.jsp?no=<%=no %>&cno=<%=oneononeComment.getNo() %>" 
+	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
+	   					
+<%  } %>	 
+	 
+	   				</div>   			
+   				</div>
+   	
+<% } %>	   	
+   		</div>
+   	</div>
+		
+		
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
 				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
 		</div>
+	
+			
+
       
 </div>
 </body>

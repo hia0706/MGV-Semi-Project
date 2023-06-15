@@ -57,6 +57,7 @@
 	h2{
 	font-size: 22px;
 	}
+	
 	.bi-heart-fill{
 	font-size: 22px;
 	line-height: 22px;
@@ -179,7 +180,7 @@ function activeTab(num) {
 			<div id="tab-01" class="tab-cont " style="display: block;">
 				<div class="theater-info-text">
 				</div>
-				<h2>시설안내</h2>
+				<h2 class="">시설안내</h2>
 				<h3>보유시설</h3>				
 				<h3>층별안내</h3>
 				<h2>교통안내</h2>
@@ -247,6 +248,11 @@ geocoder.addressSearch('<%=ad %>', function(result, status) {
 									<th>교통안내</th>
 									<td><button id="map-btn">길찾기</button></td>
 								</tr>
+								<tr>대중교통</tr>
+								<tr>자가용</tr>
+								<tr>주차안내</tr>
+								<tr>등</tr>
+								<tr>등</tr>
 							</tbody>
 					</table>			
 				</div>
