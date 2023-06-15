@@ -155,7 +155,7 @@
 					let productNo = item.no;
 					let productName = item.name;
 					
-					htmlContent += `<option value="\${productNo}"> \${productName}</option>`;
+					htmlContent += `<option value="\${productNo}""\${productNo == productNo ? 'selected' : ''}"> \${productName}</option>`;
 				});
 				// 4. 화면에 html 컨텐츠 반영시키기
 				document.getElementById("product").innerHTML = htmlContent;
@@ -165,15 +165,6 @@
 		xhr.open("GET", "cat.jsp?no=" + catNo);
 		// 3. 서버로 요청 보내기
 		xhr.send(null);
-		
-		function null(){
-			
-			let productNo = document.getElementById("product").value;
-			if(productNo === null){
-				alert("상품은 필수 입력칸 입니다.");
-				
-			}
-		}
 	}
 </script>
 </body>
