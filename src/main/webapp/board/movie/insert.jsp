@@ -40,11 +40,12 @@
 	
 	Movie movie = new Movie();
 	movie.setNo(movieNo);
+	movieBoard.setMovie(movie);
 	
 	
 	// 정보가 담긴 객체를 인서트 하기
 	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
-	
+	movieBoardDao.insertMovieBoard(movieBoard);
 	
 	// 재요청 url
 	response.sendRedirect("list.jsp");
