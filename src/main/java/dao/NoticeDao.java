@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import util.DaoHelper;
 import vo.Notice;
 
@@ -11,6 +10,19 @@ public class NoticeDao {
 	private NoticeDao() {}
 	public static NoticeDao getInstance() {
 		return instance;
+	}
+	
+	public void updatenotice(Notice notice) {
+		DaoHelper.update("noticedao.updatenotice", notice.getTitle(),
+													 notice.getContent(),
+												  	 notice.getDeleted(),
+													 notice.getNo());
+	}
+	
+	public void insertnotice(Notice notice) {
+		DaoHelper.update("noticedao.insertnotice", notice.getTitle(),
+													 notice.getContent(),
+													 notice.getMember().getId());
 	}
 	
 	public Notice getNoticeByNo(int noticeNo) {
@@ -27,7 +39,7 @@ public class NoticeDao {
 		}, noticeNo);
 	}
 	
-	public List<Notice> getNotice() {
+	public List<Notice> getNotice(int begin, int end) {
 		return DaoHelper.selectList("noticeDao.getNotice", rs -> {
 			Notice notice = new Notice();
 			notice.setNo(rs.getInt("notice_no"));
@@ -38,6 +50,12 @@ public class NoticeDao {
 			notice.setCreateDate(rs.getDate("notice_create_date"));
 			
 			return notice;
+		}, begin, end);
+	}
+	
+	public int getTotalRows() {
+		return DaoHelper.selectOne("noticeDao.getTotalRows", rs -> {
+			return rs.getInt("cnt");
 		});
 	}
 

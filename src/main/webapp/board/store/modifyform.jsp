@@ -123,7 +123,7 @@
 		
 				<div class="text-end">
 					<button type="reset" class="btn btn-secondary btn-sm">취소</button>
-					<button type="submit" class="btn btn-primary btn-sm">수정</button>
+					<button type="submit" class="btn btn-primary btn-sm" onclick="null();">수정</button>
 				</div>
 			</form>
 		</div>
@@ -155,7 +155,7 @@
 					let productNo = item.no;
 					let productName = item.name;
 					
-					htmlContent += `<option value="\${productNo}"> \${productName}</option>`;
+					htmlContent += `<option value="\${productNo}""\${productNo == productNo ? 'selected' : ''}"> \${productName}</option>`;
 				});
 				// 4. 화면에 html 컨텐츠 반영시키기
 				document.getElementById("product").innerHTML = htmlContent;

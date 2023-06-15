@@ -1,5 +1,5 @@
-<%@page import="dao.FaqDao"%>
-<%@page import="vo.Faq"%>
+<%@page import="vo.Notice"%>
+<%@page import="dao.NoticeDao"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Member"%>
 <%@page import="util.StringUtils"%>
@@ -22,9 +22,9 @@
 	
 	int no = Integer.parseInt(request.getParameter("no"));
 	
-	FaqDao faqDao = FaqDao.getInstance();
-	Faq faq = faqDao.getFaqByNo(no);
-
+	NoticeDao noticeDao = NoticeDao.getInstance();
+	Notice notice = noticeDao.getNoticeByNo(no);
+	
 %>
 
 <!doctype html>
@@ -68,11 +68,11 @@
 	 				
 	 				<div class="form-group mb-2">
 						<label class="form-label">제목</label>
-						<input type="text" class="form-control" name="title" value="<%=faq.getTitle() %>"/>
+						<input type="text" class="form-control" name="title" value="<%=notice.getTitle() %>"/>
 					</div>
 	  				<div class="form-group mb-2">
 						<label class="form-label">내용</label>
-						<textarea rows="10" class="form-control" name="content"><%=faq.getContent() %></textarea>
+						<textarea rows="10" class="form-control" name="content"><%=notice.getContent() %></textarea>
 					</div>
 					
 					

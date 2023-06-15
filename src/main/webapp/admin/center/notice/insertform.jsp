@@ -1,5 +1,3 @@
-<%@page import="dao.FaqDao"%>
-<%@page import="vo.Faq"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Member"%>
 <%@page import="util.StringUtils"%>
@@ -14,16 +12,12 @@
 
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
+
 	
 	if (member == null) {
 		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
-	
-	int no = Integer.parseInt(request.getParameter("no"));
-	
-	FaqDao faqDao = FaqDao.getInstance();
-	Faq faq = faqDao.getFaqByNo(no);
 
 %>
 
@@ -52,46 +46,51 @@
 <div class="container">
 	<div class="row mb-3">
     	<div class="col-12">
-        	<h1 class="fs-2 p-2">자주 묻는 질문</h1>
+        	<h1 class="fs-2 p-2">공지사항</h1>
       	</div>
    	</div>
 	<div class="clearfix">
 		<ul class="dot-list">
 			<li>
-				자주 묻는 질문을 수정해주세요.
+				공지사항을 등록해주세요.
 			</li>
 		</ul>
 			
 				<div class="border bg-light p-3">
-				<form id="modify" class="row g-3" method="post" action="modify.jsp" >
-	 				<input type="hidden" name="no" value="<%=no %>">
+				<form id="notice" class="row g-3" method="post" action="insert.jsp" >
 	 				
-	 				<div class="form-group mb-2">
+	 				
+	 				<div class="col-md-12">
 						<label class="form-label">제목</label>
-						<input type="text" class="form-control" name="title" value="<%=faq.getTitle() %>"/>
+						<input type="text" class="form-control" name="title"/>
 					</div>
-	  				<div class="form-group mb-2">
+	  				<div class="col-md-12">
 						<label class="form-label">내용</label>
-						<textarea rows="10" class="form-control" name="content"><%=faq.getContent() %></textarea>
+						<textarea rows="10" class="form-control" name="content"></textarea>
 					</div>
 					
 					
 				</form>
 			</div>
 			<div style="text-align: center; padding:30px;">
-				<button type="button" class="btn btn-secondary btn-sm" onclick="formsubmit()">수정</button>
+				<button type="button" class="btn btn-secondary btn-sm" onclick="formsubmit()">등록</button>
 			</div>
 	</div>
 </div>
 <script type="text/javascript">
 	function formsubmit() {
 		
-		let modifyform = document.getElementById("modify");
-		modifyform.submit();
+		let insertform = document.getElementById("notice");
+		insertform.submit();
 	}	
 </script>
 </body>
 </html>
+
+
+
+
+
 
 
 

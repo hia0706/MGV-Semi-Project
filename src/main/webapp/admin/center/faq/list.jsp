@@ -14,15 +14,20 @@
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
-	
 	if (member == null) {
 		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 	
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	
 	FaqDao faqDao = FaqDao.getInstance();
-	List<Faq> faqList = faqDao.getFaq();
+	int totalRows = faqDao.getTotalRows();
+	
+	Pagination pagination = new Pagination(pageNo, totalRows);
+	
+	
+	List<Faq> faqList = faqDao.getFaq(pagination.getBegin(), pagination.getEnd());
 
 %>
 
@@ -47,7 +52,7 @@
 <body>
 
 
-<jsp:include page="../..//nav.jsp">
+<jsp:include page="../../nav.jsp">
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
 
@@ -98,6 +103,27 @@
 					
 				</tbody>
 			</table>
+			
+			<nav>
+				<ul class="pagination justify-content-center">
+					<li class="page-item <%=pageNo <= 1 ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+					</li>
+					
+	<% for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) { %>					
+					
+					<li class="page-item <%=pageNo == num ? "active" : "" %>">
+						<a href="list.jsp?page=<%=num  %>" class="page-link"><%=num %></a>
+					</li>
+					
+	<% } %>					
+					
+					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+					</li>
+				</ul>
+			</nav>
+			
 		</div>
 </div>
 </body>

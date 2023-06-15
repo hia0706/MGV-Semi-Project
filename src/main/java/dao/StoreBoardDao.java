@@ -198,6 +198,8 @@ public class StoreBoardDao {
 														  storeBoard.getCommentCnt(),
 														  storeBoard.getDeleted(),
 														  storeBoard.getReport(),
+														  storeBoard.getCategory().getNo(),
+														  storeBoard.getProduct().getNo(),
 														  storeBoard.getNo());
 	}
 	
