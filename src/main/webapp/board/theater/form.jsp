@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="vo.Theater"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="vo.Location"%>
@@ -10,6 +11,14 @@
 	
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	List<Theater> theaters = theaterDao.getAllTheaters();
+	
+	// 세션에서 로그인된 고객의 아이디 조회하기
+	String loginId = (String) session.getAttribute("loginId");
+
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시물 등록", "utf-8"));
+		return;
+	}
 %>
 <!doctype html>
 <html lang="ko">

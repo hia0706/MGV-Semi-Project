@@ -1,9 +1,9 @@
+<%@page import="vo.SboardComment"%>
+<%@page import="dao.SboardCommentDao"%>
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="vo.ReportReason"%>
 <%@page import="dao.ReportDao"%>
-<%@page import="vo.TboardComment"%>
-<%@page import="dao.TboardCommentDao"%>
-<%@page import="vo.TheaterBoard"%>
-<%@page import="dao.TheaterBoardDao"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
@@ -16,9 +16,9 @@
 	String job = request.getParameter("job");
 
 	// 업무로직수행 - 요청 파라미터로 전달받은 게시물번호에 해당하는 게시물 상세정보를 조회한다.
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
-	String grade = theaterBoard.getGrade();
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	StoreBoard storeBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
+	String grade = storeBoard.getGrade();
 	String score = "";
 	if (grade.equals("A")){
 		score = "★★★★★";
@@ -32,8 +32,8 @@
 		score = "★☆☆☆☆";
 	}
 	
-    TboardCommentDao tboardCommentDao = TboardCommentDao.getInstance();
-    List<TboardComment> comments = tboardCommentDao.getCommentByBoardNo(boardNo);
+	  SboardCommentDao sboardCommentDao = SboardCommentDao.getInstance();
+      List<SboardComment> comments = sboardCommentDao.getCommentByBoardNo(boardNo);
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -64,19 +64,19 @@
 <div class="container my-3">
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2"><%=theaterBoard.getName() %></h1>
+			<h1 class="border bg-light fs-4 p-2"><%=storeBoard.getName() %></h1>
 		</div>
 
 <%
 	if("id".equals(err)){
 %>
 		<div class="alert alert-danger">
-			<strong>다른 사용자의 게시글을 [<%=job %>]할 수 없습니다.</strong>
+			<strong>다른 사용자의 게시글을 삭제할 수 없습니다.</strong>
 		</div>
 <%
 	}
 %>
-		
+	
 <%
 	if("Cid".equals(err)){
 %>
@@ -86,30 +86,32 @@
 <%
 	}
 %>
+		
+
 	</div>
 	
 	<div class="row mb-3">
 		<div class="col-12">
 			
-			<p style="font-size : 12px; line-height: 15%; float:right;">댓글 <strong><%=theaterBoard.getCommentCnt() %></strong></p>
-			<p style="font-size : 12px; line-height: 15%; float:right;">조회수 <strong><%=theaterBoard.getReadCnt()%>&nbsp;</strong></p>
-			<p style="font-size : 10px; line-height: 15%;"><strong><%=theaterBoard.getLocation().getName() %>/<%=theaterBoard.getTheater().getName() %></strong></p>
-			<p style="font-size : 12px; line-height: 15%;">작성자<strong> <%=theaterBoard.getMember().getId() %></strong></p>
-			<p style="font-size : 12px; line-height: 15%;"><strong> <%=theaterBoard.getUpdateDate() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%; float:right;">댓글 <strong><%=storeBoard.getCommentCnt() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%; float:right;">조회수 <strong><%=storeBoard.getReadCnt()%>&nbsp;</strong></p>
+			<p style="font-size : 10px; line-height: 15%;"><strong><%=storeBoard.getCategory().getName() %>/<%=storeBoard.getProduct().getName() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;">작성자<strong> <%=storeBoard.getMember().getId() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;"><strong> <%=storeBoard.getUpdateDate() %></strong></p>
 			<hr>
 			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
 				<p><strong>별점 : <%=score %></strong></p>
-				<p><%=theaterBoard.getContent() %></p>
+				<p><%=storeBoard.getContent() %></p>
 			</div>
 			
 			<div class="text-end">
 <%
-	if (theaterBoard.getMember().getId().equals(loginId)) {
+	if (storeBoard.getMember().getId().equals(loginId)) {
 %>
-				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
-				<a href="modifyform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-warning btn-sm">수정</a>
+				<a href="delete.jsp?no=<%=storeBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
+				<a href="modifyform.jsp?no=<%=storeBoard.getNo() %>" class="btn btn-warning btn-sm">수정</a>
 <%
-	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
+	} else if (loginId != null &&!storeBoard.getMember().getId().equals(loginId)) {
 %>
 				<button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal">신고</button>
 				
@@ -133,7 +135,7 @@
 	<div class="row mb-3">
    		<div class="col-12">
 			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
-				<input type="hidden" name="no" value=<%=theaterBoard.getNo() %> />
+				<input type="hidden" name="no" value=<%=storeBoard.getNo() %> />
  				<div class="row">
 					<div class="col-11">
 						<textarea rows="2" class="form-control" name="content"></textarea>
@@ -148,24 +150,23 @@
 	<div class="row mb-3">
    		<div class="col-12">
 <%
-	for(TboardComment comment : comments) {
+	for(SboardComment comment : comments) {
 %>
-			
+
    			<div class="border p-2 mb-2">
 	   			<div class="d-flex justify-content-between mb-1">
 	   				<span><%=comment.getMember().getId() %></span> <span class="text-muted"><%=comment.getCreaeDate() %></span>
 	   			</div>
 	   			<div>
 	   				<%=comment.getContent() %>
-				
+							
 	   				
 <%
 	if(comment.getMember().getId().equals(loginId)){
 %>
 
 
-
-	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
+					<a href="deleteComment.jsp?no=<%=storeBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
 	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
 
 <%
@@ -232,6 +233,8 @@
     	</div>
   	</div>
 </div>
+
 </div>
+
 </body>
 </html>

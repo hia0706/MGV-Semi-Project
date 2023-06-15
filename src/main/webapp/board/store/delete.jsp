@@ -1,3 +1,5 @@
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="java.net.URLEncoder"%>
@@ -18,17 +20,17 @@
 	int boardNo = Integer.parseInt(request.getParameter("no"));
 	
 	// 조회된 게시물 번호로 게시물을 조회한다
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	StoreBoard storeBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
 	
 	// 해당 게시물의 작성자가 아닌 다른 사용자가 게시물을 삭제하려 했을 때 에러메세지를 출력한다.
-	if (!theaterBoard.getMember().getId().equals(loginId)){
+	if (!storeBoard.getMember().getId().equals(loginId)){
 		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("삭제", "utf-8"));
-	} else if (theaterBoard.getMember().getId().equals(loginId)){
+	} else if (storeBoard.getMember().getId().equals(loginId)) {
 	
-		// 해당 게시물의 작성자가 맞을 경우엔 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
-		theaterBoard.setDeleted("Y");
-		theaterBoardDao.updateTheaterBoard(theaterBoard);
+	// 해당 게시물의 작성자가 맞을 경우에는 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
+		storeBoard.setDeleted("Y");
+		storeBoardDao.updatStoreBoard(storeBoard);
 		
 		response.sendRedirect("list.jsp");
 	}

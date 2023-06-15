@@ -1,3 +1,6 @@
+<%@page import="vo.SboardReport"%>
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="dao.ReportDao"%>
 <%@page import="vo.ReportReason"%>
 <%@page import="vo.TboardReport"%>
@@ -22,30 +25,30 @@
 	int reasonNo = Integer.parseInt(request.getParameter("reasonNo"));
 	
 	// 조회된 게시물 번호로 게시물을 조회한다
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	TheaterBoard savedTheaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	StoreBoard savedStoreBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
 	
 	
 	// 조회된 게시물의 신고 정보를 "Y" 로 변경한뒤 DB에 저장한다.
-	savedTheaterBoard.setReport("Y");
-	theaterBoardDao.updateTheaterBoard(savedTheaterBoard);
+	savedStoreBoard.setReport("Y");
+	storeBoardDao.updatStoreBoard(savedStoreBoard);
 	
 	// 게시물 신고 정보를 저장할 신고객체를 생성한다.
-	TboardReport tboardReport = new TboardReport();
+	SboardReport sboardReport = new SboardReport();
 	
-	TheaterBoard theaterBoard = new TheaterBoard();
-	theaterBoard.setNo(boardNo);
-	tboardReport.setTheaterBoard(theaterBoard);
+	StoreBoard storeBoard = new StoreBoard();
+	storeBoard.setNo(boardNo);
+	sboardReport.setStoreBoard(storeBoard);
 	
 	ReportReason reason = new ReportReason();
 	reason.setNo(reasonNo);
-	tboardReport.setReason(reason);
+	sboardReport.setReason(reason);
 	
-	tboardReport.setReasonContent(content);
+	sboardReport.setReasonContent(content);
 	
 	// 신고객체를 신고테이블에 insert한다.
 	ReportDao reportDao = ReportDao.getInstance();
-	reportDao.insertTboardReport(tboardReport);
+	reportDao.insertSboardReport(sboardReport);
 	
 	response.sendRedirect("list.jsp");
 	

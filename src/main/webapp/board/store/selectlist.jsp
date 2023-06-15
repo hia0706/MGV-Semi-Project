@@ -1,3 +1,9 @@
+<%@page import="vo.Product"%>
+<%@page import="vo.ProductCategory"%>
+<%@page import="dao.ProductCategoryDao"%>
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
@@ -11,22 +17,44 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
 <%
+	
+	// 요청 파라미터 조회
+	int catNo = Integer.parseInt(request.getParameter("catNo"));
+	int productNo = Integer.parseInt(request.getParameter("productNo"));	
+
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	
-	LocationDao locationDao = LocationDao.getInstance();
-	List<Location> locations = locationDao.getLocations();
+	// 품목 셀렉트 박스 목록
+	ProductCategoryDao productCategoryDao = ProductCategoryDao.getInstance();
+	List<ProductCategory> categories = productCategoryDao.getCategories();
+	
+	// 상품이름 셀렉트 박스 목록
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();	
 
 	TheaterDao theaterDao = TheaterDao.getInstance();
 	List<Theater> theaters = theaterDao.getAllTheaters();
 	
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	int totalRows = theaterBoardDao.getTotalRows();
+	// 현제 페이지에서 출력되는 게시물 수 조회하기
+	int totalRows = 0;
+	
+	if (productNo == 0){
+		totalRows = storeBoardDao.getTotalRowsByCatNo(catNo);
+	} else if (productNo != 0){
+		totalRows = storeBoardDao.getTotalRowsByProduct(productNo);
+	} 
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	
 	// 데이터 조회하기
-	List<TheaterBoard> theaterBoards = theaterBoardDao.getTheaterBoards(pagination.getBegin(), pagination.getEnd());
-
+	List<StoreBoard> storeBoards = new ArrayList<StoreBoard>();
+	
+	if (productNo == 0){
+		storeBoards = storeBoardDao.getAllStoreBoardsByCatNo(catNo, pagination.getBegin(), pagination.getEnd());
+	} else if (productNo != 0){
+		storeBoards = storeBoardDao.getAllStoreBoardsByProductNo(productNo, pagination.getBegin(), pagination.getEnd());
+	} 
+	
 %>
 <html lang="ko">
 <head>
@@ -47,12 +75,12 @@
 </jsp:include>
 
 
-<%-- 극장 게시판 시작 --%>
+<%-- 스토어 게시판 시작 --%>
  
 <div class="container">
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2">극장 게시판</h1>
+			<h1 class="border bg-light fs-4 p-2">스토어 게시판</h1>
 		</div>
 	</div>
 	<div class="row mb-3">
@@ -64,36 +92,35 @@
 					<p class="result-count"><strong>전체 <span id="totalCnt" class="font-gblue"><%=totalRows %></span>건</strong></p>
 				</div>
 				
-<%--검색 : 각 select에 name을 설정하고, method를 get으로 설정하면 된다  --%>				
+<%--검색  --%>				
 				<form method="get" action="selectlist.jsp" >
 				
-<%-- 지역/극장을 선택하는 select --%>			
-					<select id="theater" title="지역 선택" class="selectpicker" name="locationNo" >
-						<option value= 0 >지역 선택</option>
+					<select id="theater" title="품목 선택" class="selectpicker" name="catNo" >
+						<option value= 0 >품목 선택</option>
 												
 <%
-	for(Location location : locations){
+	for(ProductCategory category : categories){
 %>
-					<option value="<%=location.getNo() %>"><%=location.getName() %></option>
+						<option value="<%=category.getNo() %>"><%=category.getName() %></option>
 <%
 	}
 %>
 						
-					</select>
-
-					<select id="theater02" title="극장 선택" class="selectpicker ml07" name="theaterNo" >
-						<option value= 0 >극장 선택</option>
+						</select>
+	
+						<select id="theater02" title="상품 선택" class="selectpicker ml07" name="productNo" >
+							<option value= 0 >상품 선택</option>
 						
 <%
-	for(Theater theater : theaters){
+	for(Product product : products){
 %>
-					<option value="<%=theater.getNo() %>"><%=theater.getName() %></option>
+						<option value="<%=product.getNo() %>"><%=product.getName() %></option>
 <%
 	}
-%>						
-					</select>
-					<button type="submit" id="searchBtn" class="btn-search-input" >검색</button>
-				</form>
+%>								
+						</select>
+						<button type="submit" id="searchBtn" class="btn-search-input" >검색</button>
+					</form>
 				
 	
 			
@@ -118,7 +145,7 @@
 
 
 <%
-	for(TheaterBoard board : theaterBoards) {
+	for(StoreBoard board : storeBoards) {
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
@@ -139,13 +166,13 @@
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+						<a href="selectlist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 					</li>
 <%
 	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>				
 					<li class="page-item <%=pageNo == num ? "active" : "" %>">
-						<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
+						<a href="selectlist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
 					</li>
 
 <%
@@ -153,7 +180,7 @@
 %>
 					
 					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+						<a href="selectlist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 					</li>
 				</ul>
 			</nav>
