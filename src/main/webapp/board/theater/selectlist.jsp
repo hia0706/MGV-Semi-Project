@@ -113,8 +113,7 @@
 				</form>
 				
 
-</script>			
-			
+
 			<table class="table table-sm">
 				<colgroup>
 					<col width="5%">
@@ -140,7 +139,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getReadCnt() %></td>
 						<td><%=board.getCreateDate() %></td>

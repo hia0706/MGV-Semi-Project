@@ -20,6 +20,9 @@ public class Member {
 	private Date createDate;
 	private String referee;
 	private String disabled;
+	private Product product;
+	private Order order;
+	private ProductCategory productCategory;
 	
 	public Member() {}
 	
@@ -154,5 +157,30 @@ public class Member {
 	public void setDisabled(String disabled) {
 		this.disabled = disabled;
 	}
+	
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	
+	public Order getOrder() {
+		return order;
+	}
+	
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+	public Product getProduct() {
+		return product;
+	}
+	
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
+	}
+	
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+	
 	
 }

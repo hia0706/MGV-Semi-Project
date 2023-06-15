@@ -66,7 +66,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 
 					<div class="audience ">
 						<div class="tit ">
-							<span class="m-tooltip-wrap ">누적관객수 <!-- 2019-09-11 툴팁 보기 수정 -->
+							<span class="m-tooltip-wrap ">누적관객수 (<%=movie.getUpdateDate() %> 기준)
 							</span>
 						</div>
 						<p class="cont">

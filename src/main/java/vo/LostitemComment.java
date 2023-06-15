@@ -2,21 +2,16 @@ package vo;
 
 import java.util.Date;
 
-public class Lostitem {
-
+public class LostitemComment {
+	
 	private int no;
-	private String title;
 	private String content;
-	private String answered;
 	private String deleted;
 	private Date createDate;
+	private Lostitem lostitem;
 	private Member member;
 	
-	public Lostitem () {}
-	
-	public Lostitem(int no) {
-		this.no = no;
-	}
+	public LostitemComment() {}
 
 	public int getNo() {
 		return no;
@@ -26,28 +21,12 @@ public class Lostitem {
 		this.no = no;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getAnswered() {
-		return answered;
-	}
-
-	public void setAnswered(String answered) {
-		this.answered = answered;
 	}
 
 	public String getDeleted() {
@@ -66,6 +45,14 @@ public class Lostitem {
 		this.createDate = createDate;
 	}
 
+	public Lostitem getLostitem() {
+		return lostitem;
+	}
+
+	public void setLostitem(Lostitem lostitem) {
+		this.lostitem = lostitem;
+	}
+
 	public Member getMember() {
 		return member;
 	}
@@ -74,7 +61,5 @@ public class Lostitem {
 		this.member = member;
 	}
 	
-	
-	
-	
+ 
 }
