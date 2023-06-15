@@ -1,3 +1,5 @@
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="vo.Lostitem"%>
 <%@page import="dao.LostitemDao"%>
 <%@page import="util.StringUtils"%>
@@ -6,6 +8,17 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+
+	// 세션에서 로그인된 사용자 아이디 조회
+	String id = (String) session.getAttribute("loginId");
+	
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	
+	if (member == null) {
+		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
 	
 	LostitemDao lostitemDao = LostitemDao.getInstance();
 	List<Lostitem> lostitemList = lostitemDao.getLostitems();
@@ -41,16 +54,12 @@
 <div class="container">
 	<div class="row mb-3">
     	<div class="col-12">
-        	<h1 class="fs-2 p-2">분실물 문의</h1>
+        	<h1 class="fs-2 p-2">전체 분실물 문의 내역</h1>
       	</div>
    	</div>
 	<div class="clearfix">
 		<ul class="dot-list">
-			<li>
-				MGV에서 잃어버린 물건이 있다면 ‘분실물 문의/접수’를 통해 접수해주세요.
-				<a href="insertform.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">분실물 문의</a>
-			</li>
-			<li>접수하신 글은 비밀글로 등록되어 작성자와 관리자만 확인 가능합니다.</li>
+			<li>고객들이 접수한 분실물 문의내역을 확인하세요.</li>
 		</ul>
 			
 			<table class="table">

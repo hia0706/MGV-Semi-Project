@@ -16,7 +16,7 @@
 	Member member = memberDao.getMemberById(id);
 	
 	if (member == null) {
-		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("문의글 확인", "utf-8"));
+		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("문의내역 확인", "utf-8"));
 		return;
 	}
 
@@ -73,10 +73,9 @@
 		
 <% for (LostitemComment lostitemComment : lostitemcommentList) { %>   		
    		
-	   			
-	   				<a> ㄴ <%=lostitemComment.getContent() %></a>
-		<hr>
+	   			<a> ㄴ <%=lostitemComment.getContent() %></a>
 
+		<hr>
 <% } %>	
 		
 		<div style="text-align: center; padding:30px;">
@@ -88,9 +87,6 @@
 				
 		</div>
 	
-			
-
-      
 </div>
 </body>
 </html>
