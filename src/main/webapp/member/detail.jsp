@@ -30,7 +30,7 @@
 </head>
 <body>
 <jsp:include page="../common/nav.jsp">
-	<jsp:param name="menu" value="MEMBER"/>
+	<jsp:param name="menu" value="<%=loginId %>"/>
 </jsp:include>
 <div class="container">
 	<div class="row mb-3">
