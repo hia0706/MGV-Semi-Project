@@ -61,4 +61,15 @@ public class MovieBoardDao {
 			return movieBoard;	
 		}, begin, end);
 	}
+	
+	// movie관련
+	public List<Movie> getMovies() {
+		return DaoHelper.selectList("movieBoardDao.getAllMovie", rs -> {
+			Movie movie = new Movie();
+			movie.setNo(rs.getInt("movie_no"));
+			movie.setTitle(rs.getString("movie_title"));
+		
+			return movie;
+		});
+	}
 }
