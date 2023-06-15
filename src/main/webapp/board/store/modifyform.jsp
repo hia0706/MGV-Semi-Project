@@ -1,13 +1,12 @@
+<%@page import="vo.StoreBoard"%>
+<%@page import="vo.Product"%>
+<%@page import="dao.StoreBoardDao"%>
+<%@page import="vo.ProductCategory"%>
+<%@page import="dao.ProductCategoryDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
-<%@page import="dao.TheaterBoardDao"%>
-<%@page import="vo.TheaterBoard"%>
-<%@page import="vo.Theater"%>
-<%@page import="dao.TheaterDao"%>
-<%@page import="vo.Location"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LocationDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 
@@ -22,22 +21,26 @@
 	
 	int boardNo = Integer.parseInt(request.getParameter("no"));
 	
-	LocationDao locationDao = LocationDao.getInstance();
-	List<Location> locations = locationDao.getLocations();
+	// 품목 셀렉트 박스 목록
+	ProductCategoryDao productCategoryDao = ProductCategoryDao.getInstance();
+	List<ProductCategory> categories = productCategoryDao.getCategories();
 	
-	TheaterDao theaterDao = TheaterDao.getInstance();
-	List<Theater> theaters = theaterDao.getAllTheaters();
-	
-	// 다른사용자의 게시물을 수정하려 시도했을시 에러메세지 출력
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);	
-	if (!theaterBoard.getMember().getId().equals(loginId)){
-		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("수정", "utf-8"));
-	}
+	// 상품이름 셀렉트 박스 목록
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();	
 
-	int locationNo = theaterBoard.getLocation().getNo();
-	int theaterNo = theaterBoard.getTheater().getNo();
-	String grade = theaterBoard.getGrade();
+
+	// 조회된 게시물 번호로 게시물을 조회한다
+	StoreBoard storeBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
+	
+	// 해당 게시물의 작성자가 아닌 다른 사용자가 게시물을 수정하려 했을 때 에러메세지를 출력한다.
+	if (!storeBoard.getMember().getId().equals(loginId)){
+		response.sendRedirect("detail.jsp?no=" + boardNo + "&err=id&job="+URLEncoder.encode("수정", "utf-8"));
+	} 
+	
+	int catNo = storeBoard.getCategory().getNo();
+	int productNo = storeBoard.getProduct().getNo();
+	String grade = storeBoard.getGrade();
 	String score = "";
 	if (grade.equals("A")){
 		score = "★★★★★";
@@ -80,7 +83,7 @@
 				<input type="hidden" name="no" value="<%=boardNo %>">
 				<div class="form-group mb-2">
 					<label class="form-label">제목</label>
-					<input type="text" class="form-control" name="name" value="<%=theaterBoard.getName() %>"/>
+					<input type="text" class="form-control" name="name" value="<%=storeBoard.getName() %>"/>
 				</div>
 
 				<div class="txc-textbox" style="background-color:#FAFAFA; border:#FFFFFF 4px solid; border-radius: 5px; width: 33%; padding:10px; float: left;" >
@@ -89,12 +92,12 @@
 				</div>				
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
-					<label class="form-label">지역</label>
-					<select class="form-select" name="locationNo" id="selectbox" >
+					<label class="form-label">품목</label>
+					<select class="form-select" name="catNo" id="selectbox" >
 <%
-	for (Location location : locations){
+	for (ProductCategory category : categories){
 %>
-					<option value="<%=location.getNo() %>"<%=location.getNo() == locationNo ? "selected" : ""%> ><%=location.getName() %></option>
+					<option value="<%=category.getNo() %>"<%=category.getNo() == catNo ? "selected" : ""%> ><%=category.getName() %></option>
 <%
 	}
 %>
@@ -102,12 +105,12 @@
 				</div>
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
-					<label class="form-label">극장</label>
-					<select class="form-select" name="theaterNo">
+					<label class="form-label">상품</label>
+					<select class="form-select" name="productNo">
 <%
-	for (Theater theater : theaters){
+	for (Product product : products){
 %>
-					<option value="<%=theater.getNo() %>"<%=theater.getNo() == theaterNo ? "selected" : ""%> ><%=theater.getName() %></option>
+					<option value="<%=product.getNo() %>"<%=product.getNo() == productNo ? "selected" : ""%> ><%=product.getName() %></option>
 <%
 	}
 %>
@@ -118,7 +121,7 @@
 				
 				<div class="form-group mb-2">
 					<label class="form-label">내용</label>
-					<textarea rows="10" class="form-control" name="content" ><%=theaterBoard.getContent() %></textarea>
+					<textarea rows="10" class="form-control" name="content" ><%=storeBoard.getContent() %></textarea>
 				</div>
 
 
