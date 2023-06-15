@@ -17,11 +17,10 @@
 	List<ProductCategory> categories = productCategoryDao.getCategories();
 	
 	// 상품이름 셀렉트 박스 목록
-	ProductDao productDao = ProductDao.getInstance();
-	List<Product> products = productDao.getAllProducts();
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();	
 
 	// totalrows (de, re ='N')
-	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
 	int totalRows = storeBoardDao.getTotalRows();
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
@@ -70,8 +69,8 @@
 				<form method="get" action="selectlist.jsp" >
 				
 <%-- 지역/극장을 선택하는 select --%>			
-					<select id="theater" title="품목 선택" class="selectpicker" name="catNo" >
-						<option value= 0 >품목 선택</option>
+				<select id="theater" title="품목 선택" class="selectpicker" name="catNo" >
+					<option value= 0 >품목 선택</option>
 												
 <%
 	for(ProductCategory category : categories){
@@ -83,7 +82,7 @@
 						
 					</select>
 
-					<select id="theater02" title="상품 선택" class="selectpicker ml07" name="theaterNo" >
+					<select id="theater02" title="상품 선택" class="selectpicker ml07" name="productNo" >
 						<option value= 0 >상품 선택</option>
 						
 <%
@@ -124,7 +123,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getReadCnt() %></td>
 						<td><%=board.getCreateDate() %></td>

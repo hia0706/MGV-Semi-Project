@@ -8,16 +8,12 @@
 <%@page import="dao.MemberDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	//세션에서 로그인된 고객의 아이디 조회하기
+	// 세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
 	
-	// 에러메세지 출력
-	MemberDao memberDao = MemberDao.getInstance();
-	Member member = memberDao.getMemberById(loginId);
-   
-	if (member == null) {
-	   response.sendRedirect("../../member/loginform.jsp?err=fail");
-	   return;
+	if(loginId == null){
+		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시물신고", "utf-8"));
+		return;
 	}
 	
 	// 요청파라미터 조회

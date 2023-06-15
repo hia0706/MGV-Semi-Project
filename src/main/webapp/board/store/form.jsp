@@ -1,17 +1,20 @@
 <%@page import="java.net.URLEncoder"%>
-<%@page import="vo.Theater"%>
-<%@page import="dao.TheaterDao"%>
-<%@page import="vo.Location"%>
+<%@page import="dao.StoreBoardDao"%>
+<%@page import="dao.ProductDao"%>
+<%@page import="vo.Product"%>
+<%@page import="dao.ProductCategoryDao"%>
+<%@page import="vo.ProductCategory"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LocationDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	LocationDao locationDao = LocationDao.getInstance();
-	List<Location> locations = locationDao.getLocations();
+	//품목 셀렉트 박스 목록
+	ProductCategoryDao productCategoryDao = ProductCategoryDao.getInstance();
+	List<ProductCategory> categories = productCategoryDao.getCategories();
 	
-	TheaterDao theaterDao = TheaterDao.getInstance();
-	List<Theater> theaters = theaterDao.getAllTheaters();
-	
+	// 상품이름 셀렉트 박스 목록
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	List<Product> products = storeBoardDao.getProducts();
+
 	// 세션에서 로그인된 고객의 아이디 조회하기
 	String loginId = (String) session.getAttribute("loginId");
 
@@ -77,13 +80,13 @@
 				</div>				
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
-					<label class="form-label">지역</label>
-					<select class="form-select" name="locationNo">
-					<option value="" selected="selected" disabled="disabled">지역</option>
+					<label class="form-label">품목</label>
+					<select class="form-select" name="catNo">
+					<option value="" selected="selected" disabled="disabled">품목</option>
 <%
-	for (Location location : locations){
+	for (ProductCategory category : categories){
 %>
-					<option value="<%=location.getNo()%>"><%=location.getName() %></option>
+					<option value="<%=category.getNo()%>"><%=category.getName() %></option>
 <%
 	}
 %>
@@ -91,13 +94,13 @@
 				</div>
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
-					<label class="form-label">극장</label>
-					<select class="form-select" name="theaterNo">
-					<option value="" selected="selected" disabled="disabled">극장</option>
+					<label class="form-label">상품</label>
+					<select class="form-select" name="productNo">
+					<option value="" selected="selected" disabled="disabled">상품</option>
 <%
-	for (Theater theater : theaters){
+	for (Product product : products){
 %>
-					<option value="<%=theater.getNo()%>"><%=theater.getName() %></option>
+					<option value="<%=product.getNo()%>"><%=product.getName() %></option>
 <%
 	}
 %>

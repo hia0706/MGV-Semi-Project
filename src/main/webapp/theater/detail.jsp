@@ -52,7 +52,10 @@
     font-size: 15px;
     color: #444;
     font-weight: 400;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family: sans-serif;
+	}
+	h2{
+	font-size: 22px;
 	}
 	.bi-heart-fill{
 	font-size: 22px;
@@ -60,7 +63,8 @@
 	color:crimson;
 	}
 	.container{
-	width: 900px;}
+	width: 980px;
+	}
 	.table-fee{
     letter-spacing: 0;
     border: 0;
@@ -101,7 +105,7 @@
 <div class="container">
 	<div>
 		<div class="theater-cont-lab">
-			<h4>강남
+			<h2>강남
 			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 text-muted를 지운다. -->
 <%
 	if(loginId!=null){
@@ -110,7 +114,7 @@
 <%
 	}
 %>			
-			</h4>
+			</h2>
 		</div>
 <script type="text/javascript">
 // 즐겨찾기 등록된 극장인지 확인
@@ -177,11 +181,13 @@ function activeTab(num) {
 				</div>
 				<h2>시설안내</h2>
 				<h3>보유시설</h3>				
-				<h3>층별안내</h3>				
+				<h3>층별안내</h3>
+				<h2>교통안내</h2>
 				<!-- 카카오지도 보여줄 영역 -->
+				
 				<div id="map" class="float-start" style="width:400px;height:300px;">
 				</div>
-				
+<!-- 카카오맵 -->				
 <script type="text/javascript">
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -232,8 +238,7 @@ geocoder.addressSearch('<%=ad %>', function(result, status) {
 	});
 } 
 });
-
-
+<!-- 카카오맵 -->
 </script>	
 				<div>
 					<table style="margin-left: 10px">
@@ -305,7 +310,7 @@ geocoder.addressSearch('<%=ad %>', function(result, status) {
 				• 48개월 미만의 경우 증빙원(예 : 의료보험증, 주민등록 초/등본 등) 지참 시에만 무료 관람 가능<br>
 				<br>
 				<br>
-				<span style="font-size:22px"><span style="color:#503396">우대적용</span></span><br>
+				<span style="font-size:22px "><span style="color:#503396">우대적용</span></span><br>
 				<br>
 				• <span style="color:#01738b">국가유공자</span>&nbsp; 현장에서 국가유공자증을 소지한 본인 외 동반 1인까지 적용<br>
 				• <span style="color:#01738b">장애인</span>&nbsp; 현장에서 복지카드를 소지한 장애인[중증 (1급~3급)까지 동반 1인까지 적용 / 경증(4급~6급)은 본인에 한함]<br>
@@ -314,7 +319,7 @@ geocoder.addressSearch('<%=ad %>', function(result, status) {
 				• <span style="color:#01738b">소방종사자</span>&nbsp; 공무원증을 소지하거나 정복을 입은 소방관 본인<br>
 				<br>
 				<br>
-				관람가격 및 시간대 운영은 극장마다 상이할 수 있으며, 상기 가격은 메가박스 강남점에 한하여 적용됩니다.
+				관람가격 및 시간대 운영은 극장마다 상이할 수 있습니다.
 			</div>
 		</div>
 	</div>
