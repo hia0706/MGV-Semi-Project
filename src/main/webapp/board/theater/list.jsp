@@ -84,7 +84,7 @@
 				</select>
 	
 			
-			<table class="table table-sm" id="table-employees">
+			<table class="table table-sm" id="table-Tboard">
 				<colgroup>
 					<col width="5%">
 					<col width="55%">
@@ -227,7 +227,7 @@
 					`;
 				});
 				
-				document.querySelector("#table-employees tbody").innerHTML = htmlContents;
+				document.querySelector("#table-TBoard tbody").innerHTML = htmlContents;
 			
 				let paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
