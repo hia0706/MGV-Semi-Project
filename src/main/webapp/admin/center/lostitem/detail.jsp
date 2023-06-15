@@ -72,7 +72,7 @@
 			<br>
 		<hr>
 			<form  method="post" action="insertComment.jsp">
-				<input type="hidden" name="lostitemNo" value="<%=lostitem.getNo() %>" />
+				<input type="hidden" name="no" value="<%=lostitem.getNo() %>" />
  				<div class="row">
 					<div class="col-11">
 						<textarea rows="2" class="form-control" name="content"></textarea>

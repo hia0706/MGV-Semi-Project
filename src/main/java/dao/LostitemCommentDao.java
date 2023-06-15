@@ -51,8 +51,8 @@ public class LostitemCommentDao {
 	}
 	
 	public void updateCommentByNo(LostitemComment lostitemComment) {
-		DaoHelper.update("lostitemCommentDao.updateCommentByNo", lostitemComment.getNo(),
-																 lostitemComment.getDeleted());
+		DaoHelper.update("lostitemCommentDao.updateCommentByNo", lostitemComment.getDeleted(),
+																 lostitemComment.getNo());
 	}
 	
 	
