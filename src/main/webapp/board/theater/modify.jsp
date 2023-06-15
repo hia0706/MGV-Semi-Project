@@ -31,25 +31,24 @@
 		// 게시물을 작성한 사용자가 맞으면 게시물 수정을 진행한다.
 	} else if (savedTheaterBoard.getMember().getId().equals(loginId)) {
 	
-		// 수정된 게시물 정보를 담을 게시물 객체를 생성하고, 요청 파라미터로 받은 수정 정보를 담는다.
-		TheaterBoard theaterBoard = new TheaterBoard();
-		theaterBoard.setName(name);
-		theaterBoard.setContent(content);
+		// 요청 파라미터로 받은 수정 정보를 담는다.
+		savedTheaterBoard.setName(name);
+		savedTheaterBoard.setContent(content);
 		
 		Location location = new Location();
 		location.setNo(locationNo);
-		theaterBoard.setLocation(location);
+		savedTheaterBoard.setLocation(location);
 		
 		Theater theater = new Theater();
 		theater.setNo(theaterNo);
-		theaterBoard.setTheater(theater);
+		savedTheaterBoard.setTheater(theater);
 		
 		Member member = new Member();
 		member.setId(loginId);
-		theaterBoard.setMember(member);
+		savedTheaterBoard.setMember(member);
 		
 		// 수정된 게시물 정보를 담은 게시물 정보를 DB에 UPDATE 한다.
-		theaterBoardDao.updateTheaterBoard(theaterBoard);
+		theaterBoardDao.updateTheaterBoard(savedTheaterBoard);
 		
 		// URL 재요청
 		response.sendRedirect("detail.jsp?no="+boardNo);
