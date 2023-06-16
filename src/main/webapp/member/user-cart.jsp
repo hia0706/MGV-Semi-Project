@@ -1,9 +1,17 @@
 <%@page import="vo.Product"%>
 <%@page import="dao.ProductDao"%>
+<%@page import="vo.Cart"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.CartDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
-	
 	String loginId = (String) session.getAttribute("loginId");
+	
+	// 장바구니 상품들 가져오기
+	CartDao cartDao = CartDao.getInstance();
+	List<Cart> cartList = cartDao.getMyCarts(loginId);
+	
+	Cart ct = new Cart();
 %>
 <!doctype html>
 <html lang="ko">
@@ -16,10 +24,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style type="text/css">
-
+	.box {
+		text-align: center;
+	}
 </style>
 <script type="text/javascript">
-	
+	function() {
+		
+	}
 </script>
 </head>
 <body>
@@ -38,38 +50,29 @@
 			<table class="table">
 				<thead>
 					<tr class="table-dark text-center">
-						<th id="name">상품명</th>
-						<th id="price">판매금액</th>
-						<th id="amount">수량</th>
-						<th id="totalPrice">구매금액</th>
-						<th id="delete">취소</th>
+						<th></th>
+						<th>상품명</th>
+						<th>판매금액</th>
+						<th>수량</th>
+						<th>구매금액</th>
+						<th>취소</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="box">
 <%
-	
+	for (Cart cart : cartList) {
 %>
-					<tr class="text-center">
-						<td style="width: 20%;">팝콘</td>
-						<td style="width: 20%;"><strong>2000</strong>원</td>
-						<td style="width: 20%;">1</td>
-						<td style="width: 20%;"><strong>1800</strong>원</td>
-						<td style="width: 20%;"><i class="bi bi-trash"></i></td>
+					<tr>
+						<td><img alt="상품별 사진" src="../images/products/<%=cart.getProduct().getNo() %>.png" class="img-thumnail" width="150%"></td>
+						<td id="productName" style="width: 20%; padding: 1em 0;"><%=cart.getProduct().getName() %></td>
+						<td id="productPrice" style="width: 20%; padding: 1em 0;"><strong><%=cart.getProduct().getPrice() %></strong>원</td>
+						<td id="amount" style="width: 20%; padding: 1em 0;"><%=cart.getAmount() %></td>
+						<td id="totalPrice" style="width: 20%; padding: 1em 0;"><strong><%=cart.getTotalPrice() %></strong>원</td>
+						<td style="width: 15%; padding: 1em 0;"><a href="deleteCartItem.jsp?no=<%=cart.getNo() %>" id="deleteItem"><i class="bi bi-trash link-dark"></i></a></td>
 					</tr>
-					<tr class="text-center">
-						<td style="width: 20%;">영화티켓</td>
-						<td style="width: 20%;"><strong>15000</strong>원</td>
-						<td style="width: 20%;">2</td>
-						<td style="width: 20%;"><strong>13000</strong>원</td>
-						<td style="width: 20%;"><i class="bi bi-trash"></i></td>
-					</tr>
-					<tr class="text-center">
-						<td style="width: 20%;">음료</td>
-						<td style="width: 20%;"><strong>2000</strong>원</td>
-						<td style="width: 20%;">2</td>
-						<td style="width: 20%;"><strong>1800</strong>원</td>
-						<td style="width: 20%;"><i class="bi bi-trash"></i></td>
-					</tr>
+<%
+	}
+%>
 				</tbody>
 			</table>
 		</div>
@@ -107,7 +110,7 @@
 					
 	<div class="row mb-3">
 		<div class="col-12 text-end">
-			<a href="order.jsp" class="btn btn-primary">쇼핑하기</a>
+			<a href="order.jsp" class="btn btn-success">결제</a>
 		</div>
 	</div>
 	
