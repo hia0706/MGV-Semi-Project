@@ -29,7 +29,9 @@
 	}
 </style>
 <script type="text/javascript">
-	function() {
+	function grandTotal() {
+		let totalPrice = document.getElementById("totalPrice");
+		totalPrice
 		
 	}
 </script>
