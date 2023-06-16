@@ -89,7 +89,7 @@
 				
 	
 			
-			<table class="table table-sm" id="table-SBoard"">
+			<table class="table table-sm" id="table-SBoard">
 				<colgroup>
 					<col width="5%">
 					<col width="55%">
