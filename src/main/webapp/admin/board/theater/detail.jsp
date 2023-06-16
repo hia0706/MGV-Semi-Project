@@ -1,3 +1,4 @@
+<%@page import="vo.TboardReport"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.ReportReason"%>
 <%@page import="dao.ReportDao"%>
@@ -51,10 +52,12 @@
 		return;
 	}
 
-	ReportDao reportReasonDao = ReportDao.getInstance();
-	List<ReportReason> reportReasons = reportReasonDao.getReportReasonrs();
+	ReportDao reportDao = ReportDao.getInstance();
+	List<ReportReason> reportReasons = reportDao.getReportReasonrs();
 	
-
+	
+	// 신고 테이블 출력
+	TboardReport report = reportDao.getTboardReportByBoardNo(boardNo);
 	
 
 %>
@@ -109,124 +112,54 @@
 			</div>
 			
 			<div class="text-end">
+			
+			<br>
+			<br>
 
-				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
+<%
+	if("Y".equals(theaterBoard.getReport())){
+%>
+			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
+				<p ><strong>아래의 이유로 신고가 접수되었습니다.</strong></p>
+			</div>
+			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
+				<p ><strong>신고이유 : <%=report.getReason().getName() %></strong></p>
+				<p ><%=report.getReasonContent() %></p>
+			</div>
+
+<%
+	}
+%>
+
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
+<%
+	if(("Y".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted()))|| ("N".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted()))){
+%>		
+				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
+
+<%
+	}
+%>	
+
+<%
+	if("Y".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted())){
+%>	
+				<a href="reportEnable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-secondary btn-sm">신고취소</a>
+<%
+	}
+%>
+
+<%
+	if("Y".equals(theaterBoard.getDeleted())){
+%>
+				<a href="reportEnable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
+<%
+	}
+%>
 			</div>
 		</div>
 	</div>
-	
-<script type="text/javascript">
-	function reportform(){
-		open("reportform.jsp?no=<%=boardNo %>", "popup", "width=600, height=500")
-		
-		
-	}
-</script>
 
-<%-- 댓글 --%>	
-	<div class="row mb-3">
-   		<div class="col-12">
-			<form class="border bg-light p-2" method="post" action="insertComment.jsp">
-				<input type="hidden" name="no" value=<%=theaterBoard.getNo() %> />
- 				<div class="row">
-					<div class="col-11">
-						<textarea rows="2" class="form-control" name="content"></textarea>
-					</div>
-					<div class="col-1">
-						<button class="btn btn-outline-primary h-100">등록</button>
-					</div>
-				</div>
-			</form>   	
-   		</div>
-   	</div>
-	<div class="row mb-3">
-   		<div class="col-12">
-<%
-	for(TboardComment comment : comments) {
-%>
-			
-   			<div class="border p-2 mb-2">
-	   			<div class="d-flex justify-content-between mb-1">
-	   				<span><%=comment.getMember().getId() %></span> <span class="text-muted"><%=comment.getCreaeDate() %></span>
-	   			</div>
-	   			<div>
-	   				<%=comment.getContent() %>
-				
-	   				
-<%
-	if(comment.getMember().getId().equals(loginId)){
-%>
-
-
-
-	   				<a href="deleteComment.jsp?no=<%=theaterBoard.getNo() %>&cno=<%=comment.getCommentNo() %>" 
-	   					class="btn btn-link text-danger text-decoration-none float-end"><i class="bi bi-trash"></i></a>
-
-<%
-	}
-%>
-	   			</div>   			
-   			</div>
-<%
-	}
-%>   			
-   		</div>
-   	</div>
-   	
-   	
-<%-- 신고 모달 --%>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<h1 class="modal-title fs-5" id="exampleModalLabel">게시물 신고</h1>
-        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      		</div>
-      		<div class="modal-body">
-       			<div class="row mb-3">
-		<div class="col-12">
-			<p style="font-size : 18px;"><strong>이 게시물을 신고하는 이유</strong></p>
-			<p style="font-size : 15px;">지식재산권 침해를 신고하는 경우를 제외하고 회원님의 신고는익명으로 처리됩니다. 누군가 위급한 상황에 있다고 생각된다면 즉시 현지 응급 서비스 기관에 연락하시기 바랍니다.</p>
-			
-			<form class="border bg-light p-3" method="get" action="report.jsp?no=<%=boardNo %>" >
-				<input type="hidden" name="no" value="<%=boardNo %>">
-	
-				<div class="form-group mb-2" style="width: 33%; padding:5px;">
-					<label class="form-label">신고이유</label>
-					<select class="form-select" name="reasonNo" id="selectbox" >
-		<%
-			for (ReportReason reason : reportReasons){
-		%>
-							<option value="<%=reason.getNo() %>"><%=reason.getName() %></option>
-		<%
-			}
-		%>
-							</select>
-						</div>
-						
-						
-						<div class="form-group mb-2">
-							<label class="form-label">상세내용</label>
-							<textarea rows="5" class="form-control" name="reasonContent" ></textarea>
-						</div>
-		
-		
-				
-						<div class="text-end">
-							<button type="reset" class="btn btn-secondary btn-sm" >취소</button>
-							<button type="submit" class="btn btn-primary btn-sm" >신고</button>
-						</div>
-					</form>
-					
-					
-					
-				</div>
-			</div>
-      		</div>
-    	</div>
-  	</div>
-</div>
 </div>
 </body>
 </html>

@@ -12,9 +12,7 @@
 <!doctype html>
 <%
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
-	String err = request.getParameter("err");
-	String job = request.getParameter("job");
-		
+	
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
 	
@@ -84,16 +82,7 @@
 					<option value="" selected disabled >극장 선택</option>
 										
 				</select>
-
-<%
-	if("type".equals(err)){
-%>
-		<div class="alert alert-danger">
-			<strong>관리자가 아니면 게시판관리에 접근할 수 없습니다.</strong>
-		</div>
-<%
-	}
-%>
+	
 			
 			<table class="table table-sm" id="table-Tboard">
 				<colgroup>
