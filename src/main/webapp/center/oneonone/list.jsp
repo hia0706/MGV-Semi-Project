@@ -20,8 +20,14 @@
 		return;
 }
 	
-	OneononeDao oneononeDao = OneononeDao.getInstance();
-	List<Oneonone> oneononeList = oneononeDao.getOneononesById(id);
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+		
+		OneononeDao oneononeDao = OneononeDao.getInstance();
+		int totalRows = oneononeDao.getTotalRows();
+		
+		Pagination pagination = new Pagination(pageNo, totalRows);
+		
+		List<Oneonone> oneononeList = oneononeDao.getAllOneonones(pagination.getBegin(), pagination.getEnd());
 %>
 
 <!doctype html>
@@ -60,7 +66,6 @@
 		<ul class="dot-list">
 			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
-	</div>
 			
 			<table class="table">
 				<thead>
@@ -99,6 +104,28 @@
 				</tbody>
 			</table>
 	
+			<nav>
+				<ul class="pagination justify-content-center">
+					<li class="page-item <%=pageNo <= 1 ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+					</li>
+					
+<% for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) { %>					
+					
+					<li class="page-item <%=pageNo == num ? "active" : "" %>">
+						<a href="list.jsp?page=<%=num  %>" class="page-link"><%=num %></a>
+					</li>
+					
+<% } %>					
+					
+					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+					</li>
+				</ul>
+			</nav>				
+			
+	</div>
 </div>
 </body>
 </html>
+
