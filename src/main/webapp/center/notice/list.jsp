@@ -1,3 +1,5 @@
+<%@page import="vo.Location"%>
+<%@page import="dao.LocationDao"%>
 <%@page import="vo.Notice"%>
 <%@page import="dao.NoticeDao"%>
 <%@page import="util.StringUtils"%>
@@ -9,6 +11,10 @@
 	
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	
+	LocationDao locationDao = LocationDao.getInstance();
+	List<Location> locationList = locationDao.getLocations();
+
+
 	NoticeDao noticeDao = NoticeDao.getInstance();
 	int totalRows = noticeDao.getTotalRows();
 	
@@ -62,6 +68,24 @@
         	<h1 class="fs-2 p-2">공지사항</h1>
       		<div>
 	
+<%-- 공지사항의 글 수 --%>	
+				<div class="board-list-util">
+					<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+				</div>
+				
+<%-- 지역/극장을 선택하는 select --%>
+				<select id="location" title="지역 선택" name="locationNo" onchange="refreshTheater();">
+					<option value="" selected disabled>지역 선택</option>
+					
+<% for(Location location : locationList) { %>
+				<option value="<%=location.getNo() %>"><%=location.getName() %></option>
+<% } %>
+				
+				</select>	
+				
+				<select id="theater" title="극장 선택" name="theaterNo" onchange= "refreshNotice();">
+					<option value="" selected disabled>극장 선택</option>
+				</select>			
 			
 			<table class="table">
 				<thead>
@@ -116,5 +140,68 @@
 		</div>	
 	</div>
 </div>
+<script type="text/javascript">
+	function refreshTheater() {
+		// select 박스에서 선택된 값 조회하기
+		let locationNo = document.getElementById("location").value;
+		
+		// ajax 통신하기
+		// 1. XMLHttpRequest 객체 생성하기
+		let xhr = new XMLHttpRequest();
+		// 2. XMLHttpRequest 객체에서 onreadystatechange 이벤트가 발생할 때 마다 실행할 함수 저장
+		xhr.onreadystatechange = function() {  // 4번 울리는 진동벨이다
+			// console.log("readyState", xhr.readyState);
+			if (xhr.readyState === 4) {  // 진동벨이 4일때만 받으러간다.				
+				// 1. 응답 데이터 조회하기
+				let data =  xhr.responseText;  // 순수 텍스트이다
+				// data -> '[{"id":100, "name":"기술부"}, {"id":101, "name":"영업부"}]'
+			
+				// 2. 응답데이터(텍스트)를 객체(자바스크립트 객체 호은 배열객체)로 변환하기
+				let arr = JSON.parse(data);	// arr -> [{id:100, name:"기술부"}, {id:101, name:"영업부"}]
+				// 3. 응답데이터로 html컨텐츠 생성하기s
+				let htmlContent = "<option value='' selected disabled>--선택하세요--</option>";
+				arr.forEach(function(item, index) {
+					// item -> {id:100, name:"기술부"};
+					let theaterNo = item.id;
+					let theaterName = item.name;
+					
+					htmlContent += `<option value="\${theaterNo}"> \${theaterName}</option>`;
+				});
+				// 4. 화면에 html 컨텐츠 반영시키기
+				document.getElementById("theater").innerHTML = htmlContent;
+			}
+		}
+		// 2. XMLHttpRequest 객체 초기화하기(요청방식, 요청URL 지정)
+		xhr.open("GET", "location.jsp?no=" + locationNo);
+		// 3. 서버로 요청 보내기
+		xhr.send(null);	
+	}
+	
+	function goPage(e, pageNo) {
+		e.preventDeafault();
+		refreshNotice(pageNo)
+	}
+	
+	function refreshNotice() {
+		
+	}
+
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
