@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import util.DaoHelper;
+import vo.MboardReport;
 import vo.ReportReason;
 import vo.SboardReport;
 import vo.TboardReport;
@@ -26,7 +27,7 @@ public class ReportDao {
 		});
 	}
 	
-	// 극장 신고 관련 메서드
+	// 극장 신고 게시판 관련 메서드
 	public void insertTboardReport (TboardReport tboardReport) {
 		
 		DaoHelper.update("reportDao.insertTboardReport", tboardReport.getReasonContent(),
@@ -34,11 +35,19 @@ public class ReportDao {
 														 tboardReport.getTheaterBoard().getNo());
 	}
 	
-	// 스토어 신고 관련 메서드
+	// 스토어 게시판 신고 관련 메서드
 	public void insertSboardReport (SboardReport sboardReport) {
 		
 		DaoHelper.update("reportDao.insertSboardReport", sboardReport.getReasonContent(),
 														 sboardReport.getReason().getNo(),
 														 sboardReport.getStoreBoard().getNo());
+	}
+	
+	// 영화 게시판 신고 관련 메서드
+	public void insertMboardReport (MboardReport mboardReport) {
+		
+		DaoHelper.update("reportDao.insertSboardReport", mboardReport.getReasonContent(),
+														 mboardReport.getReason().getNo(),
+														 mboardReport.getMovieBoard().getNo());
 	}
 }
