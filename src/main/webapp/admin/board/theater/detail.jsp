@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="vo.ReportReason"%>
 <%@page import="dao.ReportDao"%>
 <%@page import="vo.TboardComment"%>
@@ -37,9 +38,23 @@
 	
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
+	String loginType = (String) session.getAttribute("loginType");	
+
+	// 에러메세지 출력
+	if(loginId == null){
+		response.sendRedirect("../../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시판 관리", "utf-8"));
+		return;
+	}
 	
+	if (!"ADMIN".equals(loginType)) {
+		response.sendRedirect("../../../board/theater/list.jsp?no=" + boardNo +"&err=type");
+		return;
+	}
+
 	ReportDao reportReasonDao = ReportDao.getInstance();
 	List<ReportReason> reportReasons = reportReasonDao.getReportReasonrs();
+	
+
 	
 
 %>
@@ -58,7 +73,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../common/nav.jsp">
+<jsp:include page="../../nav.jsp">
 	<jsp:param name="menu" value="게시글"/>
 </jsp:include>
 <div class="container my-3">
@@ -66,16 +81,6 @@
 		<div class="col-12">
 			<h1 class="border bg-light fs-4 p-2"><%=theaterBoard.getName() %></h1>
 		</div>
-
-<%
-	if("id".equals(err)){
-%>
-		<div class="alert alert-danger">
-			<strong>다른 사용자의 게시글을 [<%=job %>]할 수 없습니다.</strong>
-		</div>
-<%
-	}
-%>
 
 <%
 	if("type".equals(err)){
@@ -87,15 +92,6 @@
 	}
 %>
 		
-<%
-	if("Cid".equals(err)){
-%>
-		<div class="alert alert-danger">
-			<strong>다른 사용자의 댓글을 삭제할 수 없습니다.</strong>
-		</div>
-<%
-	}
-%>
 	</div>
 	
 	<div class="row mb-3">
@@ -113,19 +109,8 @@
 			</div>
 			
 			<div class="text-end">
-<%
-	if (theaterBoard.getMember().getId().equals(loginId)) {
-%>
+
 				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
-				<a href="modifyform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-warning btn-sm">수정</a>
-<%
-	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
-%>
-				<button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal">신고</button>
-				
-<%
-	}
-%>
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
 			</div>
 		</div>
