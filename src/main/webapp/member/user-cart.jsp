@@ -94,7 +94,7 @@
 							<img src="/mgv/images/member/minus.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%;">
-							<strong>20000</strong>원
+							<strong>0</strong>원
 						</td>
 						<td class="table-bg" style="width: 20%;">
 							<img src="/mgv/images/member/equal.png" width="40" height="40">
