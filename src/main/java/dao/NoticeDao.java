@@ -48,10 +48,12 @@ public class NoticeDao {
 			
 			Theater theater = new Theater();
 			theater.setNo(rs.getInt("theater_no"));
+			theater.setName(rs.getString("theater_name"));
 			notice.setTheater(theater);
 			
 			Location location = new Location();
 			location.setNo(rs.getInt("location_no"));
+			location.setName(rs.getString("location_name"));
 			notice.setLocation(location);
 			
 			return notice;

@@ -71,7 +71,7 @@
 				</div>
 				
 <%-- 지역/극장을 선택하는 select --%>
-				<select id="location" title="지역 선택" name="locationNo" onchange="refreshTheater();">
+				<select id="location" title="지역 선택" class="selectpicker" name="locationNo" onchange="refreshTheater();">
 					<option value="" selected disabled>지역 선택</option>
 					
 <% for(Location location : locationList) { %>
@@ -80,11 +80,11 @@
 				
 				</select>	
 				
-				<select id="theater" title="극장 선택" name="theaterNo" onchange= "refreshNotice();">
+				<select id="theater" title="극장 선택" class="selectpicker" name="theaterNo" onchange= "refreshNotice();">
 					<option value="" selected disabled>극장 선택</option>
 				</select>		
 			
-			<table class="table">
+			<table class="table" id="table-Notice">
 				<thead>
 					<tr class="table-light" > 
 						<th style="width: 5%;">번호</th>
@@ -99,7 +99,7 @@
 				
 					<tr>
 						<td><%=notice.getNo() %></td>
-						<td>MGV</td>
+						<td><%=notice.getTheater().getName() %></td>
 						<td style="text-align:left">
 							<a href="detail.jsp?no=<%=notice.getNo() %>" class="text-black text-decoration-none">
 								<%=notice.getTitle() %>
@@ -178,7 +178,8 @@
 		refreshNotice(pageNo)
 	}
 	
-	function refreshNotice() {
+	function refreshNotice(pageNo) {
+		pageNo = pageNo || 1;
 		// select 박스에서 선택된 값 조회하기
 		let theaterNo = document.getElementById("theater").value;
 		
@@ -189,8 +190,12 @@
 				let text = xhr.responseText;
 				let arr = JSON.parse(text);
 				
-				let htmlContents = "";
-				arr.forEach(function(item, index) {
+				document.getElementById("total-rows").textContent = obj.totalRows;
+				let notices = obj.noticeList;
+				let pagination = obj.pagination;
+				
+				let htmlContents = ``;
+				notices.forEach(function(item, index) {
 					htmlContents += `
 						<tr>
 							<td>\${item.no}</td>
@@ -201,10 +206,33 @@
 					`;
 				});
 				
-				document.querySelector("#table-employees tbody").innerHTML = htmlContents;
+				document.querySelector("#table-Notice tbody").innerHTML = htmlContents;
+				
+				let paginationHtmlContent = `<nav>   
+					<ul class="pagination justify-content-center">
+					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
+						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+					</li>`;
+			
+				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+					
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+											  </li>`;
+
+				}
+				
+				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+											<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+									      </li>
+										</ul>
+										</nav>`
+				
+				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+					
 			}
 		};
-		xhr.open("GET", "notice.jsp?no=" + theaterNo);
+		xhr.open("GET", "notice.jsp?no=" + theaterNo + "&page=" + pageNo);
 		xhr.send(null);
 	}
 
