@@ -53,7 +53,6 @@
 		  <ul class="dropdown-menu dropdown-menu-dark">
 			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
 			    <li><a class="dropdown-item" href="/mgv/member/user-cart.jsp">장바구니</a></li>			    
-			    <li><a class="dropdown-item" href="/mgv/member/orderlist.jsp">구매내역</a></li>
 			    <li><a class="dropdown-item" href="/mgv/member/paylist.jsp">결제내역</a></li>
 			    <li><a class="dropdown-item" href="/mgv/center/oneonone/list.jsp">내 문의내역</a></li>
 		  </ul>
