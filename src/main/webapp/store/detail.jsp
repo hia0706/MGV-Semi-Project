@@ -49,22 +49,13 @@
 		
 	})
 	
-	$(function() {
-		$('#addCart').click(function() {
-<%
-			if (loginId == null) {
-%>
-				alert("로그인이 필요한 서비스입니다.");
-<%
-			} else {
-%>
-				alert("장바구니에 상품이 추가되었습니다.");
-				history.back();
-<%
-			}
-%>
-		})
-	})
+	function addCart(productNo) {
+		let amount = document.getElementById("count").textContent;
+		let totalPrice = document.getElementById("totalPrice").textContent;
+		
+		location.href = "../member/insertCart.jsp?no=" + productNo + "&amount=" + amount + "&totalPrice=" + totalPrice;
+
+	}
 	
 </script>
 </head>
@@ -80,13 +71,7 @@
 		</div>
 	</div>
 	<div>
-<%
-	if (product.getNo() == productNo) {
-%>
 		<img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="30%">
-<%
-	}
-%>
 	</div>
 	<div>
 	<table class="table table-bordered ">
@@ -105,7 +90,7 @@
 			</tr>
 			<tr>
 				<th>상품구성</th>
-				<td><%=product.getComposition() %></td>
+				<td id="productComposition"><%=product.getComposition() %></td>
 				<th>구매 수량</th>
 				<th class="align-middle">
 					<button type="button" class="btn btn-outline-dark btn-sm" id="minus" title="수량감소" ><i class="bi bi-dash"></i></button>
@@ -115,12 +100,12 @@
 			</tr>
 			<tr>
 				<th>총 금액</th>
-				<th><strong id="totalPrice"><%=product.getPrice() %></strong>원</th>
+				<th id="totalPrice"><%=product.getPrice() %></th>
 			</tr>
 		</tbody>
 	</table>
 	<div class="text-end">
-		<a href="detail.jsp?no=<%=product.getNo() %>" class="btn btn-outline-secondary btn-sm" id="addCart">장바구니 담기</a>
+		<button onclick="addCart(<%=product.getNo() %>)" class="btn btn-outline-secondary btn-sm" id="addCart">장바구니 담기</button>
 		<a href="purchase.jsp" class="btn btn-outline-primary btn-sm" id="buy">바로 구매</a>
 	</div>
 	</div>
