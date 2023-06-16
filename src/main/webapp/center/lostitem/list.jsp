@@ -57,7 +57,7 @@
     		
             		<div class="list-group">
   <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
-  <a href="lostitem/list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
+  <a href="list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
   <a href="../oneonone/insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
