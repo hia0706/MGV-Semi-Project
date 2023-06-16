@@ -89,7 +89,7 @@
 				
 	
 			
-			<table class="table table-sm" id="table-SBoard"">
+			<table class="table table-sm" id="table-SBoard">
 				<colgroup>
 					<col width="5%">
 					<col width="55%">
@@ -237,7 +237,7 @@
 				let paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
 					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" class="page-link">이전</a>
+						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
 					</li>`;
 			
 				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
@@ -249,7 +249,7 @@
 				}
 				
 				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-					<a href="list.jsp?page=\${pagination.pageNo + 1}" class="page-link">다음</a>
+					<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
 					  </li>
 					</ul>
 				</nav>`

@@ -227,12 +227,12 @@
 					`;
 				});
 				
-				document.querySelector("#table-TBoard tbody").innerHTML = htmlContents;
+				document.querySelector("#table-Tboard tbody").innerHTML = htmlContents;
 			
 				let paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
 					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" class="page-link">이전</a>
+						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
 					</li>`;
 			
 				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
@@ -244,10 +244,10 @@
 				}
 				
 				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-					<a href="list.jsp?page=\${pagination.pageNo + 1}" class="page-link">다음</a>
-					  </li>
-					</ul>
-				</nav>`
+											<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+									      </li>
+										</ul>
+										</nav>`
 				
 				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
 

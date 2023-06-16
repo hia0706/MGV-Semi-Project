@@ -105,8 +105,13 @@
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">극장</label>
 					<select class="form-select" name="theaterNo" id="theaterNo" >
-						<option value="" selected disabled>극장 선택</option>
-
+<%
+	for (Theater theater : theaters){
+%>
+					<option value="<%=theater.getNo() %>"<%=theater.getNo() == theaterNo ? "selected" : ""%> ><%=theater.getName() %></option>
+<%
+	}
+%>
 					</select><br>
 				</div>
 			

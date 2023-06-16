@@ -80,7 +80,7 @@
 		<div class="col-12">
 			<p>제목과 내용을 입력하세요</p>		
 			<form class="border bg-light p-3" method="post" action="modify.jsp" >
-				<input type="hidden" name="no" value="<%=boardNo %>">
+				<input type="hidden" name="no" value="<%=boardNo %>" id="boardNo">
 				<div class="form-group mb-2">
 					<label class="form-label">제목</label>
 					<input type="text" class="form-control" name="name" value="<%=storeBoard.getName() %>"/>
@@ -105,11 +105,16 @@
 %>
 					</select>
 				</div>
-				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">상품</label>
 					<select class="form-select" name="productNo" id="product">
-						<option value= 0 selected disabled>상품 선택</option>
+<%
+	for (Product product : products){
+%>				
+						<option value="<%=product.getNo() %>"<%=product.getNo() == productNo ? "selected" : ""%> ><%=product.getName() %></option>
+<%
+	}
+%>
 					</select><br>
 				</div>
 			
@@ -134,35 +139,33 @@
 	function refreshProduct() {
 		// select 박스에서 선택된 값 조회하기
 		let catNo = document.getElementById("cat").value;
+		let boardNo = document.getElementById("boardNo").value;
 		
 		// ajax 통신하기
 		// 1. XMLHttpRequest 객체 생성하기
 		let xhr = new XMLHttpRequest();
 		// 2. XMLHttpRequest 객체에서 onreadystatechange 이벤트가 발생할 때 마다 실행할 함수 저장
 		xhr.onreadystatechange = function() {  // 4번 울리는 진동벨이다
-			// console.log("readyState", xhr.readyState);
 			if (xhr.readyState === 4) {  // 진동벨이 4일때만 받으러간다.				
-				// 1. 응답 데이터 조회하기
-				let data =  xhr.responseText;  // 순수 텍스트이다
-				// data -> '[{"id":100, "name":"기술부"}, {"id":101, "name":"영업부"}]'
-			
-				// 2. 응답데이터(텍스트)를 객체(자바스크립트 객체 호은 배열객체)로 변환하기
-				let arr = JSON.parse(data);	// arr -> [{id:100, name:"기술부"}, {id:101, name:"영업부"}]
-				// 3. 응답데이터로 html컨텐츠 생성하기s
+				let text = xhr.responseText;
+				let obj = JSON.parse(text);
+				
+				// 3. 응답데이터로 html컨텐츠 생성하기
+				let products = obj.product
+				let savedProduct = obj.productNo;
 				let htmlContent = "<option value='' selected disabled>--선택하세요--</option>";
-				arr.forEach(function(item, index) {
+				products.forEach(function(item, index) {
 					// item -> {id:100, name:"기술부"};
 					let productNo = item.no;
-					let productName = item.name;
-					
-					htmlContent += `<option value="\${productNo}""\${productNo == productNo ? 'selected' : ''}"> \${productName}</option>`;
+					let productName = item.name; 
+					htmlContent += `<option value="\${productNo}"\${productNo == savedProduct ? 'selected' : ''}> \${productName}</option>`;
 				});
 				// 4. 화면에 html 컨텐츠 반영시키기
 				document.getElementById("product").innerHTML = htmlContent;
 			}
 		}
 		// 2. XMLHttpRequest 객체 초기화하기(요청방식, 요청URL 지정)
-		xhr.open("GET", "cat.jsp?no=" + catNo);
+		xhr.open("GET", "modifyselect.jsp?cNo=" + catNo + "&bNo=" + boardNo);
 		// 3. 서버로 요청 보내기
 		xhr.send(null);
 	}
