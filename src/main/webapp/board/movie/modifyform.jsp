@@ -92,7 +92,7 @@
 <%
 	for (Movie movie : movies){
 %>
-									<option value="<%=movie.getNo() %>""<%=movie.getNo() == movieNo ? "selected" : ""%> ><%=movie.getTitle() %></option>
+									<option value="<%=movie.getNo() %>"<%=movie.getNo() == movieNo ? "selected" : ""%> ><%=movie.getTitle() %></option>
 <%
 	}
 %>
