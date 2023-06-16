@@ -54,10 +54,6 @@
 		let totalPrice = document.getElementById("totalPrice").textContent;
 		
 		location.href = "../member/insertCart.jsp?no=" + productNo + "&amount=" + amount + "&totalPrice=" + totalPrice;
-		
-		if (loginId != null) {
-			alert("상품이 장바구니에 담겼습니다.");
-		}
 
 	}
 	
