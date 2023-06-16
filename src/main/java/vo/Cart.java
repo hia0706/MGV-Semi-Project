@@ -1,21 +1,26 @@
 package vo;
 
-import java.sql.Date;
-// 구매내역
-public class Payment {
+import java.util.Date;
+
+public class Cart {
 
 	private int no;
+	private int amount;
+	private int totalPrice;
+	private String status;
 	private Date createDate;
 	private Date updateDate;
-	private String status;
-	private int price;
 	private Member member;
 	private Product product;
 	
-	public Payment() {}
-	
-	public Payment(int no) {
-		this.no = no;
+	public Cart() {}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getNo() {
@@ -24,6 +29,22 @@ public class Payment {
 
 	public void setNo(int no) {
 		this.no = no;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public Date getCreateDate() {
@@ -42,22 +63,6 @@ public class Payment {
 		this.updateDate = updateDate;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	
-	public int getPrice() {
-		return price;
-	}
-	
 	public Member getMember() {
 		return member;
 	}
@@ -75,4 +80,5 @@ public class Payment {
 	}
 	
 	
+
 }

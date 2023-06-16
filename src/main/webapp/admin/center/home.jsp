@@ -16,7 +16,6 @@
 </jsp:include>
 
 <div class="container mt-3">
-  <h2>고객센터 홈</h2>
   <div class="row">
   	<div class="col-3">
     	 <div class="card">

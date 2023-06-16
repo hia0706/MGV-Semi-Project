@@ -47,17 +47,26 @@
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
 
-<div class="container">
-	<div class="row mb-3">
-    	<div class="col-12">
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-3">
+			<div class="card">
+       	  		<div class="card-header text-center" >고객센터</div>
+    		
+            		<div class="list-group">
+  <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
+  <a href="list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
+  <a href="../oneonone/insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
+  <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
+  <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+					</div>
+					</div>
+		</div>
+    	<div class="col-9">
         	<h1 class="fs-2 p-2">나의 문의내역</h1>
-      	</div>
-   	</div>
-	<div class="clearfix">
 		<ul class="dot-list">
 			<li>고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
-	</div>
 		<hr>
 			<a style="font-size : 17px;"><strong><%=lostitem.getTitle() %></strong></a><br>
 			<a style="font-size : 12px;"><%=lostitem.getCreateDate() %></a>
@@ -84,9 +93,10 @@
 <% if (lostitem.getMember().getId().equals(id)) {%>				
 				<a href="delete.jsp?no=<%=lostitem.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
 <% } %>				
-				
+		
+		</div>		
 		</div>
-	
+	</div>
 </div>
 </body>
 </html>
