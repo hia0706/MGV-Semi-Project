@@ -11,7 +11,7 @@
 	
 	// 요청 파라미터값 조회
 	String name = request.getParameter("name");
-	String tel = request.getParameter("tel");
+	String tel = request.getParameter("tel");                                            
 	String email = request.getParameter("email");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");

@@ -24,6 +24,8 @@ public class TheaterBoardDao {
 															 theaterBoard.getCommentCnt(),
 															 theaterBoard.getDeleted(),
 															 theaterBoard.getReport(),
+															 theaterBoard.getLocation().getNo(),
+															 theaterBoard.getTheater().getNo(),
 															 theaterBoard.getNo());
 	}
 	
@@ -195,5 +197,14 @@ public class TheaterBoardDao {
 		}, locationNo, begin, end);
 	}
 	
-	
+	public List<Theater> getTheatersByLocationNo(int locationNo){
+		return DaoHelper.selectList("theaterBoardDao.getTheaterByLocationNo", rs -> {
+			Theater theater = new Theater();
+			
+			theater.setNo(rs.getInt("theater_no"));
+			theater.setName(rs.getString("theater_name"));
+			
+			return theater;
+		}, locationNo);
+	}
 }

@@ -2,8 +2,6 @@
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Oneonone"%>
 <%@page import="dao.OneononeDao"%>
-<%@page import="vo.Lostitem"%>
-<%@page import="dao.LostitemDao"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -22,8 +20,14 @@
 		return;
 }
 	
-	OneononeDao oneononeDao = OneononeDao.getInstance();
-	List<Oneonone> oneononeList = oneononeDao.getOneononesById(id);
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+		
+		OneononeDao oneononeDao = OneononeDao.getInstance();
+		int totalRows = oneononeDao.getTotalRows();
+		
+		Pagination pagination = new Pagination(pageNo, totalRows);
+		
+		List<Oneonone> oneononeList = oneononeDao.getAllOneonones(pagination.getBegin(), pagination.getEnd());
 %>
 
 <!doctype html>
@@ -52,17 +56,27 @@
 </jsp:include>
 
 
-<div class="container">
-	<div class="row mb-3">
-    	<div class="col-12">
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-3">
+			<div class="card">
+       	  		<div class="card-header text-center" >고객센터</div>
+    		
+            		<div class="list-group">
+  <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
+  <a href="../lostitem/list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
+  <a href="insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
+  <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
+  <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+					</div>
+					</div>
+		</div>
+    	<div class="col-9">
         	<h1 class="fs-2 p-2">나의 문의내역</h1>
-      	</div>
-   	</div>
-	<div class="clearfix">
+   	<div>
 		<ul class="dot-list">
 			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
-	</div>
 			
 			<table class="table">
 				<thead>
@@ -101,6 +115,29 @@
 				</tbody>
 			</table>
 	
+			<nav>
+				<ul class="pagination justify-content-center">
+					<li class="page-item <%=pageNo <= 1 ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+					</li>
+					
+<% for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) { %>					
+					
+					<li class="page-item <%=pageNo == num ? "active" : "" %>">
+						<a href="list.jsp?page=<%=num  %>" class="page-link"><%=num %></a>
+					</li>
+					
+<% } %>					
+					
+					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+					</li>
+				</ul>
+			</nav>				
+			</div>
+		</div>	
+	</div>
 </div>
 </body>
 </html>
+

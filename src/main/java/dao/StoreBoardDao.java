@@ -198,6 +198,8 @@ public class StoreBoardDao {
 														  storeBoard.getCommentCnt(),
 														  storeBoard.getDeleted(),
 														  storeBoard.getReport(),
+														  storeBoard.getCategory().getNo(),
+														  storeBoard.getProduct().getNo(),
 														  storeBoard.getNo());
 	}
 	
@@ -211,5 +213,16 @@ public class StoreBoardDao {
 			
 			return product;
 		});
+	}
+	
+	public List<Product> getProductsByCatNo(int catNo) {
+		return DaoHelper.selectList("storeBoardDao.getAllproductsByCatNo", rs -> {
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			product.setName(rs.getString("product_name"));
+			
+			
+			return product;
+		}, catNo);
 	}
 }

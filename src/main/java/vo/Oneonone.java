@@ -13,6 +13,10 @@ public class Oneonone {
 	private Member member;
 	
 	public Oneonone () {}
+	
+	public Oneonone(int no) {
+		this.no = no;
+	}
 
 	public int getNo() {
 		return no;

@@ -90,11 +90,12 @@
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">지역</label>
-					<select class="form-select" name="locationNo" id="selectbox" >
-<%
+					<select class="form-select" name="locationNo" id="locationNo" onchange="refreshTh();">
+						<option value="" selected disabled>지역 선택</option>
+<%			
 	for (Location location : locations){
 %>
-					<option value="<%=location.getNo() %>"<%=location.getNo() == locationNo ? "selected" : ""%> ><%=location.getName() %></option>
+						<option value="<%=location.getNo() %>"<%=location.getNo() == locationNo ? "selected" : ""%> ><%=location.getName() %></option>
 <%
 	}
 %>
@@ -103,7 +104,7 @@
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">극장</label>
-					<select class="form-select" name="theaterNo">
+					<select class="form-select" name="theaterNo" id="theaterNo" >
 <%
 	for (Theater theater : theaters){
 %>
@@ -111,7 +112,6 @@
 <%
 	}
 %>
-
 					</select><br>
 				</div>
 			
@@ -131,5 +131,42 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+function refreshTh() {
+	// select 박스에서 선택된 값 조회하기
+	let locationNo = document.getElementById("locationNo").value;
+	
+	// ajax 통신하기
+	// 1. XMLHttpRequest 객체 생성하기
+	let xhr = new XMLHttpRequest();
+	
+	// 2. XMLHttpRequest 객체에서 onreadystatechange 이벤트가 발생할 때 마다 실행할 함수 저장
+	xhr.onreadystatechange = function() {  // 4번 울리는 진동벨이다
+
+		if (xhr.readyState === 4) {  // 진동벨이 4일때만 받으러간다.				
+			// 1. 응답 데이터 조회하기
+			let data =  xhr.responseText; 
+			// 2. 응답데이터(텍스트)를 객체(자바스크립트 객체 호은 배열객체)로 변환하기
+			let arr = JSON.parse(data);	
+			// 3. 응답데이터로 html컨텐츠 생성하기s
+			let htmlContent = "<option value='' selected disabled>--선택하세요--</option>";
+			arr.forEach(function(item, index) {
+				// item -> {id:100, name:"기술부"};
+				let theaterNo = item.no;
+				let theaterName = item.name;
+				
+				htmlContent += `<option value="\${theaterNo}"> \${theaterName}</option>`;
+			});
+			// 4. 화면에 html 컨텐츠 반영시키기
+			document.getElementById("theaterNo").innerHTML = htmlContent;
+		}
+	}
+	// 2. XMLHttpRequest 객체 초기화하기(요청방식, 요청URL 지정)
+	xhr.open("GET", "location.jsp?no=" + locationNo);
+	// 3. 서버로 요청 보내기
+	xhr.send(null);
+}
+</script>
 </body>
 </html>

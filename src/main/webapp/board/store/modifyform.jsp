@@ -80,7 +80,7 @@
 		<div class="col-12">
 			<p>제목과 내용을 입력하세요</p>		
 			<form class="border bg-light p-3" method="post" action="modify.jsp" >
-				<input type="hidden" name="no" value="<%=boardNo %>">
+				<input type="hidden" name="no" value="<%=boardNo %>" id="boardNo">
 				<div class="form-group mb-2">
 					<label class="form-label">제목</label>
 					<input type="text" class="form-control" name="name" value="<%=storeBoard.getName() %>"/>
@@ -91,9 +91,11 @@
 					<p>별점 : <%=score %></p>
 				</div>				
 								
+								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">품목</label>
-					<select class="form-select" name="catNo" id="selectbox" >
+					<select class="form-select" name="catNo" id="cat" onchange="refreshProduct();">
+						<option value= 0 selected disabled>품목 선택</option>
 <%
 	for (ProductCategory category : categories){
 %>
@@ -103,18 +105,16 @@
 %>
 					</select>
 				</div>
-				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">상품</label>
-					<select class="form-select" name="productNo">
+					<select class="form-select" name="productNo" id="product">
 <%
 	for (Product product : products){
-%>
-					<option value="<%=product.getNo() %>"<%=product.getNo() == productNo ? "selected" : ""%> ><%=product.getName() %></option>
+%>				
+						<option value="<%=product.getNo() %>"<%=product.getNo() == productNo ? "selected" : ""%> ><%=product.getName() %></option>
 <%
 	}
 %>
-
 					</select><br>
 				</div>
 			
@@ -128,11 +128,47 @@
 		
 				<div class="text-end">
 					<button type="reset" class="btn btn-secondary btn-sm">취소</button>
-					<button type="submit" class="btn btn-primary btn-sm">수정</button>
+					<button type="submit" class="btn btn-primary btn-sm" onclick="null();">수정</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function refreshProduct() {
+		// select 박스에서 선택된 값 조회하기
+		let catNo = document.getElementById("cat").value;
+		let boardNo = document.getElementById("boardNo").value;
+		
+		// ajax 통신하기
+		// 1. XMLHttpRequest 객체 생성하기
+		let xhr = new XMLHttpRequest();
+		// 2. XMLHttpRequest 객체에서 onreadystatechange 이벤트가 발생할 때 마다 실행할 함수 저장
+		xhr.onreadystatechange = function() {  // 4번 울리는 진동벨이다
+			if (xhr.readyState === 4) {  // 진동벨이 4일때만 받으러간다.				
+				let text = xhr.responseText;
+				let obj = JSON.parse(text);
+				
+				// 3. 응답데이터로 html컨텐츠 생성하기
+				let products = obj.product
+				let savedProduct = obj.productNo;
+				let htmlContent = "<option value='' selected disabled>--선택하세요--</option>";
+				products.forEach(function(item, index) {
+					// item -> {id:100, name:"기술부"};
+					let productNo = item.no;
+					let productName = item.name; 
+					htmlContent += `<option value="\${productNo}"\${productNo == savedProduct ? 'selected' : ''}> \${productName}</option>`;
+				});
+				// 4. 화면에 html 컨텐츠 반영시키기
+				document.getElementById("product").innerHTML = htmlContent;
+			}
+		}
+		// 2. XMLHttpRequest 객체 초기화하기(요청방식, 요청URL 지정)
+		xhr.open("GET", "modifyselect.jsp?cNo=" + catNo + "&bNo=" + boardNo);
+		// 3. 서버로 요청 보내기
+		xhr.send(null);
+	}
+</script>
 </body>
 </html>
