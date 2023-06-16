@@ -18,6 +18,7 @@
         	<li class="nav-item"><a class="nav-link <%="영화 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/movie/list.jsp">영화 관리</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="극장 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/theater/list.jsp">극장 관리</a></li>    	
         	<li class="nav-item"><a class="nav-link <%="스토어 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/product/list.jsp">스토어 관리</a></li>    	
+        	<li class="nav-item"><a class="nav-link <%="게시판 관리".equals(menu) ? "active" : "" %>" href="/mgv/admin/board/home.jsp">게시판 관리</a></li>    	
       	</ul>
 <%
 	if (loginId != null) {
