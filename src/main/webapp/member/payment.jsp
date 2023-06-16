@@ -13,15 +13,24 @@
 	
 	// 결제정보 조회
 	PaymentDao paymentDao = PaymentDao.getInstance();
-	int totalRows = paymentDao.getTotalRowsById(loginId);
+	// 전체 결제정보 (loginId 기준) if 문 status 있는지 없는지
+	if (status == null) {
+		int totalRows = paymentDao.getTotalRowsById(loginId);
+	} else {
+		int totalRows = paymentDao.getTotalRowsByIdandStatus(loginId, status);
+	}
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	pagination.setbeginPage(pagination.getbeginPage());
 	pagination.setendPage(pagination.getEndPage());
 	pagination.setPageNo(pageNo);
 	
-	// 데이터 조회
-	List<Payment> payments = paymentDao.getAllPaymentsById(loginId, pagination.getBegin(), pagination.getEnd());
+	// 데이터 조회 if문 status 있을때 없을때
+	if (status == null) {
+		List<Payment> payments = paymentDao.getAllPaymentsById(loginId, pagination.getBegin(), pagination.getEnd());
+	} else {
+		List<Payment> payments = paymentDao.getAllPaymentsByIdandStatus(loginId, status, pagination.getBegin(), pagination.getEnd());
+	}
 	
 	PaymentDto paymentDto = new PaymentDto();
 	paymentDto.setTotalRows(totalRows);

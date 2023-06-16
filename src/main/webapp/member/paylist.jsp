@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
@@ -7,14 +8,20 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
 	String loginId = (String) session.getAttribute("loginId");
+	if (loginId == null) {
+		response.sendRedirect("loginform.jsp?req&job" + URLEncoder.encode("결제내역", "utf-8"));
+		return;
+	}
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 
 	PaymentDao paymentDao = PaymentDao.getInstance();
 
 	int totalRows = paymentDao.getTotalRowsById(loginId);
+	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	
 	List<Payment> payments = paymentDao.getAllPaymentsById(loginId, pagination.getBegin(), pagination.getEnd());
+	
 %>
 <!doctype html>
 <html lang="ko">
@@ -28,6 +35,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style type="text/css">
+	label {
+		text-align: bottom;
+	}
+	
 </style>
 </head>
 <body>
@@ -37,7 +48,7 @@
 	<div class="container">
 		<div class="row mb-3">
 			<div class="col-12">
-				<h1 class="border bg-light fs-4 p-2">구매 내역</h1>
+				<h1 class="border bg-light fs-4 p-2">결제 내역</h1>
 			</div>
 		</div>
 		<div class="row mb-3">
@@ -46,19 +57,22 @@
 					<tbody>
 						<tr>
 							<td>
-							<label id="status" class="p-3">구분</label>
-								<div class="form-check form-check-inline mb-2" id="status" onchange="refreshStatus();">
-									<input class="form-check form-check-input" type="radio" name="status" id="all" value="" checked="checked">
+							<!--  -->
+							<label class="p-3">구분</label>
+							<div>
+								<div class="form-check form-check-inline mb-2">
+									<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="All" checked="checked">
 									<label class="form-check-label" for="all">전체</label>
-								</div>
-								<div class="form-check form-check-inline" id="status" onchange="refreshStatusYes();">
-									<input class="form-check form-check-input " type="radio" name="status" id="buy" value="Y">
+								</div> <!-- onchange="refreshStatusY();" -->
+								<div class="form-check form-check-inline mb-2">
+									<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('Y');" value="Y">
 									<label class="form-check-label" for="buy">구매내역</label>
-								</div>
-								<div class="form-check form-check-inline" id="status" onchange="refreshStatusNo();">
-									<input class="form-check form-check-input " type="radio" name="status" id="cancel" value="N">
+								</div> <!-- onchange="refreshStatusN();" -->
+								<div class="form-check form-check-inline mb-2">
+									<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('N');" value="N">
 									<label class="form-check-label" for="cancel">취소내역</label>
 								</div>
+							</div>
 							</td>
 						</tr>
 					</tbody>
@@ -69,12 +83,13 @@
 	<div class="container mb-3">
 		<div class="row mb-3">
 			<div class="col-12">
-				<p><%=loginId %>님의 결제내역을 확인하세요.</p>
+				<p><strong style="font-size: 18px; color: blue;"><%=loginId %></strong>님의 결제내역을 확인하세요.</p>
 					<div class="board-list-util">
-						<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+						<p class="result-count"><strong>전체 <span id="data-count" class="font-gblue"><%=totalRows %></span>건</strong></p>
 					</div>
 				
-					<table class="table" id="table-payments">
+					<!--  -->
+					<table class="table" id="table-payments"> 
 						<thead>
 							<tr class="table-dark">
 								<th>결제일</th>
@@ -89,7 +104,8 @@
 %>
 							<tr>
 								<td><%=pay.getCreateDate() %></td>
-								<td><a class="text-black text-decoration-none" href="../product/store.jsp?no=<%=pay.getProduct().getNo() %>"><%=pay.getProduct().getName() %></a></td>
+								<td><a class="text-black text-decoration-none" href="../product/store.jsp?no=<%=pay.getProduct().getNo() %>">
+									<%=pay.getProduct().getName() %></a></td>
 								<td><%=pay.getPrice() %></td>
 								<td>
 <%
@@ -142,29 +158,28 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	function refreshStatus() {
-		// 값 조회
-		let status = document.getElementById("status").value;
-		
-		// ajax 통신
-		// 1. XMLHttpRequest 객체 생성하기
+	let checkStatus = "All";
+	
+	function refreshStatus(status) { // status 는 All, Y, N 중 하나다.
+		checkedStatus = status;
+		getData(1);
+	}
+	
+	function goPage(e, pageNo) {
+		e.preventDefault();
+		getData(pageNo);
+	}
+	function getData() {
 		let xhr = new XMLHttpRequest();
-		// 2. XMLHttpRequest 객체 생성하기
 		xhr.onreadystatechange = function() {
-			// console.log("readyState", xhr.readyState);
-			if (xhr.readyState === 4) {
-				// 1. 응답 데이터 조회하기
-				let data = xhr.responseText;
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				let text = xhr.responseText;
 				
-				// 2. 응답데이터를 객체로 변환
-				let arr = JSON.parse(data);
-				
-				let htmlContent = "";
-				arr.forEach(function(item, index)) {
-					
-				}
 			}
+			
 		}
+		xhr.opent("get", "payment.jsp?status=" + checkedStatus + "&page=" + pageNo);
+		xhr.send(null);
 	}
 </script>
 </body>

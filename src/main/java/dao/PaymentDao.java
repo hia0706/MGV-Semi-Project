@@ -23,7 +23,7 @@ public class PaymentDao {
 	}
 	
 	// 로그인 아이디의 Status = ? 행의 개수
-	public int getTotalRowsByIdByStatus(String id, String status) {
+	public int getTotalRowsByIdandStatus(String id, String status) {
 		return DaoHelper.selectOne("paymentDao.getTotalRowsByIdByStatus", rs -> {
 			return rs.getInt("cnt");
 		}, id, status);
@@ -52,8 +52,8 @@ public class PaymentDao {
 		}, id , begin, end);
 	}
 	
-	public List<Payment> getPaymentsByIdByStatus(String id, String status, int begin, int end) {
-		return DaoHelper.selectList("paymentDao,getPaymentsByIdByStatus", rs -> {
+	public List<Payment> getPaymentsByIdandStatus(String id, String status, int begin, int end) {
+		return DaoHelper.selectList("paymentDao.getPaymentsByIdandStatus", rs -> {
 			Payment payment = new Payment();
 			payment.setNo(rs.getInt("payment_no"));
 			payment.setCreateDate(rs.getDate("payment_create_date"));
