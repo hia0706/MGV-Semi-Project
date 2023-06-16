@@ -7,8 +7,19 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
 	
+	//세션에서 로그인된 사용자 아이디 조회
+	String id = (String) session.getAttribute("loginId");
+	
+	
+	
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	
 	LostitemDao lostitemDao = LostitemDao.getInstance();
-	List<Lostitem> lostitemList = lostitemDao.getLostitems();
+	int totalRows = lostitemDao.getTotalRows();
+	
+	Pagination pagination = new Pagination(pageNo, totalRows);
+	
+	List<Lostitem> lostitemList = lostitemDao.getLostitems(pagination.getBegin(), pagination.getEnd());
 
 %>
 
@@ -89,6 +100,28 @@
 					
 				</tbody>
 			</table>
+			
+		<nav>
+				<ul class="pagination justify-content-center">
+					<li class="page-item <%=pageNo <= 1 ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+					</li>
+					
+	<% for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) { %>					
+					
+					<li class="page-item <%=pageNo == num ? "active" : "" %>">
+						<a href="list.jsp?page=<%=num  %>" class="page-link"><%=num %></a>
+					</li>
+					
+	<% } %>					
+					
+					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>">
+						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+					</li>
+				</ul>
+			</nav>
+			
+			
 	</div>
 </div>
 </body>
