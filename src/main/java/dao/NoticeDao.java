@@ -161,8 +161,6 @@ public class NoticeDao {
 													notice.getContent(),
 													notice.getMember().getId(),
 													notice.getTheater().getNo(),
-													notice.getLocation().getNo(),
-													notice.getTheater().getNo(),
 													notice.getLocation().getNo());
 	}
 	
