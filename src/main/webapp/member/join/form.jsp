@@ -34,7 +34,7 @@
 </style>
 </head>
 <body onLoad="document.form.id.focus()">
-	<jsp:include page="../common/nav.jsp">
+	<jsp:include page="../../common/nav.jsp">
 		<jsp:param name="menu" value="회원가입" />
 	</jsp:include>
 	<div class="container">

@@ -40,7 +40,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../common/nav.jsp">
+<jsp:include page="../../common/nav.jsp">
 	<jsp:param name="menu" value="MEMBER"/>
 </jsp:include>
 <script type="text/javascript">
