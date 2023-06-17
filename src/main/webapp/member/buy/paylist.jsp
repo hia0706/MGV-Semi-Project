@@ -9,7 +9,7 @@
 <%
 	String loginId = (String) session.getAttribute("loginId");
 	if (loginId == null) {
-		response.sendRedirect("loginform.jsp?req&job" + URLEncoder.encode("결제내역", "utf-8"));
+		response.sendRedirect("../login/form.jsp?err=req&job=" + URLEncoder.encode("결제내역", "utf-8"));
 		return;
 	}
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
@@ -42,7 +42,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../common/nav.jsp">
+	<jsp:include page="../../common/nav.jsp">
 		<jsp:param name="menu" value="결제내역" />
 	</jsp:include>
 	<div class="container">
@@ -57,22 +57,17 @@
 					<tbody>
 						<tr>
 							<td>
-							<!--  -->
-							<label class="p-3">구분</label>
-							<div>
-								<div class="form-check form-check-inline mb-2">
-									<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="All" checked="checked">
-									<label class="form-check-label" for="all">전체</label>
-								</div> <!-- onchange="refreshStatusY();" -->
-								<div class="form-check form-check-inline mb-2">
-									<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('Y');" value="Y">
-									<label class="form-check-label" for="buy">구매내역</label>
-								</div> <!-- onchange="refreshStatusN();" -->
-								<div class="form-check form-check-inline mb-2">
-									<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('N');" value="N">
-									<label class="form-check-label" for="cancel">취소내역</label>
+								<div>
+									<div class="form-check form-check-inline mb-2">
+										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="all" checked="checked">전체
+									</div> 
+									<div class="form-check form-check-inline mb-2">
+										<input class="form-check form-check-input me-2" id="buy" type="radio" name="status" onchange="refreshPayment('Y');" value="Y">구매내역
+									</div> 
+									<div class="form-check form-check-inline mb-2">
+										<input class="form-check form-check-input me-2" id="cancel" type="radio" name="status" onchange="refreshPayment('N');" value="N">취소내역
+									</div>
 								</div>
-							</div>
 							</td>
 						</tr>
 					</tbody>
@@ -85,11 +80,13 @@
 			<div class="col-12">
 				<p><strong style="font-size: 18px; color: blue;"><%=loginId %></strong>님의 결제내역을 확인하세요.</p>
 					<div class="board-list-util">
-						<p class="result-count"><strong>전체 <span id="data-count" class="font-gblue"><%=totalRows %></span>건</strong></p>
+						<p class="result-count">
+							<strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건
+							</strong>
+						</p>
 					</div>
 				
-					<!--  -->
-					<table class="table" id="table-payments"> 
+					<table class="table" id="table-payments">
 						<thead>
 							<tr class="table-dark">
 								<th>결제일</th>
@@ -98,13 +95,13 @@
 								<th>상태</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody>		
 <%
 	for (Payment pay : payments) {
 %>
 							<tr>
 								<td><%=pay.getCreateDate() %></td>
-								<td><a class="text-black text-decoration-none" href="../product/store.jsp?no=<%=pay.getProduct().getNo() %>">
+								<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=<%=pay.getProduct().getNo() %>">
 									<%=pay.getProduct().getName() %></a></td>
 								<td><%=pay.getPrice() %></td>
 								<td>
@@ -150,18 +147,18 @@
 					</nav>
 				
 					<div class="text-end">
-						<a href="user-cart.jsp" class="btn btn-warning btn-sm">장바구니</a>
-						<a href="../store/store.jsp" class="btn btn-primary btn-sm">스토어</a>
+						<a href="../user-cart.jsp" class="btn btn-warning btn-sm">장바구니</a>
+						<a href="../../store/store.jsp" class="btn btn-primary btn-sm">스토어</a>
 					</div>
 				
 			</div>
 		</div>
 	</div>
 <script type="text/javascript">
-	let checkStatus = "All";
 	
-	function refreshStatus(status) { // status 는 All, Y, N 중 하나다.
-		checkedStatus = status;
+	
+	function refreshPayment(status) { // status 는 All, Y, N 중 하나다.
+		let checkedStatus = status;
 		getData(1);
 	}
 	
@@ -169,16 +166,61 @@
 		e.preventDefault();
 		getData(pageNo);
 	}
-	function getData() {
+	function getData(pageNo) {
+		
+		let status = document.getElementById("status");
+		
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
-			if (xhr.readyState === 4 && xhr.status === 200) {
+			if (xhr.readyState === 4) {
 				let text = xhr.responseText;
+				let obj = JSON.parse(text);
 				
-			}
+				document.getElementById("total-rows").textContent = obj.totalRows;
+				let payments = obj.payments;
+				let pagination = obj.pagination;
+				
+				let htmlContents = '';
+				
+				payments.forEach(function(item, index) {
+					htmlContents += `
+						<tr>
+							<td>\${item.createDate}</td>
+							<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=\${item.product.no}">\${item.product.name}</td>
+							<td>\${item.price}</td>
+							<td>\${item.status === "Y" ? "<span class=\"badge text-bg-success\">구매완료</span>" 
+                  				  : "<span class=\"badge text-bg-danger\">구매취소</span>"}</td>
+							</td>
+						</tr>
+					`;
+				});
+				
+				document.querySelector("#table-payments tbody").innerHTML = htmlContents;
+				
+				let paginationHtmlContent = `<nav>
+				<ul class="pagination justify-content-center">
+				<li class="page-item \${pagination.pageNo <= 1 ? 'disabled' : ''}">
+					<a href="paylist.jsp?page=\${pageNo - 1}" onclick="goPage(event, \${pagination.pageNo - 1})" class="page-link">이전</a>
+				</li>`;
+				
+				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {				
+				paginationHtmlContent = `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+											<a href="paylist.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+										</li>`;
+
+				}
 			
-		}
-		xhr.opent("get", "payment.jsp?status=" + checkedStatus + "&page=" + pageNo);
+				paginationHtmlContent = `<li class="page-item <\${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+											<a href="paylist.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+										</li>
+									</ul>
+							</nav>`
+				
+				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+
+			}	
+		};
+		xhr.open("GET", "payment.jsp?status=" + checkedStatus + "&page=" + pageNo);
 		xhr.send(null);
 	}
 </script>
