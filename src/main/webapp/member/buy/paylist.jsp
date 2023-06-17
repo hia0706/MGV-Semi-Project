@@ -167,18 +167,16 @@
 		getData(pageNo);
 	}
 	function getData(pageNo) {
-		
-		let status = document.getElementById("status");
-		
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
-			if (xhr.readyState === 4) {
+			if (xhr.readyState === 4 && xhr.status === 200) {
 				let text = xhr.responseText;
 				let obj = JSON.parse(text);
 				
 				document.getElementById("total-rows").textContent = obj.totalRows;
 				let payments = obj.payments;
 				let pagination = obj.pagination;
+				let status = obj.status;
 				
 				let htmlContents = '';
 				
@@ -189,32 +187,33 @@
 							<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=\${item.product.no}">\${item.product.name}</td>
 							<td>\${item.price}</td>
 							<td>\${item.status === "Y" ? "<span class=\"badge text-bg-success\">구매완료</span>" 
-                  				  : "<span class=\"badge text-bg-danger\">구매취소</span>"}</td>
-							</td>
+	                  				  : "<span class=\"badge text-bg-danger\">구매취소</span>"}</td>
+								</td>
 						</tr>
 					`;
 				});
 				
 				document.querySelector("#table-payments tbody").innerHTML = htmlContents;
 				
-				let paginationHtmlContent = `<nav>
-				<ul class="pagination justify-content-center">
-				<li class="page-item \${pagination.pageNo <= 1 ? 'disabled' : ''}">
-					<a href="paylist.jsp?page=\${pageNo - 1}" onclick="goPage(event, \${pagination.pageNo - 1})" class="page-link">이전</a>
-				</li>`;
-				
-				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {				
-				paginationHtmlContent = `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-											<a href="paylist.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
-										</li>`;
+				let paginationHtmlContent = `<nav>   
+					<ul class="pagination justify-content-center">
+					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
+						<a href="paylist.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+					</li>`;
+			
+				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+					
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+												<a href="paylist.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+											  </li>`;
 
 				}
-			
-				paginationHtmlContent = `<li class="page-item <\${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-											<a href="paylist.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-										</li>
-									</ul>
-							</nav>`
+				
+				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalPages ? 'disabled' : ''}">
+					<a href="paylist.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+					  </li>
+					</ul>
+				</nav>`
 				
 				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
 
