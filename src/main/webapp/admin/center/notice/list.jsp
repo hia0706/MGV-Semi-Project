@@ -13,7 +13,6 @@
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locationList = locationDao.getLocations();
 
-
 	NoticeDao noticeDao = NoticeDao.getInstance();
 	int totalRows = noticeDao.getTotalRows();
 	
@@ -80,7 +79,7 @@
 				
 				</select>	
 				
-				<select id="theater" title="극장 선택" class="selectpicker" name="theaterNo" onchange= "refreshNotice();">
+				<select id="theater" title="극장 선택" class="selectpicker ml07" name="theaterNo" onchange= "refreshNotice();">
 					<option value="" selected disabled>극장 선택</option>
 				</select>		
 			
@@ -188,7 +187,7 @@
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				let text = xhr.responseText;
-				let arr = JSON.parse(text);
+				let obj = JSON.parse(text);
 				
 				document.getElementById("total-rows").textContent = obj.totalRows;
 				let notices = obj.noticeList;
