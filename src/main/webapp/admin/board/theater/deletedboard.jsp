@@ -1,4 +1,5 @@
 <%@page import="com.google.gson.GsonBuilder"%>
+<%@page import="dao.ReportDao"%>
 <%@page import="dto.TBoardDto"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="dto.Pagination"%>
@@ -12,17 +13,19 @@
 	int theaterNo = Integer.parseInt(request.getParameter("no"));
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);	
 
-	// 게시판정보 조회하기
+	// 게시판정보 조회하기 (극장번호가 일치하고, delete = Y)
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	int totalRows = theaterBoardDao.getTotalRowsByTheater(theaterNo);
+	//
+	int totalRows = theaterBoardDao.getDelTotalRowsByTheaterNo(theaterNo);
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());
+	pagination.setendPage(pagination.getEndPage()); 
 	pagination.setPageNo(pageNo);
 	
 	// 데이터 조회하기
-	List<TheaterBoard> theaterBoards = theaterBoardDao.getTheaterBoardByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
+	//
+	List<TheaterBoard> theaterBoards = theaterBoardDao.getDelTheaterBoardsByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
 	
 	TBoardDto tBoardDto = new TBoardDto();
 	tBoardDto.setTotalRows(totalRows);

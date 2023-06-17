@@ -22,14 +22,14 @@
 		response.sendRedirect("../../../board/theater/detail.jsp?no=" + boardNo +"&err=type&job=" + URLEncoder.encode("삭제", "utf-8"));
 		return;
 	}
-	
-	
+		
 	// 조회된 게시물 번호로 게시물을 조회한다
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
 	
 	// 해당 게시물의 작성자가 맞을 경우엔 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
-	theaterBoard.setDeleted("Y");
+	theaterBoard.setReport("N");
+	theaterBoard.setDeleted("N");
 	theaterBoardDao.updateTheaterBoard(theaterBoard);
 	
 	response.sendRedirect("deletelist.jsp");

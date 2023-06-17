@@ -13,7 +13,6 @@
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locationList = locationDao.getLocations();
 
-
 	NoticeDao noticeDao = NoticeDao.getInstance();
 	int totalRows = noticeDao.getTotalRows();
 	
@@ -49,13 +48,22 @@
 </jsp:include>
 
 
-<div class="container">
-	<div class="row mb-3">
-    	<div class="col-12">
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-3">
+    				<div class="card">
+       	  		<div class="card-header text-center" >고객센터</div>
+            		<div class="list-group">
+  <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
+  <a href="../lostitem/list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
+  <a href="../oneonone/list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
+  <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
+  <a href="list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+					</div>
+				</div>
+    	</div>
+    	<div class="col-9">
         	<h1 class="fs-2 p-2">공지사항</h1>
-      	</div>
-   	</div>
-	<div class="clearfix">
 		<ul class="dot-list">
 			<li>
 				<a href="insertform.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">등록</a>
@@ -80,7 +88,7 @@
 				
 				</select>	
 				
-				<select id="theater" title="극장 선택" class="selectpicker" name="theaterNo" onchange= "refreshNotice();">
+				<select id="theater" title="극장 선택" class="selectpicker ml07" name="theaterNo" onchange= "refreshNotice();">
 					<option value="" selected disabled>극장 선택</option>
 				</select>		
 			
@@ -132,8 +140,7 @@
 				</li>
 			</ul>
 		</nav>
-		
-			
+		</div>	
 	</div>
 </div>
 <script type="text/javascript">
@@ -188,7 +195,7 @@
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				let text = xhr.responseText;
-				let arr = JSON.parse(text);
+				let obj = JSON.parse(text);
 				
 				document.getElementById("total-rows").textContent = obj.totalRows;
 				let notices = obj.noticeList;
@@ -200,7 +207,7 @@
 						<tr>
 							<td>\${item.no}</td>
 							<td>\${item.location.name}</td>
-							<td>\${item.title}</td>
+							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
 					`;

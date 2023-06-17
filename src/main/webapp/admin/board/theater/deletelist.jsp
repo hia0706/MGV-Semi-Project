@@ -1,4 +1,3 @@
-<%@page import="dao.ReportDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="dao.TheaterDao"%>
 <%@page import="util.StringUtils"%>
@@ -18,15 +17,14 @@
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
 	
-	ReportDao reportDao = ReportDao.getInstance();
-	//
-	int totalRows = reportDao.getTotalRowsByReport();
-
+	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
+	int totalRows = theaterBoardDao.getDelTotalRows();
+	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	
 	// 데이터 조회하기
-	List<TheaterBoard> theaterBoards = reportDao.getTheaterBoardByReport( pagination.getBegin(), pagination.getEnd());
-	
+	List<TheaterBoard> theaterBoards = theaterBoardDao.getDelTheaterBoards(pagination.getBegin(), pagination.getEnd());
+
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
 	String loginType = (String) session.getAttribute("loginType");	
@@ -70,7 +68,7 @@
 					  <div class="accordion" id="accordionExample">
 					  <div class="accordion-item">
 				    		<h2 class="accordion-header" id="headingOne">
-				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 				        극장 게시판 관리
 				      </button>
 				    		</h2>
@@ -85,12 +83,13 @@
 					 
 					  <div class="accordion-item">
 				    	<h2 class="accordion-header" id="headingTwo">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 					        영화 게시판 관리
 					      </button>
 				  	   </h2>
 				   	  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				       <div >
+
 				        <a href="../movie/list.jsp" class="list-group-item list-group-item-action ">일반 게시판 관리</a>
 				        <a href="../movie/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
 				        <a href="../movie/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
@@ -119,7 +118,7 @@
 				</div>
 		</div>	
     	<div class="col-9">
-			<h1 class="border bg-light fs-4 p-2">신고된 극장 게시물</h1>
+			<h1 class="border bg-light fs-4 p-2">삭제된 극장 게시물</h1>
 			<div>
 			<p>게시글 목록을 확인하세요.</p>
 			<div>	
@@ -312,7 +311,7 @@
 
 			}	
 		};
-		xhr.open("GET", "reportboard.jsp?no=" + theaterNo + "&page=" + pageNo);
+		xhr.open("GET", "deletedboard.jsp?no=" + theaterNo + "&page=" + pageNo);
 		xhr.send(null);
 
 	}

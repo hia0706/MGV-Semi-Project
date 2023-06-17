@@ -1,3 +1,5 @@
+<%@page import="vo.Theater"%>
+<%@page import="vo.Location"%>
 <%@page import="vo.Notice"%>
 <%@page import="dao.NoticeDao"%>
 <%@page import="javax.swing.text.AbstractDocument.Content"%>
@@ -21,6 +23,8 @@
 	// 요청 파라미터값 조회
 	int no = Integer.parseInt(request.getParameter("no"));
 	String title = request.getParameter("title");
+	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
+	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 	String content = request.getParameter("content");
 	
 	// 요청파라미터로 전달받은 글 번호로 글조회
@@ -28,6 +32,8 @@
 	Notice notice = noticeDao.getNoticeByNo(no);
 	
 	notice.setTitle(title);
+	notice.setLocation(new Location(locationNo));
+	notice.setTheater(new Theater(theaterNo));
 	notice.setContent(content);
 	
 	noticeDao.updatenotice(notice);
