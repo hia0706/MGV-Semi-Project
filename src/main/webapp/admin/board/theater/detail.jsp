@@ -114,17 +114,25 @@
 			<div class="text-end">
 			
 			<br>
-			<br>
-
+			<hr>		
 <%
 	if("Y".equals(theaterBoard.getReport())){
 %>
-			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
-				<p ><strong>아래의 이유로 신고가 접수되었습니다.</strong></p>
-			</div>
-			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
-				<p ><strong>신고이유 : <%=report.getReason().getName() %></strong></p>
-				<p ><%=report.getReasonContent() %></p>
+	
+			<div>
+				<div>
+					<ul>
+						<li style="font-size:16px; float:left"><strong>아래의 이유로 신고가 접수되었습니다.</strong></li><br>
+						<li style="font-size:16px; float:left">삭제버튼을 눌러 신고된 게시글을 삭제하거나, 복구버튼을 눌러 신고처리를 취소하세요.</li>
+					</ul>
+					</div>
+				
+				<br>
+				<div class="txc-textbox" style="background-color:#FFFFFF; border:#FBEFF5 1px solid;  padding: 20px;">
+					<p style="float:left"><strong>신고이유 : <%=report.getReason().getName() %></strong></p><br><br>
+					<p style="float:left"><%=report.getReasonContent() %></p><br>
+				</div>
+				<br>
 			</div>
 
 <%
@@ -152,7 +160,7 @@
 <%
 	if("Y".equals(theaterBoard.getDeleted())){
 %>
-				<a href="reportEnable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
+				<a href="Enable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
 <%
 	}
 %>
