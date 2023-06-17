@@ -139,7 +139,16 @@
 	}
 %>
 
+<%
+	if(("Y".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted()))&& ("N".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted()))){
+%>
+
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
+<%
+	}
+%>
+
+
 <%
 	if(("Y".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted()))|| ("N".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted()))){
 %>		
@@ -153,6 +162,7 @@
 	if("Y".equals(theaterBoard.getReport())&&"N".equals(theaterBoard.getDeleted())){
 %>	
 				<a href="reportEnable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-secondary btn-sm">신고취소</a>
+				<a href="reportlist.jsp" class="btn btn-primary btn-sm">목록</a>
 <%
 	}
 %>
@@ -161,6 +171,7 @@
 	if("Y".equals(theaterBoard.getDeleted())){
 %>
 				<a href="Enable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
+				<a href="deletelist.jsp" class="btn btn-primary btn-sm">목록</a>
 <%
 	}
 %>

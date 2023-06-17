@@ -32,6 +32,6 @@
 	theaterBoard.setDeleted("Y");
 	theaterBoardDao.updateTheaterBoard(theaterBoard);
 	
-	response.sendRedirect("list.jsp");
+	response.sendRedirect("delete list.jsp");
 	
 %>
