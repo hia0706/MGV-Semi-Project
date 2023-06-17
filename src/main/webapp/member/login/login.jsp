@@ -11,17 +11,17 @@
 	Member member = memberDao.getMemberById(id);
 	
 	if (member == null) {
-		response.sendRedirect("loginform.jsp?err=fail");
+		response.sendRedirect("form.jsp?err=fail");
 		return;
 	}
 	
 	if (!member.getPassword().equals(password)) {
-		response.sendRedirect("loginform.jsp?err=fail");
+		response.sendRedirect("form.jsp?err=fail");
 		return;
 	}
 	
 	if ("Yes".equals(member.getDisabled())) {
-		response.sendRedirect("loginform.jsp?err=disabled");
+		response.sendRedirect("form.jsp?err=disabled");
 		return;
 	}
 	
@@ -30,7 +30,7 @@
 	if ("MEMBER".equals(type)) {
 		if ("ADMIN".equals(member.getType())) {
 		
-			response.sendRedirect("loginform.jsp?err=admin");
+			response.sendRedirect("form.jsp?err=admin");
 			return;
 		}
 		session.setAttribute("loginType", "MEMBER");
@@ -39,7 +39,7 @@
 	} else if ("ADMIN".equals(type)) {
 		if ("MEMBER".equals(member.getType())) {
 			
-			response.sendRedirect("loginform.jsp?err=member");
+			response.sendRedirect("form.jsp?err=member");
 			return;
 		}
 		session.setAttribute("loginType", "ADMIN");

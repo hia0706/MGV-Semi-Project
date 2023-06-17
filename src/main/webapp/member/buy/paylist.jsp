@@ -155,10 +155,10 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	
+	let checkedStatus = "all";
 	
 	function refreshPayment(status) { // status 는 All, Y, N 중 하나다.
-		let checkedStatus = status;
+		checkedStatus = status;
 		getData(1);
 	}
 	

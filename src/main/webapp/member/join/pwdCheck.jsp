@@ -15,10 +15,6 @@
 		return;
 	}
 
-	System.out.println("회원 -> " + member);
-	System.out.println("회원 패스워드 -> " + member.getPassword());
-	System.out.println("입력값 -> " + password);
-	
-	response.sendRedirect("modifyform.jsp?id=" + member.getId());
+	response.sendRedirect("../info/modifyform.jsp?id=" + member.getId());
 	
 %>
