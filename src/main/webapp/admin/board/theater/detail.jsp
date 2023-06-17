@@ -160,7 +160,7 @@
 <%
 	if("Y".equals(theaterBoard.getDeleted())){
 %>
-				<a href="reportEnable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
+				<a href="Enable.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
 <%
 	}
 %>
