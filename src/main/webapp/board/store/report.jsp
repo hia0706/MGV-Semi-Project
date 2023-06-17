@@ -28,7 +28,6 @@
 	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
 	StoreBoard savedStoreBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
 	
-	
 	// 조회된 게시물의 신고 정보를 "Y" 로 변경한뒤 DB에 저장한다.
 	savedStoreBoard.setReport("Y");
 	storeBoardDao.updatStoreBoard(savedStoreBoard);

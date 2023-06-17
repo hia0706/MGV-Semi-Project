@@ -154,7 +154,7 @@ public class ReportDao {
 														 sboardReport.getStoreBoard().getNo());
 	}
 	
-	public SboardReport getPboardReportByBoardNo(int boardNo) {
+	public SboardReport getSboardReportByBoardNo(int boardNo) {
 		
 		return DaoHelper.selectOne("reportDao.getPboardReportByBoardNo", rs -> {
 			SboardReport report = new SboardReport();
@@ -261,7 +261,7 @@ public class ReportDao {
 	// 영화 게시판 신고 관련 메서드
 	public void insertMboardReport (MboardReport mboardReport) {
 		
-		DaoHelper.update("reportDao.insertSboardReport", mboardReport.getReasonContent(),
+		DaoHelper.update("reportDao.insertMboardReport", mboardReport.getReasonContent(),
 														 mboardReport.getReason().getNo(),
 														 mboardReport.getMovieBoard().getNo());
 	}

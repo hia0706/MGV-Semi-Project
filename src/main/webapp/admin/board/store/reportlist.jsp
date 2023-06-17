@@ -1,3 +1,4 @@
+<%@page import="vo.SboardReport"%>
 <%@page import="dao.ReportDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.StoreBoard"%>
@@ -41,6 +42,7 @@
 		response.sendRedirect("../../../board/theater/list.jsp?err=type");
 		return;
 	}
+
 %>
 <html lang="ko">
 <head>
@@ -182,7 +184,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a class="text-black text-decoration-none" href="detail.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getReadCnt() %></td>
 						<td><%=board.getCreateDate() %></td>

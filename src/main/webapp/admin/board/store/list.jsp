@@ -181,7 +181,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a class="text-black text-decoration-none" href="detail.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getReadCnt() %></td>
 						<td><%=board.getCreateDate() %></td>
