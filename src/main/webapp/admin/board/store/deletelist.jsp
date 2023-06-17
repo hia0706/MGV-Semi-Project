@@ -1,5 +1,3 @@
-<%@page import="vo.SboardReport"%>
-<%@page import="dao.ReportDao"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="vo.StoreBoard"%>
 <%@page import="dao.StoreBoardDao"%>
@@ -19,14 +17,14 @@
 	ProductCategoryDao productCategoryDao = ProductCategoryDao.getInstance();
 	List<ProductCategory> categories = productCategoryDao.getCategories();
 	
-	// totalrows (de ='N', re = 'Y')
-	ReportDao reportDao = ReportDao.getInstance();
-	int totalRows = reportDao.getPBTotalRowsByReport();
+	// totalrows (de ='Y')
+	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
+	int totalRows = storeBoardDao.getDelTotalRows();
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	
-	// 모든 신고된 스토어 게시물 목록 가져오기
-	List<StoreBoard> storeBoards = reportDao.getStoreBoardByReport(pagination.getBegin(), pagination.getEnd());
+	// 모든 삭제된 스토어 게시물 목록 가져오기
+	List<StoreBoard> storeBoards = storeBoardDao.getAllDelStoreBoards(pagination.getBegin(), pagination.getEnd());
 
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
@@ -42,7 +40,6 @@
 		response.sendRedirect("../../../board/theater/list.jsp?err=type");
 		return;
 	}
-
 %>
 <html lang="ko">
 <head>
@@ -126,7 +123,7 @@
 				</div>
 		</div>	
     	<div class="col-9">
-			<h1 class="border bg-light fs-4 p-2">신고된 스토어 게시물</h1>
+			<h1 class="border bg-light fs-4 p-2">삭제된 스토어 게시물</h1>
 		<div>
 			<p>게시글 목록을 확인하세요.</p>
 			<div>	
@@ -325,7 +322,7 @@
 
 			}	
 		};
-		xhr.open("GET", "reportboard.jsp?no=" + productNo + "&page=" + pageNo);
+		xhr.open("GET", "deleteboard.jsp?no=" + productNo + "&page=" + pageNo);
 		xhr.send(null);
 
 	}
