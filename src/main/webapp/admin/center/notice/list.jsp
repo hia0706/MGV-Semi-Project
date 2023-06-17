@@ -64,7 +64,6 @@
     	</div>
     	<div class="col-9">
         	<h1 class="fs-2 p-2">공지사항</h1>
-	<div class="clearfix">
 		<ul class="dot-list">
 			<li>
 				<a href="insertform.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">등록</a>
@@ -142,7 +141,6 @@
 			</ul>
 		</nav>
 		</div>	
-		</div>	
 	</div>
 </div>
 <script type="text/javascript">
@@ -209,7 +207,7 @@
 						<tr>
 							<td>\${item.no}</td>
 							<td>\${item.location.name}</td>
-							<td>\${item.title}</td>
+							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
 					`;
