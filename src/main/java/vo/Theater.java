@@ -9,6 +9,10 @@ public class Theater {
 	private String disabled;
 	
 	public Theater() {}
+	
+	public Theater(int no) {
+		this.no = no;
+	}
 
 	public int getNo() {
 		return no;
