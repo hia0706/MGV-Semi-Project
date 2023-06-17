@@ -52,7 +52,7 @@
 		</div>
 		
 		<div class="col-3 text-center"  style="margin: 0 auto;">
-			<a href="theater/list.jsp" class="text-black text-decoration-none">
+			<a href="store/list.jsp" class="text-black text-decoration-none">
 				<img src="../../images/board/store.png" width="100" height="100"><br>
 				<strong>스토어게시판 관리</strong>
 			</a>
