@@ -57,6 +57,10 @@
    					<input type="text" class="form-control" name="product-stock" style="width:300px" placeholder="물품 수량을 입력해주세요."/>
    				</div>
    				<div class="form-group mb-2 w-75">
+   					<label class="form-label">물품 구성</label>
+   					<input type="text" class="form-control" name="product-composition" style="width:500px" placeholder="상세 설명을 입력해주세요."/>
+   				</div>
+   				<div class="form-group mb-2 w-75">
    					<label class="form-label">물품 설명</label>
    					<input type="text" class="form-control" name="product-description" style="width:500px" placeholder="상세 설명을 입력해주세요."/>
    				</div>
