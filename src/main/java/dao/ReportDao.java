@@ -6,6 +6,7 @@ import util.DaoHelper;
 import vo.Location;
 import vo.MboardReport;
 import vo.Member;
+import vo.MovieBoard;
 import vo.Product;
 import vo.ProductCategory;
 import vo.ReportReason;
@@ -265,4 +266,26 @@ public class ReportDao {
 														 mboardReport.getReason().getNo(),
 														 mboardReport.getMovieBoard().getNo());
 	}
+	
+	public MboardReport getMboardReportByBoardNo(int boardNo) {
+		
+		return DaoHelper.selectOne("reportDao.getMboardReportByBoardNo", rs -> {
+			MboardReport report = new MboardReport();
+			report.setNo(rs.getInt("report_no"));
+			report.setReasonContent(rs.getString("report_reason"));
+			
+			ReportReason reason = new ReportReason();
+			reason.setNo(rs.getInt("reason_no"));
+			reason.setName(rs.getString("reason_name"));
+			report.setReason(reason);
+			
+			MovieBoard movieBoard = new MovieBoard();
+			movieBoard.setNo(rs.getInt("board_no"));
+			report.setMovieBoard(movieBoard);
+			
+			
+			return report;
+		}, boardNo);
+	}
+	
 }

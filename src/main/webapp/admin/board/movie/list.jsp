@@ -1,30 +1,25 @@
 <%@page import="vo.MovieBoard"%>
 <%@page import="dao.MovieBoardDao"%>
 <%@page import="java.net.URLEncoder"%>
-<%@page import="vo.StoreBoard"%>
-<%@page import="dao.StoreBoardDao"%>
-<%@page import="vo.Product"%>
-<%@page import="dao.ProductDao"%>
-<%@page import="dao.ProductCategoryDao"%>
-<%@page import="vo.ProductCategory"%>
 <%@page import="util.StringUtils"%>
 <%@page import="dto.Pagination"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
 <%
+
 	// 세션에서 로그인된 사용자 정보 조회하기
 	String loginId = (String) session.getAttribute("loginId");
 	String loginType = (String) session.getAttribute("loginType");
 	
 	// 에러메세지 출력
 	if(loginId == null){
-		response.sendRedirect("../../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시판 관리", "utf-8"));
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job=" + URLEncoder.encode("게시판 관리", "utf-8"));
 		return;
 	}
 	
 	if (!"ADMIN".equals(loginType)) {
-		response.sendRedirect("../../../board/theater/list.jsp?err=type");
+		response.sendRedirect("../../../board/movie/list.jsp?err=type");
 		return;
 	}
 	
@@ -133,23 +128,22 @@
 					 
 					  </div>
 					</div>
-				</div>	
+				</div>
 		</div>	
-    	<div class="col-12">
+    	<div class="col-9">
 			<h1 class="border bg-light fs-4 p-2">영화 게시판</h1>
-		</div>
-	    </div>
-	<div class="row mb-3">
+		<div>
 			<p>게시글 목록을 확인하세요.</p>
-		</div>
+			<div>	
 		
 <%-- 게시판의 게시글 수 --%>			
 		<div class="board-list-util">
 			<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
 		</div>
-		
-<%-- 검색창 --%>		
-		
+
+				
+<%-- 검색 --%>			
+		<div class="col-6 text-end" >	
 			<form id="form-search" method="get" action="list.jsp"  style="float: left;" onsubmit="searchMovieBoard(event);" class="row row-cols-lg-auto g-3 align-items-center justify-content-end">
 				<input type="hidden" name="page" value="<%=pageNo %>" >
 				<div class="col-12" >
@@ -167,9 +161,13 @@
 					<button type="submit" class="btn btn-outline-dark btn-sm">검색</button>
  				</div>
 			</form>
+		</div>
 
 
-			<table class="table table-sm" id="table-MBoard">
+				
+	
+<%-- 테이블 --%>			
+<table class="table table-sm" id="table-MBoard">
 				<colgroup>
 					<col width="5%">
 					<col width="55%">
@@ -200,7 +198,7 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>&page=<%=pageNo %>&opt=<%=opt %>&keyword=<%=keyword %>"><%=board.getName() %></a></td>
+						<td><a class="text-black text-decoration-none" href="detail.jsp?no=<%=board.getNo() %>&page=<%=pageNo %>&opt=<%=opt %>&keyword=<%=keyword %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getReadCnt() %></td>
 						<td><%=board.getCreateDate() %></td>
@@ -213,8 +211,7 @@
 			
 				</tbody>
 			</table>
-		</div>
-
+			
 <%
 	if (!movieBoards.isEmpty()){
 %>		
@@ -255,36 +252,39 @@
 
 				 </div>
 			 </div>
-
+		</div>
+	</div>
+</div>
+</div>
+</div>
 
 <script type="text/javascript">
-function searchMovieBoard(e){
-	let opt = document.querySelector("select[name=opt]").value;
-	let keyword = document.querySelector("input[name=keyword]").value;
-	
-	if (opt == ""){
-		alert("검색옵션을 선택하세요");
-		e.preventDefault();
-		return;
+
+	function searchMovieBoard(e){
+		let opt = document.querySelector("select[name=opt]").value;
+		let keyword = document.querySelector("input[name=keyword]").value;
+		
+		if (opt == ""){
+			alert("검색옵션을 선택하세요");
+			e.preventDefault();
+			return;
+		}
+		
+		if (keyword == "") {
+			alert("검색 키워드를 선택하세요");
+			e.preventDefault();
+			return;
+		}
+		
+		document.querySelector("input[name=page]").value = 1;
 	}
 	
-	if (keyword == "") {
-		alert("검색 키워드를 선택하세요");
-		e.preventDefault();
-		return;
-	}
 	
-	document.querySelector("input[name=page]").value = 1;
-}
-
-
-function goPage(e, pageNo) {
-	event.preventDefault();
-	document.querySelector("input[name=page]").value = pageNo;
-	document.getElementById("form-search").submit();
-}
-
-
+	function goPage(e, pageNo) {
+		event.preventDefault();
+		document.querySelector("input[name=page]").value = pageNo;
+		document.getElementById("form-search").submit();
+	}
 
 </script>
 </body>
