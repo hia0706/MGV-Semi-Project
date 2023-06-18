@@ -23,7 +23,7 @@
 
 // 로그인타입 관리자아니면 로그인으로 리다이렉트시킴
 	if (!"ADMIN".equals(loginType)){
-		response.sendRedirect("../member/login.jsp");
+		response.sendRedirect("../member/login/login.jsp");
 		return;
 	}
 	

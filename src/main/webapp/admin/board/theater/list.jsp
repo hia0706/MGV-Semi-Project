@@ -70,31 +70,32 @@
 					  <div class="accordion" id="accordionExample">
 					  <div class="accordion-item">
 				    		<h2 class="accordion-header" id="headingOne">
-				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				        영화 게시판 관리
+				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				        극장 게시판 관리
 				      </button>
 				    		</h2>
 				      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 				      <div>
-
-				        <a href="movie/list.jsp" class="list-group-item list-group-item-action ">일반 게시판 관리</a>
-				        <a href="movie/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
-				        <a href="movie/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
+	 			        <a href="list.jsp" class="list-group-item list-group-item-action">일반 게시판 관리</a> 
+				        <a href	="reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a>
+				        <a href="deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
 				      </div>
 				      </div>
 					 </div> 
 					 
 					  <div class="accordion-item">
 				    	<h2 class="accordion-header" id="headingTwo">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-					        극장 게시판 관리
+					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+					        영화 게시판 관리
 					      </button>
 				  	   </h2>
 				   	  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				       <div >
-	 			        <a href="theater/list.jsp" class="list-group-item list-group-item-action">일반 게시판 관리</a> 
-				        <a href	="theater/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a>
-				        <a href="theater/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
+
+				        <a href="../movie/list.jsp" class="list-group-item list-group-item-action ">일반 게시판 관리</a>
+				        <a href="../movie/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
+				        <a href="../movie/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
+
 				      </div>
 				     </div>
 				    </div>
@@ -107,9 +108,9 @@
 				        </h2>
 				     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 				      <div >
-				       	<a href="store/list.jsp" class="list-group-item list-group-item-action">일반 게시판 관리</a>
-				        <a href="store/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
-				        <a href="store/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a> 
+				       	<a href="../store/list.jsp" class="list-group-item list-group-item-action">일반 게시판 관리</a>
+				        <a href="../store/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
+				        <a href="../store/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a> 
 				      </div>
 				     </div>
 				    </div>
@@ -278,7 +279,7 @@
 					htmlContents += `
 						<tr>
 							<td>\${item.no}</td>
-							<td><a class="text-black text-decoration-none" href="read.jsp?no=\${item.no}">\${item.name}</a></td>
+							<td><a class="text-black text-decoration-none" href="list.jsp?no=\${item.no}">\${item.name}</a></td>
 							<td>\${item.member.id}</td>
 							<td>\${item.readCnt}</td>
 							<td>\${item.createDate}</td>

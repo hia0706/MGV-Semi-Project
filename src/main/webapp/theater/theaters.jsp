@@ -70,7 +70,6 @@
 				
 				let htmlContents = "";
 				arr.forEach(function(item, index) {
-					console.log(item.id);
 					htmlContents += `
 						<li class="list-group-item col-3 border-0 " >
 						<a href="detail.jsp?no=\${item.no}" style="text-decoration: none;"  class="link-dark">\${item.name}</a>
@@ -96,9 +95,8 @@
 				let text = xhr.responseText;
 				let arr = JSON.parse(text);
 				
-				let htmlContents = "<option selected disabled>지점을 선택해주세요</option>";
+				let htmlContents = "<option value='0' selected disabled>지점을 선택해주세요</option>";
 				arr.forEach(function(item, index) {
-					console.log(item.id);
 					htmlContents += `
 			            <option value="\${item.no}">\${item.name}</option>
 					`;
@@ -114,10 +112,113 @@
 	/* 처음 페이지가 로드되면 실행. */
 	window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
 		    locationSelect(1);
+		    getftList()
 
 	};
-	
-
+	// 자주가는 극장 관리 버튼을 누르면 실행
+	let ftList = [];
+	let curList = [];
+	// 자주가는 극장 리스트를 보여준다.
+	function fTControl(){
+		refreshFT(ftList);
+		curList = saveList(ftList);
+	}
+	function saveList(ftList) {
+		curList = [];
+		ftList.forEach(function (item,index) {
+			curList.push(item);
+		})
+		return curList;
+	}
+	// 자주가는 극장 리스트를 가져오는 ajax
+	function getftList() {
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				let text = xhr.responseText;
+				let arr = JSON.parse(text);
+				arr.forEach(function(item, index) {
+					let no =item.theater.no;
+					let name = item.theater.name;
+					ftList.push({no,name});
+				});
+			}
+		};
+		xhr.open("GET", "view.jsp");
+		xhr.send(null);
+		
+	}
+	// 화면을 갱신해서 보여준다.
+	function refreshFT(ftList) {
+		let contents=""
+		let circles = document.querySelectorAll(".theater-choice-list .bg .circle");
+		for(index=0;index<=2;index++){
+			circles[index].innerHTML = contents;
+		}	
+		ftList.forEach(function (item,index) {
+			contents=`<p class="txt">\${item.name}</p>
+      		<button type="button" class="del" onclick="deleteFT(\${index})">삭제</button>`;
+      		circles[index].innerHTML = contents;
+		});
+	}
+	// 자주가는 극장 목록에서 선택된 하나는 지우고 화면을 다시 호출한다.
+	function deleteFT(number) {
+		
+		let no= number;
+		curList.splice(no,1);
+		refreshFT(curList);
+	}
+	// 자주가는 극장 리스트에 극장 하나는 추가하고 화면을 다시 호출한다.
+	function insertFT() {
+		// 진행상황 확인용 변수선언
+		let passed =true;
+		// 자주가는 극장이 3개이상인가.
+		if(curList.length>=3){
+			alert("자주가는 극장은 최대 3개까지 등록 할 수 있습니다.");
+			passed = false;
+			return passed;
+		}
+		// 극장 번호 가져오기
+		let no = document.getElementById("areaList").value;
+		// 극장을 선택했는지 검사
+		if(no==0){
+			alert("극장을 선택해주세요.");
+			passed = false;
+			return passed;
+		}
+		// 중복검사
+		curList.forEach(function (item,index) {
+			if(item.no==no){
+				alert("이미 선택한 극장입니다. 다시 선택해주세요.");
+				passed = false;
+				return passed;
+			}
+		})
+		// 극장 이름 가져오기
+		let index = document.getElementById("areaList").selectedIndex;
+		let name = document.getElementById("areaList").options[index].textContent;
+		// ftList에 넣기
+		if(passed){
+			curList.push({no,name});
+			// 화면 다시 호출하기
+			refreshFT(curList);	
+		}
+	}
+	// 자주가는 극장 일괄등록
+	function insertFTList() {
+		let arr = JSON.stringify(curList);
+		let xhr = new XMLHttpRequest();
+		console.log(arr);
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				
+			}
+		};
+		xhr.open("POST", "insert.jsp");
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.send(arr);
+		window.location.reload();
+	}
 </script>
 <div class="container ">
 	<div class="theater_wrap">
@@ -142,7 +243,7 @@
 				</div> 
 			</div>
 			<div class="sect-favorite">
-				<span class="s1"><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
+				<span class="s1" ><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
 <%
 	if(loginId==null){
 		
@@ -150,7 +251,7 @@
 				<button style="border-radius: 10px; margin-left: 10px;" onclick="login()">로그인하기</button>
 <script type="text/javascript">
 	function login() {
-		window.location="../member/loginform.jsp";
+		window.location="../member/login/form.jsp";
 	}
 </script>				
 <%
@@ -168,7 +269,8 @@
 %>						  
 				</ul>
 				<!-- Button trigger modal -->
-				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+					onclick="fTControl()">
 				  자주가는 극장 관리
 				</button>
 <%
@@ -223,7 +325,7 @@
 	      	<div class="box-gray v1 a-c">
 	            <div class="dropdown bootstrap-select w150px small bs3">
 		            <select id="locationList" class="w150px small" name="locationList" tabindex="-98" onchange="refreshTheaters();">
-		            	<option value="" selected disabled>지역을 선택해주세요.</option>
+		            	<option value="0" selected disabled>지역을 선택해주세요.</option>
 <%
 	for(Location location:locations){
 %>		            
@@ -235,30 +337,34 @@
 	            </div>
 	            <div class="dropdown bootstrap-select w150px small bs3">
 		            <select id="areaList" class="w150px small" name="areaList" tabindex="-98">
-		            	<option selected disabled="disabled">지점을 선택해주세요</option>
+		            	<option value="0"  selected disabled="disabled">지점을 선택해주세요</option>
 		            </select>
 	            </div>
-	            <button id="btn-insert" type="button" class="button gray small ml05">추가</button>
+	            <button id="btn-insert" type="button" class="button gray small ml05" onclick="insertFT()">추가</button>
 			</div>					            
 	      	<div class="theater-choice-list row">
-<%
-	for(FavoriteTheater fTheater:FTList){
-%>	      	
-	               <div class="bg col-4">
-	                      <div class="circle " data-brch-no=<%=fTheater.getTheater().getNo() %>>
-	                          <p class="txt" data-eng-nm="Dongdaemoon" data-kor-nm="<%=fTheater.getTheater().getName() %>"><%=fTheater.getTheater().getName() %></p>
-	                          <button type="button" class="del">삭제</button>
-	                      </div>
-	               </div>
-<%
-	}
-%>	               
+
+	                     
+	                          
+              
+				<div class="bg col-4">
+	            	<div class="circle">
+	                </div>
+				</div>
+				<div class="bg col-4">
+	            	<div class="circle">
+	                </div>
+				</div>
+				<div class="bg col-4">
+	            	<div class="circle">
+	                </div>
+				</div>
 	               
 	        </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary">등록</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertFTList()">등록</button>
 	      </div>
 	    </div>
 	  </div>

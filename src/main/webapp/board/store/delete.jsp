@@ -12,7 +12,7 @@
 	
 	// 에러메세지 출력
 	if(loginId == null){
-		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("삭제", "utf-8"));
+		response.sendRedirect("../../member/login/form.jsp?err=req&job=" + URLEncoder.encode("삭제", "utf-8"));
 		return;
 	}
 	
