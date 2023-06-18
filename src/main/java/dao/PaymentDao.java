@@ -24,7 +24,7 @@ public class PaymentDao {
 	
 	// 로그인 아이디의 Status = ? 행의 개수
 	public int getTotalRowsByIdandStatus(String id, String status) {
-		return DaoHelper.selectOne("paymentDao.getTotalRowsByIdByStatus", rs -> {
+		return DaoHelper.selectOne("paymentDao.getTotalRowsByIdandStatus", rs -> {
 			return rs.getInt("cnt");
 		}, id, status);
 	}

@@ -18,7 +18,7 @@
 </head>
 <body>
 <body onLoad="document.form.id.focus()">
-<jsp:include page="../common/nav.jsp">
+<jsp:include page="../../common/nav.jsp">
 	<jsp:param name="menu" value="로그인"/>
 </jsp:include>
 <div class="container" style="max-width: 600px;">

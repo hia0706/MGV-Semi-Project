@@ -10,7 +10,7 @@
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
 	if (loginId == null) {
-		response.sendRedirect("../loginform.jsp");
+		response.sendRedirect("../login/form.jsp");
 		return;
 	}
 	
@@ -29,7 +29,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../common/nav.jsp">
+<jsp:include page="../../common/nav.jsp">
 	<jsp:param name="menu" value="<%=loginId %>"/>
 </jsp:include>
 <div class="container">
@@ -96,15 +96,15 @@
 <%
 	if ("No".equals(member.getDisabled())) {
 %>
-			<a href="orderlist.jsp?id=<%=member.getId() %>" class="btn btn-outline-info">구매내역</a>
-			<a href="pwdCheckform.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
+			<a href="../buy/paylist.jsp?id=<%=member.getId() %>" class="btn btn-outline-info">구매내역</a>
+			<a href="../join/pwdCheckform.jsp?id=<%=member.getId() %>" class="btn btn-outline-warning">수정하기</a>
 			<a href="disable.jsp?id=<%=member.getId() %>" class="btn btn-outline-danger">탈퇴</a>
 <%
 	} else if ("Yes".equals(member.getDisabled())) {
 %>
 			<a class="btn btn-outline-info disabled">구매내역</a>
 			<a class="btn btn-outline-warning disabled">수정하기</a>
-			<a href="../center/oneonone/insertform.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">복구 문의</a>
+			<a href="/mgv/center/oneonone/insertform.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">복구 문의</a>
 <%
 	}
 %>	

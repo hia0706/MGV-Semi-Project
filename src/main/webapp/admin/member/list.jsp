@@ -112,7 +112,6 @@ for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++)
 			<div class="text-end">
 				<a href="#" class="btn btn-primary btn-sm">판매내역</a>
 				<a href="../center/oneonone/list.jsp" class="btn btn-info btn-sm">문의내역</a>
-				<a href="#" class="btn btn-primary btn-sm">ㅇㅇㅇ</a>
 			</div>
 		</div>
 	</div>

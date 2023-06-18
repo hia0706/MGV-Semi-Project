@@ -44,16 +44,16 @@
 	if (loginType != null) {
 %>
 		<div class="dropdown navbar-text me-5">
-			<a href="/mgv/member/detail.jsp">
+			<a href="/mgv/member/info/detail.jsp">
 				<img src="/mgv/images/member/myprofile.png" alt="<%=loginId %>" width="30" height="30">
 			</a> 
 		  <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				<strong class="text-white bolder <%=loginId.equals(menu) ? "active" : "" %>"><%=loginId %>님</strong>
 		  </button>
 		  <ul class="dropdown-menu dropdown-menu-dark">
-			    <li><a class="dropdown-item" href="/mgv/member/detail.jsp">내 정보</a></li>
+			    <li><a class="dropdown-item" href="/mgv/member/info/detail.jsp">내 정보</a></li>
 			    <li><a class="dropdown-item" href="/mgv/member/user-cart.jsp">장바구니</a></li>			    
-			    <li><a class="dropdown-item" href="/mgv/member/paylist.jsp">결제내역</a></li>
+			    <li><a class="dropdown-item" href="/mgv/member/buy/paylist.jsp">결제내역</a></li>
 			    <li><a class="dropdown-item" href="/mgv/center/oneonone/list.jsp">내 문의내역</a></li>
 		  </ul>
 		</div>
@@ -67,12 +67,12 @@
 <%
 	if (loginId != null) {
 %>
-         	<li class="nav-item"><a class="nav-link " href="/mgv/member/logout.jsp">로그아웃</a></li>
+         	<li class="nav-item"><a class="nav-link " href="/mgv/member/login/logout.jsp">로그아웃</a></li>
 <%
 	} else {
 %>
-         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" href="/mgv/member/loginform.jsp">로그인</a></li>
-        	<li class="nav-item"><a class="nav-link <%="회원가입".equals(menu) ? "active" : "" %>" href="/mgv/member/joinform.jsp">회원가입</a></li>   
+         	<li class="nav-item"><a class="nav-link <%="로그인".equals(menu) ? "active" : "" %>" href="/mgv/member/login/form.jsp">로그인</a></li>
+        	<li class="nav-item"><a class="nav-link <%="회원가입".equals(menu) ? "active" : "" %>" href="/mgv/member/join/form.jsp">회원가입</a></li>   
 <%
 	}
 %>
