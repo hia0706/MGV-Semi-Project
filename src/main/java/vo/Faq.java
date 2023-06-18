@@ -11,6 +11,7 @@ public class Faq {
 	private Date updateDate;
 	private Date createDate;
 	private Member member;
+	private FaqCategory faqCategory;
 	
 	public Faq() {}
 
@@ -68,6 +69,14 @@ public class Faq {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public FaqCategory getFaqCategory() {
+		return faqCategory;
+	}
+
+	public void setFaqCategory(FaqCategory faqCategory) {
+		this.faqCategory = faqCategory;
 	}
 	
 	
