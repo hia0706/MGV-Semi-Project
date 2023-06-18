@@ -44,11 +44,13 @@
         	<h1 class="fs-2 p-2">공지사항</h1>
 	
 		<hr>
-			<a style="font-size : 17px;"><%=notice.getTitle() %><strong></strong></a><br>
-			<a style="font-size : 12px;"><%=notice.getCreateDate() %></a>
+			<a style="font-size : 19px;">[지점] [<%=notice.getTheater().getName() %>] <%=notice.getTitle() %></a><br>
+			<a style="font-size : 12px;">영화관 <%=notice.getTheater().getName() %> | </a>
+			<a style="font-size : 12px;">등록일 <%=notice.getCreateDate() %></a>
 		<hr>
 			<a><%=notice.getContent() %></a>
 		<hr>
+		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
 		</div>

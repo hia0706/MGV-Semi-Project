@@ -11,6 +11,8 @@ public class Lostitem {
 	private String deleted;
 	private Date createDate;
 	private Member member;
+	private Location location;
+	private Theater theater;
 	
 	public Lostitem () {}
 	
@@ -73,8 +75,22 @@ public class Lostitem {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	
-	
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Theater getTheater() {
+		return theater;
+	}
+
+	public void setTheater(Theater theater) {
+		this.theater = theater;
+	}
 	
 	
 }
