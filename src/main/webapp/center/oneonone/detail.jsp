@@ -69,8 +69,9 @@
 			<li>고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
 		<hr>
-			<a style="font-size : 17px;"><strong><%=oneonone.getTitle() %></strong></a><br>
-			<a style="font-size : 12px;"><%=oneonone.getCreateDate() %></a>
+			<a style="font-size : 19px;">[지점] [<%=oneonone.getTheater().getName() %>] <%=oneonone.getTitle() %></a><br>
+			<a style="font-size : 12px;">영화관 <%=oneonone.getTheater().getName() %> | </a>
+			<a style="font-size : 12px;">등록일 <%=oneonone.getCreateDate() %></a>
 		<hr>
 			<a><%=oneonone.getContent() %></a>
 			<br>

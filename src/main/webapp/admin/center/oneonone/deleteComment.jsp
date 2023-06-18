@@ -14,7 +14,7 @@
 	
 	
 	if (member == null) {
-		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터", "utf-8"));
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터", "utf-8"));
 		return;
 	}
 

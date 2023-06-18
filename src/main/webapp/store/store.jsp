@@ -27,8 +27,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <style>
-
+	a {
+		text-align: center;
+	}
 </style>
+
 
 </head>
 <body>
@@ -46,7 +49,9 @@
 	for (ProductCategory productCategory : categories) {
 %>
 			<li class="nav-item col-md-auto" role="presentation">
-				<button class="nav-link link-dark col-md-auto <%=productCategory.getNo() == 1 ? "active":"" %>" id="category-tab" data-bs-toggle="tab" data-bs-target="#category-tab-pane-<%=productCategory.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=productCategory.getName() %></button>
+				<button class="nav-link link-dark col-md-auto <%=productCategory.getNo() == 1 ? "active":"" %>" id="category-tab" data-bs-toggle="tab" data-bs-target="#category-tab-pane-<%=productCategory.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+				<%=productCategory.getName() %>
+				</button>
 			</li>
 <%
 	}
@@ -59,7 +64,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 1) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>
 <%
@@ -74,7 +80,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 2) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%
@@ -89,7 +96,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 3) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%
@@ -104,7 +112,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 4) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%
@@ -119,7 +128,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 5) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%
@@ -134,7 +144,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 6) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%
@@ -149,7 +160,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 7) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%
@@ -164,7 +176,8 @@
 	for (Product product : productList) {
 		if (product.getProductCategory().getNo() == 8) {
 %>
-					<li class="list-group-item col-3 border-0">
+					<li class="list-group-item col-3 border-0" style="text-align: center">
+						<a href="detail.jsp?no=<%=product.getNo() %>"><img alt="상품별 사진" src="../images/products/<%=product.getNo() %>.png" class="img-thumnail" width="50%" style="padding: 0.5em 0;"></a><br />
 						<a href="detail.jsp?no=<%=product.getNo() %>" style="text-decoration: none;" class="link-dark"><%=product.getName() %></a>
 					</li>	
 <%

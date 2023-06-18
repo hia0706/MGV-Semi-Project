@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils"%>
 <%@page import="vo.MovieBoard"%>
 <%@page import="dao.MovieBoardDao"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,9 @@
 <%
 	// 요청 파라미터 조회
 	int boardNo = Integer.parseInt(request.getParameter("no"));
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	String opt = StringUtils.nullToBlank(request.getParameter("opt"));
+	String keyword = StringUtils.nullToBlank(request.getParameter("keyword"));
 
 	// 글 번호에 해당하는 게시글 정보를 조회
 	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
@@ -16,6 +20,7 @@
 	// 조회수가 +1된 게시글 객체를 DB에 UPDATE한다.
 	movieBoardDao.updateMovieBoard(movieBoard);
 	
-	// url 재요청
-	response.sendRedirect("detail.jsp?no="+ boardNo);
+	// url 재요청   
+	response.sendRedirect("detail.jsp?no=" + boardNo + "&page=" + pageNo + "&opt=" + opt + "&keyword=" + keyword );
+	
 %>

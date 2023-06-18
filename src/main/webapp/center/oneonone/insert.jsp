@@ -1,3 +1,5 @@
+<%@page import="vo.Theater"%>
+<%@page import="vo.Location"%>
 <%@page import="dao.OneononeDao"%>
 <%@page import="vo.Member"%>
 <%@page import="vo.Oneonone"%>
@@ -11,6 +13,8 @@
 	
 
 	// 요청 파라미터값 조회
+	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
+	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 	String name = request.getParameter("name");
 	String tel = request.getParameter("tel");
 	String email = request.getParameter("email");
@@ -19,6 +23,8 @@
 	
 	// OneonOne객체를 생성해서 요청파라미터값 저장하기
 	Oneonone oneonone = new Oneonone();
+	oneonone.setLocation(new Location(locationNo));
+	oneonone.setTheater(new Theater(theaterNo));
 	oneonone.setTitle(title);
 	oneonone.setContent(content);
 	
