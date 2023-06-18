@@ -58,7 +58,7 @@
 	
 	
 	// 신고 테이블 출력
-	SboardReport report = reportDao.getSboardReportByBoardNo(boardNo);
+	TboardReport report = reportDao.getTboardReportByBoardNo(boardNo);
 	
 
 %>

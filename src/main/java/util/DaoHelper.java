@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 
+
 public class DaoHelper {
 	
 	private static Properties prop = new Properties();
@@ -45,7 +46,7 @@ public class DaoHelper {
 		try {
 			T t = null;
 			Connection conn = ConnUtils.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(prop.getProperty(key));
+			PreparedStatement pstmt = conn.prepareStatement(getSql(key));
 			setParams(pstmt, params);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -73,7 +74,7 @@ public class DaoHelper {
 		try {
 			List<T> list = new ArrayList<>();
 			Connection conn = ConnUtils.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(prop.getProperty(key));
+			PreparedStatement pstmt = conn.prepareStatement(getSql(key));
 			setParams(pstmt, params);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -100,7 +101,7 @@ public class DaoHelper {
 	
 		try {
 			Connection conn = ConnUtils.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(prop.getProperty(key));
+			PreparedStatement pstmt = conn.prepareStatement(getSql(key));
 			setParams(pstmt, params);
 			pstmt.executeUpdate();
 			
@@ -135,6 +136,13 @@ public class DaoHelper {
 		}
 	}
 	
+	private static String getSql(String key) {
+		if (key.contains(" ")) {
+			return key;
+		} 
+		return prop.getProperty(key);
+	}
+	
 	/**
 	 * ResutSet에서 커서가 가르키는 행의 값을 객체로 반환하는 기능에 대한 표준을 지정한다.
 	 *
@@ -143,12 +151,12 @@ public class DaoHelper {
 	public static interface RowMapper<T> {
 		T mapRow(ResultSet rs) throws SQLException;
 	}
-	
+
 	public static <T> HashSet<T> selectSet(String key, RowMapper<T> rowMapper, Object...params) {
 		try {
 			HashSet<T> set = new HashSet<>();
 			Connection conn = ConnUtils.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(prop.getProperty(key));
+			PreparedStatement pstmt = conn.prepareStatement(getSql(key));
 			setParams(pstmt, params);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -165,5 +173,6 @@ public class DaoHelper {
 			throw new RuntimeException(ex);
 		}
 	}
-	
 }
+
+	
