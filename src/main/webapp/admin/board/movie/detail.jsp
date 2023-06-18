@@ -1,7 +1,10 @@
-<%@page import="vo.SboardReport"%>
-<%@page import="vo.StoreBoard"%>
-<%@page import="dao.StoreBoardDao"%>
+<%@page import="vo.MboardReport"%>
 <%@page import="java.net.URLEncoder"%>
+<%@page import="util.StringUtils"%>
+<%@page import="vo.MboardComment"%>
+<%@page import="dao.MboardCommentDao"%>
+<%@page import="vo.MovieBoard"%>
+<%@page import="dao.MovieBoardDao"%>
 <%@page import="vo.ReportReason"%>
 <%@page import="dao.ReportDao"%>
 <%@page import="java.util.List"%>
@@ -14,12 +17,16 @@
 	int boardNo = Integer.parseInt(request.getParameter("no"));
 	String err = request.getParameter("err");
 	String job = request.getParameter("job");
+	
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	String opt = StringUtils.nullToBlank(request.getParameter("opt"));
+	String keyword = StringUtils.nullToBlank(request.getParameter("keyword"));
 
 	// 업무로직수행 - 요청 파라미터로 전달받은 게시물번호에 해당하는 게시물 상세정보를 조회한다.
-	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
-	StoreBoard storeBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
-	
-	String grade = storeBoard.getGrade();
+	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
+	MovieBoard movieBoard = movieBoardDao.getMovieBoardByBoardNo(boardNo);
+
+	String grade = movieBoard.getGrade();
 	String score = "";
 	if (grade.equals("A")){
 		score = "★★★★★";
@@ -33,27 +40,28 @@
 		score = "★☆☆☆☆";
 	}
 	
-	// 세션에서 로그인된 사용자 정보 조회하기
-	String loginId = (String) session.getAttribute("loginId");
-	String loginType = (String) session.getAttribute("loginType");	
+   // 세션에서 로그인된 사용자 정보 조회하기
+  	String loginId = (String) session.getAttribute("loginId");
+  	String loginType = (String) session.getAttribute("loginType");	
 
-	// 에러메세지 출력
-	if(loginId == null){
-		response.sendRedirect("../../../member/login/form.jsp?err=req&job=" + URLEncoder.encode("게시판 관리", "utf-8"));
-		return;
-	}
-	
-	if (!"ADMIN".equals(loginType)) {
-		response.sendRedirect("../../../board/store/list.jsp?no=" + boardNo +"&err=type");
-		return;
-	}
+  	// 에러메세지 출력
+  	if(loginId == null){
+  		response.sendRedirect("../../../member/login/form.jsp?err=req&job=" + URLEncoder.encode("게시판 관리", "utf-8"));
+  		return;
+  	}
+  	
+  	if (!"ADMIN".equals(loginType)) {
+  		response.sendRedirect("../../../board/movie/list.jsp?no=" + boardNo +"&err=type");
+  		return;
+  	}
 
-	ReportDao reportDao = ReportDao.getInstance();
-	List<ReportReason> reportReasons = reportDao.getReportReasonrs();
-	
-	
-	// 신고 테이블 출력
-	SboardReport report = reportDao.getSboardReportByBoardNo(boardNo);
+  	ReportDao reportDao = ReportDao.getInstance();
+  	List<ReportReason> reportReasons = reportDao.getReportReasonrs();
+  	
+  	
+  	// 신고 테이블 출력
+  	MboardReport report = reportDao.getMboardReportByBoardNo(boardNo);
+  	
 	
 
 %>
@@ -78,41 +86,52 @@
 <div class="container my-3">
 	<div class="row mb-3">
 		<div class="col-12">
-			<h1 class="border bg-light fs-4 p-2"><%=storeBoard.getName() %></h1>
+			<h1 class="border bg-light fs-4 p-2"><%=movieBoard.getName() %></h1>
 		</div>
 
 <%
-	if("type".equals(err)){
+	if("id".equals(err)){
 %>
 		<div class="alert alert-danger">
-			<strong>관리자가 아니면 사용자의 게시물을 [<%=job %>]할 수 없습니다.</strong>
+			<strong>다른 사용자의 게시글을 삭제할 수 없습니다.</strong>
+		</div>
+<%
+	}
+%>
+	
+<%
+	if("Cid".equals(err)){
+%>
+		<div class="alert alert-danger">
+			<strong>다른 사용자의 댓글을 삭제할 수 없습니다.</strong>
 		</div>
 <%
 	}
 %>
 		
+
 	</div>
 	
 	<div class="row mb-3">
 		<div class="col-12">
 			
-			<p style="font-size : 12px; line-height: 15%; float:right;">댓글 <strong><%=storeBoard.getCommentCnt() %></strong></p>
-			<p style="font-size : 12px; line-height: 15%; float:right;">조회수 <strong><%=storeBoard.getReadCnt()%>&nbsp;</strong></p>
-			<p style="font-size : 10px; line-height: 15%;"><strong><%=storeBoard.getCategory().getName() %>/<%=storeBoard.getProduct().getName() %></strong></p>
-			<p style="font-size : 12px; line-height: 15%;">작성자<strong> <%=storeBoard.getMember().getId() %></strong></p>
-			<p style="font-size : 12px; line-height: 15%;"><strong> <%=storeBoard.getUpdateDate() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%; float:right;">댓글 <strong><%=movieBoard.getCommentCnt() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%; float:right;">조회수 <strong><%=movieBoard.getReadCnt()%>&nbsp;</strong></p>
+			<p style="font-size : 10px; line-height: 15%;"><strong><%=movieBoard.getMovie().getTitle() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;">작성자<strong> <%=movieBoard.getMember().getId() %></strong></p>
+			<p style="font-size : 12px; line-height: 15%;"><strong> <%=movieBoard.getUpdateDate() %></strong></p>
 			<hr>
 			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
 				<p><strong>별점 : <%=score %></strong></p>
-				<p><%=storeBoard.getContent() %></p>
+				<p><%=movieBoard.getContent() %></p>
 			</div>
 			
 			<div class="text-end">
-			
+
 			<br>
 			<hr>		
 <%
-	if("Y".equals(storeBoard.getReport())){
+	if("Y".equals(movieBoard.getReport())){
 %>
 	
 			<div>
@@ -136,7 +155,7 @@
 %>
 
 <%
-	if(("Y".equals(storeBoard.getReport())&&"N".equals(storeBoard.getDeleted()))&& ("N".equals(storeBoard.getReport())&&"N".equals(storeBoard.getDeleted()))){
+	if(("Y".equals(movieBoard.getReport())&&"N".equals(movieBoard.getDeleted()))&& ("N".equals(movieBoard.getReport())&&"N".equals(movieBoard.getDeleted()))){
 %>
 
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
@@ -146,35 +165,38 @@
 
 
 <%
-	if(("Y".equals(storeBoard.getReport())&&"N".equals(storeBoard.getDeleted()))|| ("N".equals(storeBoard.getReport())&&"N".equals(storeBoard.getDeleted()))){
+	if(("Y".equals(movieBoard.getReport())&&"N".equals(movieBoard.getDeleted()))|| ("N".equals(movieBoard.getReport())&&"N".equals(movieBoard.getDeleted()))){
 %>		
-				<a href="delete.jsp?no=<%=storeBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
+				<a href="delete.jsp?no=<%=movieBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 
 <%
 	}
 %>	
 
 <%
-	if("Y".equals(storeBoard.getReport())&&"N".equals(storeBoard.getDeleted())){
+	if("Y".equals(movieBoard.getReport())&&"N".equals(movieBoard.getDeleted())){
 %>	
-				<a href="reportEnable.jsp?no=<%=storeBoard.getNo() %>" class="btn btn-secondary btn-sm">신고취소</a>
+				<a href="reportEnable.jsp?no=<%=movieBoard.getNo() %>" class="btn btn-secondary btn-sm">신고취소</a>
 				<a href="reportlist.jsp" class="btn btn-primary btn-sm">목록</a>
 <%
 	}
 %>
 
 <%
-	if("Y".equals(storeBoard.getDeleted())){
+	if("Y".equals(movieBoard.getDeleted())){
 %>
-				<a href="enable.jsp?no=<%=storeBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
+				<a href="enable.jsp?no=<%=movieBoard.getNo() %>" class="btn btn-success btn-sm">복구</a>
 				<a href="deletelist.jsp" class="btn btn-primary btn-sm">목록</a>
 <%
 	}
 %>
-			</div>
-		</div>
-	</div>
+   	
+		
+    	</div>
+  	</div>
+</div>
 
 </div>
+
 </body>
 </html>
