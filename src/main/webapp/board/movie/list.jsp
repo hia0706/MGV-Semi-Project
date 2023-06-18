@@ -84,7 +84,7 @@
 				<div class="col-12" >
 					<select class="form-select form-control-sm" name="opt" >
 						<option value="" <%="".equals(opt) ? "selected" : "" %>> 검색옵션</option>
-						<option value="title" <%="title".equals(opt) ? "selected" : "" %>> 영화제목</option>
+						<option value="Mtitle" <%="Mtitle".equals(opt) ? "selected" : "" %>> 영화제목</option>
 						<option value="name" <%="name".equals(opt) ? "selected" : "" %>> 글제목</option>
 						<option value="writer" <%="writer".equals(opt) ? "selected" : "" %>> 작성자</option>
 					</select>
@@ -132,12 +132,11 @@
 %>
 					<tr>
 						<td><%=board.getNo() %></td>
-						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>"><%=board.getName() %></a></td>
+						<td><a class="text-black text-decoration-none" href="read.jsp?no=<%=board.getNo() %>&page=<%=pageNo %>&opt=<%=opt %>&keyword=<%=keyword %>"><%=board.getName() %></a></td>
 						<td><%=board.getMember().getId()%></td>
 						<td><%=board.getReadCnt() %></td>
 						<td><%=board.getCreateDate() %></td>
 					</tr>
-
 <%
 		}
 	}
@@ -199,13 +198,13 @@
 		let keyword = document.querySelector("input[name=keyword]").value;
 		
 		if (opt == ""){
-			alert("검색옵션을 선책하세요");
+			alert("검색옵션을 선택하세요");
 			e.preventDefault();
 			return;
 		}
 		
 		if (keyword == "") {
-			alert("검색 키워드를 선책하세요");
+			alert("검색 키워드를 선택하세요");
 			e.preventDefault();
 			return;
 		}

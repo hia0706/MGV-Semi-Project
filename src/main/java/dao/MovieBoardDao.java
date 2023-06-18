@@ -128,7 +128,7 @@ public class MovieBoardDao {
 		sql       += "from (select * from mgv_movie_board A, mgv_movie B ";
 		sql		  += "where A.movie_no = B.movie_no ";
 		sql		  += "and board_report = 'N' and board_deleted = 'N' ";
-		if ("title".equals(opt)) {
+		if ("Mtitle".equals(opt)) {
 			sql += "and movie_title like '%' || ? || '%') ";
 		} else if("name".equals(opt)) {
 			sql += "and board_name like '%' || ? || '%') ";
@@ -152,7 +152,7 @@ public class MovieBoardDao {
 		sql       += "where board_deleted = 'N' and board_report = 'N' ";
 		sql       += "and A.movie_no = B.movie_no ";
 		
-		if ("title".equals(opt)) {
+		if ("Mtitle".equals(opt)) {
 			sql += "and movie_title like '%' || ? || '%') ";
 		} else if("name".equals(opt)) {
 			sql += "and board_name like '%' || ? || '%') ";
