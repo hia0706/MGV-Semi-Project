@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils"%>
 <%@page import="vo.MboardComment"%>
 <%@page import="dao.MboardCommentDao"%>
 <%@page import="vo.MovieBoard"%>
@@ -14,6 +15,10 @@
 	int boardNo = Integer.parseInt(request.getParameter("no"));
 	String err = request.getParameter("err");
 	String job = request.getParameter("job");
+	
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	String opt = StringUtils.nullToBlank(request.getParameter("opt"));
+	String keyword = StringUtils.nullToBlank(request.getParameter("keyword"));
 
 	// 업무로직수행 - 요청 파라미터로 전달받은 게시물번호에 해당하는 게시물 상세정보를 조회한다.
 	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
@@ -119,18 +124,11 @@
 <%
 	}
 %>
-				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
+				<a href="list.jsp?page=<%=pageNo %>&opt=<%=opt %>&keyword=<%=keyword %>" class="btn btn-primary btn-sm">목록</a>
 			</div>
 		</div>
 	</div>
 	
-<script type="text/javascript">
-	function reportform(){
-		open("reportform.jsp?no=<%=boardNo %>", "popup", "width=600, height=500")
-		
-		
-	}
-</script>
 
 <%-- 댓글 --%>	
 	<div class="row mb-3">

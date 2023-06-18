@@ -74,15 +74,18 @@
     	<div class="col-9">
         	<h1 class="fs-2 p-2">자주 묻는 질문</h1>
         	
-   	<div class="clearfix">
 		<ul class="dot-list">
 			<li>
 				<a href="insertform.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">등록</a>
 				자주 묻는 질문을 등록하세요.
 				<br>
-				<br>
 			</li>
 		</ul>
+		
+<%-- faq 글 수 --%>	
+				<div class="board-list-util">
+					<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+				</div>
 	
 			
 			<table class="table">
@@ -134,7 +137,6 @@
 					</li>
 				</ul>
 			</nav>
-			</div>
 		</div>
 	</div>	
 </div>

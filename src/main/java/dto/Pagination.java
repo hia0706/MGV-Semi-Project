@@ -69,4 +69,12 @@ public class Pagination {
 		}
 		return getCurrentBlock()*pages;
 	}
+	
+	public boolean isFirstPage() {
+		return pageNo <= 1;
+	}
+	
+	public boolean isLastPage() {
+		return pageNo >= getTotalPages();
+	}
 }
