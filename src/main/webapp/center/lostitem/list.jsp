@@ -97,7 +97,7 @@
 					<option value="" selected disabled>극장 선택</option>
 				</select>					
 					
-					<table class="table"id="table-Lostitem">
+					<table class="table" id="table-Lostitem">
 						<thead>
 							<tr class="table-light" > 
 								<th style="width: 5%;">번호</th>

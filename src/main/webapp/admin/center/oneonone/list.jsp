@@ -15,7 +15,7 @@
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 	if (member == null) {
-		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 	
@@ -76,6 +76,11 @@
 		<ul class="dot-list">
 			<li>고객들이 남긴 1:1 문의내역을 확인하세요.</li>
 		</ul>
+		
+<%-- 공지사항의 글 수 --%>	
+				<div class="board-list-util">
+					<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+				</div>		
 			
 			<table class="table">
 				<thead>
