@@ -42,7 +42,7 @@
 <body>
 
 <jsp:include page="../../common/nav.jsp">
-	<jsp:param name="menu" value="극장"/>
+	<jsp:param name="menu" value="게시판"/>
 </jsp:include>
 
 
