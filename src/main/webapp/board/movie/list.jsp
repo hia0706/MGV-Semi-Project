@@ -13,16 +13,30 @@
 <!doctype html>
 <%
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	String opt = StringUtils.nullToBlank(request.getParameter("opt"));
+	String keyword = StringUtils.nullToBlank(request.getParameter("keyword"));
 
 	// totalrows (de, re ='N')
 	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
-	int totalRows = movieBoardDao.getTotalRows();
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	
-	// 모든 스토어 게시물 목록 가져오기
-	List<MovieBoard> movieBoards = movieBoardDao.getAllMovieBoards(pagination.getBegin(), pagination.getEnd());
+	int totalRows = 0;
+	List<MovieBoard> movieBoards = null;
+	Pagination pagination = null;
+	if (opt.isBlank() || keyword.isBlank()) {
+		totalRows = movieBoardDao.getTotalRows();
+		pagination = new Pagination(pageNo, totalRows);
 
+		int begin = pagination.getBegin();
+		int end = pagination.getEnd();
+		movieBoards = movieBoardDao.getAllMovieBoards(begin, end);
+	} else {	
+		totalRows = movieBoardDao.getTotalRowsByCondition(opt, keyword);
+		pagination = new Pagination(pageNo, totalRows);
+		
+		int begin = pagination.getBegin();
+		int end = pagination.getEnd();
+		movieBoards = movieBoardDao.getMovieBoaldsByCondition(begin, end, opt, keyword);
+	}
 %>
 <html lang="ko">
 <head>
@@ -35,6 +49,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style type="text/css">
+	.btn.btn-xs {--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;}
+</style>
 </head>
 <body>
 
@@ -45,7 +62,7 @@
 
 <%-- 영화 게시판 시작 --%>
  
-<div class="container">
+<div class="container" >
 	<div class="row mb-3">
 		<div class="col-12">
 			<h1 class="border bg-light fs-4 p-2">영화 게시판</h1>
@@ -54,14 +71,37 @@
 	<div class="row mb-3">
 		<div class="col-12">
 			<p>게시글 목록을 확인하세요.</p>
-
+		</div>
+		
 <%-- 게시판의 게시글 수 --%>			
-				<div class="board-list-util">
-					<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+		<div class="board-list-util">
+			<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+		</div>
+		
+		<div class="col-6 text-end" >	
+			<form id="form-search" method="get" action="list.jsp"  style="float: left;" onsubmit="searchMovieBoard(event);" class="row row-cols-lg-auto g-3 align-items-center justify-content-end">
+				<input type="hidden" name="page" value="<%=pageNo %>" >
+				<div class="col-12" >
+					<select class="form-select form-control-sm" name="opt" >
+						<option value="" <%="".equals(opt) ? "selected" : "" %>> 검색옵션</option>
+						<option value="title" <%="title".equals(opt) ? "selected" : "" %>> 영화제목</option>
+						<option value="name" <%="name".equals(opt) ? "selected" : "" %>> 글제목</option>
+						<option value="writer" <%="writer".equals(opt) ? "selected" : "" %>> 작성자</option>
+					</select>
 				</div>
+				<div class="col-12">
+					<input type="text" class="form-control form-control-sm" name="keyword" value="<%=keyword %>" />
+				</div>
+				<div class="col-12">
+					<button type="submit" class="btn btn-outline-dark btn-sm">검색</button>
+ 				</div>
+			</form>
+		</div>
+	</div>
 
-
-			<table class="table table-sm" id="table-SBoard"">
+	<div class="row mb-3">
+		<div class="col-12">
+			<table class="table table-sm" id="table-MBoard">
 				<colgroup>
 					<col width="5%">
 					<col width="55%">
@@ -80,8 +120,14 @@
 				</thead>
 				<tbody>
 
-
 <%
+	if(movieBoards.isEmpty()){
+%>
+					<tr>
+						<td colspan="5" class="text-center">검색 결과가 없습니다.</td>
+					</tr>
+<%
+	} else {
 	for(MovieBoard board : movieBoards) {
 %>
 					<tr>
@@ -93,37 +139,53 @@
 					</tr>
 
 <%
+		}
 	}
 %>
  					
 			
 				</tbody>
 			</table>
+		</div>
+	</div>		
 			
+<%
+	if (!movieBoards.isEmpty()){
+%>		
+	<div class="row mb-3">
+		<div class="col-12">
 			<nav>
 				<ul class="pagination justify-content-center">
-					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+					<li class="page-item">
+						<a class="page-link <%=pagination.isFirstPage() ? "disabled" : "" %>" 
+							href="list.jsp?page=<%=pagination.getPageNo() - 1 %>"
+							onclick="goPage(event, <%=pagination.getPageNo() + 1 %>)"
+							>이전</a>
 					</li>
 <%
-	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
-%>				
-					<li class="page-item <%=pageNo == num ? "active" : "" %>">
-						<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
-					</li>
-
-<%
-	}
+		for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>
-					
-					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+					<li class="page-item">
+						<a class="page-link <%=pagination.getPageNo() == num ? "active" : "" %>" 
+							href="list.jsp?page=<%=num %> "
+							onclick="goPage(event, <%=num %>)"><%=num %></a>
+					</li>
+<%
+		}
+%>
+					<li class="page-item">
+						<a class="page-link <%=pagination.isLastPage() ? "disabled" : "" %>" 
+							href="list.jsp?page=<%=pagination.getPageNo() + 1 %>"
+							onclick="goPage(event, <%=pagination.getPageNo() + 1 %>)"
+							>다음</a>
 					</li>
 				</ul>
 			</nav>
-
 			
 			
+<%
+	}
+%>
 			<div class="text-end">
 				<a href="form.jsp" class="btn btn-primary btn-sm">새 게시글 등록</a>
 			</div>
@@ -132,73 +194,33 @@
 </div>
 
 <script type="text/javascript">
+	function searchMovieBoard(e){
+		let opt = document.querySelector("select[name=opt]").value;
+		let keyword = document.querySelector("input[name=keyword]").value;
+		
+		if (opt == ""){
+			alert("검색옵션을 선책하세요");
+			e.preventDefault();
+			return;
+		}
+		
+		if (keyword == "") {
+			alert("검색 키워드를 선책하세요");
+			e.preventDefault();
+			return;
+		}
+		
+		document.querySelector("input[name=page]").value = 1;
+	}
 	
 	
 	function goPage(e, pageNo) {
-		e.preventDefault();
-		refreshBo(pageNo)
+		event.preventDefault();
+		document.querySelector("input[name=page]").value = pageNo;
+		document.getElementById("form-search").submit();
 	}
 	
-	function refreshBo(pageNo) {
-		pageNo = pageNo || 1;
-		// select 박스에서 선택된 값 조회하기
-		let productNo = document.getElementById("product").value;
-		
-		// ajax 요청
-		let xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState === 4) {      
-				let text = xhr.responseText;
-				let obj = JSON.parse(text);
-				
-				document.getElementById("total-rows").textContent = obj.totalRows;
-				let boards = obj.storeBoards;  
-				let pagination = obj.pagination;
-				
-				let htmlContents = ``;
-				
-				boards.forEach(function(item, index) {
-					htmlContents += `
-						<tr>
-							<td>\${item.no}</td>
-							<td><a class="text-black text-decoration-none" href="read.jsp?no=\${item.no}">\${item.name}</a></td>
-							<td>\${item.member.id}</td>
-							<td>\${item.readCnt}</td>
-							<td>\${item.createDate}</td>
-						</tr>
-					`;
-				});
-				
-				document.querySelector("#table-SBoard tbody").innerHTML = htmlContents;
-			
-				let paginationHtmlContent = `<nav>   
-					<ul class="pagination justify-content-center">
-					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" class="page-link">이전</a>
-					</li>`;
-			
-				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
-					
-					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
-											  </li>`;
 
-				}
-				
-				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-					<a href="list.jsp?page=\${pagination.pageNo + 1}" class="page-link">다음</a>
-					  </li>
-					</ul>
-				</nav>`
-				
-				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
-
-			}	
-		};
-		xhr.open("GET", "board.jsp?no=" + productNo + "&page=" + pageNo);
-		xhr.send(null);
-
-	}
 
 </script>
 </body>
