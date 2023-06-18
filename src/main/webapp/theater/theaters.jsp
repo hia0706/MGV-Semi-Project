@@ -95,7 +95,7 @@
 				let text = xhr.responseText;
 				let arr = JSON.parse(text);
 				
-				let htmlContents = "<option selected disabled>지점을 선택해주세요</option>";
+				let htmlContents = "<option value='0' selected disabled>지점을 선택해주세요</option>";
 				arr.forEach(function(item, index) {
 					htmlContents += `
 			            <option value="\${item.no}">\${item.name}</option>
@@ -117,9 +117,18 @@
 	};
 	// 자주가는 극장 관리 버튼을 누르면 실행
 	let ftList = [];
+	let curList = [];
 	// 자주가는 극장 리스트를 보여준다.
 	function fTControl(){
-		refreshFT(ftList)
+		refreshFT(ftList);
+		curList = saveList(ftList);
+	}
+	function saveList(ftList) {
+		curList = [];
+		ftList.forEach(function (item,index) {
+			curList.push(item);
+		})
+		return curList;
 	}
 	// 자주가는 극장 리스트를 가져오는 ajax
 	function getftList() {
@@ -141,47 +150,74 @@
 	}
 	// 화면을 갱신해서 보여준다.
 	function refreshFT(ftList) {
+		let contents=""
 		let circles = document.querySelectorAll(".theater-choice-list .bg .circle");
+		for(index=0;index<=2;index++){
+			circles[index].innerHTML = contents;
+		}	
 		ftList.forEach(function (item,index) {
-			let contents=`<p class="txt">\${item.name}</p>
+			contents=`<p class="txt">\${item.name}</p>
       		<button type="button" class="del" onclick="deleteFT(\${index})">삭제</button>`;
       		circles[index].innerHTML = contents;
 		});
 	}
 	// 자주가는 극장 목록에서 선택된 하나는 지우고 화면을 다시 호출한다.
 	function deleteFT(number) {
+		
 		let no= number;
-		ftList.splice(no,1);
-		let circles = document.querySelectorAll(".theater-choice-list .bg .circle");
-		let contents=""
-		for(index=0;index<=2;index++){
-			circles[index].innerHTML = contents;
-		}
-		refreshFT(ftList);
+		curList.splice(no,1);
+		refreshFT(curList);
 	}
 	// 자주가는 극장 리스트에 극장 하나는 추가하고 화면을 다시 호출한다.
 	function insertFT() {
+		// 진행상황 확인용 변수선언
+		let passed =true;
 		// 자주가는 극장이 3개이상인가.
-		if(ftList.length>=3){
+		if(curList.length>=3){
 			alert("자주가는 극장은 최대 3개까지 등록 할 수 있습니다.");
-			return;
+			passed = false;
+			return passed;
 		}
 		// 극장 번호 가져오기
 		let no = document.getElementById("areaList").value;
+		// 극장을 선택했는지 검사
+		if(no==0){
+			alert("극장을 선택해주세요.");
+			passed = false;
+			return passed;
+		}
 		// 중복검사
-		ftList.forEach(function (item,index) {
+		curList.forEach(function (item,index) {
 			if(item.no==no){
 				alert("이미 선택한 극장입니다. 다시 선택해주세요.");
-				return;
+				passed = false;
+				return passed;
 			}
 		})
 		// 극장 이름 가져오기
 		let index = document.getElementById("areaList").selectedIndex;
 		let name = document.getElementById("areaList").options[index].textContent;
 		// ftList에 넣기
-		ftList.push({no,name});
-		// 화면 다시 호출하기
-		refreshFT(ftList);
+		if(passed){
+			curList.push({no,name});
+			// 화면 다시 호출하기
+			refreshFT(curList);	
+		}
+	}
+	// 자주가는 극장 일괄등록
+	function insertFTList() {
+		let arr = JSON.stringify(curList);
+		let xhr = new XMLHttpRequest();
+		console.log(arr);
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				
+			}
+		};
+		xhr.open("POST", "insert.jsp");
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.send(arr);
+		window.location.reload();
 	}
 </script>
 <div class="container ">
@@ -289,7 +325,7 @@
 	      	<div class="box-gray v1 a-c">
 	            <div class="dropdown bootstrap-select w150px small bs3">
 		            <select id="locationList" class="w150px small" name="locationList" tabindex="-98" onchange="refreshTheaters();">
-		            	<option value="" selected disabled>지역을 선택해주세요.</option>
+		            	<option value="0" selected disabled>지역을 선택해주세요.</option>
 <%
 	for(Location location:locations){
 %>		            
@@ -301,7 +337,7 @@
 	            </div>
 	            <div class="dropdown bootstrap-select w150px small bs3">
 		            <select id="areaList" class="w150px small" name="areaList" tabindex="-98">
-		            	<option selected disabled="disabled">지점을 선택해주세요</option>
+		            	<option value="0"  selected disabled="disabled">지점을 선택해주세요</option>
 		            </select>
 	            </div>
 	            <button id="btn-insert" type="button" class="button gray small ml05" onclick="insertFT()">추가</button>
@@ -328,7 +364,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary">등록</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertFTList()">등록</button>
 	      </div>
 	    </div>
 	  </div>
