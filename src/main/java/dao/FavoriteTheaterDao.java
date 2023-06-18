@@ -47,6 +47,9 @@ public class FavoriteTheaterDao {
 	public void deleteFavoriteTheater(FavoriteTheater favoriteTheater){  
 		DaoHelper.update("favoriteTheaterDao.deleteFavoriteTheater", favoriteTheater.getMember().getId(), favoriteTheater.getTheater().getNo());
 	};
+	public void deleteFavoriteTheaterById(String id){  
+		DaoHelper.update("favoriteTheaterDao.deleteFavoriteTheaterById", id);
+	};
 	public void insertFavoriteTheater(FavoriteTheater favoriteTheater){  
 		DaoHelper.update("favoriteTheaterDao.insertFavoriteTheater", favoriteTheater.getMember().getId(), favoriteTheater.getTheater().getNo());
 	};	
