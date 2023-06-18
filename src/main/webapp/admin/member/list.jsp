@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="dto.Pagination"%>
 <%@page import="util.StringUtils"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,11 @@
 <%@page import="dao.MemberDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+	String loginId = (String) session.getAttribute("loginId");
+	if (loginId == null) {
+		response.sendRedirect("../../member/login/form.jsp?err=admin&job="+URLEncoder.encode("회원관리", "utf-8"));
+		return;
+	}
 	// 회원 목록
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 
@@ -14,7 +20,7 @@
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 
-	List<Member> memberList = memberDao.getMembers(pagination.getBegin(), pagination.getEnd());
+	List<Member> memberList = memberDao.getAdminMembers(pagination.getBegin(), pagination.getEnd());
 	
 %>
 <!doctype html>
@@ -33,7 +39,7 @@
 </head>
 <body>
 <jsp:include page="../nav.jsp">
-	<jsp:param name="menu" value="회원관리"/>
+	<jsp:param name="menu" value="회원 관리"/>
 </jsp:include>
 <div class="container">
 <div class="row mb-3">

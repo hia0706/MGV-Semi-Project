@@ -9,8 +9,8 @@
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
-	if (loginId == null) {
-		response.sendRedirect("../login/form.jsp");
+	if (member == null) {
+		response.sendRedirect("../login/form.jsp=req");
 		return;
 	}
 	

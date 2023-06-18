@@ -16,7 +16,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="../common/nav.jsp" />
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="무비"/>
+</jsp:include>
 
 <c:set var="managerMovieDao" value="<%= ManagerMovieDao.getInstance() %>" />
 <c:set var="movies" value="${managerMovieDao.getMovieChart()}" />

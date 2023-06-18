@@ -18,8 +18,8 @@
 <link rel="icon" href="/mgv/images/mgv.ico" type="images/x-icon">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="../common/check.js"></script>
-<script src="../common/postapi.js"></script>
+<script src="/mgv/common/check.js"></script>
+<script src="/mgv/common/postapi.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 	container {

@@ -19,7 +19,7 @@
 
 	
 	if (member == null) {
-		response.sendRedirect("../../member/loginform.jsp?err=req&job="+URLEncoder.encode("문의글 등록", "utf-8"));
+		response.sendRedirect("../../member/login/form.jsp?err=req&job="+URLEncoder.encode("문의글 등록", "utf-8"));
 		return;
 	}
 	
