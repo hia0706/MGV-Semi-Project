@@ -127,7 +127,7 @@
 				</div>
 		</div>	
     	<div class="col-9">
-			<h1 class="border bg-light fs-4 p-2">영화 게시판</h1>
+			<h1 class="border bg-light fs-4 p-2">신고된 영화 게시물</h1>
 		<div>
 			<p>게시글 목록을 확인하세요.</p>
 			<div>	

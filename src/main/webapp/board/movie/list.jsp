@@ -149,23 +149,23 @@
 	</div>		
 			
 <%
-	if (!movieBoards.isEmpty()){
-%>		
+	if (!movieBoards.isEmpty()) {
+%>
 	<div class="row mb-3">
 		<div class="col-12">
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item">
-						<a class="page-link <%=pagination.isFirstPage() ? "disabled" : "" %>" 
-							href="list.jsp?page=<%=pagination.getPageNo() - 1 %>"
-							onclick="goPage(event, <%=pagination.getPageNo() + 1 %>)"
+						<a class="page-link <%=pageNo <= 1 ? "disabled" : "" %>" 
+							href="list.jsp?page=<%=pageNo - 1 %>"
+							onclick="goPage(event, <%=pageNo - 1 %>)"
 							>이전</a>
 					</li>
 <%
 		for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>
 					<li class="page-item">
-						<a class="page-link <%=pagination.getPageNo() == num ? "active" : "" %>" 
+						<a class="page-link <%=pageNo == num ? "active" : "" %>" 
 							href="list.jsp?page=<%=num %> "
 							onclick="goPage(event, <%=num %>)"><%=num %></a>
 					</li>
@@ -173,9 +173,9 @@
 		}
 %>
 					<li class="page-item">
-						<a class="page-link <%=pagination.isLastPage() ? "disabled" : "" %>" 
-							href="list.jsp?page=<%=pagination.getPageNo() + 1 %>"
-							onclick="goPage(event, <%=pagination.getPageNo() + 1 %>)"
+						<a class="page-link <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>" 
+							href="list.jsp?page=<%=pageNo + 1 %>"
+							onclick="goPage(event, <%=pageNo + 1 %>)"
 							>다음</a>
 					</li>
 				</ul>
