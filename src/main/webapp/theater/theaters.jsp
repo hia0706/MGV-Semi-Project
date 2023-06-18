@@ -120,7 +120,8 @@
 	let curList = [];
 	// 자주가는 극장 리스트를 보여준다.
 	function fTControl(){
-		refreshFT(ftList)
+		refreshFT(ftList);
+		curList = saveList(ftList);
 	}
 	function saveList(ftList) {
 		curList = [];
@@ -162,14 +163,13 @@
 	}
 	// 자주가는 극장 목록에서 선택된 하나는 지우고 화면을 다시 호출한다.
 	function deleteFT(number) {
-		curList = saveList(ftList);
+		
 		let no= number;
 		curList.splice(no,1);
 		refreshFT(curList);
 	}
 	// 자주가는 극장 리스트에 극장 하나는 추가하고 화면을 다시 호출한다.
 	function insertFT() {
-		curList = saveList(ftList);
 		// 진행상황 확인용 변수선언
 		let passed =true;
 		// 자주가는 극장이 3개이상인가.
@@ -204,6 +204,7 @@
 			refreshFT(curList);	
 		}
 	}
+	// 자주가는 극장 일괄등록
 	function insertFTList() {
 		let arr = JSON.stringify(curList);
 		let xhr = new XMLHttpRequest();
@@ -216,6 +217,7 @@
 		xhr.open("POST", "insert.jsp");
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.send(arr);
+		window.location.reload();
 	}
 </script>
 <div class="container ">
@@ -362,7 +364,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary" onclick="insertFTList()">등록</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertFTList()">등록</button>
 	      </div>
 	    </div>
 	  </div>
