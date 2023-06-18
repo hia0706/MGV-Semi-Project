@@ -268,8 +268,3 @@
 </body>
 </html>
 
-
-
-</body>
-</html>
-
