@@ -188,13 +188,13 @@
 					<nav>
 						<ul class="pagination justify-content-center">
 							<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-								<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+								<a href="deletelist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 							</li>
 <%
 	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>				
 							<li class="page-item <%=pageNo == num ? "active" : "" %>">
-								<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
+								<a href="deletelist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
 							</li>
 
 <%
@@ -202,7 +202,7 @@
 %>
 					
 							<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-								<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+								<a href="deletelist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 							</li>
 						</ul>
 					</nav>
@@ -290,19 +290,19 @@
 				let paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
 					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+						<a href="deletelist.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
 					</li>`;
 			
 				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
 					
 					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+												<a href="deletelist.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
 											  </li>`;
 
 				}
 				
 				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-											<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+											<a href="deletelist.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
 									      </li>
 										</ul>
 										</nav>`
