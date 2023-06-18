@@ -90,9 +90,9 @@
 				   	  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				       <div >
 
-				        <a href="movie/list.jsp" class="list-group-item list-group-item-action ">일반 게시판 관리</a>
-				        <a href="movie/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
-				        <a href="movie/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
+				        <a href="../movie/list.jsp" class="list-group-item list-group-item-action ">일반 게시판 관리</a>
+				        <a href="../movie/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
+				        <a href="../movie/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
 
 				      </div>
 				     </div>
@@ -106,9 +106,9 @@
 				        </h2>
 				     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 				      <div >
-				       	<a href="store/list.jsp" class="list-group-item list-group-item-action">일반 게시판 관리</a>
-				        <a href="store/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
-				        <a href="store/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a> 
+				       	<a href="../store/list.jsp" class="list-group-item list-group-item-action">일반 게시판 관리</a>
+				        <a href="../store/reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
+				        <a href="../store/deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a> 
 				      </div>
 				     </div>
 				    </div>
@@ -277,7 +277,7 @@
 					htmlContents += `
 						<tr>
 							<td>\${item.no}</td>
-							<td><a class="text-black text-decoration-none" href="read.jsp?no=\${item.no}">\${item.name}</a></td>
+							<td><a class="text-black text-decoration-none" href="list.jsp?no=\${item.no}">\${item.name}</a></td>
 							<td>\${item.member.id}</td>
 							<td>\${item.readCnt}</td>
 							<td>\${item.createDate}</td>
