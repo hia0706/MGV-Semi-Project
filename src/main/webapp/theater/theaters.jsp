@@ -1,3 +1,5 @@
+<%@page import="dao.NoticeDao"%>
+<%@page import="vo.Notice"%>
 <%@page import="dao.FavoriteTheaterDao"%>
 <%@page import="vo.FavoriteTheater"%>
 <%@page import="vo.Theater"%>
@@ -17,6 +19,11 @@
 	// 자주가는 극장 정보 가져오기
 	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
 	List<FavoriteTheater> FTList = fTheaterDao.getFavoriteTheaterById(loginId);
+	
+	// 공지사항 최근 5개 가져오기
+	NoticeDao noticeDao = NoticeDao.getInstance();
+	
+	List<Notice> noticeList = noticeDao.getNotice(1, 5);
 %>
 <!doctype html>
 <html lang="ko" >
@@ -279,36 +286,42 @@
 			</div>	
 			</div>
 			
-			<div class="part-title">
-				<h3 class="tit">극장 공지사항</h3>
+			<div class="part-title" style="overflow: hidden;">
+				<h3 class="tit" style="float: left;">극장 공지사항</h3>
+				<a href="../center/notice/list.jsp" class="text-black text-decoration-none"  style="float: right;" title="극장 공지사항 더보기">
+				더보기 </a>
 			</div>
 			<div class="table-wrap">
 				<table class="board-list">
 				<colgroup style="user-select: auto;">
 						<col style="width: 150px; user-select: auto;">
-						<col style="user-select: auto;">
 						<col style="width: 150px; user-select: auto;">
+						<col style="user-select: auto;">
 						<col style="width: 120px; user-select: auto;">
 				</colgroup>
 				<thead>
 					<tr>
+						<th scope="col">지역</th>
 						<th scope="col">극장</th>
 						<th scope="col">제목</th>
-						<th scope="col">지역</th>
 						<th scope="col">등록일</th>
 					</tr>
 				</thead>
 				<tbody>
+<% for (Notice notice : noticeList) { %>				
+				
 					<tr>
-						<td>뭐시기극장</td>
-						<th scope="row">
-							<a href="/support/notice/detail?artiNo=10860&amp;bbsNo=9" title="[대전현대아울렛]영화관 재오픈 안내 상세보기" style="user-select: auto;">
-												[대전현대아울렛]영화관 재오픈 안내
+						<td><%=notice.getLocation().getName() %></td>
+						<td><%=notice.getTheater().getName() %></td>
+						<td style="text-align:left">
+							<a href="../center/notice/detail.jsp?no=<%=notice.getNo() %>" class="text-black text-decoration-none">
+								<%=notice.getTitle() %>
 							</a>
-						</th>
-						<td>서울</td>
-						<td>2023-06-12</td>
+						</td>
+						<td><%=notice.getCreateDate() %></td>
 					</tr>
+
+<% } %>	
 				</tbody>
 				</table>
 			</div>
