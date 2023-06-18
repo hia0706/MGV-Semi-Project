@@ -199,9 +199,8 @@
 							<td>\${item.price}</td>
 							<td>\${item.status === "Y" ? "<span class=\"badge text-bg-success\">구매완료</span>" 
 	                  				  : "<span class=\"badge text-bg-danger\">구매취소</span>"}</td>
-	                  				  
-              				<td>\${item.status === "N" ? "<a href=\"/mgv/member/buy/delete.jsp\">
-									"<img src=\"/mgv/images/member/trash.png\" style=\"width: 20px; height: 20px;\"/></a>" : ""}</td>	
+              				<td>\${item.status === 'N' ? `<a href="/mgv/member/buy/delete.jsp">
+              					    <img src="/mgv/images/member/trash.png" style="width: 20px; height: 20px;"/></a>` : ''}</td>	
 						</tr>
 					`;
 				});

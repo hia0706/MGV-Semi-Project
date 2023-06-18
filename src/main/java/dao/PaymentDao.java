@@ -74,5 +74,8 @@ public class PaymentDao {
 		}, id, status, begin, end);
 	}
 	
+	public void deletePaymentByNo(int no) {
+		DaoHelper.update("paymentDao.deletePaymentByNo", no);
+	}
 	
 }
