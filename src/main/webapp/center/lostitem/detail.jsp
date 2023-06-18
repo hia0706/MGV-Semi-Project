@@ -68,8 +68,9 @@
 			<li>고객센터를 통해 남기신 분실물 문의내역을 확인하실 수 있습니다.</li>
 		</ul>
 		<hr>
-			<a style="font-size : 17px;"><strong><%=lostitem.getTitle() %></strong></a><br>
-			<a style="font-size : 12px;"><%=lostitem.getCreateDate() %></a>
+			<a style="font-size : 19px;">[지점] [<%=lostitem.getTheater().getName() %>] <%=lostitem.getTitle() %></a><br>
+			<a style="font-size : 12px;">영화관 <%=lostitem.getTheater().getName() %> | </a>
+			<a style="font-size : 12px;">등록일 <%=lostitem.getCreateDate() %></a>
 		<hr>
 			<a><%=lostitem.getContent() %></a>
 			<br>

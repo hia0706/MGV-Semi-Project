@@ -143,7 +143,7 @@
 				// 2. 응답데이터(텍스트)를 객체(자바스크립트 객체 호은 배열객체)로 변환하기
 				let arr = JSON.parse(data);	
 				// 3. 응답데이터로 html컨텐츠 생성하기s
-				let htmlContent = "<option value='' selected disabled>--선택하세요--</option>";
+				let htmlContent = "<option value='' selected disabled>극장 선택</option>";
 				arr.forEach(function(item, index) {
 					// item -> {id:100, name:"기술부"};
 					let theaterNo = item.no;
