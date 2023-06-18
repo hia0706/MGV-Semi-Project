@@ -1,3 +1,4 @@
+<%@page import="dao.ReportDao"%>
 <%@page import="vo.MovieBoard"%>
 <%@page import="dao.MovieBoardDao"%>
 <%@page import="java.net.URLEncoder"%>
@@ -29,24 +30,25 @@
 
 	// totalrows (de, re ='N')
 	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
+	ReportDao reportDao = ReportDao.getInstance();
 	
 	int totalRows = 0;
 	List<MovieBoard> movieBoards = null;
 	Pagination pagination = null;
 	if (opt.isBlank() || keyword.isBlank()) {
-		totalRows = movieBoardDao.getTotalRows();
+		totalRows = reportDao.getMBTotalRowsByReport();
 		pagination = new Pagination(pageNo, totalRows);
 
 		int begin = pagination.getBegin();
 		int end = pagination.getEnd();
-		movieBoards = movieBoardDao.getAllMovieBoards(begin, end);
+		movieBoards = reportDao.getMovieBoardByReport(begin, end);
 	} else {	
-		totalRows = movieBoardDao.getTotalRowsByCondition(opt, keyword);
+		totalRows = reportDao.getTotalRowsByConditionAndReport(opt, keyword);
 		pagination = new Pagination(pageNo, totalRows);
 		
 		int begin = pagination.getBegin();
 		int end = pagination.getEnd();
-		movieBoards = movieBoardDao.getMovieBoaldsByCondition(begin, end, opt, keyword);
+		movieBoards = reportDao.getMovieBoardsByConditionAndReport(begin, end, opt, keyword);
 	}
 %>
 <html lang="ko">
@@ -140,7 +142,7 @@
 				
 <%-- 검색 --%>			
 		<div class="col-6 text-end" >	
-			<form id="form-search" method="get" action="list.jsp"  style="float: left;" onsubmit="searchMovieBoard(event);" class="row row-cols-lg-auto g-3 align-items-center justify-content-end">
+			<form id="form-search" method="get" action="reportlist.jsp"  style="float: left;" onsubmit="searchMovieBoard(event);" class="row row-cols-lg-auto g-3 align-items-center justify-content-end">
 				<input type="hidden" name="page" value="<%=pageNo %>" >
 				<div class="col-12" >
 					<select class="form-select form-control-sm" name="opt" >

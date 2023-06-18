@@ -6,6 +6,7 @@ import util.DaoHelper;
 import vo.Location;
 import vo.MboardReport;
 import vo.Member;
+import vo.Movie;
 import vo.MovieBoard;
 import vo.Product;
 import vo.ProductCategory;
@@ -288,4 +289,107 @@ public class ReportDao {
 		}, boardNo);
 	}
 	
+	public List<MovieBoard> getMovieBoardByReport(int begin, int end) {
+		
+		return DaoHelper.selectList("reportDao.getMovieBoardByreport", rs -> {
+			MovieBoard movieBoard = new MovieBoard();
+			
+			movieBoard.setNo(rs.getInt("board_no"));
+			movieBoard.setName(rs.getString("board_name"));
+			movieBoard.setContent(rs.getString("board_content"));
+			movieBoard.setGrade(rs.getString("board_grade"));
+			movieBoard.setCreateDate(rs.getDate("board_create_date"));
+			movieBoard.setUpdateDate(rs.getDate("board_update_date"));
+			movieBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			movieBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			movieBoard.setDeleted(rs.getString("board_deleted"));
+			movieBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			movieBoard.setMember(member);
+			
+			Movie movie = new Movie();
+			movie.setTitle(rs.getString("movie_title"));
+			movie.setNo(rs.getInt("movie_no"));
+			movieBoard.setMovie(movie);
+			
+			return movieBoard;
+		}, begin, end);
+	}
+	
+	
+	public int getMBTotalRowsByReport() {
+		
+		return DaoHelper.selectOne("reportDao.getMBTotalRowsByReport", rs -> {
+			
+			return rs.getInt("cnt");
+		});
+	}
+	
+	
+	public int getTotalRowsByConditionAndReport(String opt, String keyword) {
+		String sql = "select count(*) cnt ";
+		sql       += "from (select * from mgv_movie_board A, mgv_movie B ";
+		sql		  += "where A.movie_no = B.movie_no ";
+		sql		  += "and board_report = 'Y' and board_deleted = 'N' ";
+		if ("Mtitle".equals(opt)) {
+			sql += "and movie_title like '%' || ? || '%') ";
+		} else if("name".equals(opt)) {
+			sql += "and board_name like '%' || ? || '%') ";
+		} else if("writer".equals(opt)) {
+			sql += "and member_id like '%' || ? || '%') ";
+		}
+		return DaoHelper.selectOne(sql, rs ->{
+			return rs.getInt("cnt");
+			
+		} , keyword);
+		
+	}
+
+	public List<MovieBoard> getMovieBoardsByConditionAndReport(int begin, int end, String opt, String keyword){
+		
+		String sql = "select * from (select row_number() over (order by board_no desc) row_number, ";
+		sql       += "A.board_no, A.board_name, A.board_content, A.board_grade, A.board_create_date, ";
+		sql		  += "A.board_update_date, A.board_read_cnt, A.board_comment_cnt, A.board_deleted, "; 
+		sql       += "A.board_report, A.member_id, A.movie_no ";
+		sql  	  += "from mgv_movie_board A, mgv_movie B ";
+		sql       += "where board_deleted = 'N' and board_report = 'Y' ";
+		sql       += "and A.movie_no = B.movie_no ";
+		
+		if ("Mtitle".equals(opt)) {
+			sql += "and movie_title like '%' || ? || '%') ";
+		} else if("name".equals(opt)) {
+			sql += "and board_name like '%' || ? || '%') ";
+		} else if("writer".equals(opt)) {
+			sql += "and member_id like '%' || ? || '%') ";
+		}
+		
+		sql += "where row_number between ? and ? ";
+	
+		return DaoHelper.selectList(sql, rs -> {
+			MovieBoard movieBoard = new MovieBoard();
+			
+			movieBoard.setNo(rs.getInt("board_no"));
+			movieBoard.setName(rs.getString("board_name"));
+			movieBoard.setContent(rs.getString("board_content"));
+			movieBoard.setGrade(rs.getString("board_grade"));
+			movieBoard.setCreateDate(rs.getDate("board_create_date"));
+			movieBoard.setUpdateDate(rs.getDate("board_update_date"));
+			movieBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			movieBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			movieBoard.setDeleted(rs.getString("board_deleted"));
+			movieBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			movieBoard.setMember(member);
+			
+			Movie movie = new Movie();
+			movie.setNo(rs.getInt("movie_no"));
+			movieBoard.setMovie(movie);
+			
+			return movieBoard;	
+		}, keyword, begin, end);
+	}
 }
