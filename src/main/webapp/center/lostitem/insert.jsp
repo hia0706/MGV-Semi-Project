@@ -1,3 +1,5 @@
+<%@page import="vo.Theater"%>
+<%@page import="vo.Location"%>
 <%@page import="dao.LostitemDao"%>
 <%@page import="vo.Member"%>
 <%@page import="vo.Lostitem"%>
@@ -10,6 +12,8 @@
 	String id = (String) session.getAttribute("loginId");
 	
 	// 요청 파라미터값 조회
+	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
+	int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 	String name = request.getParameter("name");
 	String tel = request.getParameter("tel");                                            
 	String email = request.getParameter("email");
@@ -18,6 +22,8 @@
 	
 	// Lostitem객체를 생성해서 요청파라미터 값 저장하기
 	Lostitem lostitem = new Lostitem();
+	lostitem.setLocation(new Location(locationNo));
+	lostitem.setTheater(new Theater(theaterNo));
 	lostitem.setTitle(title);
 	lostitem.setContent(content);
 	

@@ -28,12 +28,6 @@ public class NoticeDao {
 		}, theaterNo);
 	}
 	
-	public int getTotalRowsByLocation(int locationNo) {
-		return DaoHelper.selectOne("noticeDao.getTotalRowsByLocation", rs -> {
-			return rs.getInt("cnt");
-		}, locationNo);
-	}
-	
 	
 	// select
 	public List<Notice> getNotice(int begin, int end) {
@@ -114,34 +108,6 @@ public class NoticeDao {
 			
 			return notice;
 		}, theaterNo, begin, end);
-	}
-	
-	public List<Notice> getNoticeByLocationNo(int locationNo, int begin, int end) {
-		return DaoHelper.selectList("noticeDao.getNoticeByLocationNo", rs -> {
-			Notice notice = new Notice();
-			notice.setNo(rs.getInt("notice_no"));
-			notice.setTitle(rs.getString("notice_title"));
-			notice.setContent(rs.getString("notice_content"));
-			notice.setDeleted(rs.getString("notice_deleted"));
-			notice.setUpdateDate(rs.getDate("notice_update_date"));
-			notice.setCreateDate(rs.getDate("notice_create_date"));
-			
-			Member member = new Member();
-			member.setId(rs.getString("member_id"));
-			notice.setMember(member);
-			
-			Theater theater = new Theater();
-			theater.setNo(rs.getInt("theater_no"));
-			theater.setName(rs.getString("theater_name"));
-			notice.setTheater(theater);
-			
-			Location location = new Location();
-			location.setNo(rs.getInt("location_no"));
-			location.setName(rs.getString("location_name"));
-			notice.setLocation(location);
-			
-			return notice;
-		}, locationNo, begin, end);
 	}
 	
 	public List<Theater> getTheatersByLocationNo(int locationNo) {
