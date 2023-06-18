@@ -9,12 +9,14 @@
 	int price = Integer.parseInt(request.getParameter("product-price"));
 	int stock = Integer.parseInt(request.getParameter("product-stock"));
 	String description = request.getParameter("product-description");
+	String composition = request.getParameter("product-composition");
 	
 	Product product = new Product();
 	product.setName(name);
 	product.setPrice(price);
 	product.setStock(stock);
 	product.setDescription(description);
+	product.setComposition(composition);
 	product.setProductCategory(new ProductCategory(catNo));
 	
 	// 업무로직 수행
