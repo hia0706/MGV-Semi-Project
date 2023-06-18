@@ -50,11 +50,19 @@
 	})
 	
 	function addCart(productNo) {
+
 		let amount = document.getElementById("count").textContent;
 		let totalPrice = document.getElementById("totalPrice").textContent;
 		
 		location.href = "../member/insertCart.jsp?no=" + productNo + "&amount=" + amount + "&totalPrice=" + totalPrice;
-
+		
+		alert("상품이 장바구니에 담겼습니다.");
+	}
+	
+	function loginPage() {
+		alert("해당 상품은 로그인 후 이용이 가능합니다.");
+		
+		location.href = "../member/login/form.jsp?err=addProduct&job=<%=product.getNo() %>";
 	}
 	
 </script>
@@ -105,8 +113,17 @@
 		</tbody>
 	</table>
 	<div class="text-end">
-		<button onclick="addCart(<%=product.getNo() %>)" class="btn btn-outline-secondary btn-sm" id="addCart">장바구니 담기</button>
-		<a href="purchase.jsp" class="btn btn-outline-primary btn-sm" id="buy">바로 구매</a>
+<%
+	if (loginId != null) {
+%>
+		<button onclick="addCart(<%=product.getNo() %>)" class="btn btn-outline-success btn-sm" id="addCart">장바구니 담기</button>
+<%
+	} else if (loginId == null) {
+%>
+		<button onclick="loginPage();" class="btn btn-outline-success btn-sm" id="loginPage">로그인</button>
+<%
+	}
+%>
 	</div>
 	</div>
 	<div class="box-pulldown">
