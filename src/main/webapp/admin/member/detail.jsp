@@ -3,8 +3,9 @@
 <%@page import="dao.MemberDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+	String loginId = (String) session.getAttribute("loginId");
 	String err = request.getParameter("err");
-	String id = request.getParameter("id");	
+	String id = request.getParameter("id");
 
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getDetailMemberById(id);
@@ -24,7 +25,7 @@
 </head>
 <body>
 <jsp:include page="../../admin/nav.jsp">
-	<jsp:param name="menu" value="ADMIN"/>
+	<jsp:param name="menu" value="회원 관리"/>
 </jsp:include>
 <div class="container">
 	<div class="row mb-3">

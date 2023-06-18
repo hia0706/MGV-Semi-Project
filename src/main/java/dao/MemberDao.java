@@ -110,6 +110,22 @@ public class MemberDao {
 		});
 	}
 	
+	public List<Member> getAdminMembers(int begin, int end) {
+		return DaoHelper.selectList("memberDao.getAdminMembers", rs -> {
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			member.setName(rs.getString("member_name"));
+			member.setBirth(rs.getString("member_birth"));
+			member.setTel(rs.getString("member_tel"));
+			member.setEmail(rs.getString("member_email"));
+			member.setDisabled(rs.getString("member_disabled"));
+			member.setCreateDate(rs.getDate("member_create_date"));
+			member.setUpdateDate(rs.getDate("member_update_date"));
+			
+			return member;
+		}, begin, end);
+	}
+	
 	public List<Member> getMembers(int begin, int end) {
 		return DaoHelper.selectList("memberDao.getMembers", rs -> {
 			Member member = new Member();

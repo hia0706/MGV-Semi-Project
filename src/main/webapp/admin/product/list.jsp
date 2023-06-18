@@ -32,7 +32,7 @@
 </head>
 <body>
 <jsp:include page="../nav.jsp">
-	<jsp:param name="menu" value="상품"/>
+	<jsp:param name="menu" value="스토어 관리"/>
 </jsp:include>
 <div class="container">
 <div class="row mb-3">
