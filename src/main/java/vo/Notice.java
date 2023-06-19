@@ -11,6 +11,8 @@ public class Notice {
 	private Date updateDate;
 	private Date createDate;
 	private Member member;
+	private Theater theater;
+	private Location location;
 	
 	public Notice () {}
 
@@ -68,6 +70,22 @@ public class Notice {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public Theater getTheater() {
+		return theater;
+	}
+
+	public void setTheater(Theater theater) {
+		this.theater = theater;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 }

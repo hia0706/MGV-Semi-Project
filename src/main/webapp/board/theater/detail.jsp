@@ -76,6 +76,16 @@
 <%
 	}
 %>
+
+<%
+	if("type".equals(err)){
+%>
+		<div class="alert alert-danger">
+			<strong>관리자가 아니면 사용자의 게시물을 [<%=job %>]할 수 없습니다.</strong>
+		</div>
+<%
+	}
+%>
 		
 <%
 	if("Cid".equals(err)){

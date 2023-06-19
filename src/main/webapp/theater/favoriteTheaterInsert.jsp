@@ -15,7 +15,7 @@
 
 
 	if (member == null) {
-		response.sendRedirect("../member/loginform.jsp?err=req&job="+URLEncoder.encode("즐겨찾기추가", "utf-8"));
+		response.sendRedirect("../member/login/form.jsp?err=req&job="+URLEncoder.encode("즐겨찾기추가", "utf-8"));
 		return;
 	}
 	

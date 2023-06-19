@@ -42,6 +42,22 @@ public class StoreBoardDao {
 		}, catNo);
 	}
 	
+	public int getDelTotalRows() {
+		
+		return DaoHelper.selectOne("storeBoardDao.getDelTotalRows", rs -> {
+			
+			return rs.getInt("cnt");
+		});
+	}
+	
+	public int getDelTotalRowsByProduct(int productNo) {
+		
+		return DaoHelper.selectOne("storeBoardDao.getDelTotalRowsByProduct", rs -> {
+			
+			return rs.getInt("cnt");
+		}, productNo);
+	}
+	
 	
 	// select
 	public List<StoreBoard> getAllStoreBoards(int begin, int end) {
@@ -75,6 +91,72 @@ public class StoreBoardDao {
 			return storeBoard;	
 		}, begin, end);
 	}
+	
+	public List<StoreBoard> getAllDelStoreBoards(int begin, int end) {
+		
+		return DaoHelper.selectList("storeBoardDao.getDelBoard", rs -> {
+			StoreBoard storeBoard = new StoreBoard();
+			
+			storeBoard.setNo(rs.getInt("board_no"));
+			storeBoard.setName(rs.getString("board_name"));
+			storeBoard.setContent(rs.getString("board_content"));
+			storeBoard.setGrade(rs.getString("board_grade"));
+			storeBoard.setCreateDate(rs.getDate("board_create_date"));
+			storeBoard.setUpdateDate(rs.getDate("board_update_date"));
+			storeBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			storeBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			storeBoard.setDeleted(rs.getString("board_deleted"));
+			storeBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			storeBoard.setMember(member);
+			
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			storeBoard.setProduct(product);
+			
+			ProductCategory category = new ProductCategory();
+			category.setNo(rs.getInt("cat_no"));
+			storeBoard.setCategory(category);
+			
+			return storeBoard;	
+		}, begin, end);
+	}
+	
+	
+	public List<StoreBoard> getAllDelStoreBoardsByProductNo(int productNo, int begin, int end) {
+		
+		return DaoHelper.selectList("storeBoardDao.getDelBoardByProduct", rs -> {
+			StoreBoard storeBoard = new StoreBoard();
+			
+			storeBoard.setNo(rs.getInt("board_no"));
+			storeBoard.setName(rs.getString("board_name"));
+			storeBoard.setContent(rs.getString("board_content"));
+			storeBoard.setGrade(rs.getString("board_grade"));
+			storeBoard.setCreateDate(rs.getDate("board_create_date"));
+			storeBoard.setUpdateDate(rs.getDate("board_update_date"));
+			storeBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			storeBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			storeBoard.setDeleted(rs.getString("board_deleted"));
+			storeBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			storeBoard.setMember(member);
+			
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			storeBoard.setProduct(product);
+			
+			ProductCategory category = new ProductCategory();
+			category.setNo(rs.getInt("cat_no"));
+			storeBoard.setCategory(category);
+			
+			return storeBoard;	
+		}, productNo, begin, end);
+	}
+	
 	
 	public List<StoreBoard> getAllStoreBoardsByProductNo(int productNo, int begin, int end) {
 		
@@ -198,6 +280,8 @@ public class StoreBoardDao {
 														  storeBoard.getCommentCnt(),
 														  storeBoard.getDeleted(),
 														  storeBoard.getReport(),
+														  storeBoard.getCategory().getNo(),
+														  storeBoard.getProduct().getNo(),
 														  storeBoard.getNo());
 	}
 	
@@ -211,5 +295,16 @@ public class StoreBoardDao {
 			
 			return product;
 		});
+	}
+	
+	public List<Product> getProductsByCatNo(int catNo) {
+		return DaoHelper.selectList("storeBoardDao.getAllproductsByCatNo", rs -> {
+			Product product = new Product();
+			product.setNo(rs.getInt("product_no"));
+			product.setName(rs.getString("product_name"));
+			
+			
+			return product;
+		}, catNo);
 	}
 }

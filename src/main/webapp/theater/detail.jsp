@@ -57,6 +57,7 @@
 	h2{
 	font-size: 22px;
 	}
+	
 	.bi-heart-fill{
 	font-size: 22px;
 	line-height: 22px;
@@ -104,8 +105,14 @@
 </jsp:include>
 <div class="container">
 	<div>
+		<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a class="text-black text-decoration-none" href="theaters.jsp">전체극장</a></li>
+		    <li class="breadcrumb-item active" aria-current="page"><%=theater.getName() %></li>
+		  </ol>
+		</nav>
 		<div class="theater-cont-lab">
-			<h2>강남
+			<h2><%=theater.getName() %>
 			<!-- 현재 극장이 즐겨찾기에 해당하는 극장이 아니면 색상 변경 text-muted를 지운다. -->
 <%
 	if(loginId!=null){
@@ -179,73 +186,80 @@ function activeTab(num) {
 			<div id="tab-01" class="tab-cont " style="display: block;">
 				<div class="theater-info-text">
 				</div>
-				<h2>시설안내</h2>
+				<h2 class="">시설안내</h2>
 				<h3>보유시설</h3>				
 				<h3>층별안내</h3>
 				<h2>교통안내</h2>
 				<!-- 카카오지도 보여줄 영역 -->
-				
 				<div id="map" class="float-start" style="width:400px;height:300px;">
 				</div>
 <!-- 카카오맵 -->				
 <script type="text/javascript">
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-mapOption = {
-    center: new kakao.maps.LatLng(37.5642135, 127.0016985), // 지도의 중심좌표
-    level: 3 // 지도의 확대 레벨
-};  
-
-//지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-//주소-좌표 변환 객체를 생성합니다
-var places = new kakao.maps.services.Places();
-var geocoder = new kakao.maps.services.Geocoder();
-
-
-//주소로 좌표를 검색합니다
-geocoder.addressSearch('<%=ad %>', function(result, status) {
-
-// 정상적으로 검색이 완료됐으면 undifined
-
- if (status === kakao.maps.services.Status.OK) {
-
-	 
-	var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	var lat = result[0].y; // 위도
-	var lng = result[0].x; // 경도
-    // 결과값으로 받은 위치를 마커로 표시합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: coords
-    });
-
-    // 인포윈도우로 장소에 대한 설명을 표시합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=theater.getName()%></div>'
-    });
-    infowindow.open(map, marker);
-
-    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-    map.setCenter(coords);
-    var name = '<%=theater.getName()%>'; 
-    var mapbtn = document.getElementById('map-btn');
-	mapbtn.addEventListener("click", function() {
-		window.open("https://map.kakao.com/link/to/"+name+","+lat+","+lng,
-				"빠른길찾기",
-		        "width=800, height=1200, top=50, left=50"
-		        )
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+	    center: new kakao.maps.LatLng(37.5642135, 127.0016985), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	};  
+	
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	//주소-좌표 변환 객체를 생성합니다
+	var places = new kakao.maps.services.Places();
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	
+	//주소로 좌표를 검색합니다
+	geocoder.addressSearch('<%=ad %>', function(result, status) {
+	
+	// 정상적으로 검색이 완료됐으면 undifined
+	
+	 if (status === kakao.maps.services.Status.OK) {
+	
+		 
+		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		var lat = result[0].y; // 위도
+		var lng = result[0].x; // 경도
+	    // 결과값으로 받은 위치를 마커로 표시합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: coords
+	    });
+	
+	    // 인포윈도우로 장소에 대한 설명을 표시합니다
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=theater.getName()%></div>'
+	    });
+	    infowindow.open(map, marker);
+	
+	    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	    map.setCenter(coords);
+	    var name = '<%=theater.getName()%>'; 
+	    var mapbtn = document.getElementById('map-btn');
+		mapbtn.addEventListener("click", function() {
+			window.open("https://map.kakao.com/link/to/"+name+","+lat+","+lng,
+					"빠른길찾기",
+			        "width=800, height=1200, top=50, left=50"
+			        )
+		});
+	} 
 	});
-} 
-});
 <!-- 카카오맵 -->
 </script>	
 				<div>
 					<table style="margin-left: 10px">
 							<tbody>
 								<tr>
-									<th>교통안내</th>
 									<td><button id="map-btn">길찾기</button></td>
+								</tr>
+								<tr>
+									<th>대중교통</th>
+								</tr>
+								<tr>
+									<th>자가용</th>
+								</tr>
+								<tr>
+									<th>주차안내</th>
 								</tr>
 							</tbody>
 					</table>			

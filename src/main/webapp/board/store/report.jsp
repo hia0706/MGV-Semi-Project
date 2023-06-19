@@ -15,7 +15,7 @@
 	String loginId = (String) session.getAttribute("loginId");
 	
 	if(loginId == null){
-		response.sendRedirect("../../member/loginform.jsp?err=req&job=" + URLEncoder.encode("게시물신고", "utf-8"));
+		response.sendRedirect("../../member/login/form.jsp?err=req&job=" + URLEncoder.encode("게시물신고", "utf-8"));
 		return;
 	}
 	
@@ -27,7 +27,6 @@
 	// 조회된 게시물 번호로 게시물을 조회한다
 	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
 	StoreBoard savedStoreBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
-	
 	
 	// 조회된 게시물의 신고 정보를 "Y" 로 변경한뒤 DB에 저장한다.
 	savedStoreBoard.setReport("Y");

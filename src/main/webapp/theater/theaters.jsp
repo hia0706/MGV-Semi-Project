@@ -1,3 +1,5 @@
+<%@page import="dao.NoticeDao"%>
+<%@page import="vo.Notice"%>
 <%@page import="dao.FavoriteTheaterDao"%>
 <%@page import="vo.FavoriteTheater"%>
 <%@page import="vo.Theater"%>
@@ -17,10 +19,11 @@
 	// 자주가는 극장 정보 가져오기
 	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
 	List<FavoriteTheater> FTList = fTheaterDao.getFavoriteTheaterById(loginId);
-	// 극장정보 가져오기
-	TheaterDao theaterDao = TheaterDao.getInstance();
-	List<Theater> theaterList = theaterDao.getAllTheaters(); 
 	
+	// 공지사항 최근 5개 가져오기
+	NoticeDao noticeDao = NoticeDao.getInstance();
+	
+	List<Notice> noticeList = noticeDao.getNotice(1, 5);
 %>
 <!doctype html>
 <html lang="ko" >
@@ -33,169 +36,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet" >
+<link rel="stylesheet" href="style.css"> <!-- 극장정보 스타일시트 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <style>
-	body {
-    overflow: auto;
-    overflow-y: scroll;
-    letter-spacing: 0;
-    line-height: 1.5;
-    font-size: 15px;
-    color: #444;
-    font-weight: 400;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
-	}
-	.theater-list ul li {
-    position: relative;
-    float: left;
-    width: 25%;
-    line-height: 26px;
-    text-align: left;
-    padding-left: 40px;
-	}
-    .bi-heart-fill{
-        font-size: 22px;
-        line-height: 22px;
-        color:crimson;
-    }
-  	.list-group-item a{
-  	text-decoration: none;
-  	}
-  	.list-group-item:hover{
-  		font-weight: 700;
-  	}
-  	.sect-city{
-  	width: 1000px;
-  	border-radius: 10px;
-  	border: 3px solid #686571;
-  	}
-  	.sect-city ul li:active{
-  	background: #555;
-    border: 1px solid #555;
-  	}
-  	.container
-  	{
-  	width: 1000px;
-  	padding: 0px;
-  	}
-	.table-wrap table{
-	font-size: 12pt;
-    width: 100%;
-    margin: 0;
-    border: 0;
-    table-layout: fixed;
-    border-collapse: collapse;
-    empty-cells: show;
-	}
-	.table-wrap {
-	width: 1000px;
-    position: relative;
-    border-top: 1px solid #555;
-    }
-    h3.tit {
-    margin: 0;
-    padding: 0 0 16px 0;
-    font-size: 1.6em;
-    font-weight: 400;
-    color: #503396;
-    line-height: 1.1;
-	}
-	.board-list>thead>tr>th {
-    height: 45px;
-    padding: 3px 10px;
-    color: #222;
-    border: 1px solid #eaeaea;
-    border-width: 0 0 1px 0;
-    background-color: #f2f4f5;
-    text-align: center;
-	}
-	.board-list>tbody>tr>th {
-    text-align: left;
-    font-weight: 400;
-	}
-	.board-list>tbody>tr>td, .board-list>tbody>tr>th {
-    height: 45px;
-    padding: 10px;
-    border: 1px solid #eaeaea;
-    border-width: 0 0 1px 0;
-    text-align: center;
-	}
-	th {
-    display: table-cell;
-    vertical-align: inherit;
-    font-weight: bold;
-    text-align: internal-center;
-	}
-	table {
-    border-collapse: separate;
-    text-indent: initial;
-    border-spacing: 2px;
-	}
-	.part-title {
-	margin-top: 100px;
-	}
-	.theater-choice-list .bg .circle {
-    display: table-cell;
-    position: relative;
-    width: 90px;
-    height: 90px;
-    border-radius: 90px;
-    vertical-align: middle;
-    text-align: center;
-    background-color: #ebebeb;
-	}
-	.theater-choice-list {
-    overflow: hidden;
-    margin: 0;
-    padding: 20px 0 0 45px;
-	}
-	.box-gray.v1 {
-    border-radius: 5px;
-	}
-	.a-c {
-	    text-align: center!important;
-	}
-	.box-gray {
-	    padding: 20px;
-	    background-color: #f2f4f5;
-	}
-	.bootstrap-select:not(.input-group-btn), .bootstrap-select[class*=col-] {
-    float: none;
-    display: inline-block;
-    margin-left: 0;
-	}
-	.sect-favorite{
-	float: none;
-	display: inline-block;
-	margin-left: 0;
-	padding: 1em;
-	background-color: #f2f4f5;
-	border-radius: 0 0 10px 10px;
-	width: 100%;
-	height: 50px;
-	}
-	.sect-favorite ul{
-	display: inline-block;
-    margin: 0 20px;
-	}
-	 .sect-favorite ul li{
-	display: inline-block;
-    padding: 0 15px;
-    margin: 0 2px;
-    height: 25px;
-    line-height: 24px;
-    border-radius: 25px;
-    background-color: #fff;
-	}
-	a {
-	text-decoration: none;
-	}
-	.btn-jj{
-	float: right;
-	border-radius: 25px;
-	}
+	
 </style>
 
 </head>
@@ -209,161 +55,202 @@
 				"자주가는 극장 등록",
 				"width=800, height=1200, top=50, left=50");
 	}
+	function locationSelect(no) {
+		// locationNo로 영화관탭생성
+		let el = document.getElementById("theater-tab-"+no);
+		let locNo = no;
+		let htmlContent ="<div class='tab-pane fade show active' id='theater-tab-pane-"+locNo+"' role='tabpanel' aria-labelledby='theater-"+locNo+"-tab' tabindex='0' ><ul class='list-group list-group-horizontal row row-cols-4' style='margin-left: 0;'></ul></div>";
+		document.querySelector("#myTabContent").innerHTML=htmlContent;
+		theaterTab(locNo);
+	}
+
+	function theaterTab(no) {
+		// select 박스에서 선택된값 조회하기
+		let locNo = no;
+		
+		// ajax 요청
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				let text = xhr.responseText;
+				let arr = JSON.parse(text);
+				
+				let htmlContents = "";
+				arr.forEach(function(item, index) {
+					htmlContents += `
+						<li class="list-group-item col-3 border-0 " >
+						<a href="detail.jsp?no=\${item.no}" style="text-decoration: none;"  class="link-dark">\${item.name}</a>
+						</li>
+					`;
+				});
+				
+				document.querySelector("#theater-tab-pane-"+locNo+" ul").innerHTML = htmlContents;
+			}
+		};
+		xhr.open("GET", "theaterTab.jsp?no="+locNo);
+		xhr.send(null);
+	}
+	//
+	function refreshTheaters() {
+		// select 박스에서 선택된값 조회하기
+		let locNo = document.getElementById("locationList").value;
+		
+		// ajax 요청
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				let text = xhr.responseText;
+				let arr = JSON.parse(text);
+				
+				let htmlContents = "<option value='0' selected disabled>지점을 선택해주세요</option>";
+				arr.forEach(function(item, index) {
+					htmlContents += `
+			            <option value="\${item.no}">\${item.name}</option>
+					`;
+				});
+				
+				document.querySelector("#areaList").innerHTML = htmlContents;
+			}
+		};
+		xhr.open("GET", "theaterTab.jsp?no="+locNo);
+		xhr.send(null);
+	}
+	
+	/* 처음 페이지가 로드되면 실행. */
+	window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
+		    locationSelect(1);
+		    getftList()
+
+	};
+	// 자주가는 극장 관리 버튼을 누르면 실행
+	let ftList = [];
+	let curList = [];
+	// 자주가는 극장 리스트를 보여준다.
+	function fTControl(){
+		refreshFT(ftList);
+		curList = saveList(ftList);
+	}
+	function saveList(ftList) {
+		curList = [];
+		ftList.forEach(function (item,index) {
+			curList.push(item);
+		})
+		return curList;
+	}
+	// 자주가는 극장 리스트를 가져오는 ajax
+	function getftList() {
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				let text = xhr.responseText;
+				let arr = JSON.parse(text);
+				arr.forEach(function(item, index) {
+					let no =item.theater.no;
+					let name = item.theater.name;
+					ftList.push({no,name});
+				});
+			}
+		};
+		xhr.open("GET", "view.jsp");
+		xhr.send(null);
+		
+	}
+	// 화면을 갱신해서 보여준다.
+	function refreshFT(ftList) {
+		let contents=""
+		let circles = document.querySelectorAll(".theater-choice-list .bg .circle");
+		for(index=0;index<=2;index++){
+			circles[index].innerHTML = contents;
+		}	
+		ftList.forEach(function (item,index) {
+			contents=`<p class="txt">\${item.name}</p>
+      		<button type="button" class="del" onclick="deleteFT(\${index})">삭제</button>`;
+      		circles[index].innerHTML = contents;
+		});
+	}
+	// 자주가는 극장 목록에서 선택된 하나는 지우고 화면을 다시 호출한다.
+	function deleteFT(number) {
+		
+		let no= number;
+		curList.splice(no,1);
+		refreshFT(curList);
+	}
+	// 자주가는 극장 리스트에 극장 하나는 추가하고 화면을 다시 호출한다.
+	function insertFT() {
+		// 진행상황 확인용 변수선언
+		let passed =true;
+		// 자주가는 극장이 3개이상인가.
+		if(curList.length>=3){
+			alert("자주가는 극장은 최대 3개까지 등록 할 수 있습니다.");
+			passed = false;
+			return passed;
+		}
+		// 극장 번호 가져오기
+		let no = document.getElementById("areaList").value;
+		// 극장을 선택했는지 검사
+		if(no==0){
+			alert("극장을 선택해주세요.");
+			passed = false;
+			return passed;
+		}
+		// 중복검사
+		curList.forEach(function (item,index) {
+			if(item.no==no){
+				alert("이미 선택한 극장입니다. 다시 선택해주세요.");
+				passed = false;
+				return passed;
+			}
+		})
+		// 극장 이름 가져오기
+		let index = document.getElementById("areaList").selectedIndex;
+		let name = document.getElementById("areaList").options[index].textContent;
+		// ftList에 넣기
+		if(passed){
+			curList.push({no,name});
+			// 화면 다시 호출하기
+			refreshFT(curList);	
+		}
+	}
+	// 자주가는 극장 일괄등록
+	function insertFTList() {
+		let arr = JSON.stringify(curList);
+		let xhr = new XMLHttpRequest();
+		console.log(arr);
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4){
+				
+			}
+		};
+		xhr.open("POST", "insert.jsp");
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.send(arr);
+		window.location.reload();
+	}
 </script>
 <div class="container ">
 	<div class="theater_wrap">
-		<h2>전체극장</h2>
+		<h2 class="tit">전체극장</h2>
 			<div class="sect-city" >
 				<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist" >
 <%
 	for(Location location:locations){
 %>			
-				  <li class="nav-item col-md-auto" role="presentation">
-				    <button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab" data-bs-toggle="tab" data-bs-target="#theater-tab-pane-<%=location.getNo() %>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><%=location.getName() %></button>
-				  </li>
+					<li class="nav-item col-md-auto" role="presentation">
+				    	<button class="nav-link link-dark  col-md-auto <%=location.getNo() == 1? "active":""%>" id="theater-tab-<%=location.getNo() %>" data-bs-toggle="tab" 
+				    		data-bs-target="#theater-tab-pane-<%=location.getNo() %>" type="button" role="tab" 
+				    		aria-controls="home-tab-pane" aria-selected="true" onclick="locationSelect(<%=location.getNo() %>);" value="<%=location.getNo() %>">
+				    		<%=location.getName() %>
+				    	</button>
+					</li>
 <%
 	}
 %>			  
 				</ul>
 				<div class="tab-content theater-list" id="myTabContent">
-				  <div class="tab-pane fade show active" id="theater-tab-pane-1" role="tabpanel" aria-labelledby="theater-1-tab" tabindex="0" >
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==1){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-2" role="tabpanel" aria-labelledby="theater-2-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==2){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-3" role="tabpanel" aria-labelledby="theater-3-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==3){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				 
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-4" role="tabpanel" aria-labelledby="theater-4-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==4){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-5" role="tabpanel" aria-labelledby="theater-5-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==5){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;" class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-6" role="tabpanel" aria-labelledby="theater-6-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==6){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-7" role="tabpanel" aria-labelledby="theater-7-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==7){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-8" role="tabpanel" aria-labelledby="theater-8-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==8){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				 
-				  </div>
-				  <div class="tab-pane fade" id="theater-tab-pane-9" role="tabpanel" aria-labelledby="theater-9-tab" tabindex="0">
-				  	<ul class="list-group list-group-horizontal row row-cols-4 " style="margin-left: 0;">
-<%
-	for(Theater theater:theaterList){
-		if(theater.getLocation().getNo()==9){
-%>			  	
-					  <li class="list-group-item col-3 border-0 " >
-					  	<a href="detail.jsp?no=<%=theater.getNo() %>" style="text-decoration: none;"  class="link-dark"><%=theater.getName() %></a>
-					  </li>
-<%
-		}
-	}
-%>				  
-					</ul>				  
-				  </div>
-				</div>
+				</div> 
+			</div>
 			<div class="sect-favorite">
-				<span class="s1"><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
+				<span class="s1" ><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
 <%
 	if(loginId==null){
 		
@@ -371,7 +258,7 @@
 				<button style="border-radius: 10px; margin-left: 10px;" onclick="login()">로그인하기</button>
 <script type="text/javascript">
 	function login() {
-		window.location="../member/loginform.jsp";
+		window.location="../member/login/form.jsp";
 	}
 </script>				
 <%
@@ -387,11 +274,10 @@
 <%
 		}
 %>						  
-			  		
-			  		
 				</ul>
 				<!-- Button trigger modal -->
-				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				<button type="button" class="btn-sm btn-light btn-jj" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+					onclick="fTControl()">
 				  자주가는 극장 관리
 				</button>
 <%
@@ -400,41 +286,46 @@
 			</div>	
 			</div>
 			
-			<div class="part-title">
-				<h3 class="tit">극장 공지사항</h3>
+			<div class="part-title" style="overflow: hidden;">
+				<h3 class="tit" style="float: left;">극장 공지사항</h3>
+				<a href="../center/notice/list.jsp" class="text-black text-decoration-none"  style="float: right;" title="극장 공지사항 더보기">
+				더보기 </a>
 			</div>
 			<div class="table-wrap">
 				<table class="board-list">
 				<colgroup style="user-select: auto;">
 						<col style="width: 150px; user-select: auto;">
-						<col style="user-select: auto;">
 						<col style="width: 150px; user-select: auto;">
+						<col style="user-select: auto;">
 						<col style="width: 120px; user-select: auto;">
 				</colgroup>
 				<thead>
 					<tr>
+						<th scope="col">지역</th>
 						<th scope="col">극장</th>
 						<th scope="col">제목</th>
-						<th scope="col">지역</th>
 						<th scope="col">등록일</th>
 					</tr>
 				</thead>
 				<tbody>
+<% for (Notice notice : noticeList) { %>				
+				
 					<tr>
-						<td>뭐시기극장</td>
-						<th scope="row">
-							<a href="/support/notice/detail?artiNo=10860&amp;bbsNo=9" title="[대전현대아울렛]영화관 재오픈 안내 상세보기" style="user-select: auto;">
-												[대전현대아울렛]영화관 재오픈 안내
+						<td><%=notice.getLocation().getName() %></td>
+						<td><%=notice.getTheater().getName() %></td>
+						<td style="text-align:left">
+							<a href="../center/notice/detail.jsp?no=<%=notice.getNo() %>" class="text-black text-decoration-none">
+								<%=notice.getTitle() %>
 							</a>
-						</th>
-						<td>서울</td>
-						<td>2023-06-12</td>
+						</td>
+						<td><%=notice.getCreateDate() %></td>
 					</tr>
+
+<% } %>	
 				</tbody>
 				</table>
 			</div>
 		</div>
-	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -446,7 +337,8 @@
 	      <div class="modal-body">
 	      	<div class="box-gray v1 a-c">
 	            <div class="dropdown bootstrap-select w150px small bs3">
-		            <select title="" class="w150px small" name="locationList" tabindex="-98">
+		            <select id="locationList" class="w150px small" name="locationList" tabindex="-98" onchange="refreshTheaters();">
+		            	<option value="0" selected disabled>지역을 선택해주세요.</option>
 <%
 	for(Location location:locations){
 %>		            
@@ -457,38 +349,35 @@
 		            </select>
 	            </div>
 	            <div class="dropdown bootstrap-select w150px small bs3">
-		            <select title="" class="w150px small" name="areaList" tabindex="-98">
-		            	<option selected disabled="disabled">지점을 선택해주세요</option>
-			            <option value="10">강남</option>
-			            <option value="30">강남</option>
-			            <option value="35">강남</option>
-			            <option value="45">강남</option>
-			            <option value="55">강남</option>
-			            <option value="65">강남</option>
-			            <option value="70">강남</option>
+		            <select id="areaList" class="w150px small" name="areaList" tabindex="-98">
+		            	<option value="0"  selected disabled="disabled">지점을 선택해주세요</option>
 		            </select>
 	            </div>
-	            <button id="btn-insert" type="button" class="button gray small ml05">추가</button>
+	            <button id="btn-insert" type="button" class="button gray small ml05" onclick="insertFT()">추가</button>
 			</div>					            
 	      	<div class="theater-choice-list row">
-<%
-	for(FavoriteTheater fTheater:FTList){
-%>	      	
-	               <div class="bg col-4">
-	                      <div class="circle " data-brch-no=<%=fTheater.getTheater().getNo() %>>
-	                          <p class="txt" data-eng-nm="Dongdaemoon" data-kor-nm="<%=fTheater.getTheater().getName() %>"><%=fTheater.getTheater().getName() %></p>
-	                          <button type="button" class="del">삭제</button>
-	                      </div>
-	               </div>
-<%
-	}
-%>	               
+
+	                     
+	                          
+              
+				<div class="bg col-4">
+	            	<div class="circle">
+	                </div>
+				</div>
+				<div class="bg col-4">
+	            	<div class="circle">
+	                </div>
+				</div>
+				<div class="bg col-4">
+	            	<div class="circle">
+	                </div>
+				</div>
 	               
 	        </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary">등록</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertFTList()">등록</button>
 	      </div>
 	    </div>
 	  </div>

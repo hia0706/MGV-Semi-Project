@@ -11,8 +11,14 @@ public class Oneonone {
 	private String deleted;
 	private Date createDate;
 	private Member member;
+	private Location location;
+	private Theater theater;
 	
 	public Oneonone () {}
+	
+	public Oneonone(int no) {
+		this.no = no;
+	}
 
 	public int getNo() {
 		return no;
@@ -68,6 +74,22 @@ public class Oneonone {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Theater getTheater() {
+		return theater;
+	}
+
+	public void setTheater(Theater theater) {
+		this.theater = theater;
 	}
 	
 }

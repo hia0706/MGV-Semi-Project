@@ -23,7 +23,7 @@
 	<div class="row mb-3">
 		<div class="col-12">
 			<p>구매내역을 확인하세요</p>
-			<table class="table table-striped table-hover">
+			<table class="table table-striped">
 				<tbody>
 					<tr class="table-dark">
 						<th style="width: 15%;">상품명</th>

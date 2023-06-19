@@ -3,6 +3,19 @@ package util;
 public class StringUtils {
 
 	/**
+	 * 문자열이 null이면 빈 문자열을 반환한다.
+	 * @param str 문자열
+	 * @return 빈 문자열 혹은 문자열
+	 */
+	public static String nullToBlank(String str) {
+		if (str == null) {
+			return "";
+		}
+		return str;
+	}
+	
+	
+	/**
 	 * 문자열을 전달받아서 정수로 변환해서 반환한다.
 	 * @param text 숫자로 구성된 문자열
 	 * @return 정수값, text가 null이거나 빈 문자열이거나 숫자가 아닌 문자열이 포함되어 있으면 0이 반환된다.

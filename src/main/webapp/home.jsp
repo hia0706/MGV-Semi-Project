@@ -19,8 +19,12 @@
 
 <div class="container">
 	<div class="p-3">
-		<h1 class="mb-5" style="color: white;">영화</h1>
-		
+		<h1 class="mb-5" style="color: white;">환영합니다. MGV 입니다.</h1>
+		<a href="#">
+           <img src="/mgv/images/home/hia.jpg"  alt="mgv"  class="">
+           <img src="/mgv/images/home/evan.jpg" alt="mgv" class="">
+           <img src="/mgv/images/home/rapter.jpg" alt="mgv" class="">
+        </a>
 
 	</div>
 </div>

@@ -32,7 +32,7 @@
 </head>
 <body>
 <jsp:include page="../../admin/nav.jsp">
-	<jsp:param value="manu" name="극장"/>
+	<jsp:param value="manu" name="극장 관리"/>
 </jsp:include>
 <div class="container my-3">
 	<div class="row mb-3">

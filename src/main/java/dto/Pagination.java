@@ -6,6 +6,33 @@ public class Pagination {
 	private int rows = 10;		// 한 화면에 표시할 행의 갯수
 	private int pages = 5;		// 한 화면에 표시할 페이지번호 갯수
 	private int totalRows;		// 전체 데이터 갯수
+	private int pageNo;
+	private int beginPage;
+	private int endPage;
+	
+	public int getbeginPage() {
+		return beginPage;
+	}
+	
+	public void setbeginPage(int beginPage) {
+		this.beginPage = beginPage;
+	}
+	
+	public int getendPage() {
+		return endPage;
+	}
+	
+	public void setendPage(int endPage) {
+		this.endPage = endPage;
+	}
+	
+	public int getPageNo() {
+		return pageNo;
+	}
+	
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
 	
 	public Pagination(int page, int totalRows) {
 		this.page = page;
@@ -41,5 +68,13 @@ public class Pagination {
 			return getTotalPages();
 		}
 		return getCurrentBlock()*pages;
+	}
+	
+	public boolean isFirstPage() {
+		return pageNo <= 1;
+	}
+	
+	public boolean isLastPage() {
+		return pageNo >= getTotalPages();
 	}
 }

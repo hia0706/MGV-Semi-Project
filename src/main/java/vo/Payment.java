@@ -7,7 +7,8 @@ public class Payment {
 	private int no;
 	private Date createDate;
 	private Date updateDate;
-	private String canceld;
+	private String status;
+	private int price;
 	private Member member;
 	private Product product;
 	
@@ -41,14 +42,22 @@ public class Payment {
 		this.updateDate = updateDate;
 	}
 
-	public String getCanceld() {
-		return canceld;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
-	public void setCanceld(String canceld) {
-		this.canceld = canceld;
+	
+	public String getStatus() {
+		return status;
 	}
-
+	
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+	
 	public Member getMember() {
 		return member;
 	}

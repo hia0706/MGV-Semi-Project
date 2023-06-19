@@ -24,6 +24,8 @@ public class TheaterBoardDao {
 															 theaterBoard.getCommentCnt(),
 															 theaterBoard.getDeleted(),
 															 theaterBoard.getReport(),
+															 theaterBoard.getLocation().getNo(),
+															 theaterBoard.getTheater().getNo(),
 															 theaterBoard.getNo());
 	}
 	
@@ -123,12 +125,20 @@ public class TheaterBoardDao {
 		}, theaterNo);
 	}
 	
-	public int getTotalRowsByLocation(int locationNo) {
+	public int getDelTotalRowsByTheaterNo(int theaterNo) {
+			
+			return DaoHelper.selectOne("theaterBoardDao.getTotalRowsByTheaterNoDel", rs -> {
+				
+				return rs.getInt("cnt");
+			}, theaterNo);
+		}
+	
+	public int getDelTotalRows() {
 		
-		return DaoHelper.selectOne("theaterBoardDao.getTotalRowsByLocation", rs -> {
+		return DaoHelper.selectOne("theaterBoardDao.getTotalRowsByDel", rs -> {
 			
 			return rs.getInt("cnt");
-		}, locationNo);
+		});
 	}
 	
 	
@@ -196,4 +206,78 @@ public class TheaterBoardDao {
 	}
 	
 	
+	public List<TheaterBoard> getDelTheaterBoardsByTheaterNo(int theaterNo, int begin, int end){
+		return DaoHelper.selectList("theaterBoarDao.getDelBoardByTheaterNo", rs -> {
+			TheaterBoard theaterBoard = new TheaterBoard();
+			
+			theaterBoard.setNo(rs.getInt("board_no"));
+			theaterBoard.setName(rs.getString("board_name"));
+			theaterBoard.setContent(rs.getString("board_content"));
+			theaterBoard.setGrade(rs.getString("board_grade"));
+			theaterBoard.setCreateDate(rs.getDate("board_create_date"));
+			theaterBoard.setUpdateDate(rs.getDate("board_update_date"));
+			theaterBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			theaterBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			theaterBoard.setDeleted(rs.getString("board_deleted"));
+			theaterBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			theaterBoard.setMember(member);
+			
+			Theater theater = new Theater();
+			theater.setNo(rs.getInt("theater_no"));
+			theaterBoard.setTheater(theater);
+			
+			Location location = new Location();
+			location.setNo(rs.getInt("location_no"));
+			theaterBoard.setLocation(location);
+			
+			return theaterBoard;
+		}, theaterNo, begin, end);
+	}
+	
+	
+	public List<TheaterBoard> getDelTheaterBoards(int begin, int end){
+		return DaoHelper.selectList("theaterBoarDao.getDelBoard", rs -> {
+			TheaterBoard theaterBoard = new TheaterBoard();
+			
+			theaterBoard.setNo(rs.getInt("board_no"));
+			theaterBoard.setName(rs.getString("board_name"));
+			theaterBoard.setContent(rs.getString("board_content"));
+			theaterBoard.setGrade(rs.getString("board_grade"));
+			theaterBoard.setCreateDate(rs.getDate("board_create_date"));
+			theaterBoard.setUpdateDate(rs.getDate("board_update_date"));
+			theaterBoard.setReadCnt(rs.getInt("board_read_cnt"));
+			theaterBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
+			theaterBoard.setDeleted(rs.getString("board_deleted"));
+			theaterBoard.setReport(rs.getString("board_report"));
+			
+			Member member = new Member();
+			member.setId(rs.getString("member_id"));
+			theaterBoard.setMember(member);
+			
+			Theater theater = new Theater();
+			theater.setNo(rs.getInt("theater_no"));
+			theaterBoard.setTheater(theater);
+			
+			Location location = new Location();
+			location.setNo(rs.getInt("location_no"));
+			theaterBoard.setLocation(location);
+			
+			return theaterBoard;
+		}, begin, end);
+	}
+	
+	
+	public List<Theater> getTheatersByLocationNo(int locationNo){
+		return DaoHelper.selectList("theaterBoardDao.getTheaterByLocationNo", rs -> {
+			Theater theater = new Theater();
+			
+			theater.setNo(rs.getInt("theater_no"));
+			theater.setName(rs.getString("theater_name"));
+			
+			return theater;
+		}, locationNo);
+	}
 }
