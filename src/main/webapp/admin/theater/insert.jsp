@@ -9,7 +9,9 @@
 	String name = request.getParameter("name");
 	int lno = Integer.parseInt(request.getParameter("lno"));
 	String tel = request.getParameter("tel");
-	String address = request.getParameter("address1");
+	String address = request.getParameter("address1")+request.getParameter("address2");
+	String parkingInfo = request.getParameter("parkingInfo");
+	String parkingFee = request.getParameter("parkingFee");
 	
 	Theater theater = new Theater();
 	theater.setNo(tno);

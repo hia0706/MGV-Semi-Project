@@ -51,8 +51,11 @@ public class TheaterDao {
 			theater.setAddress(rs.getString("theater_address"));
 			theater.setDisabled(rs.getString("theater_disabled"));
 			theater.setTel(rs.getString("theater_tel"));
+			theater.setParkingInfo(rs.getString("theater_parking_info"));
+			theater.setParkingFee(rs.getString("theater_parking_fee"));
 			Location location = new Location();
 			location.setNo(rs.getInt("location_no"));
+			location.setName(rs.getString("location_name"));
 			theater.setLocation(location);
 			return theater;
 		}, theaterNo);

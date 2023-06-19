@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="dao.ReportDao"%>
 <%@page import="dto.TBoardDto"%>
@@ -18,11 +19,8 @@
 	//
 	int totalRows = reportDao.getTotalRowsByReportAndTno(theaterNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage()); 
-	pagination.setPageNo(pageNo);
-	
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
+
 	// 데이터 조회하기
 	//
 	List<TheaterBoard> theaterBoards = reportDao.getTheaterBoardByreportAndTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());

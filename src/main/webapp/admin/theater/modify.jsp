@@ -1,17 +1,34 @@
+<%@page import="dao.TheaterDao"%>
+<%@page import="dao.ManagerTheaterDao"%>
+<%@page import="vo.Location"%>
+<%@page import="vo.Theater"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<!doctype html>
-<html lang="ko">
-<head>
-<title></title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
-<body>
-<div class="container">
+<%
+	// 요청 파라미터 조회
 
-</div>
-</body>
-</html>
+	int tno = Integer.parseInt(request.getParameter("no"));
+	String name = request.getParameter("name");
+	String tel = request.getParameter("tel");
+	String address = request.getParameter("address1")+request.getParameter("address2");
+	String parkingInfo = request.getParameter("parkingInfo");
+	String parkingFee = request.getParameter("parkingFee");
+	
+	TheaterDao theaterDao = TheaterDao.getInstance();
+	
+	Theater theater = theaterDao.getTheaterByNo(tno);
+	theater.setNo(tno);
+	theater.setName(name);
+	theater.setAddress(address);
+	theater.setTel(tel);
+	theater.setParkingInfo(parkingInfo);
+	theater.setParkingFee(parkingFee);
+	
+
+	
+	// 업무로직 수행 - 새 상품정보를 db에 저장시킨다.
+	ManagerTheaterDao managerTheaterDao = new ManagerTheaterDao();
+	managerTheaterDao.updateTheater(theater);
+	
+	// 재요청 URL응답
+	response.sendRedirect("list.jsp");
+%>
