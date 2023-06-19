@@ -30,6 +30,7 @@ public class CartDao {
 			cart.setTotalPrice(rs.getInt("cart_totalprice"));
 			cart.setCreateDate(rs.getDate("cart_create_date"));
 			cart.setUpdateDate(rs.getDate("cart_update_date"));
+			cart.setStatus(rs.getString("cart_status"));
 			
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
@@ -43,6 +44,10 @@ public class CartDao {
 			
 			return cart;
 		}, id);
+	}
+	
+	public void updateCart(String id) {
+		DaoHelper.update("cartDao.updateCart", id);
 	}
 	
 	public void deleteCartItem(int no) {
