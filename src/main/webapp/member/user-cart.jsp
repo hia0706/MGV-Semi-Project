@@ -68,14 +68,16 @@
 %>
 					<tr>
 						<td><img alt="상품별 사진" src="../images/products/<%=cart.getProduct().getNo() %>.png" class="img-thumnail" width="150%" style="padding: 0.5em 0;"></td>
-						<td id="product-name" style="width: 20%; padding: 2em 0;"><a href="../store/detail.jsp?no=<%=cart.getProduct().getNo() %>" class="link-dark" style="text-decoration: none"><%=cart.getProduct().getName() %></a></td>
+						<td style="width: 20%; padding: 2em 0;"><a href="../store/detail.jsp?no=<%=cart.getProduct().getNo() %>" class="link-dark" style="text-decoration: none"><input type="hidden" name="no" value="<%=cart.getProduct().getNo() %>"><%=cart.getProduct().getName() %></a></td>
 						<td style="width: 20%; padding: 2em 0;"><strong id="product-price"><%=cart.getProduct().getPrice() %></strong>원</td>
 						<td style="width: 20%; padding: 2em 0;">
 								<span id="amount"><%=cart.getAmount() %></span>
 						</td>
-						<td style="width: 20%; padding: 2em 0;"><strong><span id="total-price"><%=cart.getTotalPrice() %></span></strong>원</td>
+						<td style="width: 20%; padding: 2em 0;"><strong><span id="total-price" ><%=cart.getTotalPrice() %></span></strong>원</td>
 						<td style="width: 15%; padding: 2em 0;"><a href="deleteCartItem.jsp?no=<%=cart.getNo() %>" id="delete-item"><i class="bi bi-trash link-dark"></i></a></td>
+						
 					</tr>
+					
 <%
 	}
 %>
@@ -108,7 +110,7 @@
 							<img src="/mgv/images/member/equal2.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%; padding: 1em 2em;">
-							<strong id="payment" style="font-size: large; color: red;"><%=payment %></strong>원
+							<strong style="font-size: large; color: red;"><input type="hidden" value="<%=payment %>" name="payment"><%=payment %></strong>원
 						</td>
 					</tr>
 				</tbody>	
