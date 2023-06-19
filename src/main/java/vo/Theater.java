@@ -7,9 +7,27 @@ public class Theater {
 	private String address; // 주소
 	private String tel;
 	private String disabled;
+	private String parkingInfo;
+	private String parkingFee;
 	
 	public Theater() {}
 	
+	public String getParkingInfo() {
+		return parkingInfo;
+	}
+
+	public void setParkingInfo(String parkingInfo) {
+		this.parkingInfo = parkingInfo;
+	}
+
+	public String getParkingFee() {
+		return parkingFee;
+	}
+
+	public void setParkingFee(String parkingFee) {
+		this.parkingFee = parkingFee;
+	}
+
 	public Theater(int no) {
 		this.no = no;
 	}

@@ -1,5 +1,15 @@
+<%@page import="dao.TheaterDao"%>
+<%@page import="vo.Theater"%>
+<%@page import="vo.Location"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.LocationDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
+<%
+	int theaterNo = Integer.parseInt(request.getParameter("no"));
+	TheaterDao dao = TheaterDao.getInstance();
+	Theater theater = dao.getTheaterByNo(theaterNo); 
+%>
 <html lang="ko">
 <head>
 <title></title>
@@ -10,8 +20,126 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
+<jsp:include page="../../admin/nav.jsp">
+	<jsp:param name="menu" value="극장"/>
+</jsp:include>
+<div class="container" style="max-width: 600px;">
+	<div class="row mb-3">
+    	<div class="col-12">
+        	<h1 class="border bg-light fs-4 p-2">극장 수정하기</h1>
+      	</div>
+   	</div>
+   	<div class="row mb-3">
+   		<div class="col-12">
+   			<p>극장 정보를 입력하고 수정하세요.</p>
 
+   			<form class="border bg-light p-2" name="form" method="post" action="modify.jsp?no=<%=theater.getNo()%>">
+   				
+   				<div class="form-group mb-2 w-75">
+   					<label class="form-label">극장번호</label>
+   					<input type="text" class="form-control" id="theater-no" name="tno" style="width:300px" value="<%=theater.getNo() %>"  disabled/>
+   				</div>
+   				
+   				<div class="form-group mb-2 w-75">
+   					<label class="form-label">극장명</label>
+   					<input type="text" class="form-control" id="theater-name" name="name" style="width:300px" value="<%=theater.getName() %>"  />
+   				</div>
+   				
+   				<div class="form-group mb-2">
+					<label class="form-label">지역 선택</label>
+					<input type="text" class="form-control" id="location-name" name="name" style="width:300px" value="<%=theater.getLocation().getName() %>"  disabled/>
+
+					</select>
+				</div>
+   				<div class="form-group mb-2 w-75">
+   					<label class="form-label">극장 연락처</label>
+   					<input type="text" class="form-control" id="member-repwd" name="tel" style="width:300px" value="<%=theater.getTel() %>" required/>
+   				</div>
+   				
+
+   				<div class="form-group mb-2 w-75">
+				 <label class="form-label">주소</label><br />
+					<a id="btn" class="btn text-black btn-outline-primary btn-sm ">극장주소검색</a>
+					<br /> 
+				 <label class="form-label"></label><br />
+					<div class="form-group row" >
+						<div class="col-auto">
+							<input type="text" class="form-control" id="Addr" name="address1" style="width: 500px" value="<%=theater.getAddress() %>" readonly="readonly" required>
+						</div>
+						<div class="col-auto" >
+							<input type="text" class="form-control" id="detailAddr" name="address2" style="width: 300px" placeholder="상세주소를 입력하세요" >
+						</div>
+					</div>
+				</div>
+				<div class="form-group mb-2 w-75">
+   					<label class="form-label">주차정보</label>
+   					<input type="text" class="form-control" id="member-repwd" name="parkingInfo" style="width:300px" value="<%=theater.getParkingInfo() %>" />
+   				</div><div class="form-group mb-2 w-75">
+   					<label class="form-label">주차요금</label><br/>
+   					<textarea name="parkingFee" id="textarea11" style="width:300px" ><%=theater.getParkingFee() %></textarea>
+   				</div>
+   				
+   				
+
+   				<div class="text-center mb-3">
+   					<button type="submit" class="btn btn-primary">극장등록</button>
+   					<button type="reset" class="btn btn-danger">취소</button>
+   				</div>
+   			</form>
+   			
+<!-- daum 주소 찾기 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 주소찾기 -->
+<script>
+	
+
+const btn = document.querySelector("#btn");
+// 버튼을 클릭하면 daum.Postcode 함수 실행
+btn.addEventListener("click", () => {
+	new daum.Postcode({
+    	oncomplete: function(data) {
+			console.log(data); 
+			// 도로명 주소 변수 설정
+			let fullAddr = '';
+			// 지번 주소 변수 설정
+			let parAddr = '';
+			// 추가 주소 변수 설정
+			let extraAddr = '';
+			
+			// userSelectedType이 'R'(도로명주소)를 클릭했을 때 도로명 주소를 입력받고
+			if (data.userSelectedType === 'R') {
+				fullAddr = data.roadAddress;
+			} else { // userSelectedType이 'R'이 아닌 경우는 지번 주소를 넣는다.
+				fullAddr = data.jibunAddress;
+			}
+			
+			// userSelectedType이 'R'(도로명주소)일 때
+			if (data.userSelectedType === 'R') {
+				// 법정동이 비어 있지 않는 경우 
+				if (data.bname !== '') {
+					extraAddr += data.bname;
+				}
+				// 건물명이 비어 있지 않는 경우
+				if (data.buildingName !== '') {
+					// extraAddr이 비어있지 않으면 ,로 연결해주고 건물명 넣고
+					// bname(법정동)이 없으면 건물명을 바로 넣어준다.
+					extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+				}
+				
+				// extraAddr 이 비어있지 않으면 좌우 ()로 싸고 없으면 빈 값을 반환한다.
+				fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ') ' : '');
+			}
+
+			// 입력창에 도로명주소 넣기
+			document.form.address1.value = fullAddr;
+			
+    	}
+    }).open();
+});
+</script>
+
+   		</div>
+   	</div>
 </div>
 </body>
 </html>

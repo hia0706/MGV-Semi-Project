@@ -13,7 +13,7 @@
 	// 전체 데이터 개수 조회
 	ManagerTheaterDao managerTheaterDao = new ManagerTheaterDao();
 	String disable = "N";
-	int totalRows = managerTheaterDao.getTotalRows(disable);
+	int totalRows =StringUtils.stringToInt(managerTheaterDao.getTotalRows(disable), 0);
 	
 	Pagination pagination = new Pagination(pageNo, totalRows);
 	

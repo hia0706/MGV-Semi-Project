@@ -27,10 +27,10 @@ public class ManagerTheaterDao {
 		}, begin, end);
 	}
 	
-	public int getTotalRows (String disable) {
+	public String getTotalRows (String disable) {
 		
 		return DaoHelper.selectOne("managerTheaterDao.getTotalRowsByDisabled", rs -> {
-			return rs.getInt("cnt");
+			return rs.getString("cnt");
 		}, disable);
 	}
 	
@@ -39,6 +39,19 @@ public class ManagerTheaterDao {
 															theater.getLocation().getNo(),
 															theater.getName(),
 															theater.getAddress(),
-															theater.getTel());
+															theater.getTel(),
+															theater.getParkingInfo(),
+															theater.getParkingFee() );
+		
+	}
+	public void updateTheater(Theater theater) {
+		DaoHelper.update("managerTheaterDao.updateTheater", theater.getName(),
+															theater.getAddress(),
+															theater.getTel(),
+															theater.getParkingInfo(),
+															theater.getParkingFee(),
+															theater.getDisabled(),
+															theater.getNo());
+		
 	}
 }
