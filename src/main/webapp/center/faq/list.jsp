@@ -64,8 +64,8 @@
   <a href="../oneonone/insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
-  <a class="list-group-item list-group-item-action" style="color:gray; font-size:15px;">
-  		MGV 고객센터 <br> MGV center <br><br> 10:00~19:00
+  <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
+  		MGV 고객센터 <br> Dream center <br><br> 10:00~19:00
   </a>
 					</div>
 				</div>
@@ -80,11 +80,11 @@
 				</div>
 	
 <%-- 카테고리를 선택하는 select --%>
-				<select id="category" title="카테고리 선택" class="form-select selectpicker form-control mb-3" style="width: 150px; color:gray;" name="categoryNo" onchange="refreshFaq();">
+				<select id="category" title="카테고리 선택" class="form-select selectpicker form-control mb-3" style="width: 150px;" name="categoryNo" onchange="refreshFaq();">
 					<option value="" selected disabled >카테고리 선택</option>
 					
 <% for(FaqCategory category : categoryList) { %>
-				<option style="color:black;" value="<%=category.getNo() %>"><%=category.getName() %></option>
+				<option value="<%=category.getNo() %>"><%=category.getName() %></option>
 <% } %>
 				
 				</select>					
@@ -171,7 +171,7 @@
 						<tr>
 							<td>\${item.no}</td>
 							<td>\${item.faqCategory.name}</td>
-							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
+							<td style="text-align:left"><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
 					`;
@@ -202,8 +202,14 @@
 											</nav>`
 					
 					document.querySelector(".pagination").innerHTML = paginationHtmlContent;
-				} 
-					
+				} else {
+					document.querySelector("#table_Faq tbody").innerHTML = `
+						<tr>
+							<td colspan="4" class="text-center">조회결과가 존재하지 않습니다.</td>
+						</tr>
+					`;
+					document.querySelector(".pagination").innerHTML = "";
+				}
 			}
 		};
 		xhr.open("GET", "faq.jsp?no=" + categoryNo + "&page=" + pageNo);

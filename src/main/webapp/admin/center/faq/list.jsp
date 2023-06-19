@@ -13,10 +13,16 @@
 
 	//세션에서 로그인된 사용자 아이디 조회
 	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");		
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 	if (member == null) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+
+	if (!"ADMIN".equals(type)) {
 		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
@@ -73,6 +79,9 @@
   <a href="../oneonone/list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+   <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
+  		MGV 고객센터 <br> Dream center <br><br> 10:00~19:00
+  </a>
 					</div>
 				</div>
     	</div>
@@ -93,7 +102,7 @@
 				</div>
 	
 <%-- 카테고리를 선택하는 select --%>
-				<select id="category" title="카테고리 선택" class="selectpicker ml07" name="categoryNo" onchange="refreshFaq();">
+				<select id="category" title="카테고리 선택" class="form-select selectpicker form-control mb-3" style="width: 150px;" name="categoryNo" onchange="refreshFaq();">
 					<option value="" selected disabled>카테고리 선택</option>
 					
 <% for(FaqCategory category : categoryList) { %>
@@ -102,7 +111,7 @@
 				
 				</select>		
 			
-			<table class="table" id="table_Faq">
+			<table class="table border-top"  id="table_Faq">
 				<thead>
 					<tr class="table-light" > 
 						<th style="width: 5%;">번호</th>
@@ -182,7 +191,7 @@
 						<tr>
 							<td>\${item.no}</td>
 							<td>\${item.faqCategory.name}</td>
-							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
+							<td style="text-align:left"><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
 					`;
@@ -213,8 +222,14 @@
 											</nav>`
 					
 					document.querySelector(".pagination").innerHTML = paginationHtmlContent;
-				} 
-					
+				} else {
+					document.querySelector("#table-Faq tbody").innerHTML = `
+						<tr>
+							<td colspan="4" class="text-center">조회결과가 존재하지 않습니다.</td>
+						</tr>
+					`;
+					document.querySelector(".pagination").innerHTML = "";
+				}
 			}
 		};
 		xhr.open("GET", "faq.jsp?no=" + categoryNo + "&page=" + pageNo);
