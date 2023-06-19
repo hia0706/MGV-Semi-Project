@@ -6,6 +6,7 @@
 <%
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
+	
 %>
 <html lang="ko">
 <head>
@@ -34,12 +35,12 @@
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">극장번호</label>
-   					<input type="text" class="form-control" id="theater-name" name="tno" style="width:300px" placeholder="극장번호를 입력해주세요."/>
+   					<input type="text" class="form-control" id="theater-name" name="tno" style="width:300px" placeholder="극장번호를 입력해주세요." required/>
    				</div>
    				
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">극장명</label>
-   					<input type="text" class="form-control" id="theater-name" name="name" style="width:300px" placeholder="극장명을 입력해주세요."/>
+   					<input type="text" class="form-control" id="theater-name" name="name" style="width:300px" placeholder="극장명을 입력해주세요." required/>
    				</div>
    				
    				<div class="form-group mb-2">
@@ -56,7 +57,7 @@
 				</div>
    				<div class="form-group mb-2 w-75">
    					<label class="form-label">극장 연락처</label>
-   					<input type="text" class="form-control" id="member-repwd" name="tel" style="width:300px" placeholder="극장 연락처를 입력해주세요."/>
+   					<input type="text" class="form-control" id="member-repwd" name="tel" style="width:300px" placeholder="극장 연락처를 입력해주세요." required/>
    				</div>
    				
 
@@ -65,13 +66,23 @@
 					<a id="btn" class="btn text-black btn-outline-primary btn-sm ">극장주소검색</a>
 					<br /> 
 				 <label class="form-label"></label><br />
-					<input type="text" class="form-control" name="address1" style="width:400px" placeholder="도로명주소" readonly="readonly" />
-
-					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="지번주소" readonly="readonly" />
-
-					<input type="text" class="form-control" name="address2" style="width:300px" placeholder="지번주소"  readonly="readonly" />
-
+					<div class="form-group row" >
+						<div class="col-auto">
+							<input type="text" class="form-control" id="Addr" name="address1" style="width: 400px" placeholder="주소" readonly="readonly" required>
+						</div>
+						<div class="col-auto" >
+							<input type="text" class="form-control" id="detailAddr" name="address2" style="width: 300px" placeholder="상세주소를 입력하세요" required>
+						</div>
+					</div>
 				</div>
+				<div class="form-group mb-2 w-75">
+   					<label class="form-label">주차정보</label>
+   					<input type="text" class="form-control" id="member-repwd" name="parkingInfo" style="width:300px" placeholder="주차정보를 입력해주세요." />
+   				</div><div class="form-group mb-2 w-75">
+   					<label class="form-label">주차요금</label><br/>
+   					<textarea name="parkingFee" id="textarea11" style="width:300px" placeholder="주차요금 정보를 입력해주세요." ></textarea>
+   				</div>
+   				
    				
 
    				<div class="text-center mb-3">
@@ -102,10 +113,8 @@ btn.addEventListener("click", () => {
 			// userSelectedType이 'R'(도로명주소)를 클릭했을 때 도로명 주소를 입력받고
 			if (data.userSelectedType === 'R') {
 				fullAddr = data.roadAddress;
-				parAddr = data.jibunAddress;
 			} else { // userSelectedType이 'R'이 아닌 경우는 지번 주소를 넣는다.
 				fullAddr = data.jibunAddress;
-				parAddr = data.jibunAddress;
 			}
 			
 			// userSelectedType이 'R'(도로명주소)일 때
@@ -127,14 +136,12 @@ btn.addEventListener("click", () => {
 
 			// 입력창에 도로명주소 넣기
 			document.form.address1.value = fullAddr;
-			// 입력창에 전체 주소 넣기
-			document.form.address2.value = parAddr;
 			
     	}
     }).open();
 });
 </script>
-   			
+
    		</div>
    	</div>
 </div>

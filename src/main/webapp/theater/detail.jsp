@@ -57,7 +57,9 @@
 	h2{
 	font-size: 22px;
 	}
-	
+	h3{
+	font-size: 20px;
+	}
 	.bi-heart-fill{
 	font-size: 22px;
 	line-height: 22px;
@@ -165,9 +167,41 @@ function activeTab(num) {
 	document.getElementById("tab-menu-"+num).classList.add("active");
 	document.getElementById("tab-"+num).style.display = "block";
 }
+// 주차요금정보을 받아서 개행문자로 분리하고 출력해준다.
+function parkingFeeAct() {
+	let cont = document.querySelector(".fee-info .dot-list");
+	let str="<%=theater.getParkingFee()%>";
+	let lines = str.split("\n");
+	let contents="";
+	lines.forEach(function (item) {
+		if(item.length==0){
+			return;
+		}
+		contents += `<li>\${item}</li>`;
+	})
+		cont.innerHTML=contents;
+}
+//주차정보을 받아서 개행문자로 분리하고 출력해준다.
+function parkingInfoAct() {
+	let cont = document.querySelector(".park-info .dot-list");
+	let str="<%=theater.getParkingInfo()%>";
+	let lines = str.split("\n");
+	let contents="";
+	lines.forEach(function (item) {
+		if(item.length==0){
+			return;
+		}
+		contents += `<li>\${item}</li>`;
+	})
+	cont.innerHTML=contents;
+}
+window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
+	parkingFeeAct();
+	parkingInfoAct()
+};
 </script>		
 		<div class="theater_detail ">
-			<img alt="대학로" src="../images/theater/theater1.jpg">
+			<img alt="<%=theater.getName() %>" src="../images/theater/theater<%=theaterNo %>.jpg">
 			<div>
 				<ul class="nav nav-tabs nav-fill" style="width: 980px">
 				  <li class="nav-item ">
@@ -185,14 +219,14 @@ function activeTab(num) {
 		<div class="tab-cont-wrap">
 			<div id="tab-01" class="tab-cont " style="display: block;">
 				<div class="theater-info-text">
-				</div>
-				<h2 class="">시설안내</h2>
-				<h3>보유시설</h3>				
-				<h3>층별안내</h3>
-				<h2>교통안내</h2>
-				<!-- 카카오지도 보여줄 영역 -->
-				<div id="map" class="float-start" style="width:400px;height:300px;">
-				</div>
+					<h3>교통안내</h3>
+					<div>
+						<!-- 카카오지도 보여줄 영역 -->
+						<div style="overflow: hidden;">
+							<div id="map" class="float-start" style="width:100%;height:400px;">
+							</div>
+						</div>
+					</div>
 <!-- 카카오맵 -->				
 <script type="text/javascript">
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -228,7 +262,7 @@ function activeTab(num) {
 	
 	    // 인포윈도우로 장소에 대한 설명을 표시합니다
 	    var infowindow = new kakao.maps.InfoWindow({
-	        content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=theater.getName()%></div>'
+	        content: '<div style="width:300px;text-align:center;padding:6px;"><%=theater.getAddress()%><button id="map-btn" class="border-0" style=" border-radius: 15px;">길찾기</button></div>'
 	    });
 	    infowindow.open(map, marker);
 	
@@ -246,25 +280,24 @@ function activeTab(num) {
 	});
 <!-- 카카오맵 -->
 </script>	
-				<div>
-					<table style="margin-left: 10px">
-							<tbody>
-								<tr>
-									<td><button id="map-btn">길찾기</button></td>
-								</tr>
-								<tr>
-									<th>대중교통</th>
-								</tr>
-								<tr>
-									<th>자가용</th>
-								</tr>
-								<tr>
-									<th>주차안내</th>
-								</tr>
-							</tbody>
-					</table>			
 				</div>
-			
+				<div class="parking-info" style="margin-top: 50px;">
+					<div class="parking-section">
+						<div class="park-info">
+							<span style="color:#503396; font-size:22px">주차안내</span>
+							<ul class="dot-list">
+								<li>인근 주차장을 이용해 주세요.</li>
+							</ul>
+						</div>
+						<div class="fee-info">
+							<span style="color:#503396; font-size:22px">주차요금</span>
+							<ul class="dot-list">
+								<li>영화 관람 시 3시간 무료입니다.</li>
+								<li>3시간 초과 시 AK플라자 무료주차 안내에 따릅니다.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="tab-02" class="tab-cont" style="display: none;">
 				<table style="margin-left: 10px">
@@ -318,13 +351,13 @@ function activeTab(num) {
 						</tbody>
 					</table>
 				</div>
-				<span style="color:#503396"><span style="font-size:22px">요금제</span></span><br>
+				<span style="color:#503396; font-size:22px">요금제</span><br>
 				<br>
 				• <span style="color:#01738b">청소년 요금</span>&nbsp; 만7세~ 만18세 : 초등학생~고등학생(학생증, 교복, 청소년증, 의료보험증, 주민등록 등/초본, 그 외 청소년 확인 가능 서류)<br>
 				• 48개월 미만의 경우 증빙원(예 : 의료보험증, 주민등록 초/등본 등) 지참 시에만 무료 관람 가능<br>
 				<br>
 				<br>
-				<span style="font-size:22px "><span style="color:#503396">우대적용</span></span><br>
+				<span style="color:#503396; font-size:22px">우대적용</span><br>
 				<br>
 				• <span style="color:#01738b">국가유공자</span>&nbsp; 현장에서 국가유공자증을 소지한 본인 외 동반 1인까지 적용<br>
 				• <span style="color:#01738b">장애인</span>&nbsp; 현장에서 복지카드를 소지한 장애인[중증 (1급~3급)까지 동반 1인까지 적용 / 경증(4급~6급)은 본인에 한함]<br>
@@ -339,4 +372,7 @@ function activeTab(num) {
 	</div>
 </div>
 </body>
+<footer>
+	<div style="margin-top: 100px;"></div>
+</footer>
 </html>
