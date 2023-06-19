@@ -127,7 +127,7 @@ html. body {
 			<span><strong>조장</strong> 이진서 <strong>조원</strong> 신하원, 오민선, 서준호, 이재권, 진현국</span><br/>
 			<span><strong>근무시간</strong>: 월 ~ 금 AM 9:00 ~ PM 6:00 |
 			<strong>점심시간</strong>: PM1 :00 ~ PM 2 : 00 |
-			<strong>고객센터</strong> : AM 10: 00 ~ PM6 : 00</span>
+			<strong>고객센터</strong> : AM 10: 00 ~ PM 7 : 00</span>
 		
 		</p>
 	</footer>
