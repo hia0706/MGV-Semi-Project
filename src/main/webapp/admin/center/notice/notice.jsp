@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="dto.TBoardDto"%>
 <%@page import="com.google.gson.Gson"%>
@@ -17,10 +18,8 @@
 	NoticeDao noticeDao = NoticeDao.getInstance();
 	int totalRows = noticeDao.getTotalRowsByTheater(theaterNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());
-	pagination.setPageNo(pageNo);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
+	
 	
 	// 데이터 조회하기
 	List<Notice> noticeList = noticeDao.getNoticeByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
@@ -31,7 +30,7 @@
 	noticeDto.setPagination(pagination);
 	
 	// json 형식의 텍스트로 변환하기
-	Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	String text = gson.toJson(noticeDto);
 	
 	// 텍스트를 응답으로 보내기

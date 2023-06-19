@@ -125,7 +125,7 @@ html. body {
 		<p>
 			<span>2302기 3조 세미 프로젝트</span><br/>
 			<span>조장 : 이진서</span><br/>
-			<span>조원 : 신하원, 서준호, 오민선, 이재권, 진현국</span>
+			<span>조원 : 신하원, 오민선, 서준호, 이재권, 진현국</span>
 		</p>
 	</footer>
 		
