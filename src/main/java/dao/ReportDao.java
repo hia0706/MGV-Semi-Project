@@ -37,6 +37,10 @@ public class ReportDao {
 	}
 	
 	// 극장 신고 게시판 관련 메서드
+	public void deleteTboardReport (int boardNo) {
+		DaoHelper.update("reportDao.deleteTboardReport", boardNo);
+	}
+	
 	public void insertTboardReport (TboardReport tboardReport) {
 		
 		DaoHelper.update("reportDao.insertTboardReport", tboardReport.getReasonContent(),
@@ -149,6 +153,10 @@ public class ReportDao {
 	}
 	
 	// 스토어 게시판 신고 관련 메서드
+	public void deleteSboardReport (int boardNo) {
+		DaoHelper.update("reportDao.deletePboardReport", boardNo);
+	}
+	
 	public void insertSboardReport (SboardReport sboardReport) {
 		
 		DaoHelper.update("reportDao.insertSboardReport", sboardReport.getReasonContent(),
@@ -261,6 +269,11 @@ public class ReportDao {
 	}
 	
 	// 영화 게시판 신고 관련 메서드
+	public void deleteMboardReport (int boardNo) {
+		DaoHelper.update("reportDao.deleteMboardReport", boardNo);
+	}
+	
+	
 	public void insertMboardReport (MboardReport mboardReport) {
 		
 		DaoHelper.update("reportDao.insertMboardReport", mboardReport.getReasonContent(),
