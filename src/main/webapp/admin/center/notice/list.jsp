@@ -77,8 +77,11 @@
   <a href="../oneonone/list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="list.jsp" class="list-group-item list-group-item-action">공지사항</a>
-  <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
-  		MGV 고객센터 <br> Dream center <br><br> 10:00~19:00
+ <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
+  		MGV 고객센터 <br> 
+  		Dream center <br><br>
+  		TEL 0607-0620<br> 
+  		<img src="../../../images/center/clock.png" width="13" height="13"> 10:00~19:00
   </a>
 					</div>
 				</div>
