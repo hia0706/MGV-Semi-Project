@@ -218,13 +218,12 @@
 		console.log(arr);
 		xhr.onreadystatechange = function () {
 			if(xhr.readyState == 4){
-				
+				window.location.reload();				
 			}
 		};
 		xhr.open("POST", "insert.jsp");
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.send(arr);
-		window.location.reload();
 	}
 </script>
 <div class="container ">
