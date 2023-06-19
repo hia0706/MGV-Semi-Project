@@ -184,30 +184,33 @@
 				</tbody>
 			</table>
 			
-
-			
-					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-								<a href="reportlist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
-							</li>
+<%
+	if(totalRows > 0){
+%>
+			<nav>
+				<ul class="pagination justify-content-center">
+					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
+						<a href="reportlist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+					</li>
 <%
 	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>				
-							<li class="page-item <%=pageNo == num ? "active" : "" %>">
-								<a href="reportlist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
-							</li>
+					<li class="page-item <%=pageNo == num ? "active" : "" %>">
+						<a href="reportlist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
+					</li>
 
 <%
 	}
 %>
 					
-							<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-								<a href="reportlist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
-							</li>
-						</ul>
-					</nav>
-			
+					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
+						<a href="reportlist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+					</li>
+				</ul>
+			</nav>
+<%
+	}
+%>
 
 				</div>
 			</div>
@@ -288,28 +291,35 @@
 				
 				document.querySelector("#table-Tboard tbody").innerHTML = htmlContents;
 			
-				let paginationHtmlContent = `<nav>   
+				
+				if(pagination.totalRows > 0){
+				paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
 					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="reportlist.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
 					</li>`;
 			
 				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
 					
 					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="reportlist.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
 											  </li>`;
 
 				}
 				
-				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-											<a href="reportlist.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-									      </li>
-										</ul>
-										</nav>`
+				paginationHtmlContent += `<li class="page-item">
+				<a class="page-link \${pagination.pageNo >= pagination.TotalPages ? 'disabled' : ''}" 
+					"list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+			</li>
+			</ul>
+			</nav>`
+				
 				
 				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
-
+				} else {
+				document.querySelector(".pagination").innerHTML = "";
+					
+				}
 			}	
 		};
 		xhr.open("GET", "reportboard.jsp?no=" + theaterNo + "&page=" + pageNo);

@@ -17,7 +17,7 @@
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	if (memberDao.getMemberById(id) != null) {
-		response.sendRedirect("joinform.jsp?err=dup");
+		response.sendRedirect("join/form.jsp?err=dup");
 		return;
 	}
 	
@@ -36,5 +36,5 @@
 	
 	memberDao.insertMember(member);
 	
-	response.sendRedirect("../home.jsp");
+	response.sendRedirect("/mgv/home.jsp");
 %>

@@ -27,6 +27,7 @@
 	
 	// 모든 스토어 게시물 목록 가져오기
 	List<StoreBoard> storeBoards = storeBoardDao.getAllStoreBoards(pagination.getBegin(), pagination.getEnd());
+	
 
 %>
 <html lang="ko">
@@ -127,17 +128,19 @@
 			
 				</tbody>
 			</table>
-			
+<%
+	if(totalRows > 0){
+%>
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+						<a href="reportlist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 					</li>
 <%
 	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>				
 					<li class="page-item <%=pageNo == num ? "active" : "" %>">
-						<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
+						<a href="reportlist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
 					</li>
 
 <%
@@ -145,13 +148,13 @@
 %>
 					
 					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+						<a href="reportlist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 					</li>
 				</ul>
 			</nav>
-
-			
-			
+<%
+	}
+%>		
 			<div class="text-end">
 				<a href="form.jsp" class="btn btn-primary btn-sm">새 게시글 등록</a>
 			</div>
@@ -219,6 +222,7 @@
 				let pagination = obj.pagination;
 				
 				let htmlContents = ``;
+				let paginationHtmlContent = ``;
 				
 				boards.forEach(function(item, index) {
 					htmlContents += `
@@ -234,28 +238,33 @@
 				
 				document.querySelector("#table-SBoard tbody").innerHTML = htmlContents;
 			
-				let paginationHtmlContent = `<nav>   
+				if(pagination.totalRows > 0){
+					paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
 					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
 						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
 					</li>`;
 			
-				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+					for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+						
+						paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+													<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+												  </li>`;
+	
+					}
 					
-					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
-											  </li>`;
-
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+						<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+					      </li>
+						</ul>
+						</nav>`
+					
+					
+					document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+				} else {
+				document.querySelector(".pagination").innerHTML = "";
+					
 				}
-				
-				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-					<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-					  </li>
-					</ul>
-				</nav>`
-				
-				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
-
 			}	
 		};
 		xhr.open("GET", "board.jsp?no=" + productNo + "&page=" + pageNo);

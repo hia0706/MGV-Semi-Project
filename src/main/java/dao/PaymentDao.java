@@ -38,6 +38,7 @@ public class PaymentDao {
 			payment.setUpdateDate(rs.getDate("payment_update_date"));
 			payment.setStatus(rs.getString("payment_status"));
 			payment.setPrice(rs.getInt("payment_price"));
+			payment.setDelete(rs.getString("payment_delete"));
 			
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
@@ -60,6 +61,7 @@ public class PaymentDao {
 			payment.setUpdateDate(rs.getDate("payment_update_date"));
 			payment.setStatus(rs.getString("payment_status"));
 			payment.setPrice(rs.getInt("payment_price"));
+			payment.setDelete(rs.getString("payment_delete"));
 			
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
@@ -74,5 +76,24 @@ public class PaymentDao {
 		}, id, status, begin, end);
 	}
 	
+	public Payment getPaymentById(String id) {
+		return DaoHelper.selectOne("paymentDao.getPaymentById", rs -> {
+			Payment payment = new Payment();
+			payment.setNo(rs.getInt("payment_no"));
+			payment.setCreateDate(rs.getDate("payment_create_date"));
+			payment.setUpdateDate(rs.getDate("payment_update_date"));
+			payment.setStatus(rs.getString("payment_status"));
+			payment.setPrice(rs.getInt("payment_price"));
+			payment.setDelete(rs.getString("payment_delete"));
+			
+			return payment;
+		}, id);
+	}
+	
+	public void updatePayment(Payment payment) {
+		DaoHelper.update("paymentDao.updatePayment", payment.getStatus(),
+													 payment.getDelete(),
+													 payment.getNo());
+	}
 	
 }
