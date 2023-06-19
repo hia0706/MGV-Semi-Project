@@ -9,8 +9,8 @@
 <%@ page contentType="application/json; charset=utf-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" %>
 <%
 	String loginId = (String) session.getAttribute("loginId");
-	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	String status = request.getParameter("status");
+	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 	
 	// 결제정보 조회
 	PaymentDao paymentDao = PaymentDao.getInstance();
@@ -44,5 +44,4 @@
 	
 	// 텍스트를 응답으로 보내기
 	out.write(text);
-	System.out.println(text);
 %>

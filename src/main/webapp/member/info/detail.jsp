@@ -10,7 +10,7 @@
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
 	if (member == null) {
-		response.sendRedirect("../login/form.jsp=req");
+		response.sendRedirect("/mgv/member/login/login/form.jsp=req");
 		return;
 	}
 	
@@ -104,7 +104,7 @@
 %>
 			<a class="btn btn-outline-info disabled">구매내역</a>
 			<a class="btn btn-outline-warning disabled">수정하기</a>
-			<a href="/mgv/center/oneonone/insertform.jsp?id=<%=member.getId() %>" class="btn btn-outline-primary">복구 문의</a>
+			<a href="../login/logout.jsp" class="btn btn-outline-primary" onclick="alert('복구 문의는 고객센터(0607-0620) 에 문의하세요.')">복구 문의</a>
 <%
 	}
 %>	
