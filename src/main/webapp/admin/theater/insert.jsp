@@ -1,3 +1,4 @@
+<%@page import="dao.TheaterDao"%>
 <%@page import="dao.ManagerTheaterDao"%>
 <%@page import="vo.Location"%>
 <%@page import="vo.Theater"%>
@@ -23,7 +24,13 @@
 	location.setNo(lno);
 	theater.setLocation(location);
 
-	
+	// 중복검사
+	TheaterDao theaterDao = TheaterDao.getInstance();
+	Theater theatercheck= theaterDao.getTheaterByNo(tno);
+	if(theatercheck!=null){
+		response.sendRedirect("form.jsp?err=dup");
+		return;
+	}
 	// 업무로직 수행 - 새 상품정보를 db에 저장시킨다.
 	ManagerTheaterDao managerTheaterDao = new ManagerTheaterDao();
 	managerTheaterDao.insertTheater(theater);
