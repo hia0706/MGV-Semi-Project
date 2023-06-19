@@ -64,6 +64,7 @@
 		discountPrice += cart.getTotalPrice()*0.1;
 		payment = grandTotal - discountPrice;
 		countPrice += 1;
+
 %>
 					<tr>
 						<td><img alt="상품별 사진" src="../images/products/<%=cart.getProduct().getNo() %>.png" class="img-thumnail" width="150%" style="padding: 0.5em 0;"></td>
@@ -96,12 +97,12 @@
 						<th style="width: 20%;">총 결제금액</th>
 					</tr>
 					<tr class="text-center">
-						<td id="grand-total" class="table" style="width: 20%; padding: 1em 1em;"><strong><%=grandTotal %>원</strong></td>
+						<td id="grand-total" class="table" style="width: 20%; padding: 1em 1em;"><strong><%=grandTotal %></strong>원</td>
 						<td class="table-bg" style="width: 20%;">
 							<img src="/mgv/images/member/minus2.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%; padding: 1em 2em;">
-							<strong style="font-size: large; color: black;"><%=discountPrice %></strong><strong>원</strong>
+							<strong style="font-size: large; color: black;"><%=discountPrice %></strong>원
 						</td>
 						<td class="table-bg" style="width: 20%;">
 							<img src="/mgv/images/member/equal2.png" width="40" height="40">
@@ -137,21 +138,22 @@
 		  },
 		  { variantKey: 'widgetA' }
 		)
-<%
-	for (Cart cart : cartList) {
-%>
 
 		function payment() {
 		  	paymentWidget.requestPayment({
-		  	orderId: 'loginId',
+		  	orderId: 'DOVMZxZag5_walYjj30Dr',
+<%
+	for (Cart cart : cartList) {
+%>
 		  	orderName: '<%=cart.getProduct().getName() %> 외 <%=countPrice %>건',
-		 	successUrl: 'http://localhost/mgv/home.jsp',
-		 	failUrl: 'http://localhost:8080/fail',
-			})
-		}
 <%
 	}
 %>
+		 	successUrl: 'http://localhost/mgv/member/updateCart.jsp',
+		 	failUrl: 'http://localhost:8080/fail',
+			})
+		}
+
 </script>
 </body>
 </html>
