@@ -129,7 +129,7 @@
 				
 				
 <%-- 지역/극장을 선택하는 select --%>			
-				<select id="location" title="지역 선택" class="selectpicker" name="locationNo" onchange="refreshTh();">
+				<select id="location" title="지역 선택" class="form-select selectpicker ml07 form-control mb-3" style="width: 150px; float:left; " name="locationNo" onchange="refreshTh();">
 					<option value="" selected disabled>지역 선택</option>
 												
 <%
@@ -142,7 +142,7 @@
 						
 				</select>
 
-				<select id="theater" title="극장 선택" class="selectpicker ml07" name="theaterNo" onchange="refreshBo();">
+				<select id="theater" title="극장 선택" class="form-select selectpicker ml07 form-control mb-3" style="width: 150px; float:left; position: relative; left:5px; " name="theaterNo" onchange="refreshBo();">
 					<option value="" selected disabled >극장 선택</option>
 										
 				</select>
