@@ -9,6 +9,7 @@ public class Payment {
 	private Date updateDate;
 	private String status;
 	private int price;
+	private String delete;
 	private Member member;
 	private Product product;
 	
@@ -56,6 +57,14 @@ public class Payment {
 	
 	public int getPrice() {
 		return price;
+	}
+	
+	public void setDelete(String delete) {
+		this.delete = delete;
+	}
+	
+	public String getDelete() {
+		return delete;
 	}
 	
 	public Member getMember() {

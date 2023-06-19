@@ -40,8 +40,11 @@ public class FaqDao {
 			faq.setUpdateDate(rs.getDate("faq_update_date"));
 			faq.setCreateDate(rs.getDate("faq_create_date")); 
 			faq.setMember(new Member(rs.getString("member_id")));
-			faq.setFaqCategory(new FaqCategory(rs.getInt("category_no")));
-			faq.setFaqCategory(new FaqCategory(rs.getString("category_name")));
+			
+			FaqCategory category = new FaqCategory();
+			category.setNo(rs.getInt("category_no"));
+			category.setName(rs.getString("category_name"));
+			faq.setFaqCategory(category);
 			
 			return faq;
 		}, begin, end);
@@ -57,8 +60,12 @@ public class FaqDao {
 			faq.setUpdateDate(rs.getDate("faq_update_date"));
 			faq.setCreateDate(rs.getDate("faq_create_date"));
 			faq.setMember(new Member(rs.getString("member_id")));
-			faq.setFaqCategory(new FaqCategory(rs.getInt("category_no")));
-			faq.setFaqCategory(new FaqCategory(rs.getString("category_name")));
+			
+			FaqCategory category = new FaqCategory();
+			category.setNo(rs.getInt("category_no"));
+			category.setName(rs.getString("category_name"));
+			faq.setFaqCategory(category);
+			
 			
 			return faq;
 		}, faqNo);
@@ -74,8 +81,11 @@ public class FaqDao {
 			faq.setUpdateDate(rs.getDate("faq_update_date"));
 			faq.setCreateDate(rs.getDate("faq_create_date"));
 			faq.setMember(new Member(rs.getString("member_id")));
-			faq.setFaqCategory(new FaqCategory(rs.getInt("category_no")));
-			faq.setFaqCategory(new FaqCategory(rs.getString("category_name")));
+			
+			FaqCategory category = new FaqCategory();
+			category.setNo(rs.getInt("category_no"));
+			category.setName(rs.getString("category_name"));
+			faq.setFaqCategory(category);
 			
 			return faq;
 		}, categoryNo, begin, end);

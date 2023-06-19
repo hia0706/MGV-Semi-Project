@@ -181,7 +181,7 @@
 					htmlContents += `
 						<tr>
 							<td>\${item.no}</td>
-							<td>\${item.name}</td>
+							<td>\${item.faqCategory.name}</td>
 							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
@@ -190,27 +190,30 @@
 				
 				document.querySelector("#table_Faq tbody").innerHTML = htmlContents;
 				
-				let paginationHtmlContent = `<nav>   
-					<ul class="pagination justify-content-center">
-					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
-					</li>`;
-			
-				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+				
+				if (pagination.totalRows > 0) {
+					let paginationHtmlContent = `<nav>   
+						<ul class="pagination justify-content-center">
+						<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
+							<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+						</li>`;
+				
+					for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+						
+						paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+													<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+												  </li>`;
+	
+					}
 					
-					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
-											  </li>`;
-
-				}
-				
-				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-											<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-									      </li>
-										</ul>
-										</nav>`
-				
-				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+												<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+										      </li>
+											</ul>
+											</nav>`
+					
+					document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+				} 
 					
 			}
 		};
