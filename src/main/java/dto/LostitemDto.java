@@ -10,7 +10,7 @@ public class LostitemDto {
 
 	private int totalRows;
 	private List<Lostitem> lostimeList;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	
 	public LostitemDto() {}
 
@@ -30,11 +30,11 @@ public class LostitemDto {
 		this.lostimeList = lostimeList;
 	}
 
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 

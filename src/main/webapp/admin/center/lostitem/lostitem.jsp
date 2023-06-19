@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="dto.LostitemDto"%>
@@ -16,10 +17,8 @@
 	LostitemDao lostitemDao = LostitemDao.getInstance();
 	int totalRows = lostitemDao.getTotalRowsByTheater(theaterNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());
-	pagination.setPageNo(pageNo);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
+
 	
 	// 데이터 조회하기
 	List<Lostitem> lostimeList = lostitemDao.getLostitemByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
