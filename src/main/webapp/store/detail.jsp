@@ -14,7 +14,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>상품 상세 &#60; 스토어 서비스 | 영화 그 이상의 감동. MGV</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">

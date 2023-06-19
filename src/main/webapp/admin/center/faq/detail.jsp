@@ -33,7 +33,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>상세페이지 | 자주묻는 질문 &#60; MGV 고객센터</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -79,9 +80,9 @@
 		<hr>
 		
 		<div style="text-align: center; padding:30px;">
-				<a href="modifyform.jsp?no=<%=faq.getNo() %>" class="btn btn-secondary btn-sm">수정</a>
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
-				<a href="delete.jsp?no=<%=faq.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
+				<a href="modifyform.jsp?no=<%=faq.getNo() %>" class="btn btn-warning btn-sm">수정</a>
+				<a href="delete.jsp?no=<%=faq.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 				
 
 			</div>

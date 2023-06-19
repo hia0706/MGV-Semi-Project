@@ -113,20 +113,20 @@
 			</div>
 			
 			<div class="text-end">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
 <%
 	if (theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 				<a href="modifyform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-warning btn-sm">수정</a>
+				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 <%
 	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal">신고</button>
+				<button class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal">신고</button>
 				
 <%
 	}
 %>
-				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
 			</div>
 		</div>
 	</div>
