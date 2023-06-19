@@ -60,6 +60,9 @@
   <a href="../oneonone/insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+   <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
+  		MGV 고객센터 <br> Dream center <br><br> 10:00~19:00
+  </a>
 					</div>
 				</div>
     	</div>
@@ -87,7 +90,7 @@
 				</select>		
 			</div>		
 			
-			<table class="table" id="table-Notice">
+			<table class="table border-top" id="table-Notice">
 				<thead>
 					<tr class="table-light" >
 						<th style="width: 5%;">번호</th>
