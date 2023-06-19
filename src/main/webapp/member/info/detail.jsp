@@ -104,7 +104,7 @@
 %>
 			<a class="btn btn-outline-info disabled">구매내역</a>
 			<a class="btn btn-outline-warning disabled">수정하기</a>
-			<a href="#" class="btn btn-outline-primary" onclick="alert('복구 문의는 고객센터(0607-0620) 에 문의하세요.')">복구 문의</a>
+			<a href="../login/logout.jsp" class="btn btn-outline-primary" onclick="alert('복구 문의는 고객센터(0607-0620) 에 문의하세요.')">복구 문의</a>
 <%
 	}
 %>	
