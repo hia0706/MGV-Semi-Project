@@ -69,7 +69,13 @@
 			<a style="font-size : 12px;">영화관 <%=notice.getTheater().getName() %> | </a>
 			<a style="font-size : 12px;">등록일 <%=notice.getCreateDate() %></a>
 		<hr>
-			<a><%=notice.getContent() %></a>
+			<a>
+				<br>
+				안녕하세요<br>
+				MGV <%=notice.getTheater().getName() %>지점입니다.<br><br>
+				<%=notice.getContent() %><br><br>
+				감사합니다.<br><br>
+			</a>
 		<hr>
 		
 		<div style="text-align: center; padding:30px;">

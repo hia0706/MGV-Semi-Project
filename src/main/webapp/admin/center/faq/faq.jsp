@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="dto.FaqDto"%>
 <%@page import="vo.Faq"%>
 <%@page import="dao.FaqDao"%>
@@ -16,10 +17,7 @@
 	FaqDao faqDao = FaqDao.getInstance();
 	int totalRows = faqDao.getTotalRowsByCategory(categoryNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());
-	pagination.setPageNo(pageNo);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
 	
 	// 데이터 조회하기
 	List<Faq> faqList = faqDao.getFaqByCategoryNo(categoryNo, pagination.getBegin(), pagination.getEnd());
