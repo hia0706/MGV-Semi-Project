@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="dto.PaymentDto"%>
 <%@page import="vo.Payment"%>
@@ -41,7 +42,7 @@
 	paymentDto.setPagination(pagination);
 	
 	// json 형식의 텍스트 변환
-	Gson gson = new Gson();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	String text = gson.toJson(paymentDto);
 	
 	// 텍스트를 응답으로 보내기
