@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport"%>
 <%@page import="dto.Pagination"%>
@@ -18,7 +19,7 @@
 
 	int totalRows = paymentDao.getTotalRowsById(loginId);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
 	
 	List<Payment> payments = paymentDao.getAllPaymentsById(loginId, pagination.getBegin(), pagination.getEnd());
 	
@@ -89,6 +90,7 @@
 					<table class="table" id="table-payments">
 						<thead>
 							<tr class="table-dark">
+								<th>결제번호</th>
 								<th>결제일</th>
 								<th>상품명</th>
 								<th>결제금액</th>
@@ -101,7 +103,7 @@
 	for (Payment pay : payments) {
 %>
 							<tr>
-								<td><%=pay.getCreateDate() %></td>
+								<td><%=pay.getNo() %></td>
 								<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=<%=pay.getProduct().getNo() %>">
 									<%=pay.getProduct().getName() %></a></td>
 								<td><%=pay.getPrice() %></td>
@@ -193,6 +195,7 @@
 				payments.forEach(function(item, index) {
 					htmlContents += `
 						<tr>
+							<td>\${item.no}</td>
 							<td>\${item.createDate}</td>
 							<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=\${item.product.no}">\${item.product.name}</td>
 							<td>\${item.price}</td>
