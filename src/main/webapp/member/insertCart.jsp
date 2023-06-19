@@ -7,7 +7,6 @@
 <%
 	String loginId = (String) session.getAttribute("loginId");
 	int productNo = Integer.parseInt(request.getParameter("no"));
-	
 	int amount = Integer.parseInt(request.getParameter("amount"));
 	int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 	

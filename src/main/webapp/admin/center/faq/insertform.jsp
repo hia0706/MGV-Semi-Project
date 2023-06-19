@@ -1,3 +1,5 @@
+<%@page import="vo.FaqCategory"%>
+<%@page import="dao.FaqCategoryDao"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Member"%>
 <%@page import="util.StringUtils"%>
@@ -9,15 +11,23 @@
 	
 	//세션에서 로그인된 사용자 정보를 조회한다.
 	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");		
 
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 
-	
 	if (member == null) {
-		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
+	
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+	
+	FaqCategoryDao faqCategoryDao = FaqCategoryDao.getInstance();
+	List<FaqCategory> faqcategoryList = faqCategoryDao.getAllFaqCategories();
 
 %>
 
@@ -43,13 +53,23 @@
 	<jsp:param name="menu" value="고객센터"/>
 </jsp:include>
 
-<div class="container">
-	<div class="row mb-3">
-    	<div class="col-12">
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-3">
+    				<div class="card">
+       	  		<div class="card-header text-center" >고객센터</div>
+            		<div class="list-group">
+  <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
+  <a href="../lostitem/list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
+  <a href="../oneonone/list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
+  <a href="list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
+  <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+					</div>
+				</div>
+    	</div>
+    	<div class="col-9">
         	<h1 class="fs-2 p-2">자주 묻는 질문</h1>
-      	</div>
-   	</div>
-	<div class="clearfix">
+        	
 		<ul class="dot-list">
 			<li>
 				자주 묻는 질문을 등록해주세요.
@@ -59,6 +79,19 @@
 				<div class="border bg-light p-3">
 				<form id="faq" class="row g-3" method="post" action="insert.jsp" >
 	 				
+					<div class="col-md-12">
+						<label class="form-label">카테고리</label>
+						<select class="form-select" name="categoryNo">
+						<option value="" selected disabled>카테고리 선택</option>
+						
+<% for (FaqCategory faqCategory : faqcategoryList) { %>						
+
+							<option value="<%=faqCategory.getNo() %>"> <%=faqCategory.getName() %></option>
+
+<% } %>						
+						
+						</select>
+					</div>	 				
 	 				
 	 				<div class="col-md-12">
 						<label class="form-label">제목</label>
@@ -75,6 +108,7 @@
 			<div style="text-align: center; padding:30px;">
 				<button type="button" class="btn btn-secondary btn-sm" onclick="formsubmit()">등록</button>
 			</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

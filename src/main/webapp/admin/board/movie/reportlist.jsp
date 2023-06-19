@@ -219,7 +219,7 @@
 				<ul class="pagination justify-content-center">
 					<li class="page-item">
 						<a class="page-link <%=pageNo <= 1 ? "disabled" : "" %>" 
-							href="list.jsp?page=<%=pageNo - 1 %>"
+							href="reportlist.jsp?page=<%=pageNo - 1 %>"
 							onclick="goPage(event, <%=pageNo - 1 %>)"
 							>이전</a>
 					</li>
@@ -228,7 +228,7 @@
 %>
 					<li class="page-item">
 						<a class="page-link <%=pageNo == num ? "active" : "" %>" 
-							href="list.jsp?page=<%=num %> "
+							href="reportlist.jsp?page=<%=num %> "
 							onclick="goPage(event, <%=num %>)"><%=num %></a>
 					</li>
 <%
@@ -236,7 +236,7 @@
 %>
 					<li class="page-item">
 						<a class="page-link <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>" 
-							href="list.jsp?page=<%=pageNo + 1 %>"
+							href="reportlist.jsp?page=<%=pageNo + 1 %>"
 							onclick="goPage(event, <%=pageNo + 1 %>)"
 							>다음</a>
 					</li>

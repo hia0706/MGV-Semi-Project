@@ -9,12 +9,18 @@
 
 	//세션에서 로그인된 사용자 정보를 조회한다.
 	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");		
 
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 	
 	if (member == null) {
 		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+	
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 	
@@ -63,7 +69,13 @@
 			<a style="font-size : 12px;">영화관 <%=notice.getTheater().getName() %> | </a>
 			<a style="font-size : 12px;">등록일 <%=notice.getCreateDate() %></a>
 		<hr>
-			<a><%=notice.getContent() %></a>
+			<a>
+				<br>
+				안녕하세요<br>
+				MGV <%=notice.getTheater().getName() %>지점입니다.<br><br>
+				<%=notice.getContent() %><br><br>
+				감사합니다.<br><br>
+			</a>
 		<hr>
 		
 		<div style="text-align: center; padding:30px;">

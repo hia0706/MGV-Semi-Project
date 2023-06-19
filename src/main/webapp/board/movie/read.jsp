@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="util.StringUtils"%>
 <%@page import="vo.MovieBoard"%>
 <%@page import="dao.MovieBoardDao"%>
@@ -21,6 +22,6 @@
 	movieBoardDao.updateMovieBoard(movieBoard);
 	
 	// url 재요청   
-	response.sendRedirect("detail.jsp?no=" + boardNo + "&page=" + pageNo + "&opt=" + opt + "&keyword=" + keyword );
+	response.sendRedirect("detail.jsp?no=" + boardNo + "&page=" + pageNo + "&opt=" + opt + "&keyword=" + URLEncoder.encode(keyword, "utf-8") );
 	
 %>

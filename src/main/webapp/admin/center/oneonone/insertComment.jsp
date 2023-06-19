@@ -13,13 +13,18 @@
 	
 	// 세션에 속성으로 저장된 로그인한 고객의 아이디 조회하기
 	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");		
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 	
-	
 	if (member == null) {
 		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터", "utf-8"));
+		return;
+	}
+	
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 	

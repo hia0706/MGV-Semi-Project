@@ -1,3 +1,4 @@
+<%@page import="dao.ReportDao"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="java.net.URLEncoder"%>
@@ -26,6 +27,12 @@
 	// 조회된 게시물 번호로 게시물을 조회한다
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
+	
+	// 신고여부가 Y인 게시물은 삭제 복구시 해당 게시글의 신고정보가 삭제된다.
+	ReportDao reportDao = ReportDao.getInstance();
+	if("Y".equals(theaterBoard.getReport())){
+		reportDao.deleteTboardReport(boardNo);
+	}
 	
 	// 해당 게시물의 작성자가 맞을 경우엔 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
 	theaterBoard.setReport("N");

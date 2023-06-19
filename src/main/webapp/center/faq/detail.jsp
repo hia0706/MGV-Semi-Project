@@ -44,8 +44,9 @@
         	<h1 class="fs-2 p-2">자주 묻는 질문</h1>
 	
 		<hr>
-			<a style="font-size : 17px;"><%=faq.getTitle() %><strong></strong></a><br>
-			<a style="font-size : 12px;"><%=faq.getCreateDate() %></a>
+			<a style="font-size : 19px;">[카테고리] [<%=faq.getFaqCategory().getName() %>] <%=faq.getTitle() %></a><br>
+			<a style="font-size : 12px;">카테고리 <%=faq.getFaqCategory().getName() %> | </a>
+			<a style="font-size : 12px;">등록일 <%=faq.getCreateDate() %></a>
 		<hr>
 			<a><%=faq.getContent() %></a>
 		<hr>
