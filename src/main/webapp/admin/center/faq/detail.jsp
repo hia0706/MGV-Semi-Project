@@ -58,7 +58,8 @@
 			<a style="font-size : 12px;">카테고리 <%=faq.getFaqCategory().getName() %> | </a>
 			<a style="font-size : 12px;">등록일 <%=faq.getCreateDate() %></a>
 		<hr>
-			<a><%=faq.getContent() %></a>
+			<br>
+			<a><%=faq.getContent() %></a><br><br>
 		<hr>
 		
 		<div style="text-align: center; padding:30px;">

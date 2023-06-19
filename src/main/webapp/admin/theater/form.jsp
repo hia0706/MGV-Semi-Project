@@ -7,6 +7,7 @@
 	LocationDao locationDao = LocationDao.getInstance();
 	List<Location> locations = locationDao.getLocations();
 	
+	String err = request.getParameter("err");
 %>
 <html lang="ko">
 <head>
@@ -21,6 +22,15 @@
 <jsp:include page="../../admin/nav.jsp">
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
+<%
+	if("dup".equals(err)){
+%>
+	<div class="alert alert-danger">
+				<strong>등록 실패</strong> 이미 존재하는 극장입니다..
+			</div>
+<%
+	}
+%>
 <div class="container" style="max-width: 600px;">
 	<div class="row mb-3">
     	<div class="col-12">
