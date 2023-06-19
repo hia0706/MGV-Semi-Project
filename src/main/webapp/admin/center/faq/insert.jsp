@@ -1,3 +1,4 @@
+<%@page import="vo.FaqCategory"%>
 <%@page import="dao.FaqDao"%>
 <%@page import="javax.swing.text.AbstractDocument.Content"%>
 <%@page import="vo.Faq"%>
@@ -19,6 +20,8 @@
 	}
 	
 	// 요청 파라미터값 조회
+	int no = Integer.parseInt(request.getParameter("no"));
+	String name = request.getParameter("name");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
 	
@@ -27,6 +30,11 @@
 	faq.setTitle(title);
 	faq.setContent(content);
 	faq.setMember(new Member(id));
+	
+	FaqCategory faqCategory = new FaqCategory();
+	faqCategory.setNo(no);
+	faqCategory.setName(name);
+	faq.setFaqCategory(faqCategory);
 	
 	FaqDao faqDao = FaqDao.getInstance();
 	faqDao.insertFaq(faq);
