@@ -37,7 +37,7 @@ fotter p{
 fotter p span{
 	display: inline-block;
 	margin-left: 20px;
-	font-size: 10px
+	font-size: 10px;
 
 }
 
@@ -117,15 +117,18 @@ html. body {
 	</div>
 	</section>
 	
-	<footer>
+	<footer class="footer" style="text-align: center;">
 		<nav>
-			<a class="text-black text-decoration-none" href="https://www.erdcloud.com/d/4nYKSKxkRtdsYwCgh">ERDCloud&nbsp</a> | 
-			<a class="text-black text-decoration-none" href="https://github.com/semi-movie/MGV">&nbspGithub</a>
+			<a class="text-black text-decoration-none" href="https://www.erdcloud.com/d/4nYKSKxkRtdsYwCgh"><strong>ERDCloud</strong>&nbsp</a> | 
+			<a class="text-black text-decoration-none" href="https://github.com/semi-movie/MGV">&nbsp<strong>Github</strong></a>
 		</nav>
 		<p>
-			<span>2302기 3조 세미 프로젝트</span><br/>
-			<span>조장 : 이진서</span><br/>
-			<span>조원 : 신하원, 오민선, 서준호, 이재권, 진현국</span>
+			<span><strong>TEL</strong> 0607-0620 <strong>Address</strong>서울특별시 종로구 율곡로10길 105 디아망 4층 (봉익동 10-1)</span><br/>
+			<span><strong>조장</strong> 이진서 <strong>조원</strong> 신하원, 오민선, 서준호, 이재권, 진현국</span><br/>
+			<span><strong>근무시간</strong>: 월 ~ 금 AM 9:00 ~ PM 6:00 |
+			<strong>점심시간</strong>: PM1 :00 ~ PM 2 : 00 |
+			<strong>고객센터</strong> : AM 10: 00 ~ PM 7 : 00</span>
+		
 		</p>
 	</footer>
 		
