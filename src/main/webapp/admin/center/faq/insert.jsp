@@ -20,8 +20,7 @@
 	}
 	
 	// 요청 파라미터값 조회
-	int no = Integer.parseInt(request.getParameter("no"));
-	String name = request.getParameter("name");
+	int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
 	
@@ -32,8 +31,7 @@
 	faq.setMember(new Member(id));
 	
 	FaqCategory faqCategory = new FaqCategory();
-	faqCategory.setNo(no);
-	faqCategory.setName(name);
+	faqCategory.setNo(categoryNo);
 	faq.setFaqCategory(faqCategory);
 	
 	FaqDao faqDao = FaqDao.getInstance();
