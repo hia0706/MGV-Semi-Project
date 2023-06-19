@@ -50,22 +50,31 @@
 	})
 	
 	function addCart(productNo) {
+<%
+		if (loginId == null) {
+%>
+			
+			alert("해당 상품은 로그인 후 이용이 가능합니다.");
+			
+			location.href = "../member/login/form.jsp?err=addProduct&job=<%=product.getNo() %>";
+<%
+		} else if (loginId != null) {
+%>
 
-		let amount = document.getElementById("count").textContent;
-		let totalPrice = document.getElementById("totalPrice").textContent;
+			let amount = document.getElementById("count").textContent;
+			let totalPrice = document.getElementById("totalPrice").textContent;
 		
-		location.href = "../member/insertCart.jsp?no=" + productNo + "&amount=" + amount + "&totalPrice=" + totalPrice;
+			location.href = "../member/insertCart.jsp?no=" + productNo + "&amount=" + amount + "&totalPrice=" + totalPrice;
 		
-		alert("상품이 장바구니에 담겼습니다.");
+			alert("상품이 장바구니에 담겼습니다.");
 		
-		location.href = "store.jsp";
+			location.href = "store.jsp";
+<%
+		}
+%>
 	}
+
 	
-	function loginPage() {
-		alert("해당 상품은 로그인 후 이용이 가능합니다.");
-		
-		location.href = "../member/login/form.jsp?err=addProduct&job=<%=product.getNo() %>";
-	}
 	
 </script>
 </head>
@@ -115,23 +124,13 @@
 		</tbody>
 	</table>
 	<div class="text-end">
-<%
-	if (loginId != null) {
-%>
 		<button onclick="addCart(<%=product.getNo() %>)" class="btn btn-outline-success btn-sm" id="addCart">장바구니 담기</button>
-<%
-	} else if (loginId == null) {
-%>
-		<button onclick="loginPage();" class="btn btn-outline-success btn-sm" id="loginPage">로그인</button>
-<%
-	}
-%>
 	</div>
 	</div>
 	<div class="box-pulldown">
-			<button type="button" class="btn-toggle">
+			<p>
 				구매 후 취소
-			</button>
+			</p>
 		<div class="dotList02">
 		<br>       
             ■ 연장/취소/환불 안내<br>
