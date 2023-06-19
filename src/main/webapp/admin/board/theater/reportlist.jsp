@@ -278,7 +278,7 @@
 					htmlContents += `
 						<tr>
 							<td>\${item.no}</td>
-							<td><a class="text-black text-decoration-none" href="list.jsp?no=\${item.no}">\${item.name}</a></td>
+							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.name}</a></td>
 							<td>\${item.member.id}</td>
 							<td>\${item.readCnt}</td>
 							<td>\${item.createDate}</td>

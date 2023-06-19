@@ -1,3 +1,5 @@
+<%@page import="vo.FaqCategory"%>
+<%@page import="dao.FaqCategoryDao"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="vo.Faq"%>
@@ -15,11 +17,14 @@
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 	if (member == null) {
-		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 	
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
+	
+	FaqCategoryDao faqCategoryDao = FaqCategoryDao.getInstance();
+	List<FaqCategory> categoryList = faqCategoryDao.getAllFaqCategories();
 	
 	FaqDao faqDao = FaqDao.getInstance();
 	int totalRows = faqDao.getTotalRows();
@@ -87,12 +92,21 @@
 					<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
 				</div>
 	
+<%-- 카테고리를 선택하는 select --%>
+				<select id="category" title="카테고리 선택" class="selectpicker ml07" name="categoryNo" onchange="refreshFaq();">
+					<option value="" selected disabled>카테고리 선택</option>
+					
+<% for(FaqCategory category : categoryList) { %>
+				<option value="<%=category.getNo() %>"><%=category.getName() %></option>
+<% } %>
+				
+				</select>		
 			
-			<table class="table">
+			<table class="table" id="table_Faq">
 				<thead>
 					<tr class="table-light" > 
 						<th style="width: 5%;">번호</th>
-						<th style="width: 10%;">극장</th>
+						<th style="width: 10%;">카테고리</th>
 						<th style="width: 50%;">제목</th>
 						<th style="width: 10%;">등록일</th>
 					</tr>
@@ -103,7 +117,7 @@
 				
 					<tr>
 						<td><%=faq.getNo() %></td>
-						<td>MGV</td>
+						<td><%=faq.getFaqCategory().getName() %></td>
 						<td style="text-align:left">
 							<a href="detail.jsp?no=<%=faq.getNo() %>" class="text-black text-decoration-none">
 								<%=faq.getTitle() %>
@@ -140,5 +154,78 @@
 		</div>
 	</div>	
 </div>
+<script type="text/javascript">
+	function goPage(e, pageNo) {
+		e.preventDeafault();
+		refreshFaq(pageNo)
+	}
+
+	function refreshFaq(pageNo) {
+		pageNo = pageNo || 1;
+		// select 박스에서 선택된 값 조회하기
+		let categoryNo = document.getElementById("category").value;
+		
+		// ajax 요청
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4) {
+				let text = xhr.responseText;
+				let obj = JSON.parse(text);
+				
+				document.getElementById("total-rows").textContent = obj.totalRows;
+				let faqs = obj.faqList;
+				let pagination = obj.pagination;
+				
+				let htmlContents = ``;
+				faqs.forEach(function(item, index) {
+					htmlContents += `
+						<tr>
+							<td>\${item.no}</td>
+							<td>\${item.name}</td>
+							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
+							<td>\${item.createDate}</td>
+						</tr>
+					`;
+				});
+				
+				document.querySelector("#table_Faq tbody").innerHTML = htmlContents;
+				
+				let paginationHtmlContent = `<nav>   
+					<ul class="pagination justify-content-center">
+					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
+						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+					</li>`;
+			
+				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+					
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+											  </li>`;
+
+				}
+				
+				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+											<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+									      </li>
+										</ul>
+										</nav>`
+				
+				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+					
+			}
+		};
+		xhr.open("GET", "faq.jsp?no=" + categoryNo + "&page=" + pageNo);
+		xhr.send(null);
+	}
+
+</script>
 </body>
 </html>
+	
+
+
+
+
+
+
+
