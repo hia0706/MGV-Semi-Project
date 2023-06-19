@@ -57,9 +57,8 @@
 					<tbody>
 						<tr>
 							<td>
-								<div>
 									<div class="form-check form-check-inline mb-2">
-										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="all" checked="checked">전체
+										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="all" >전체
 									</div> 
 									<div class="form-check form-check-inline mb-2">
 										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('Y');" value="Y">구매내역
@@ -67,7 +66,6 @@
 									<div class="form-check form-check-inline mb-2">
 										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('N');" value="N">취소내역
 									</div>
-								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -118,12 +116,12 @@
 		}	
 %>								
 									</td>
-									<td>
+									<td >
 <%
 		if ("N".equals(pay.getStatus())) { /* 구매취소만 삭제 */
 %>								
-										<a href="/mgv/member/buy/delete.jsp">
-										<img src="/mgv/images/member/trash.png" style="width: 20px; height: 20px;"/></a>
+												<a href="delete.jsp?<%=loginId%>">
+											<img src="/mgv/images/member/trash.png" style="width: 20px; height: 20px;"/></a>
 <%
 		} 
 %>
@@ -187,7 +185,6 @@
 				document.getElementById("total-rows").textContent = obj.totalRows;
 				let payments = obj.payments;
 				let pagination = obj.pagination;
-				let status = obj.status;
 				
 				let htmlContents = '';
 				

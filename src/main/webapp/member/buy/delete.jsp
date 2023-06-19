@@ -9,14 +9,17 @@
 	
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
-	PaymentDao paymentDao = PaymentDao.getInstance();
 	if (member == null) {
 		response.sendRedirect("../login/form.jsp?err=req&job=" + URLEncoder.encode("내역삭제", "utf-8"));
 		return;
 	}
-
-	int no = Integer.parseInt(request.getParameter("no"));
-	paymentDao.deletePaymentByNo(no);
+	
+	PaymentDao paymentDao = PaymentDao.getInstance();
+	Payment payment = paymentDao.getPaymentById(loginId);
+	
+	payment.setDelete("Y");
+	
+	paymentDao.updatePayment(payment);
 	
 	response.sendRedirect("paylist.jsp");
 	
