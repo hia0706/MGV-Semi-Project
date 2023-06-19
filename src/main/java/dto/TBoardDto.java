@@ -7,7 +7,7 @@ import vo.TheaterBoard;
 public class TBoardDto {
 	private int totalRows;
 	private List<TheaterBoard> theaterBoards;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	
 	public TBoardDto() {}
 
@@ -27,11 +27,11 @@ public class TBoardDto {
 		this.theaterBoards = theaterBoards;
 	}
 
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 	
