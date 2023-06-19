@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport"%>
 <%@page import="dto.Pagination"%>
@@ -18,7 +19,7 @@
 
 	int totalRows = paymentDao.getTotalRowsById(loginId);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
 	
 	List<Payment> payments = paymentDao.getAllPaymentsById(loginId, pagination.getBegin(), pagination.getEnd());
 	
@@ -57,8 +58,9 @@
 					<tbody>
 						<tr>
 							<td>
+								<div>
 									<div class="form-check form-check-inline mb-2">
-										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="all" >전체
+										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('all');" value="all" checked="checked" >전체
 									</div> 
 									<div class="form-check form-check-inline mb-2">
 										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('Y');" value="Y">구매내역
@@ -66,6 +68,7 @@
 									<div class="form-check form-check-inline mb-2">
 										<input class="form-check form-check-input me-2" type="radio" name="status" onchange="refreshPayment('N');" value="N">취소내역
 									</div>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -87,6 +90,7 @@
 					<table class="table" id="table-payments">
 						<thead>
 							<tr class="table-dark">
+								<th>결제번호</th>
 								<th>결제일</th>
 								<th>상품명</th>
 								<th>결제금액</th>
@@ -99,7 +103,7 @@
 	for (Payment pay : payments) {
 %>
 							<tr>
-								<td><%=pay.getCreateDate() %></td>
+								<td><%=pay.getNo() %></td>
 								<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=<%=pay.getProduct().getNo() %>">
 									<%=pay.getProduct().getName() %></a></td>
 								<td><%=pay.getPrice() %></td>
@@ -120,7 +124,7 @@
 <%
 		if ("N".equals(pay.getStatus())) { /* 구매취소만 삭제 */
 %>								
-												<a href="delete.jsp?<%=loginId%>">
+												<a href="delete.jsp">
 											<img src="/mgv/images/member/trash.png" style="width: 20px; height: 20px;"/></a>
 <%
 		} 
@@ -191,13 +195,14 @@
 				payments.forEach(function(item, index) {
 					htmlContents += `
 						<tr>
+							<td>\${item.no}</td>
 							<td>\${item.createDate}</td>
 							<td><a class="text-black text-decoration-none" href="/mgv/store/detail.jsp?no=\${item.product.no}">\${item.product.name}</td>
 							<td>\${item.price}</td>
-							<td>\${item.status === "Y" ? "<span class=\"badge text-bg-success\">구매완료</span>" 
-	                  				  : "<span class=\"badge text-bg-danger\">구매취소</span>"}</td>
-              				<td>\${item.status === 'N' ? `<a href="/mgv/member/buy/delete.jsp">
-              					    <img src="/mgv/images/member/trash.png" style="width: 20px; height: 20px;"/></a>` : ''}</td>	
+							<td>\${item.status === "Y" ? `<span class="badge text-bg-success">구매완료</span>` 
+													   : `<span class="badge text-bg-danger">구매취소</span>`}
+              				<td>\${item.status === "N" ? `<a href="/mgv/member/buy/delete.jsp">
+                                    <img src="/mgv/images/member/trash.png" style="width: 20px; height: 20px;"/></a>` : ''}</td>	
 						</tr>
 					`;
 				});
@@ -206,20 +211,20 @@
 				
 				let paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
-					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="paylist.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+					<li class="page-item \${pagination.page <= 1 ?  'disabled' : ''}">
+						<a href="payment.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.page -1})" class="page-link">이전</a>
 					</li>`;
 			
 				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
 					
-					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="paylist.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+					paginationHtmlContent += `<li class="page-item \${pagination.page == num ? 'active' : ''}">
+												<a href="payment.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
 											  </li>`;
 
 				}
 				
 				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalPages ? 'disabled' : ''}">
-					<a href="paylist.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+					<a href="payment.jsp?page=\${pagination.page + 1}" onclick="goPage(event, \${pagination.page + 1})" class="page-link">다음</a>
 					  </li>
 					</ul>
 				</nav>`

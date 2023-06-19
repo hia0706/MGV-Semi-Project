@@ -134,7 +134,7 @@
 
 				
 <%-- 지역/극장을 선택하는 select --%>			
-				<select id="cat" title="품목 선택" class="selectpicker" name="catNo" onchange="refreshProduct();">
+				<select id="cat" title="품목 선택" class="form-select selectpicker ml07 form-control mb-3" style="width: 150px; float:left; " name="catNo" onchange="refreshProduct();">
 					<option value= 0 selected disabled>품목 선택</option>
 												
 <%
@@ -147,7 +147,7 @@
 						
 					</select>
 
-					<select id="product" title="상품 선택" class="selectpicker ml07" name="productNo"  onchange="refreshBo();">
+					<select id="product" title="상품 선택" class="form-select selectpicker ml07 form-control mb-3" style="width: 150px; float:left; position: relative; left:5px; " name="productNo"  onchange="refreshBo();">
 						<option value= 0 selected disabled>상품 선택</option>
 						
 					</select>
@@ -319,12 +319,11 @@
 
 					}
 					
-					paginationHtmlContent += `<li class="page-item">
-					<a class="page-link \${pagination.pageNo >= pagination.TotalPages ? 'disabled' : ''}" 
-						"list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-				</li>
-				</ul>
-				</nav>`
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+						<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+					      </li>
+						</ul>
+						</nav>`
 					
 					
 					document.querySelector(".pagination").innerHTML = paginationHtmlContent;

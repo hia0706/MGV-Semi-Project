@@ -1,4 +1,8 @@
 <%@page import="dao.ReportDao"%>
+<%@page import="vo.MovieBoard"%>
+<%@page import="dao.MovieBoardDao"%>
+<%@page import="vo.StoreBoard"%>
+<%@page import="dao.StoreBoardDao"%>
 <%@page import="vo.Member"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="java.net.URLEncoder"%>
@@ -20,25 +24,24 @@
 	}
 	
 	if (!"ADMIN".equals(loginType)) {
-		response.sendRedirect("../../../board/theater/detail.jsp?no=" + boardNo +"&err=type&job=" + URLEncoder.encode("삭제", "utf-8"));
+		response.sendRedirect("../../../board/store/detail.jsp?no=" + boardNo +"&err=type&job=" + URLEncoder.encode("삭제", "utf-8"));
 		return;
 	}
-		
+	
 	// 조회된 게시물 번호로 게시물을 조회한다
-	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
-	TheaterBoard theaterBoard = theaterBoardDao.getTheaterBoardByNo(boardNo);
+	MovieBoardDao movieBoardDao = MovieBoardDao.getInstance();
+	MovieBoard movieBoard = movieBoardDao.getMovieBoardByBoardNo(boardNo);
 	
-	// 신고여부가 Y인 게시물은 삭제 복구시 해당 게시글의 신고정보가 삭제된다.
+	// 신고가 취소되면 해당 게시글의 신고정보가 삭제된다.
 	ReportDao reportDao = ReportDao.getInstance();
-	if("Y".equals(theaterBoard.getReport())){
-		reportDao.deleteTboardReport(boardNo);
+	if("Y".equals(movieBoard.getReport())){
+		reportDao.deleteMboardReport(boardNo);
 	}
+		
+	// 해당 게시물의 작성자가 맞을 경우엔 조회된 게시물의 신고 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
+	movieBoard.setReport("N");
+	movieBoardDao.updateMovieBoard(movieBoard);
 	
-	// 해당 게시물의 작성자가 맞을 경우엔 조회된 게시물의 삭제 정보를 "Y" 로 변경한뒤 DB에 저장한다. + url 재요청
-	theaterBoard.setReport("N");
-	theaterBoard.setDeleted("N");
-	theaterBoardDao.updateTheaterBoard(theaterBoard);
-	
-	response.sendRedirect("deletelist.jsp");
+	response.sendRedirect("reportlist.jsp");
 	
 %>
