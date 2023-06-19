@@ -9,12 +9,18 @@
 
 	//세션에서 로그인된 사용자 정보를 조회한다.
 	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");		
 
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(id);
 	
 	if (member == null) {
-		response.sendRedirect("../../../member/loginform.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
 		return;
 	}
 	
@@ -48,10 +54,12 @@
    	</div>
 	
 		<hr>
-			<a style="font-size : 17px;"><%=faq.getTitle() %><strong></strong></a><br>
-			<a style="font-size : 12px;"><%=faq.getCreateDate() %></a>
+			<a style="font-size : 19px;">[카테고리] [<%=faq.getFaqCategory().getName() %>] <%=faq.getTitle() %></a><br>
+			<a style="font-size : 12px;">카테고리 <%=faq.getFaqCategory().getName() %> | </a>
+			<a style="font-size : 12px;">등록일 <%=faq.getCreateDate() %></a>
 		<hr>
-			<a><%=faq.getContent() %></a>
+			<br>
+			<a><%=faq.getContent() %></a><br><br>
 		<hr>
 		
 		<div style="text-align: center; padding:30px;">

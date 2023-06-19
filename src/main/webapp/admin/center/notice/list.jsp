@@ -1,3 +1,5 @@
+<%@page import="dao.MemberDao"%>
+<%@page import="vo.Member"%>
 <%@page import="vo.Location"%>
 <%@page import="dao.LocationDao"%>
 <%@page import="vo.Notice"%>
@@ -8,6 +10,22 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+	//세션에서 로그인된 사용자 아이디 조회
+	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");	
+	
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	if (member == null) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+	
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 
 	LocationDao locationDao = LocationDao.getInstance();
@@ -59,40 +77,44 @@
   <a href="../oneonone/list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+  <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
+  		MGV 고객센터 <br> Dream center <br><br> 10:00~19:00
+  </a>
 					</div>
 				</div>
     	</div>
     	<div class="col-9">
         	<h1 class="fs-2 p-2">공지사항</h1>
-		<ul class="dot-list">
-			<li>
-				<a href="insertform.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">등록</a>
-				공지사항을 등록하세요.
-				<br>
-			</li>
-		</ul>
+			<ul class="dot-list">
+				<li>
+					<a href="insertform.jsp" class="btn btn-outline-dark btn-xs" style="float:right;">등록</a>
+					공지사항을 등록하세요.
+					<br>
+				</li>
+			</ul>
 			
 			
 <%-- 공지사항의 글 수 --%>	
-				<div class="board-list-util">
-					<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
-				</div>
+			<div class="board-list-util">
+				<p class="result-count"><strong>전체 <span id="total-rows" class="font-gblue"><%=totalRows %></span>건</strong></p>
+			</div>
 				
+			<div class="d-flex justify-content-start">
 <%-- 지역/극장을 선택하는 select --%>
-				<select id="location" title="지역 선택" class="selectpicker" name="locationNo" onchange="refreshTheater();">
+				<select id="location" title="지역 선택" class="form-select selectpicker form-control mb-3 me-3" style="width: 150px;"name="locationNo" onchange="refreshTheater();">
 					<option value="" selected disabled>지역 선택</option>
 					
 <% for(Location location : locationList) { %>
-				<option value="<%=location.getNo() %>"><%=location.getName() %></option>
+					<option value="<%=location.getNo() %>"><%=location.getName() %></option>
 <% } %>
-				
 				</select>	
 				
-				<select id="theater" title="극장 선택" class="selectpicker ml07" name="theaterNo" onchange= "refreshNotice();">
+				<select id="theater" title="극장 선택" class="form-select selectpicker form-control mb-3" style="width: 150px;" name="theaterNo" onchange= "refreshNotice();">
 					<option value="" selected disabled>극장 선택</option>
 				</select>		
+			</div>
 			
-			<table class="table" id="table-Notice">
+			<table class="table border-top" id="table-Notice">
 				<thead>
 					<tr class="table-light" > 
 						<th style="width: 5%;">번호</th>
@@ -120,24 +142,34 @@
 					
 				</tbody>
 			</table>
-			
+	
 			<nav>
 			<ul class="pagination justify-content-center">
+<%
+	if (!noticeList.isEmpty()) { 
+%>
 				<li class="page-item <%=pageNo <= 1 ? "disabled" : "" %>">
 					<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 				</li>
 				
-<% for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) { %>					
+<% 
+		for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) { 
+%>
 				
 				<li class="page-item <%=pageNo == num ? "active" : "" %>">
 					<a href="list.jsp?page=<%=num  %>" class="page-link"><%=num %></a>
 				</li>
 				
-<% } %>					
+<% 
+		} 
+%>					
 				
 				<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : "" %>">
 					<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 				</li>
+<%
+	}
+%>
 			</ul>
 		</nav>
 		</div>	
@@ -181,7 +213,7 @@
 	}
 	
 	function goPage(e, pageNo) {
-		e.preventDeafault();
+		e.preventDefault();
 		refreshNotice(pageNo)
 	}
 	
@@ -207,7 +239,7 @@
 						<tr>
 							<td>\${item.no}</td>
 							<td>\${item.theater.name}</td>
-							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
+							<td style="text-align:left"><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
 					`;
@@ -215,28 +247,36 @@
 				
 				document.querySelector("#table-Notice tbody").innerHTML = htmlContents;
 				
-				let paginationHtmlContent = `<nav>   
-					<ul class="pagination justify-content-center">
-					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
-					</li>`;
-			
-				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
-					
-					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
-											  </li>`;
+	            if(pagination.totalRows > 0){
+	                let paginationHtmlContent = `<nav>   
+	                   <ul class="pagination justify-content-center">
+	                   <li class="page-item \${pagination.page <= 1 ?  'disabled' : ''}">
+	                      <a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.page -1})" class="page-link">이전</a>
+	                   </li>`;
+	             
+	                for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+	                   
+	                   paginationHtmlContent += `<li class="page-item \${pagination.page == num ? 'active' : ''}">
+	                      <a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+	                        </li>`;
 
-				}
-				
-				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-											<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-									      </li>
-										</ul>
-										</nav>`
-				
-				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+	                }
+	                
+	                paginationHtmlContent += `<li class="page-item \${pagination.page >= pagination.totalPages ? 'disabled' : ''}">
+	                   <a href="list.jsp?page=\${pagination.page + 1}" onclick="goPage(event, \${pagination.page + 1})" class="page-link">다음</a>
+	                     </li>
+	                   </ul>
+	                </nav>`
 					
+					document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+				} else {
+					document.querySelector("#table-Notice tbody").innerHTML = `
+						<tr>
+							<td colspan="4" class="text-center">조회결과가 존재하지 않습니다.</td>
+						</tr>
+					`;
+					document.querySelector(".pagination").innerHTML = "";
+				}
 			}
 		};
 		xhr.open("GET", "notice.jsp?no=" + theaterNo + "&page=" + pageNo);

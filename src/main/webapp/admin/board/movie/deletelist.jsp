@@ -87,7 +87,7 @@
 				      <div>
 				        <a href="list.jsp" class="list-group-item list-group-item-action ">일반 게시판 관리</a>
 				        <a href="reportlist.jsp" class="list-group-item list-group-item-action">신고 게시판 관리</a> 
-				        <a href="deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
+				        <a style="color: #81BEF7; background-color: #E0F2F7" href="deletelist.jsp" class="list-group-item list-group-item-action">삭제 게시판 관리</a>
 				      </div>
 				      </div>
 					 </div> 

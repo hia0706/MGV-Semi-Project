@@ -57,6 +57,8 @@
 		location.href = "../member/insertCart.jsp?no=" + productNo + "&amount=" + amount + "&totalPrice=" + totalPrice;
 		
 		alert("상품이 장바구니에 담겼습니다.");
+		
+		location.href = "store.jsp";
 	}
 	
 	function loginPage() {

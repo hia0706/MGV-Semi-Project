@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="vo.Theater"%>
 <%@page import="vo.Location"%>
 <%@page import="dao.OneononeDao"%>
@@ -10,7 +12,14 @@
 	// 세션에서 로그인된 사용자 정보를 조회한다.
 	String id = (String) session.getAttribute("loginId");
 
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
 	
+	if (member == null) {
+		response.sendRedirect("../../member/login/form.jsp?err=req&job="+URLEncoder.encode("문의내역 확인", "utf-8"));
+		return;
+	}
+		
 
 	// 요청 파라미터값 조회
 	int locationNo = Integer.parseInt(request.getParameter("locationNo"));
@@ -28,7 +37,6 @@
 	oneonone.setTitle(title);
 	oneonone.setContent(content);
 	
-	Member member = new Member();
 	member.setId(id);
 	member.setName(name);
 	member.setTel(tel);

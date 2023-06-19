@@ -8,7 +8,7 @@ public class OneononeDto {
 
 	private int totalRows;
 	private List<Oneonone> oneononeList;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	public int getTotalRows() {
 		return totalRows;
 	}
@@ -21,10 +21,10 @@ public class OneononeDto {
 	public void setOneononeList(List<Oneonone> oneononeList) {
 		this.oneononeList = oneononeList;
 	}
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 	

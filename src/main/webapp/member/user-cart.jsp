@@ -64,17 +64,21 @@
 		discountPrice += cart.getTotalPrice()*0.1;
 		payment = grandTotal - discountPrice;
 		countPrice += 1;
+
 %>
 					<tr>
 						<td><img alt="상품별 사진" src="../images/products/<%=cart.getProduct().getNo() %>.png" class="img-thumnail" width="150%" style="padding: 0.5em 0;"></td>
-						<td id="product-name" style="width: 20%; padding: 2em 0;"><a href="../store/detail.jsp?no=<%=cart.getProduct().getNo() %>" class="link-dark" style="text-decoration: none"><%=cart.getProduct().getName() %></a></td>
+						<td style="width: 20%; padding: 2em 0;"><a href="../store/detail.jsp?no=<%=cart.getProduct().getNo() %>" class="link-dark" style="text-decoration: none"><%=cart.getProduct().getName() %></a></td>
 						<td style="width: 20%; padding: 2em 0;"><strong id="product-price"><%=cart.getProduct().getPrice() %></strong>원</td>
 						<td style="width: 20%; padding: 2em 0;">
 								<span id="amount"><%=cart.getAmount() %></span>
 						</td>
-						<td style="width: 20%; padding: 2em 0;"><strong><span id="total-price"><%=cart.getTotalPrice() %></span></strong>원</td>
+						<td style="width: 20%; padding: 2em 0;"><strong><span id="total-price"><input type="hidden" name="price" value="<%=cart.getTotalPrice() %>" /><%=cart.getTotalPrice() %></span></strong>원</td>
+						
 						<td style="width: 15%; padding: 2em 0;"><a href="deleteCartItem.jsp?no=<%=cart.getNo() %>" id="delete-item"><i class="bi bi-trash link-dark"></i></a></td>
+						
 					</tr>
+					
 <%
 	}
 %>
@@ -96,18 +100,18 @@
 						<th style="width: 20%;">총 결제금액</th>
 					</tr>
 					<tr class="text-center">
-						<td id="grand-total" class="table" style="width: 20%; padding: 1em 1em;"><strong><%=grandTotal %>원</strong></td>
+						<td id="grand-total" class="table" style="width: 20%; padding: 1em 1em;"><strong><%=grandTotal %></strong>원</td>
 						<td class="table-bg" style="width: 20%;">
 							<img src="/mgv/images/member/minus2.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%; padding: 1em 2em;">
-							<strong style="font-size: large; color: black;"><%=discountPrice %></strong><strong>원</strong>
+							<strong style="font-size: large; color: black;"><%=discountPrice %></strong>원
 						</td>
 						<td class="table-bg" style="width: 20%;">
 							<img src="/mgv/images/member/equal2.png" width="40" height="40">
 						</td>
 						<td class="table-bg" style="width: 20%; padding: 1em 2em;">
-							<strong id="payment" style="font-size: large; color: red;"><%=payment %></strong>원
+							<strong style="font-size: large; color: red;"><%=payment %></strong>원
 						</td>
 					</tr>
 				</tbody>	
@@ -137,21 +141,22 @@
 		  },
 		  { variantKey: 'widgetA' }
 		)
-<%
-	for (Cart cart : cartList) {
-%>
 
 		function payment() {
 		  	paymentWidget.requestPayment({
-		  	orderId: 'loginId',
+		  	orderId: 'DOVMZxZag5_walYjj30Dr',
+<%
+	for (Cart cart : cartList) {
+%>
 		  	orderName: '<%=cart.getProduct().getName() %> 외 <%=countPrice %>건',
-		 	successUrl: 'http://localhost/mgv/home.jsp',
-		 	failUrl: 'http://localhost:8080/fail',
-			})
-		}
 <%
 	}
 %>
+		 	successUrl: 'http://localhost/mgv/member/updateCart.jsp',
+		 	failUrl: 'http://localhost:8080/fail',
+			})
+		}
+
 </script>
 </body>
 </html>

@@ -8,7 +8,7 @@ public class NoticeDto {
 
 	private int totalRows;
 	private List<Notice> noticeList;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	
 	public NoticeDto() {}
 
@@ -28,11 +28,11 @@ public class NoticeDto {
 		this.noticeList = noticeList;
 	}
 
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 	

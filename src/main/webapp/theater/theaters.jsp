@@ -59,7 +59,7 @@
 		// locationNo로 영화관탭생성
 		let el = document.getElementById("theater-tab-"+no);
 		let locNo = no;
-		let htmlContent ="<div class='tab-pane fade show active' id='theater-tab-pane-"+locNo+"' role='tabpanel' aria-labelledby='theater-"+locNo+"-tab' tabindex='0' ><ul class='list-group list-group-horizontal row row-cols-4' style='margin-left: 0;'></ul></div>";
+		let htmlContent ="<div class='tab-pane fade show active' id='theater-tab-pane-"+locNo+"' role='tabpanel' aria-labelledby='theater-"+locNo+"-tab' tabindex='0' ><ul class='list-group list-group-horizontal row row-cols-4' style='margin-left: 0;width: 95%; '></ul></div>";
 		document.querySelector("#myTabContent").innerHTML=htmlContent;
 		theaterTab(locNo);
 	}
@@ -218,13 +218,12 @@
 		console.log(arr);
 		xhr.onreadystatechange = function () {
 			if(xhr.readyState == 4){
-				
+				window.location.reload();				
 			}
 		};
 		xhr.open("POST", "insert.jsp");
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.send(arr);
-		window.location.reload();
 	}
 </script>
 <div class="container ">
@@ -248,7 +247,6 @@
 				</ul>
 				<div class="tab-content theater-list" id="myTabContent">
 				</div> 
-			</div>
 			<div class="sect-favorite">
 				<span class="s1" ><%=loginId!=null? loginId+"님":"나" %>의 자주가는극장</span>
 <%
@@ -284,6 +282,7 @@
 	}
 %>				
 			</div>	
+			</div>
 			</div>
 			
 			<div class="part-title" style="overflow: hidden;">

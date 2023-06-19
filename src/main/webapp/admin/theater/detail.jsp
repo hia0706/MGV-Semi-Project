@@ -1,4 +1,13 @@
+<%@page import="vo.Theater"%>
+<%@page import="dao.TheaterDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%
+	//파라미터 극장번호
+	int theaterNo = Integer.parseInt(request.getParameter("no"));
+	//극장번호로 극장정보 가져오기
+	TheaterDao theaterDao = TheaterDao.getInstance();
+	Theater theater = theaterDao.getTheaterByNo(theaterNo);
+%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -26,30 +35,43 @@
 				<tbody>
 					<tr>
 						<th class="table-dark" style="width: 15%;">극장이름</th>
-						<td style="width: 35%;">서울 MGV</td>
+						<td style="width: 35%;"><%=theater.getName() %></td>
 						<th class="table-dark" style="width: 15%;">번호</th>
-						<td style="width: 35%;">101</td>
+						<td style="width: 35%;"><%=theater.getNo() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 15%;">지역</th>
-						<td style="width: 35%;">서울</td>
-						<th class="table-dark" style="width: 15%;">일반주소</th>
-						<td style="width: 35%;">일반주소</td>
+						<td style="width: 35%;"><%=theater.getLocation().getName() %></td>
+						<th class="table-dark" style="width: 15%;">연락처</th>
+						<td style="width: 35%;"><%=theater.getTel() %></td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width: 15%;">도로명주소</th>
-						<td style="width: 35%;">도로명주소</td>
-						<th class="table-dark" style="width: 15%;">극장 연락처</th>
-						<td style="width: 35%;">02-111-1111</td>
+						<th class="table-dark" style="width: 15%;">주소</th>
+						<td colspan="3" style="width: 35%;"><%=theater.getAddress() %></td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">주차정보</th>
+						<td colspan="3" style="width: 35%;"><%=theater.getParkingInfo() %></td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">주차요금</th>
+						<td colspan="3" style="width: 35%;"><%=theater.getParkingFee() %></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="text-end">
-				<a href="delete.jsp?no=101" class="btn btn-danger btn-sm">삭제</a>
-				<a href="reapply.jsp?no=101" class="btn btn-danger btn-sm">복구</a>				
-				<a href="modifyform.jsp?no=101" class="btn btn-warning btn-sm">수정</a>
+	
+
+<%
+	if("N".equals(theater.getDisabled())){
+%>				
+				<a href="delete.jsp?no=<%=theater.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
+<%}else{ %>				
+				<a href="reapply.jsp?no=<%=theater.getNo() %>" class="btn btn-danger btn-sm">복구</a>
+<%} %>								
+				<a href="modifyform.jsp?no=<%=theater.getNo() %>" class="btn btn-warning btn-sm">수정</a>
 				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
 	</div>
 </div>

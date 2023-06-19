@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="dto.SBoardDto"%>
 <%@page import="vo.StoreBoard"%>
 <%@page import="com.google.gson.GsonBuilder"%>
@@ -20,11 +21,8 @@
 	//
 	int totalRows = reportDao.getPBTotalRowsByReportAndPno(productNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());    
-	pagination.setPageNo(pageNo);
-	
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
+
 	// 데이터 조회하기
 	//
 	List<StoreBoard> storeBoards = reportDao.getStoreBoardByreportAndProductNo(productNo, pagination.getBegin(), pagination.getEnd());

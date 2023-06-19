@@ -8,7 +8,7 @@ public class FaqDto {
 
 	private int totalRows;
 	private List<Faq> faqList;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	
 	public FaqDto () {}
 
@@ -28,11 +28,11 @@ public class FaqDto {
 		this.faqList = faqList;
 	}
 
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 	

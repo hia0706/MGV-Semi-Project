@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="dto.OneononeDto"%>
 <%@page import="vo.Oneonone"%>
 <%@page import="dao.OneononeDao"%>
@@ -16,10 +17,8 @@
 	OneononeDao oneononeDao = OneononeDao.getInstance();
 	int totalRows = oneononeDao.getTotalRowsByTheater(theaterNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());
-	pagination.setPageNo(pageNo);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
+	
 	
 	// 데이터 조회하기
 	List<Oneonone> oneononeList = oneononeDao.getOneononeByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());

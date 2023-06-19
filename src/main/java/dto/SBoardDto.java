@@ -7,7 +7,7 @@ import vo.StoreBoard;
 public class SBoardDto {
 	private int totalRows;
 	private List<StoreBoard> storeBoards;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	
 	public SBoardDto() {}
 
@@ -27,11 +27,11 @@ public class SBoardDto {
 		this.storeBoards = storeBoards;
 	}
 
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 	

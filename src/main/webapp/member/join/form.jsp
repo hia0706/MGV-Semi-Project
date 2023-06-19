@@ -106,7 +106,7 @@
 							
 							<div class="form-group mb-2">
 								<label class="form-label">생년월일</label><br /> 
-								<input type="date" class="form-control" id="birth" name="birth" style="width: 300px" required>
+								<input type="date" class="form-control" id="birth" name="birth" max="2023-06-20" style="width: 300px" required>
 							</div>
 							
 							<div class="form-group mb-2 ">
