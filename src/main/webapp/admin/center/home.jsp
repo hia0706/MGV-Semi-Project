@@ -1,5 +1,27 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="vo.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
+<%
+	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");		
+
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	
+	if (member == null) {
+		response.sendRedirect("../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+	
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+	
+	
+%>
 <html lang="ko">
 <head>
 <title>MGV 고객센터</title>
@@ -27,6 +49,9 @@
   <a href="oneonone/list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
+   <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
+  		MGV 고객센터 <br> Dream center <br><br> 10:00~19:00
+  </a>
 </div>
         
   		</div>
@@ -35,25 +60,25 @@
     	<div class="row mb-3 bg-light p-3">
 		<div class="col-3 text-center">
 			<a href="lostitem/list.jsp" class="text-black text-decoration-none">
-				<img src="../../images/center/lostitem.png" width="50" height="50"><br>
+				<img src="../../images/center/lostitem.png" width="100" height="100"><br>
 				<strong>분실물 문의</strong>
 			</a>		
 		</div>
 		<div class="col-3 text-center">
 			<a href="oneonone/list.jsp" class="text-black text-decoration-none">
-				<img src="../../images/center/oneonone.png" width="50" height="50"><br>
+				<img src="../../images/center/oneonone.png" width="100" height="100"><br>
 				<strong>1:1 문의</strong>
 			</a>
 		</div>
 		<div class="col-3 text-center">
 			<a href="faq/list.jsp" class="text-black text-decoration-none">
-				<img src="../../images/center/faq.png" width="50" height="50"><br>
+				<img src="../../images/center/faq.png" width="100" height="100"><br>
 				<strong>자주 묻는 질문</strong>
 			</a>
 		</div>
 		<div class="col-3 text-center">
 			<a href="notice/list.jsp" class="text-black text-decoration-none">
-				<img src="../../images/center/notice.png" width="50" height="50"><br>
+				<img src="../../images/center/notice.png" width="100" height="100"><br>
 				<strong>공지사항</strong>
 			</a>
 		</div>

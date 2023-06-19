@@ -1,3 +1,5 @@
+<%@page import="dao.MemberDao"%>
+<%@page import="vo.Member"%>
 <%@page import="vo.Location"%>
 <%@page import="dao.LocationDao"%>
 <%@page import="vo.Notice"%>
@@ -8,6 +10,22 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
+	//세션에서 로그인된 사용자 아이디 조회
+	String id = (String) session.getAttribute("loginId");
+	String type = (String) session.getAttribute("loginType");	
+	
+	MemberDao memberDao = MemberDao.getInstance();
+	Member member = memberDao.getMemberById(id);
+	if (member == null) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+	
+	if (!"ADMIN".equals(type)) {
+		response.sendRedirect("../../../member/login/form.jsp?err=req&job="+URLEncoder.encode("고객센터 관리", "utf-8"));
+		return;
+	}
+
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);
 
 	LocationDao locationDao = LocationDao.getInstance();

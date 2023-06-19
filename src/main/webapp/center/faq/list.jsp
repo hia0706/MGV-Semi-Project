@@ -80,11 +80,11 @@
 				</div>
 	
 <%-- 카테고리를 선택하는 select --%>
-				<select id="category" title="카테고리 선택" class="form-select selectpicker form-control mb-3" style="width: 150px; color:gray;" name="categoryNo" onchange="refreshFaq();">
+				<select id="category" title="카테고리 선택" class="form-select selectpicker form-control mb-3" style="width: 150px;" name="categoryNo" onchange="refreshFaq();">
 					<option value="" selected disabled >카테고리 선택</option>
 					
 <% for(FaqCategory category : categoryList) { %>
-				<option style="color:black;" value="<%=category.getNo() %>"><%=category.getName() %></option>
+				<option value="<%=category.getNo() %>"><%=category.getName() %></option>
 <% } %>
 				
 				</select>					
