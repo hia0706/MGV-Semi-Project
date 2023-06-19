@@ -1,3 +1,4 @@
+<%@page import="dto.Pagination1"%>
 <%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="dto.TBoardDto"%>
 <%@page import="com.google.gson.Gson"%>
@@ -16,10 +17,7 @@
 	TheaterBoardDao theaterBoardDao = TheaterBoardDao.getInstance();
 	int totalRows = theaterBoardDao.getTotalRowsByTheater(theaterNo);
 	
-	Pagination pagination = new Pagination(pageNo, totalRows);
-	pagination.setbeginPage(pagination.getBeginPage());
-	pagination.setendPage(pagination.getEndPage());
-	pagination.setPageNo(pageNo);
+	Pagination1 pagination = new Pagination1(pageNo, totalRows);
 	
 	// 데이터 조회하기
 	List<TheaterBoard> theaterBoards = theaterBoardDao.getTheaterBoardByTheaterNo(theaterNo, pagination.getBegin(), pagination.getEnd());
@@ -36,4 +34,5 @@
 	
 	// 텍스트를 응답으로 보내기
 	out.write(text);
+	System.out.println(text);
 %>
