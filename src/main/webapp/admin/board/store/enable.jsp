@@ -1,3 +1,4 @@
+<%@page import="dao.ReportDao"%>
 <%@page import="vo.StoreBoard"%>
 <%@page import="dao.StoreBoardDao"%>
 <%@page import="vo.Member"%>
@@ -28,6 +29,12 @@
 	// 조회된 게시물 번호로 게시물을 조회한다
 	StoreBoardDao storeBoardDao = StoreBoardDao.getInstance();
 	StoreBoard storeBoard = storeBoardDao.getAllStoreBoardsByNo(boardNo);
+	
+	// 신고여부가 Y인 게시물은 삭제 복구시 해당 게시글의 신고정보가 삭제된다.
+	ReportDao reportDao = ReportDao.getInstance();
+	if("Y".equals(storeBoard.getReport())){
+		reportDao.deleteSboardReport(boardNo);
+	}
 	
 	// 조회된 게시물의 삭제 정보를 "N" 로 변경한뒤 DB에 저장한다. + url 재요청
 	storeBoard.setReport("N");

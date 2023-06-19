@@ -134,7 +134,7 @@
 
 				
 <%-- 지역/극장을 선택하는 select --%>			
-				<select id="cat" title="품목 선택" class="selectpicker" name="catNo" onchange="refreshProduct();">
+				<select id="cat" title="품목 선택" class="form-select selectpicker ml07 form-control mb-3" style="width: 150px; float:left; " name="catNo" onchange="refreshProduct();">
 					<option value= 0 selected disabled>품목 선택</option>
 												
 <%
@@ -147,7 +147,7 @@
 						
 					</select>
 
-					<select id="product" title="상품 선택" class="selectpicker ml07" name="productNo"  onchange="refreshBo();">
+					<select id="product" title="상품 선택" class="form-select selectpicker ml07 form-control mb-3" style="width: 150px; float:left; position: relative; left:5px; " name="productNo"  onchange="refreshBo();">
 						<option value= 0 selected disabled>상품 선택</option>
 						
 					</select>
@@ -195,16 +195,19 @@
 				</tbody>
 			</table>
 			
+<%
+	if(totalRows > 0){
+%>
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li class="page-item <%=pageNo <= 1 ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
+						<a href="reportlist.jsp?page=<%=pageNo - 1 %>" class="page-link">이전</a>
 					</li>
 <%
 	for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 %>				
 					<li class="page-item <%=pageNo == num ? "active" : "" %>">
-						<a href="list.jsp?page=<%=num %>" class="page-link"><%=num %></a>
+						<a href="reportlist.jsp?page=<%=num %>" class="page-link"><%=num %></a>
 					</li>
 
 <%
@@ -212,10 +215,13 @@
 %>
 					
 					<li class="page-item <%=pageNo >= pagination.getTotalPages() ? "disabled" : ""%>">
-						<a href="list.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
+						<a href="reportlist.jsp?page=<%=pageNo + 1 %>" class="page-link">다음</a>
 					</li>
 				</ul>
 			</nav>
+<%
+	}
+%>
 
 				 </div>
 			 </div>
@@ -298,28 +304,32 @@
 				
 				document.querySelector("#table-SBoard tbody").innerHTML = htmlContents;
 			
-				let paginationHtmlContent = `<nav>   
-					<ul class="pagination justify-content-center">
-					<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
-						<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
-					</li>`;
-			
-				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+				if(pagination.totalRows > 0){
+					paginationHtmlContent = `<nav>   
+						<ul class="pagination justify-content-center">
+						<li class="page-item \${pagination.pageNo <= 1 ?  'disabled' : ''}">
+							<a href="list.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.pageNo -1})" class="page-link">이전</a>
+						</li>`;
+				
+					for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
+						
+						paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
+													<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
+												  </li>`;
+
+					}
 					
-					paginationHtmlContent += `<li class="page-item \${pagination.pageNo == num ? 'active' : ''}">
-												<a href="list.jsp?page=\${num}" onclick="goPage(event, \${num})" class="page-link">\${num}</a>
-											  </li>`;
-
+					paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+						<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+					      </li>
+						</ul>
+						</nav>`
+					
+					
+					document.querySelector(".pagination").innerHTML = paginationHtmlContent;
+					} else {
+					document.querySelector(".pagination").innerHTML = "";
 				}
-				
-				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
-					<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-					  </li>
-					</ul>
-				</nav>`
-				
-				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
-
 			}	
 		};
 		xhr.open("GET", "deleteboard.jsp?no=" + productNo + "&page=" + pageNo);

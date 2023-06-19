@@ -206,7 +206,7 @@
 					htmlContents += `
 						<tr>
 							<td>\${item.no}</td>
-							<td>\${item.location.name}</td>
+							<td>\${item.theater.name}</td>
 							<td><a class="text-black text-decoration-none" href="detail.jsp?no=\${item.no}">\${item.title}</a></td>
 							<td>\${item.createDate}</td>
 						</tr>
