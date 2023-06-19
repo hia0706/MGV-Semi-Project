@@ -1,5 +1,5 @@
 @charset "UTF-8";
-body {
+	body {
     overflow: auto;
     overflow-y: scroll;
     letter-spacing: 0;
@@ -12,11 +12,12 @@ body {
 	.theater-list ul li {
     position: relative;
     float: left;
-    width: 25%;
+    width: 20%;
     line-height: 26px;
     text-align: left;
     padding-left: 40px;
 	}
+	
     .bi-heart-fill{
         font-size: 22px;
         line-height: 22px;

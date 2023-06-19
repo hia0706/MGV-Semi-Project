@@ -33,14 +33,20 @@
 					<tr>
 						<th class="table-dark" style="width: 15%;">지역</th>
 						<td style="width: 35%;">서울</td>
-						<th class="table-dark" style="width: 15%;">일반주소</th>
-						<td style="width: 35%;">일반주소</td>
+						<th class="table-dark" style="width: 15%;">연락처</th>
+						<td style="width: 35%;">02-111-1111</td>
 					</tr>
 					<tr>
-						<th class="table-dark" style="width: 15%;">도로명주소</th>
-						<td style="width: 35%;">도로명주소</td>
-						<th class="table-dark" style="width: 15%;">극장 연락처</th>
-						<td style="width: 35%;">02-111-1111</td>
+						<th class="table-dark" style="width: 15%;">주소</th>
+						<td colspan="3" style="width: 35%;">주소</td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">주차정보</th>
+						<td colspan="3" style="width: 35%;">주차정보</td>
+					</tr>
+					<tr>
+						<th class="table-dark" style="width: 15%;">주차요금</th>
+						<td colspan="3" style="width: 35%;">주차요금</td>
 					</tr>
 				</tbody>
 			</table>

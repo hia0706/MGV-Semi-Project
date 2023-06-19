@@ -39,6 +39,18 @@ public class ManagerTheaterDao {
 															theater.getLocation().getNo(),
 															theater.getName(),
 															theater.getAddress(),
-															theater.getTel());
+															theater.getTel(),
+															theater.getParkingInfo(),
+															theater.getParkingFee() );
+		
+	}
+	public void updateTheater(Theater theater) {
+		DaoHelper.update("managerTheaterDao.updateTheater", theater.getName(),
+															theater.getAddress(),
+															theater.getTel(),
+															theater.getParkingInfo(),
+															theater.getParkingFee(), 
+															theater.getNo());
+		
 	}
 }
