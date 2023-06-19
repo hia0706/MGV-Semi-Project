@@ -309,12 +309,12 @@
 
 				}
 				
-				paginationHtmlContent += `<li class="page-item">
-				<a class="page-link \${pagination.pageNo >= pagination.TotalPages ? 'disabled' : ''}" 
-					"list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
-			</li>
-			</ul>
-			</nav>`
+				paginationHtmlContent += `<li class="page-item \${pagination.pageNo >= pagination.totalRows ? 'disabled' : ''}">
+					<a href="list.jsp?page=\${pagination.pageNo + 1}" onclick="goPage(event, \${pagination.pageNo + 1})" class="page-link">다음</a>
+				      </li>
+					</ul>
+					</nav>
+`
 				
 				
 				document.querySelector(".pagination").innerHTML = paginationHtmlContent;
