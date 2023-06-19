@@ -201,7 +201,7 @@ window.onload = function() { // window.addEventListener('load', (event) => {와 
 };
 </script>		
 		<div class="theater_detail ">
-			<img alt="<%=theater.getName() %>" src="../images/theater/theater<%=theaterNo %>.jpg">
+			<img alt="<%=theater.getName() %>" src="../images/theater/theater1.jpg">
 			<div>
 				<ul class="nav nav-tabs nav-fill" style="width: 980px">
 				  <li class="nav-item ">
