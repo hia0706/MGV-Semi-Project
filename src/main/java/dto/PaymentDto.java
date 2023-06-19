@@ -8,7 +8,7 @@ public class PaymentDto {
 	
 	private int totalRows;
 	private List<Payment> payments;
-	private Pagination pagination;
+	private Pagination1 pagination;
 	
 	public PaymentDto() {}
 
@@ -28,11 +28,11 @@ public class PaymentDto {
 		this.payments = payments;
 	}
 
-	public Pagination getPagination() {
+	public Pagination1 getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(Pagination1 pagination) {
 		this.pagination = pagination;
 	}
 	
