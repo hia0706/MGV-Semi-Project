@@ -62,7 +62,10 @@
  JsonObject jsonObject =(JsonObject) obj;
  String searchWord = request.getParameter("searchWord");
  Trie trie= new Trie();
+ JsonArray jsonArray=null;
+ if (searchWord!=null){
  String x= trie.getJamo(searchWord);
- JsonArray jsonArray = (JsonArray) jsonObject.get(x);
+jsonArray = (JsonArray) jsonObject.get(x);
+ }
  %>
 <%=jsonArray %>	
