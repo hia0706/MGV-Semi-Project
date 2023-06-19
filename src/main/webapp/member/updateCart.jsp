@@ -1,3 +1,7 @@
+<%@page import="vo.Product"%>
+<%@page import="vo.Member"%>
+<%@page import="vo.Payment"%>
+<%@page import="dao.PaymentDao"%>
 <%@page import="dao.CartDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%
@@ -6,6 +10,6 @@
 	CartDao cartDao = CartDao.getInstance();
 	cartDao.updateCart(loginId);
 	
-	response.sendRedirect("../home.jsp");	
+	response.sendRedirect("../member/buy/paylist.jsp");	
 	
 %>
