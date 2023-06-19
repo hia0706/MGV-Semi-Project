@@ -25,7 +25,8 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 <title></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="megabox.min.css">
+
+	<link rel="stylesheet" href="/mgv/resources/css/megabox.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">

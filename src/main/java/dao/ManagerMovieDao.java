@@ -32,7 +32,26 @@ public class ManagerMovieDao {
 			movie.setReleaseDate(rs.getDate("movie_release_date"));
 			movie.setUpdateDate(rs.getDate("movie_update_date"));
 			return movie;
-		});
+		},10);
+	}
+	public List<Movie> getMovieChart(int chartEnd){
+		return DaoHelper.selectList("managermovieDao.getMovieChart", rs -> {
+			Movie movie = new Movie();
+			movie.setNo(rs.getInt("movie_no"));
+			movie.setRank(rs.getInt("movie_rank"));
+			movie.setTitle(rs.getString("movie_title"));
+			movie.setGenre(rs.getString("movie_genre"));
+			movie.setDirector(rs.getString("movie_director"));
+			movie.setCast(rs.getString("movie_cast"));
+			movie.setDescription(rs.getString("movie_description"));
+			movie.setIsPlaying(rs.getString("movie_isplaying"));
+			movie.setAudiCnt(rs.getInt("movie_audicnt"));
+			movie.setPosterURL(rs.getString("movie_posterurl"));
+			movie.setRankOldAndNew(rs.getString("movie_rankoldandnew"));
+			movie.setReleaseDate(rs.getDate("movie_release_date"));
+			movie.setUpdateDate(rs.getDate("movie_update_date"));
+			return movie;
+		},chartEnd);
 	}
 	
 	public List<Movie> getMovies() {

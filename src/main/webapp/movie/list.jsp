@@ -18,9 +18,7 @@
 <body>
 <jsp:include page="../common/nav.jsp" />
 
-<c:set var="managerMovieDao" value="<%= ManagerMovieDao.getInstance() %>" />
-<c:set var="movies" value="${managerMovieDao.getMovieChart()}" />
-
+<c:set var="movies" value="${ManagerMovieDao.getInstance().getMovieChart()}" />
 <div class="container">
 	<h1 style="padding: 5px 0px 15px;
     		   margin-bottom: 32px;
