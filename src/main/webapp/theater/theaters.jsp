@@ -213,7 +213,6 @@
 	function insertFTList() {
 		let arr = JSON.stringify(curList);
 		let xhr = new XMLHttpRequest();
-		console.log(arr);
 		xhr.onreadystatechange = function () {
 			if(xhr.readyState == 4){
 				window.location.reload();				

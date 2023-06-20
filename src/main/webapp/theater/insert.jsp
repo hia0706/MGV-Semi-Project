@@ -22,7 +22,6 @@
 
 	// 클라이언트에서 보낸 문자열 출력
 	String returnMessage = br.readLine();		
-	System.out.println(returnMessage);
 	
 	  // GSON 라이브러리로 읽기
     Gson gson = new Gson();
