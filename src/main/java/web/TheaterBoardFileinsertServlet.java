@@ -34,6 +34,7 @@ import vo.TheaterBoard;
  *  	maxRuquestSize - 요청시의 최대 크기 지정
  *  	location - 파일 업로드시에 임시저장 디렉토리 지정
  */
+
 @MultipartConfig(
 		fileSizeThreshold =  1024*1024*10,
 		maxFileSize = 1024*1024*50,
