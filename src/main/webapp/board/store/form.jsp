@@ -83,7 +83,7 @@
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">품목</label>
-					<select class="form-select" name="catNo" id="cat" onchange="refreshProduct();">
+					<select class="form-select required" name="catNo" id="cat" onchange="refreshProduct();" required="required">
 						<option value= 0 selected disabled>품목 선택</option>
 <%
 	for (ProductCategory category : categories){
@@ -97,7 +97,7 @@
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">상품</label>
-					<select class="form-select" name="productNo" id="product">
+					<select class="form-select required" name="productNo" id="product" required="required">
 						<option value= 0 selected disabled>상품 선택</option>
 					</select><br>
 				</div>

@@ -88,7 +88,7 @@
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label" >영화제목</label>
-								<select class="form-select" name="movieNo" id="MovieNo" >
+								<select class="form-select required" name="movieNo" id="MovieNo" required="required">
 									<option value= 0 selected disabled>제목 선택</option>
 <%
 	for (Movie movie : movies){
