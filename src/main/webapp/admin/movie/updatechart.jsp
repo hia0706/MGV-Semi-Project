@@ -95,10 +95,8 @@ class Trie{
     	}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json=gson.toJson(map);
-		
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter("C:/Users/Joon/Documents/MGV/src/main/webapp/admin/movie/trie.json"));
-			bw.write("trie = ");
 			bw.write(json);
 			bw.flush();
 			bw.close();
@@ -158,7 +156,7 @@ class Trie{
 		managerMovieDao.initChart(movieNo);
 	}
 	
-	movies= service.getMovies();
+	movies= managerMovieDao.getMovies();
 	Trie trie=new Trie();
 	trie.getTrie(movies);
 	// 재요청URL 응답

@@ -11,12 +11,19 @@
 <%
       String q = request.getParameter("q");
 	
-
 	ManagerMovieDao dao=ManagerMovieDao.getInstance();
 	Movie movie=dao.getMovieByTitle(q);
+	
+	String json="";
+	if (movie!=null){
+	
 	movie.setPosterURL(movie.getMainPoster());
+
+	}else{
+		movie=new Movie();
+		movie.setNo(0);
+	}
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      String json =gson.toJson(movie);
-  
+    json =gson.toJson(movie);
 %>
 <%= json %>

@@ -1,3 +1,4 @@
+<%@page import="util.DateUtils"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="dao.TheaterDao"%>
@@ -15,23 +16,28 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <%
-      int movieNo = Integer.parseInt(request.getParameter("qNo"));
-      String scheduleDate = request.getParameter("qDate");
-	
-	
-	ScheduleDao dao=ScheduleDao.getInstance();
-	List<Schedule> schedules = dao.getSchedules(scheduleDate, movieNo);
-	
-	List<String> list = new ArrayList<>();
-	for (Schedule schedule : schedules){
-	String s=schedule.getTheaterNo()+""+schedule.getTimeNo();
-	list.add(s);
-	}
-	
-	
-	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  	String json=gson.toJson(list);
+
+String[] schedules = request.getParameterValues("q[]");
+int movieNo= Integer.parseInt(request.getParameter("mNo"));
+String date=request.getParameter("date");
+ScheduleDao sDao= ScheduleDao.getInstance();
+sDao.clearDailySchedules(date, movieNo);
+
+
+
+for (String s : schedules){
+	Schedule schedule= new Schedule();
+	int tNo=(int)s.charAt(1)-48;
+	int timeNo=(int)s.charAt(2)-48;
+	schedule.setKey(date+"&"+movieNo+"&"+tNo+"&"+timeNo);
+	schedule.setMovieNo(movieNo);
+	schedule.setTimeNo(timeNo);
+	schedule.setTheaterNo(tNo);
+	schedule.setOpenDate(DateUtils.toDate(date));
+	sDao.insertSchedule(schedule);
+}
+
+
 %>
-<%= json %>
+

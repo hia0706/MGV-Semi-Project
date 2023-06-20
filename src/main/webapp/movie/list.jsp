@@ -31,7 +31,7 @@
 		<c:forEach var="movie" items="${movies}">
 			<div style='display: inline-block;margin-right:100px;'>
 				<p style="background:#fb4357; color: white; font-weight:bold; text-align: center">순위: ${movie.rank}</p>
-				<p><img src="${movie.getMainPoster()}" style='height:260px;'></p>
+				<p><a href="detail.jsp?no=${movie.no }"><img src="${movie.getMainPoster()}" style='height:260px;'></a></p>
 				<p>
 					<strong>
 		                <c:choose>
@@ -39,7 +39,7 @@
 		                        ${fn:substring(movie.title, 0, 10)}...
 		                    </c:when>
 		                    <c:otherwise>
-		                        ${movie.title}
+		                       <a href="detail.jsp?no=${movie.no }" class="text-black text-decoration-none"> ${movie.title}</a>
 		                    </c:otherwise>
 		                </c:choose>
 					</strong>

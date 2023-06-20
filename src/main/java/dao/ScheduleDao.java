@@ -23,40 +23,23 @@ public class ScheduleDao {
 			schedule.setKey(rs.getString("schedule_key"));
 			schedule.setMovieNo(rs.getInt("movie_no"));
 			schedule.setTheaterNo(rs.getInt("theater_no"));
-			schedule.setScheduleDate(rs.getDate("schedule_open_date"));
+			schedule.setOpenDate(rs.getDate("schedule_open_date"));
 			schedule.setTimeNo(rs.getInt("schedule_time_no"));
 			return schedule;
 		},inputDate,movieNo);
 	
 		
 	}
-	public List<Schedule> getSchedulesByDate(Date inputDate){
-		String date=DateUtils.toText(inputDate);
-		return DaoHelper.selectList("scheduleDao.getSchedulesByDate",rs -> {
-			Schedule schedule = new Schedule();
-			schedule.setMovieNo(rs.getInt("movie_no"));
-			schedule.setTheaterNo(rs.getInt("theater_no"));
-			schedule.setScheduleDate(rs.getDate("schedule_open_date"));
-			schedule.setTimeNo(rs.getInt("schedule_time_no"));
-			
-			return schedule;
-		}, date);
+	public void clearDailySchedules(String inputDate, int movieNo) {
+		DaoHelper.update("scheduleDao.clearDailySchedules", inputDate, movieNo);
+	}
+	public void insertSchedule(Schedule schedule) {
+		DaoHelper.update("scheduleDao.insertSchedule", schedule.getKey(),
+														schedule.getOpenDate(),
+														schedule.getTimeNo(),
+														schedule.getMovieNo(),
+														schedule.getTheaterNo());		
 	}
 	
-	public HashMap<Integer,List<Schedule>> getDailySchedules(String inputDate, int movieNo,HashSet<Integer> theaterNos){
-		HashMap<Integer,List<Schedule>> schedules= new HashMap<>();
-		for (int theaterNo : theaterNos) {
-			schedules.put(theaterNo, DaoHelper.selectList("scheduleDao.getDailySchedules",rs -> {
-				Schedule schedule = new Schedule();
-				schedule.setKey(rs.getString("schedule_key"));
-				schedule.setMovieNo(rs.getInt("movie_no"));
-				schedule.setTheaterNo(rs.getInt("theater_no"));
-				schedule.setScheduleDate(rs.getDate("schedule_open_date"));
-				schedule.setTimeNo(rs.getInt("schedule_time_no"));
-				
-				return schedule;
-			}, inputDate,movieNo,theaterNo));
-		}
-		return schedules;
-	}
+	
 }

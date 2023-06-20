@@ -8,7 +8,7 @@ public class Schedule {
 	private int movieNo;
 	private int theaterNo;
 	private int timeNo;
-	private Date scheduleDate;
+	private Date openDate;
 	public String getKey() {
 		return key;
 	}
@@ -33,10 +33,10 @@ public class Schedule {
 	public void setTimeNo(int timeNo) {
 		this.timeNo = timeNo;
 	}
-	public Date getScheduleDate() {
-		return scheduleDate;
+	public Date getOpenDate() {
+		return openDate;
 	}
-	public void setScheduleDate(Date scheduleDate) {
-		this.scheduleDate = scheduleDate;
+	public void setOpenDate(Date openDate) {
+		this.openDate = openDate;
 	}
 }
