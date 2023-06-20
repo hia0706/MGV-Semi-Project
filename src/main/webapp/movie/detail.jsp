@@ -37,7 +37,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 </head>
 <body>
 
-	<jsp:include page="../nav.jsp">
+	<jsp:include page="../common/nav.jsp">
 		<jsp:param name="menu" value="영화" />
 	</jsp:include>
 	<div class="row mb-3">
@@ -55,7 +55,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 			<div class="bg-pattern"></div>
 			<div class="bg-mask"></div>
 			<div class="movie-detail-cont">
-				<p class="d-day default" ><%="Y".equals(movie.getIsPlaying()) ? "상영중" : "상영대기"%></p>
+				<p class="d-day default" ><%="Y".equals(movie.getIsPlaying()) ? "예매 가능" : "예매 불가"%></p>
 				<p class="title"><%=movie.getTitle()%></p>
 				<div class="info">
 					<div class="rate">
@@ -81,7 +81,7 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 					</div>
 				</div>
 				<div class="reserve screen-type">
-						<a href="schedule.jsp?no=<%=movie.getNo() %>&title=<%=movie.getTitle() %>" class="btn reserve">스케쥴 관리</a>
+						<a class="btn reserve" onclick="fn1()">예매 (미구현)</a>
 				</div>
 			</div>
 		</div>
@@ -126,4 +126,11 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript">
+function fn1(){
+	alert("미구현입니다.")
+}
+</script>
+
 </html>
