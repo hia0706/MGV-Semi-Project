@@ -26,7 +26,7 @@
 	
 	List<String> list = new ArrayList<>();
 	for (Schedule schedule : schedules){
-	String s=schedule.getTheaterNo()+""+schedule.getTimeNo();
+	String s="-"+schedule.getTheaterNo()+"-"+schedule.getTimeNo();
 	list.add(s);
 	}
 	
