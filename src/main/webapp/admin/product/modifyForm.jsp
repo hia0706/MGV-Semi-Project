@@ -29,6 +29,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="checkProduct.js"></script>
 </head>
 <body>
 <jsp:include page="../nav.jsp">
@@ -60,31 +61,31 @@
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">상품이름</label>
-					<input type="text" class="form-control" name="name" value="<%=product.getName() %>"/>
+					<input id="product-name" type="text" class="form-control" name="name" value="<%=product.getName() %>"/>
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">상품가격</label>
-					<input type="text" class="form-control" name="price" value="<%=product.getPrice() %>"/>
+					<input id="product-price" type="text" class="form-control" name="price" value="<%=product.getPrice() %>"/>
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">재고수량</label>
-					<input type="text" class="form-control" name="stock" value="<%=product.getStock() %>"/>
+					<input id="product-stock" type="text" class="form-control" name="stock" value="<%=product.getStock()%>"/>
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">판매여부</label>
-					<input type="text" class="form-control" name="soldOut" value="<%=product.getSoldOut() %>"/>
+					<input id="product-soldout" type="text" class="form-control" name="soldOut" value="<%=product.getSoldOut() %>"/>
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">상품 구성</label>
-					<input type="text" class="form-control" name="soldOut" value="<%=product.getComposition() %>"/>
+					<input id="product-composition" type="text" class="form-control" name="composition" value="<%=product.getComposition() %>"/>
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label">상품 설명</label>
-					<textarea class="form-control" rows="5" name="description"><%=product.getDescription() %></textarea>
+					<textarea id="product-description" class="form-control" rows="5" name="description"><%=product.getDescription() == null ? "내용없음" : product.getDescription() %></textarea>
 				</div>
 				<div class="text-end">
 					<a href="detail.jsp?no=<%=product.getNo() %>" type="reset" class="btn btn-secondary btn-sm">취소</a>
-					<button type="submit" class="btn btn-primary btn-sm">수정</button>
+					<button type="submit" class="btn btn-primary btn-sm" onclick="return check()">수정</button>
 				</div>
 			</form>
 		</div>
