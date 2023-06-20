@@ -13,6 +13,7 @@ public class Oneonone {
 	private Member member;
 	private Location location;
 	private Theater theater;
+	private String fileName;
 	
 	public Oneonone () {}
 	
@@ -90,6 +91,22 @@ public class Oneonone {
 
 	public void setTheater(Theater theater) {
 		this.theater = theater;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	public String getOriginalFilename() {
+		if (fileName == null) {
+			return null;
+		}
+	
+		return fileName.substring(13); 
 	}
 	
 }
