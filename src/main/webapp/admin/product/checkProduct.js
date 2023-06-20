@@ -7,7 +7,6 @@ function check() {
 	let stock = document.getElementById("product-stock");
 	let soldout = document.getElementById("product-soldout");
 	let composition = document.getElementById("product-composition");
-	let description = document.getElementById("product-description");
 	
 	if (name.value === '') {
 		alert('상품의 이름을 입력하세요.');
@@ -27,10 +26,11 @@ function check() {
 		return false;
 	}
 	
-	if (soldout.value === '') {
-		alert('상품의 판매여부를 넣어주세요');
-		soldout.focus();
-		return false;
+	if (soldout.value.search("Y") && soldout.value.search("N") || soldout.value.length > 1) {
+  
+      alert("'Y' 또는 'N'으로 입력하세요.");
+      soldout.focus();
+      return false;
 	}
 	
 	if (composition.value == '') {

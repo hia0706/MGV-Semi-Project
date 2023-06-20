@@ -23,7 +23,7 @@
 <jsp:include page="../nav.jsp">
    <jsp:param value="menu" name="영화"/>
 </jsp:include>
-<c:set var="managerMovieDao" value="<%= ManagerMovieDao.getInstance() %>" />
+<c:set var="managerMovieDao" value="${ManagerMovieDao.getInstance()}" />
 <c:set var="movies" value="${managerMovieDao.getMovies()}" />
 <div class="container">
 	<div class="row mb-3">
@@ -61,8 +61,8 @@
 			</table>
 			
 			<div class="text-end">
-					<a href="dbdownload.jsp" class="btn btn-primary btn-sm">영화 db 다운로드</a>
-					<a href="dbupload.jsp" class="btn btn-primary btn-sm">영화 db 업로드</a>
+					<a href="dbdownload.jsp" class="btn btn-success btn-sm">영화 db 다운로드</a>
+					<a href="dbupload.jsp" class="btn btn-light btn-sm">영화 db 업로드</a>
 					<a href="updatechart.jsp" class="btn btn-primary btn-sm">영화차트 업데이트</a>
 			</div>
 		</div>

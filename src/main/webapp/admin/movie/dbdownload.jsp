@@ -17,8 +17,8 @@
 <%
 
 JsonParser parser = new JsonParser();
-String jsonFilePath = "C:/Workspace/movie-open-api/moviedb.json";
-Object obj = parser.parse(new BufferedReader(new FileReader(jsonFilePath)));
+String dbPath=System.getenv("PROJECT_HOME")+"\\src\\main\\webapp\\admin\\movie\\moviedb.json";
+Object obj = parser.parse(new BufferedReader(new FileReader(dbPath)));
 JsonArray aj= (JsonArray) obj;
 Gson gson= new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").setPrettyPrinting().create();
 
@@ -32,15 +32,11 @@ HashSet<Integer> movieNos= 	managerMovieDao.getMovieNos();
 for (Movie movie: movies){
 	if (movieNos.contains(movie.getNo())){
 		managerMovieDao.updateMovie(movie);
-		movieNos.remove(movie.getNo());
 	}else {
 		managerMovieDao.insertMovie(movie);
 	}
 }
 
-for (int movieNo : movieNos){
-	managerMovieDao.initChart(movieNo);
-}
 
 
 

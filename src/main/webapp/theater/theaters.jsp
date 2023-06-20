@@ -48,6 +48,9 @@
 	<jsp:param name="menu" value="극장"/>
 </jsp:include>
 <script type="text/javascript">
+	function godetail(no) {
+		window.location="detail.jsp?no="+no;
+	}
 	function insert() {
 		window.open("insert.jsp",
 				"자주가는 극장 등록",
@@ -76,7 +79,7 @@
 				let htmlContents = "";
 				arr.forEach(function(item, index) {
 					htmlContents += `
-						<li class="list-group-item col-md-auto border-0 " style="padding-left: 30px;  padding-right: 1px;">
+						<li class="list-group-item col-md-auto border-0 " style="padding-left: 30px;  padding-right: 1px;" onclick="godetail(\${item.no});">
 						<a href="detail.jsp?no=\${item.no}" style="text-decoration: none;"  class="link-dark">\${item.name}</a>
 						</li>
 					`;
@@ -222,6 +225,7 @@
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.send(arr);
 	}
+	
 </script>
 <div class="container ">
 	<div class="theater_wrap">
