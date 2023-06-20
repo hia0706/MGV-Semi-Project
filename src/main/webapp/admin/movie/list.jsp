@@ -51,7 +51,7 @@
 						<td>${movie.rank}</td>
 						<td><a href="detail.jsp?no=${movie.no}" class="text-black text-decoration-none">${movie.title}</a></td>
 						<td>${movie.getStringFormattedDate()}</td>
-						<td><a href="schedule.jsp?no=${movie.no}" class="btn">관리</a></td>
+						<td><a href="schedule.jsp?no=${movie.no }&title=${movie.title}" class="btn">관리</a></td>
 					</tr>
 					
 </c:forEach>	

@@ -88,10 +88,10 @@
 				</div>
 				<div class="form-group mb-2 w-75">
    					<label class="form-label">주차정보</label>
-   					<input type="text" class="form-control" id="member-repwd" name="parkingInfo" style="width:300px" placeholder="주차정보를 입력해주세요." />
+   					<input type="text" class="form-control" id="member-repwd" name="parkingInfo" style="width:300px" placeholder="주차정보를 입력해주세요." required/>
    				</div><div class="form-group mb-2 w-75">
    					<label class="form-label">주차요금</label><br/>
-   					<textarea name="parkingFee" id="textarea11" style="width:300px" placeholder="주차요금 정보를 입력해주세요." ></textarea>
+   					<textarea name="parkingFee" id="textarea11" style="width:300px" placeholder="주차요금 정보를 입력해주세요." required></textarea>
    				</div>
    				
    				

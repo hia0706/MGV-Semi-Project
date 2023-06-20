@@ -106,9 +106,9 @@
 %>
 					</select>
 				</div>
-				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
+				<div class="form-group mb-2 " style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">상품</label>
-					<select class="form-select" name="productNo" id="product">
+					<select class="form-select required" name="productNo" id="product" required="required">
 <%
 	for (Product product : products){
 %>				
@@ -129,7 +129,7 @@
 		
 				<div class="text-end">
 					<button type="reset" class="btn btn-secondary btn-sm">취소</button>
-					<button type="submit" class="btn btn-primary btn-sm" onclick="null();">수정</button>
+					<button type="submit" class="btn btn-primary btn-sm" >수정</button>
 				</div>
 			</form>
 		</div>
@@ -170,6 +170,8 @@
 		// 3. 서버로 요청 보내기
 		xhr.send(null);
 	}
+	
+
 </script>
 </body>
 </html>
