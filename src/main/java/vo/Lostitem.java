@@ -13,6 +13,7 @@ public class Lostitem {
 	private Member member;
 	private Location location;
 	private Theater theater;
+	private String fileName;
 	
 	public Lostitem () {}
 	
@@ -91,6 +92,21 @@ public class Lostitem {
 	public void setTheater(Theater theater) {
 		this.theater = theater;
 	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	
+	public String getOriginalFilename() {
+		if (fileName == null) {
+			return null;
+		}
+	
+		return fileName.substring(13); 
+	}
 	
 }

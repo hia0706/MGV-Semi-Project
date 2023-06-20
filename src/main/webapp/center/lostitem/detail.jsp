@@ -85,7 +85,11 @@
 			<br>
 			<br>
 			<br>
-			<br>
+			
+<% if (lostitem.getFileName() != null) { %>			
+			<img src="../../images/lostitem/<%=lostitem.getFileName() %>" />
+<% } %>			
+
 		<hr>
 		
 <% for (LostitemComment lostitemComment : lostitemcommentList) { %>   		

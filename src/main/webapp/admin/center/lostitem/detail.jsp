@@ -89,7 +89,11 @@
 			<br>
 			<br>
 			<br>
-			<br>
+			
+<% if (lostitem.getFileName() != null) { %>			
+			<img src="../../../images/lostitem/<%=lostitem.getFileName() %>" />
+<% } %>				
+			
 		<hr>
 			<form  method="post" action="insertComment.jsp">
 				<input type="hidden" name="no" value="<%=lostitem.getNo() %>" />
