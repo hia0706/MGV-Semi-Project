@@ -16,6 +16,21 @@ public class TheaterBoardDao {
 		return instance;
 	}
 	
+	public void updateTheaterBoardFile(TheaterBoard theaterBoard) {
+		DaoHelper.update("theaterBoardDao.updateBoardByNoFile" , theaterBoard.getName(),
+															 theaterBoard.getContent(),
+															 theaterBoard.getGrade(),
+															 theaterBoard.getReadCnt(),
+															 theaterBoard.getCommentCnt(),
+															 theaterBoard.getDeleted(),
+															 theaterBoard.getReport(),
+															 theaterBoard.getLocation().getNo(),
+															 theaterBoard.getTheater().getNo(),
+															 theaterBoard.getFileName(),
+															 theaterBoard.getNo());
+	}
+	
+	
 	public void updateTheaterBoard(TheaterBoard theaterBoard) {
 		DaoHelper.update("theaterBoardDao.updateBoardByNo" , theaterBoard.getName(),
 															 theaterBoard.getContent(),
@@ -28,6 +43,7 @@ public class TheaterBoardDao {
 															 theaterBoard.getTheater().getNo(),
 															 theaterBoard.getNo());
 	}
+	
 	
 	public TheaterBoard getTheaterBoardByNo(int boardNo) {
 		
@@ -44,6 +60,7 @@ public class TheaterBoardDao {
 			theaterBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
 			theaterBoard.setDeleted(rs.getString("board_deleted"));
 			theaterBoard.setReport(rs.getString("board_report"));
+			theaterBoard.setFileName(rs.getString("board_filename"));
 			
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
@@ -105,7 +122,8 @@ public class TheaterBoardDao {
 															   theaterBoard.getGrade(),
 															   theaterBoard.getMember().getId(),
 															   theaterBoard.getTheater().getNo(),
-															   theaterBoard.getLocation().getNo());	
+															   theaterBoard.getLocation().getNo(),
+															   theaterBoard.getFileName());	
 		
 	}
 	

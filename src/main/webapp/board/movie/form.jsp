@@ -42,7 +42,7 @@
 	<div class="row mb-3">
 		<div class="col-12">
 			<p>제목과 내용을 입력하세요</p>		
-			<form class="border bg-light p-3" method="post" action="insert.jsp" >
+			<form class="border bg-light p-3" method="post" action="insert" enctype="multipart/form-data" >
 				<div class="form-group mb-2">
 					<label class="form-label">제목</label>
 					<input type="text" class="form-control" name="name"/>
@@ -99,6 +99,10 @@
 					<textarea rows="10" class="form-control" name="content"></textarea>
 				</div>
 
+				<div class="col-md-12">
+					<label class="form-label">첨부파일</label>
+					<input type="file" class="form-control" name="upfile"/>
+				</div>
 
 		
 				<div class="text-end">

@@ -17,6 +17,7 @@ public class StoreBoard {
 	private Member member;
 	private Product product;
 	private ProductCategory category;
+	private String fileName;
 	
 	public StoreBoard() {}
 
@@ -124,5 +125,20 @@ public class StoreBoard {
 		this.category = category;
 	}
 	
+	public String getFileName() {
+		return fileName;
+	}
+	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	public String getOriginalFilename() {
+		if (fileName == null) {
+			return null;
+		}
+	
+		return fileName.substring(13); 
+	}
 	
 }

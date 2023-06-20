@@ -87,7 +87,7 @@
 		</ul>
 		
 				<div class="border bg-light p-3">
-				<form id="oneonone" class="row g-3" method="post" action="insert.jsp" >
+				<form id="oneonone" class="row g-3" method="post" action="insert" enctype="multipart/form-data">
 	 				
 	 				<div class="col-md-6">
 						<label class="form-label">지역</label>
@@ -129,6 +129,13 @@
 	  				<div class="col-md-12">
 						<label class="form-label">내용</label>
 						<textarea rows="10" class="form-control" name="content"></textarea>
+					</div>
+					<div class="col-md-12">
+						<label class="form-label" for="upfile">첨부파일
+							<br>* JPEG, PNG 형식의 파일만 첨부 가능합니다. 
+							<br>* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.
+						</label>
+						<input type="file" class="form-control" id="upfile" name="upfile" accept="image/png, image/jpeg"/>
 					</div>
 					
 					

@@ -237,6 +237,7 @@ public class StoreBoardDao {
 			storeBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
 			storeBoard.setDeleted(rs.getString("board_deleted"));
 			storeBoard.setReport(rs.getString("board_report"));
+			storeBoard.setFileName(rs.getString("BORAD_FILENAME"));
 			
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
@@ -267,7 +268,8 @@ public class StoreBoardDao {
 															 storeBoard.getGrade(),
 															 storeBoard.getMember().getId(),
 															 storeBoard.getProduct().getNo(),
-															 storeBoard.getCategory().getNo());	
+															 storeBoard.getCategory().getNo(),
+															 storeBoard.getFileName());	
 		
 	}
 	
@@ -282,6 +284,21 @@ public class StoreBoardDao {
 														  storeBoard.getReport(),
 														  storeBoard.getCategory().getNo(),
 														  storeBoard.getProduct().getNo(),
+														  storeBoard.getNo());
+	}
+	
+	public void updatStoreBoardFile(StoreBoard storeBoard) {
+		
+		DaoHelper.update("storeBoardDao.updateBoardByNoFile", storeBoard.getName(),
+														  storeBoard.getContent(),
+														  storeBoard.getGrade(),
+														  storeBoard.getReadCnt(),
+														  storeBoard.getCommentCnt(),
+														  storeBoard.getDeleted(),
+														  storeBoard.getReport(),
+														  storeBoard.getCategory().getNo(),
+														  storeBoard.getProduct().getNo(),
+														  storeBoard.getFileName(),
 														  storeBoard.getNo());
 	}
 	

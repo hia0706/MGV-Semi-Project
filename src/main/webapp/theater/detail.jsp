@@ -1,3 +1,5 @@
+<%@page import="vo.Notice"%>
+<%@page import="dao.NoticeDao"%>
 <%@page import="vo.FavoriteTheater"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.FavoriteTheaterDao"%>
@@ -22,6 +24,11 @@
 	// 자주가는 극장 정보 가져오기
 	FavoriteTheaterDao fTheaterDao = FavoriteTheaterDao.getInstance();
 	FavoriteTheater favoriteTheater = fTheaterDao.getFavoriteTheaterByKey(loginId, theaterNo);
+	
+	// 공지사항 최근 5개 가져오기
+	NoticeDao noticeDao = NoticeDao.getInstance();
+		
+	List<Notice> noticeList = noticeDao.getNoticeByTheaterNo(theaterNo, 1, 5);
 %>
 <!doctype html>
 <html lang="ko">
@@ -32,6 +39,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet" >
+<link rel="stylesheet" href="style.css"> <!-- 극장정보 스타일시트 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
@@ -196,9 +204,18 @@ function parkingInfoAct() {
 	})
 	cont.innerHTML=contents;
 }
+// 전화번호 출력
+function telInfoAct() {
+	let cont = document.querySelector(".tel-info .dot-list");
+	let str="<%=theater.getTel()%>";
+	let contents="";
+	contents += `<li>\${str}</li>`;
+	cont.innerHTML=contents;
+}
 window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
 	parkingFeeAct();
-	parkingInfoAct()
+	parkingInfoAct();
+	telInfoAct();
 };
 </script>		
 		<div class="theater_detail ">
@@ -208,9 +225,9 @@ window.onload = function() { // window.addEventListener('load', (event) => {와 
 				  <li class="nav-item ">
 				    <a id= "tab-menu-01" class="nav-link link-dark tab-head active" href="#tab01" title="극장정보 탭으로 이동" onclick="activeTab('01')">극장정보</a>
 				  </li>
-				<!--   <li class="nav-item">
-				    <a id= "tab-menu-02" class="nav-link link-dark tab-head" href="#tab02" title="상영시간표 탭으로 이동"  onclick="activeTab('02')">상영?시간표?</a>
-				  </li> -->
+				   <li class="nav-item">
+				    <a id= "tab-menu-02" class="nav-link link-dark tab-head" href="#tab02" title="극장 공지사항으로 이동"  onclick="activeTab('02')">공지사항</a>
+				  </li> 
 				  <li class="nav-item">
 				    <a id= "tab-menu-03" class="nav-link link-dark tab-head" href="#tab03" title="관람료 탭으로 이동"  onclick="activeTab('03')">관람료</a>
 				  </li>
@@ -287,27 +304,70 @@ window.onload = function() { // window.addEventListener('load', (event) => {와 
 						<div class="park-info">
 							<span style="color:#503396; font-size:22px">주차안내</span>
 							<ul class="dot-list">
-								<li>인근 주차장을 이용해 주세요.</li>
 							</ul>
 						</div>
 						<div class="fee-info">
 							<span style="color:#503396; font-size:22px">주차요금</span>
 							<ul class="dot-list">
-								<li>영화 관람 시 3시간 무료입니다.</li>
-								<li>3시간 초과 시 AK플라자 무료주차 안내에 따릅니다.</li>
+							</ul>
+						</div>
+						<div class="tel-info">
+							<span style="color:#503396; font-size:22px">전화문의</span>
+							<ul class="dot-list">
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="tab-02" class="tab-cont" style="display: none;">
-				<table style="margin-left: 10px">
-						<tbody>
-							<tr>
-								<th>공지사항2</th>
-							</tr>
-						</tbody>
+				<div class="part-title" style="overflow: hidden;">
+				<h3 class="tit" style="float: left;">극장 공지사항</h3>
+				<a href="../center/notice/list.jsp" class="text-black text-decoration-none"  style="float: right;" title="극장 공지사항 더보기">
+				더보기 </a>
+			</div>
+			<div class="table-wrap">
+				<table class="board-list">
+				<colgroup style="user-select: auto;">
+						<col style="width: 150px; user-select: auto;">
+						<col style="width: 150px; user-select: auto;">
+						<col style="user-select: auto;">
+						<col style="width: 120px; user-select: auto;">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">지역</th>
+						<th scope="col">극장</th>
+						<th scope="col">제목</th>
+						<th scope="col">등록일</th>
+					</tr>
+				</thead>
+				<tbody>
+<% for (Notice notice : noticeList) { %>				
+				
+					<tr>
+						<td><%=notice.getLocation().getName() %></td>
+						<td><%=notice.getTheater().getName() %></td>
+						<td style="text-align:left">
+							<a href="../center/notice/detail.jsp?no=<%=notice.getNo() %>" class="text-black text-decoration-none">
+								<%=notice.getTitle() %>
+							</a>
+						</td>
+						<td><%=notice.getCreateDate() %></td>
+					</tr>
+
+<% } %>	
+<% if(noticeList.isEmpty()) { %>				
+				
+					<tr>
+						<td colspan="4">공지사항이 없습니다.</td>
+						
+					</tr>
+
+<% } %>	
+
+				</tbody>
 				</table>
+			</div>
 			</div>
 			<div id="tab-03" class="tab-cont" style="display: none;">
 				<h3>영화관람료</h3>

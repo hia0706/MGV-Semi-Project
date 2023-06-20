@@ -73,7 +73,25 @@ public class ManagerMovieDao {
 			return movie;
 		});
 	}
-	
+	public List<Movie> getMovies(int a, int b) {
+		return DaoHelper.selectList("managermovieDao.getMoviesByRowNum", rs -> {
+			Movie movie = new Movie();
+			movie.setNo(rs.getInt("movie_no"));
+			movie.setRank(rs.getInt("movie_rank"));
+			movie.setTitle(rs.getString("movie_title"));
+			movie.setGenre(rs.getString("movie_genre"));
+			movie.setDirector(rs.getString("movie_director"));
+			movie.setCast(rs.getString("movie_cast"));
+			movie.setDescription(rs.getString("movie_description"));
+			movie.setIsPlaying(rs.getString("movie_isplaying"));
+			movie.setAudiCnt(rs.getInt("movie_audicnt"));
+			movie.setPosterURL(rs.getString("movie_posterurl"));
+			movie.setRankOldAndNew(rs.getString("movie_rankoldandnew"));
+			movie.setReleaseDate(rs.getDate("movie_release_date"));
+			movie.setUpdateDate(rs.getDate("movie_update_date"));
+			return movie;
+		},a,b);
+	}
 	public Movie getMovieByNo(int movieNo) {
 		return DaoHelper.selectOne("managermovieDao.getMovieByNo", rs -> {
 			Movie movie = new Movie();
@@ -150,5 +168,10 @@ public class ManagerMovieDao {
 	public void initChart(int movieNo) {
 		DaoHelper.update("managermovieDao.initChart", movieNo);
 	}
-	
+	public int getTotalRows() {
+		return DaoHelper.selectOne("managermovieDao.getTotalRows", rs -> {
+			return rs.getInt("cnt");
+		});
+	}
+
 }

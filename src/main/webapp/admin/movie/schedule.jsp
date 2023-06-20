@@ -490,6 +490,8 @@ $("#movieTitle").on("keyup", function() {
     const detail = document.querySelector(".detail")
   	const poster=detail.querySelector("img")
   	poster.src=""
+        searchDate= document.querySelector("#datepicker")
+        searchDate.value=""
  
 });
     
@@ -519,7 +521,8 @@ function get_list(keyword){
              keywords.append($ul)
              
              keywords.style.display = "block" 
-       
+   
+            	 
     }
 })}
 

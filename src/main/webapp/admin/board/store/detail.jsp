@@ -107,7 +107,9 @@
 				<p><strong>별점 : <%=score %></strong></p>
 				<p><%=storeBoard.getContent() %></p>
 			</div>
-			
+<% if (storeBoard.getFileName() != null) { %>			
+			<img src="../../../images/board/store/<%=storeBoard.getFileName() %>" />
+<% } %>	
 			<div class="text-end">
 			
 			<br>
