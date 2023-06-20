@@ -76,7 +76,7 @@
 				let htmlContents = "";
 				arr.forEach(function(item, index) {
 					htmlContents += `
-						<li class="list-group-item col-3 border-0 " >
+						<li class="list-group-item col-md-auto border-0 " style="padding-left: 30px;  padding-right: 1px;">
 						<a href="detail.jsp?no=\${item.no}" style="text-decoration: none;"  class="link-dark">\${item.name}</a>
 						</li>
 					`;
