@@ -106,7 +106,7 @@
 				<th>상품이름</th>
 				<td><%=product.getName() %></td>
 				<th>상품가격</th>
-				<td><strong id="price"><%=product.getPrice() %></strong><strong>원</strong></td>
+				<td><strong id="price"><%=product.getPrice() %></strong>원</td>
 			</tr>
 			<tr>
 				<th>상품구성</th>
@@ -120,7 +120,7 @@
 			</tr>
 			<tr>
 				<th>총 금액</th>
-				<th id="totalPrice"><%=product.getPrice() %></th>
+				<td><strong id="totalPrice"><%=product.getPrice() %></strong>원</td>
 			</tr>
 		</tbody>
 	</table>
