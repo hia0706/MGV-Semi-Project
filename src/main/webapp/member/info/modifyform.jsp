@@ -23,7 +23,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="../common/check.js"></script>
+<script src="/mgv/common/checkUpdate.js"></script>
 <script src="../common/updatePostapi.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
@@ -59,32 +59,47 @@
 			<div class="col-12">
 				<p>회원 정보를 확인하고, 수정하세요.</p>
 			
-				<form class="border bg-light needs-validation was-validated p-3" id="form" method="post" action="modify.jsp"> 
+				<form class="border bg-light needs-validation was-validated p-3" id="form" method="post" action="modify.jsp" novalidate> 
 					<div class="form-group mb-2">
 						<label class="form-label">이름</label>
-						<input type="text" class="form-control" name="name" value="<%=member.getName() %>" required>
+						<input type="text" class="form-control" id="name" name="name" value="<%=member.getName() %>" required>
+						<div class="invalid-feedback">
+							한글만 입력 가능 (공백, 영문 불가능)
+						</div>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">비밀번호</label>
-						<input type="password" class="form-control" name="password" value="<%=member.getPassword() %>" required>
+						<input type="password" class="form-control" id="pwd" name="password" value="<%=member.getPassword() %>" required>
+						<div class="invalid-feedback">
+							6자 이상 대, 소문자, 숫자를 포함해야 합니다.
+						</div>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">생년월일</label><br /> 
-						<input type="date" class="form-control" name="birth" value="<%=member.getBirth() %>" required>
+						<input type="date" class="form-control" id="birth" name="birth" max="2023-06-20" value="<%=member.getBirth() %>" disabled>
 					</div>
 					<div class="form-group mb-2 ">
 						<label class="form-label">휴대폰 번호</label><br /> 
-						<input type="tel" class="form-control" maxlength="13" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="<%=member.getTel() %>" required>
+						<input type="tel" class="form-control" id="tel" maxlength="13" name="tel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="<%=member.getTel() %>" required>
+						<div class="invalid-feedback">
+							010-1234-5678
+						</div>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">이메일</label><br /> 
-						<input type="email" class="form-control" name="email" value="<%=member.getEmail() %>" required>
+						<input type="email" class="form-control" id="email" name="email" value="<%=member.getEmail() %>" required>
+						<div class="invalid-feedback">
+							name@example.com
+						</div>
 					</div>
 					<div class="form-group">
 						<label class="form-label">주소</label>
 						<div class="form-group row">
 							<div class="col-auto">
-								<input type="text" class="form-control" maxlength="5" id="zipcode" name="zipcode" value="<%=member.getZipcode() %>" style="width: 150px">
+								<input type="text" class="form-control" id="zipcode" maxlength="5" id="zipcode" name="zipcode" value="<%=member.getZipcode() %>" style="width: 150px">
+								<div class="invalid-feedback">
+									우편번호를 검색하세요
+								</div>
 							</div>
 							<div class="col-auto">
 								<button type="button" class="btn text-black btn-outline-primary btn-m mb-3" onclick="upPost();">우편번호검색</button>
@@ -93,15 +108,18 @@
 					</div>
 					<div class="form-group row mb-2" >
 						<div class="col-auto">
-							<input type="text" class="form-control" id="address1" name="address1" value="<%=member.getAddress1() %>" readonly="readonly">
+							<input type="text" class="form-control" id="Addr" id="address1" name="address1" value="<%=member.getAddress1() %>" readonly="readonly">
 						</div>
 						<div class="col-auto" >
-							<input type="text" class="form-control" id="address2" name="address2" value="<%=member.getAddress2() %>" required>
+							<input type="text" class="form-control" id="detailAddr" name="address2" value="<%=member.getAddress2() %>" required>
+							<div class="invalid-feedback">
+								상세주소를 입력하세요
+							</div>
 						</div>
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">추천인</label>
-						<input type="text" class="form-control" name="referee" value="<%=member.getReferee() == null ? "" : member.getReferee() %>" disabled />
+						<input type="text" class="form-control" id="referee" name="referee" value="<%=member.getReferee() == null ? "" : member.getReferee() %>" disabled />
 					</div>
 					<div class="form-group mb-2">
 						<label class="form-label">수정일자</label>
@@ -109,7 +127,7 @@
 					</div>
 					<div class="text-end mb-2 w-50">
 						<button type="button" class="btn btn-secondary btn-m" onclick="goBack();">이전</button>								
-						<button type="submit" class="btn btn-primary btn-m">수정</button>
+						<button type="submit" class="btn btn-primary btn-m" onclick="return join()">수정</button>
 					</div>
 				</form>
 			</div>	

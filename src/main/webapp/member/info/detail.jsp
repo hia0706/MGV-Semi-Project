@@ -67,7 +67,9 @@
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 10%;">가입일자</th>
-						<td style="width: 90%;" colspan="3"><%=member.getCreateDate() %></td>
+						<td style="width: 40%;"><%=member.getCreateDate() %></td>
+						<th class="table-dark" style="width: 10%;">수정일자</th>
+						<td style="width: 40%;"><%=member.getUpdateDate() %></td>
 					</tr>
 					<tr>
 						<th class="table-dark" style="width: 10%;">추천인</th>
