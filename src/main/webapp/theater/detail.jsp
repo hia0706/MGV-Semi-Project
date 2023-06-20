@@ -196,9 +196,18 @@ function parkingInfoAct() {
 	})
 	cont.innerHTML=contents;
 }
+// 전화번호 출력
+function telInfoAct() {
+	let cont = document.querySelector(".tel-info .dot-list");
+	let str="<%=theater.getTel()%>";
+	let contents="";
+	contents += `<li>\${str}</li>`;
+	cont.innerHTML=contents;
+}
 window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
 	parkingFeeAct();
-	parkingInfoAct()
+	parkingInfoAct();
+	telInfoAct();
 };
 </script>		
 		<div class="theater_detail ">
@@ -287,14 +296,16 @@ window.onload = function() { // window.addEventListener('load', (event) => {와 
 						<div class="park-info">
 							<span style="color:#503396; font-size:22px">주차안내</span>
 							<ul class="dot-list">
-								<li>인근 주차장을 이용해 주세요.</li>
 							</ul>
 						</div>
 						<div class="fee-info">
 							<span style="color:#503396; font-size:22px">주차요금</span>
 							<ul class="dot-list">
-								<li>영화 관람 시 3시간 무료입니다.</li>
-								<li>3시간 초과 시 AK플라자 무료주차 안내에 따릅니다.</li>
+							</ul>
+						</div>
+						<div class="tel-info">
+							<span style="color:#503396; font-size:22px">전화문의</span>
+							<ul class="dot-list">
 							</ul>
 						</div>
 					</div>
