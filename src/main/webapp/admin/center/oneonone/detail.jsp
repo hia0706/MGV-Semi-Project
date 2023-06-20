@@ -90,7 +90,11 @@
 			<br>
 			<br>
 			<br>
-			<br>
+			
+<% if (oneonone.getFileName() != null) { %>			
+			<img src="../../../images/oneonone/<%=oneonone.getFileName() %>" />
+<% } %>					
+			
 		<hr>
 			<form  method="post" action="insertComment.jsp">
 				<input type="hidden" name="no" value="<%=oneonone.getNo() %>" />

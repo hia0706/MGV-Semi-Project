@@ -94,6 +94,7 @@ public class OneononeDao {
 			oneonone.setDeleted(rs.getString("oneonone_deleted"));
 			oneonone.setCreateDate(rs.getDate("oneonone_create_date"));
 			oneonone.setMember(new Member(rs.getString("member_id")));
+			oneonone.setFileName(rs.getString("ONEONONE_FILENAME"));
 			
 			Theater theater = new Theater();
 			theater.setNo(rs.getInt("theater_no"));
@@ -156,7 +157,8 @@ public class OneononeDao {
 													   oneonone.getMember().getTel(),
 													   oneonone.getMember().getName(),
 													   oneonone.getTheater().getNo(),
-													   oneonone.getLocation().getNo());
+													   oneonone.getLocation().getNo(),
+													   oneonone.getFileName());
 	}
 	
 	public void updateOneonone(Oneonone oneonone) {

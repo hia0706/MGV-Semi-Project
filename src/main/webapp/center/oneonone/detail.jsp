@@ -85,7 +85,11 @@
 			<br>
 			<br>
 			<br>
-			<br>
+			
+<% if (oneonone.getFileName() != null) { %>			
+			<img src="../../images/oneonone/<%=oneonone.getFileName() %>"  />
+<% } %>					
+			
 		<hr>
 		
 <% for (OneononeComment oneononeComment : oneononecommentList) { %>   		
