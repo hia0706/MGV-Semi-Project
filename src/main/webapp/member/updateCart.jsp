@@ -10,6 +10,5 @@
 	CartDao cartDao = CartDao.getInstance();
 	cartDao.updateCart(loginId);
 	
-	response.sendRedirect("../member/buy/paylist.jsp");	
-	
+	response.sendRedirect("../member/buy/paylist.jsp");
 %>
