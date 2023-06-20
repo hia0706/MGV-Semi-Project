@@ -16,6 +16,7 @@ public class MovieBoard {
 	private String report;
 	private Member member;
 	private Movie movie;
+	private String fileName;
 
 	public MovieBoard() {}
 
@@ -115,5 +116,20 @@ public class MovieBoard {
 		this.movie = movie;
 	}
 	
+	public String getFileName() {
+		return fileName;
+	}
+	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	public String getOriginalFilename() {
+		if (fileName == null) {
+			return null;
+		}
+	
+		return fileName.substring(13); 
+	}
 	
 }
