@@ -96,7 +96,7 @@ class Trie{
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json=gson.toJson(map);
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("C:/Users/Joon/Documents/MGV/src/main/webapp/admin/movie/trie.json"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("C:/Workspace/movie-open-api/trie.json"));
 			bw.write(json);
 			bw.flush();
 			bw.close();

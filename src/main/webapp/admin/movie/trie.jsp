@@ -53,11 +53,8 @@
  
  
  <%
- 
- 
- 
  JsonParser parser = new JsonParser();
- String jsonFilePath =  request.getSession().getServletContext().getRealPath("/admin/movie/trie.json");
+ String jsonFilePath = "C:/Workspace/movie-open-api/trie.json";
  Object obj = parser.parse(new FileReader(jsonFilePath));
  JsonObject jsonObject =(JsonObject) obj;
  String searchWord = request.getParameter("searchWord");
