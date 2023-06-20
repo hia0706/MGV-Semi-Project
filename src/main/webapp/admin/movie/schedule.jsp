@@ -18,8 +18,6 @@
 
 
 <%
-
-
 //세션에서 로그인타입 속성획득
 String loginType = (String) session.getAttribute("loginType");
 //로그인타입 관리자아니면 로그인으로 리다이렉트시킴
@@ -27,12 +25,6 @@ if (!"ADMIN".equals(loginType)) {
 	response.sendRedirect("../member/login/login.jsp");
 	return;
 }
-TheaterDao theaterDao = TheaterDao.getInstance();
-List<Theater> theaters = theaterDao.getAllTheaters();
-LocationDao locationDao = LocationDao.getInstance();
-List<Location> locations = locationDao.getLocations();
-HashSet<Integer> theaterNos = new HashSet<>();
-ScheduleDao scheduleDao = ScheduleDao.getInstance();
 %>
 
 <head>
