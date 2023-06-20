@@ -109,6 +109,9 @@
 			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
 				<p><strong>별점 : <%=score %></strong></p>
 				<p><%=movieBoard.getContent() %></p>
+<% if (movieBoard.getFileName() != null) { %>			
+			<img src="../../images/board/movie/<%=movieBoard.getFileName() %>" />
+<% } %>	
 			</div>
 			
 			<div class="text-end">

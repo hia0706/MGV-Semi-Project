@@ -103,6 +103,9 @@
 			<div class="txc-textbox" style="background-color:#EFF8FB; border:#FFFFFF 1px solid; border-radius: 5px; padding: 20px;">
 				<p><strong>별점 : <%=score %></strong></p>
 				<p><%=storeBoard.getContent() %></p>
+<% if (storeBoard.getFileName() != null) { %>			
+			<img src="../../images/board/store/<%=storeBoard.getFileName() %>" />
+<% } %>	
 			</div>
 			
 			<div class="text-end">
