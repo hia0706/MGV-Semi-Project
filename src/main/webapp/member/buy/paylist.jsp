@@ -10,7 +10,7 @@
 <%
 	String loginId = (String) session.getAttribute("loginId");
 	if (loginId == null) {
-		response.sendRedirect("../login/form.jsp?err=req&job=" + URLEncoder.encode("결제내역", "utf-8"));
+		response.sendRedirect("/mgv/meber/login/form.jsp?err=req&job=" + URLEncoder.encode("결제내역", "utf-8"));
 		return;
 	}
 	int pageNo = StringUtils.stringToInt(request.getParameter("page"), 1);

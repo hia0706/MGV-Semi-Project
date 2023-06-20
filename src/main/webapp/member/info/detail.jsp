@@ -10,7 +10,7 @@
 	MemberDao memberDao = MemberDao.getInstance();
 	Member member = memberDao.getMemberById(loginId);
 	if (member == null) {
-		response.sendRedirect("/mgv/member/login/login/form.jsp=req");
+		response.sendRedirect("/mgv/member/login/form.jsp=req");
 		return;
 	}
 	
