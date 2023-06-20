@@ -85,7 +85,7 @@
 		</ul>
 			
 				<div class="border bg-light p-3">
-				<form id="lostitem" class="row g-3" method="post" action="insert.jsp" >
+				<form id="lostitem" class="row g-3" method="post" action="insert" enctype="multipart/form-data">
 	 				
 	 									<div class="col-md-6">
 						<label class="form-label">지역</label>
@@ -128,7 +128,10 @@
 						<label class="form-label">내용</label>
 						<textarea rows="10" class="form-control" name="content"></textarea>
 					</div>
-					
+					<div class="col-md-12">
+						<label class="form-label">첨부파일</label>
+						<input type="file" class="form-control" name="upfile"/>
+					</div>
 					
 				</form>
 			</div>
