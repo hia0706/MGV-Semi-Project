@@ -23,7 +23,7 @@
 <jsp:include page="../nav.jsp">
    <jsp:param value="menu" name="영화"/>
 </jsp:include>
-<c:set var="managerMovieDao" value="<%= ManagerMovieDao.getInstance() %>" />
+<c:set var="managerMovieDao" value="${ManagerMovieDao.getInstance()}" />
 <c:set var="movies" value="${managerMovieDao.getMovies()}" />
 <div class="container">
 	<div class="row mb-3">
