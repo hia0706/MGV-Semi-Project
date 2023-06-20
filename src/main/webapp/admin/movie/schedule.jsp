@@ -24,7 +24,7 @@
 String loginType = (String) session.getAttribute("loginType");
 //로그인타입 관리자아니면 로그인으로 리다이렉트시킴
 if (!"ADMIN".equals(loginType)) {
-	response.sendRedirect("../member/login/login.jsp");
+	response.sendRedirect("/mgv/member/login/form.jsp");
 	return;
 }
 TheaterDao theaterDao = TheaterDao.getInstance();
@@ -36,7 +36,8 @@ ScheduleDao scheduleDao = ScheduleDao.getInstance();
 %>
 
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>영화 스케줄 &#60; 영화 관리</title>
 <style type="text/css">
 .layer {
     display: block;
@@ -157,7 +158,6 @@ table {
     border-bottom: 1px solid #fff;
 }
 </style>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link

@@ -22,7 +22,8 @@ Movie movie = managerMovieDao.getMovieByNo(no);
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>영화 상세정보 &#60; 영화 관리</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
