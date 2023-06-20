@@ -28,8 +28,9 @@ sDao.clearDailySchedules(date, movieNo);
 
 for (String s : schedules){
 	Schedule schedule= new Schedule();
-	int tNo=(int)s.charAt(1)-48;
-	int timeNo=(int)s.charAt(2)-48;
+	String[] ss= s.split("-");
+	int tNo=Integer.parseInt(ss[1]);
+	int timeNo=Integer.parseInt(ss[2]);
 	schedule.setKey(date+"&"+movieNo+"&"+tNo+"&"+timeNo);
 	schedule.setMovieNo(movieNo);
 	schedule.setTimeNo(timeNo);

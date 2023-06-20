@@ -269,13 +269,13 @@ table {
 									<tr class="scheduleList" id="theater+${theater.no}">
 										<td style="width:15%;"><b>${theater.name}</b></td>
 										<td class="scheduleBtn"><input type="button"
-											class="btn btn-danger" name="sc" value="해제" id="a${theater.no}1" /></input></td>
+											class="btn btn-danger" name="sc" value="해제" id="a-${theater.no}-1" /></input></td>
 										<td class="scheduleBtn"><input type="button"
-											class="btn btn-danger" name="sc" value="해제" id="a${theater.no}2" /></input></td>
+											class="btn btn-danger" name="sc" value="해제" id="a-${theater.no}-2" /></input></td>
 										<td class="scheduleBtn"><input type="button"
-											class="btn btn-danger"  name="sc" value="해제" id="a${theater.no}3" /></input></td>
+											class="btn btn-danger"  name="sc" value="해제" id="a-${theater.no}-3" /></input></td>
 										<td class="scheduleBtn"><input type="button"
-											class="btn btn-danger" name="sc" value="해제" id="a${theater.no}4" /></input></td>
+											class="btn btn-danger" name="sc" value="해제" id="a-${theater.no}-4" /></input></td>
 									</tr>
 								</c:forEach>
 							</tr>
