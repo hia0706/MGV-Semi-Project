@@ -131,8 +131,11 @@
 						<textarea rows="10" class="form-control" name="content"></textarea>
 					</div>
 					<div class="col-md-12">
-						<label class="form-label">첨부파일</label>
-						<input type="file" class="form-control" name="upfile"/>
+						<label class="form-label" for="upfile">첨부파일
+							<br>* JPEG, PNG 형식의 파일만 첨부 가능합니다. 
+							<br>* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.
+						</label>
+						<input type="file" class="form-control" id="upfile" name="upfile" accept="image/png, image/jpeg"/>
 					</div>
 					
 					

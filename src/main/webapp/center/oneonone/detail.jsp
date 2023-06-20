@@ -87,7 +87,7 @@
 			<br>
 			
 <% if (oneonone.getFileName() != null) { %>			
-			<img src="../../images/oneonone/<%=oneonone.getFileName() %>" />
+			<img src="../../images/oneonone/<%=oneonone.getFileName() %>"  />
 <% } %>					
 			
 		<hr>
