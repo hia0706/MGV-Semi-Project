@@ -1,3 +1,4 @@
+<%@page import="java.io.BufferedReader"%>
 <%@page import="com.google.gson.JsonArray"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="com.google.gson.JsonParser"%>
@@ -55,7 +56,7 @@
  <%
  JsonParser parser = new JsonParser();
  String jsonFilePath = "C:/Workspace/movie-open-api/trie.json";
- Object obj = parser.parse(new FileReader(jsonFilePath));
+ Object obj = parser.parse(new BufferedReader(new FileReader(jsonFilePath)));
  JsonObject jsonObject =(JsonObject) obj;
  String searchWord = request.getParameter("searchWord");
  Trie trie= new Trie();

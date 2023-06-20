@@ -18,6 +18,7 @@ public class TheaterBoard {
 	private Member member;
 	private Theater theater;
 	private Location location;
+	private String fileName;
 	
 	
 	public TheaterBoard() {}
@@ -101,7 +102,20 @@ public class TheaterBoard {
 		this.location = location;
 	}
 	
+	public String getFileName() {
+		return fileName;
+	}
 	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	
+	public String getOriginalFilename() {
+		if (fileName == null) {
+			return null;
+		}
+	
+		return fileName.substring(13); 
+	}
 }
 

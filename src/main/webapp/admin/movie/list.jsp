@@ -61,6 +61,8 @@
 			</table>
 			
 			<div class="text-end">
+					<a href="dbdownload.jsp" class="btn btn-success btn-sm">영화 db 다운로드</a>
+					<a href="dbupload.jsp" class="btn btn-light btn-sm">영화 db 업로드</a>
 					<a href="updatechart.jsp" class="btn btn-primary btn-sm">영화차트 업데이트</a>
 			</div>
 		</div>
