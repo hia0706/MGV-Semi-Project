@@ -70,6 +70,7 @@ public class MovieBoardFileinsertServlet extends HttpServlet {
 	      Part upfilePart = request.getPart("upfile");
 	      
 	      String filename = null;
+	      System.out.println(filename);
 	      if (!upfilePart.getSubmittedFileName().isEmpty()) {
 		      filename = System.currentTimeMillis() + upfilePart.getSubmittedFileName();  // 이름중복을 피하기 위해서 현재시간을 붙여준다.
 		      
