@@ -356,6 +356,15 @@ window.onload = function() { // window.addEventListener('load', (event) => {와 
 					</tr>
 
 <% } %>	
+<% if(noticeList.isEmpty()) { %>				
+				
+					<tr>
+						<td colspan="4">공지사항이 없습니다.</td>
+						
+					</tr>
+
+<% } %>	
+
 				</tbody>
 				</table>
 			</div>
