@@ -10,6 +10,7 @@
 	int stock = Integer.parseInt(request.getParameter("stock"));
 	String soldOut = request.getParameter("soldOut");
 	String description = request.getParameter("description");
+	String composition = request.getParameter("composition");
 	int catNo = Integer.parseInt(request.getParameter("catNo"));
 	
 	ProductCategory productCategory = new ProductCategory(catNo);
@@ -24,6 +25,7 @@
 	product.setStock(stock);
 	product.setSoldOut(soldOut);
 	product.setDescription(description);
+	product.setComposition(composition);
 	product.setProductCategory(productCategory);
 	
 	// 수정된 정보가 포함된 product객체를 전달해서 데이터 베이스에 반영시키기

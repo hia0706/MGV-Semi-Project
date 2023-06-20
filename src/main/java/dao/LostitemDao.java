@@ -67,6 +67,7 @@ public class LostitemDao {
 			lostitem.setDeleted(rs.getString("lostitem_deleted"));
 			lostitem.setCreateDate(rs.getDate("lostitem_create_date"));
 			lostitem.setMember(new Member(rs.getString("member_id")));
+			lostitem.setFileName(rs.getString("LOSTITEM_FILENAME"));
 			
 			Theater theater = new Theater();
 			theater.setNo(rs.getInt("theater_no"));
@@ -127,7 +128,8 @@ public class LostitemDao {
 				lostitem.getMember().getTel(),
 				lostitem.getMember().getName(),
 				lostitem.getTheater().getNo(),
-				lostitem.getLocation().getNo());
+				lostitem.getLocation().getNo(),
+				lostitem.getFileName());
 	}
 	
 	public void updateLostitem(Lostitem lostitem) {

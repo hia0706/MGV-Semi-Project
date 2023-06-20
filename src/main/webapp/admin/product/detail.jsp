@@ -75,7 +75,7 @@
 					</tr>
 					<tr>
 						<th>상품설명</th>
-						<td colspan="4"><%=product.getDescription() %></td>
+						<td colspan="4"><%=product.getDescription() == null ? "내용없음" : product.getDescription()%></td>
 					</tr>
 				</tbody>
 			</table>
