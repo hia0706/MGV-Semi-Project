@@ -108,7 +108,6 @@ public class MovieBoardDao {
 		
 		DaoHelper.update("movieBoardDao.updateBoardByNo", movieBoard.getName(),
 														  movieBoard.getContent(),
-														  movieBoard.getGrade(),
 														  movieBoard.getReadCnt(),
 														  movieBoard.getCommentCnt(),
 													   	  movieBoard.getDeleted(),
@@ -121,7 +120,6 @@ public class MovieBoardDao {
 		
 		DaoHelper.update("movieBoardDao.updateBoardByNoFile", movieBoard.getName(),
 														  movieBoard.getContent(),
-														  movieBoard.getGrade(),
 														  movieBoard.getReadCnt(),
 														  movieBoard.getCommentCnt(),
 													   	  movieBoard.getDeleted(),
