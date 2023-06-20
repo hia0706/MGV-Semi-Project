@@ -15,7 +15,7 @@ List<Movie> movies=dao.getMovies();
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").setPrettyPrinting().create();
 String json=gson.toJson(movies);
 
-String dbPath=System.getenv("mgv")+"\\src\\main\\webapp\\admin\\movie\\moviedb.json";
+String dbPath=System.getenv("PROJECT_HOME")+"\\src\\main\\webapp\\admin\\movie\\moviedb.json";
 
 try {
 	BufferedWriter bw = new BufferedWriter(new FileWriter(dbPath));
