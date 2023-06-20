@@ -105,7 +105,7 @@
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">극장</label>
-					<select class="form-select" name="theaterNo" id="theaterNo" >
+					<select class="form-select required" name="theaterNo" id="theaterNo" required="required">
 <%
 	for (Theater theater : theaters){
 %>
