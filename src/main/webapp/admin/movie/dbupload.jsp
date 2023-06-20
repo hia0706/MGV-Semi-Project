@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.FileWriter"%>
 <%@page import="java.io.BufferedWriter"%>
@@ -13,8 +14,11 @@ List<Movie> movies=dao.getMovies();
 
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").setPrettyPrinting().create();
 String json=gson.toJson(movies);
+
+String dbPath=System.getenv("mgv")+"\\src\\main\\webapp\\admin\\movie\\moviedb.json";
+
 try {
-	BufferedWriter bw = new BufferedWriter(new FileWriter("C:/Workspace/movie-open-api/moviedb.json"));
+	BufferedWriter bw = new BufferedWriter(new FileWriter(dbPath));
 	bw.write(json);
 	bw.flush();
 	bw.close();
