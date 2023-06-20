@@ -30,7 +30,7 @@
 	<div style="display: flex;flex-wrap: wrap;">
 		<c:forEach var="movie" items="${movies}">
 			<div style='display: inline-block;margin-right:100px;'>
-				<p style="background:#fb4357; color: white; font-weight:bold; text-align: center">순위: ${movie.rank}</p>
+				<p style="background:#432e75; color: white; font-weight:bold; text-align: center">순위: ${movie.rank}</p>
 				<p><a href="detail.jsp?no=${movie.no }"><img src="${movie.getMainPoster()}" style='height:260px;'></a></p>
 				<p>
 					<strong>
