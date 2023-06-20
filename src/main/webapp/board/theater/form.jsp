@@ -79,7 +79,7 @@
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">지역</label>
-					<select class="form-select" name="locationNo" id="locationNo" onchange="refreshTh();">
+					<select class="form-select required" name="locationNo" id="locationNo" onchange="refreshTh();" required="required">
 						<option value="" selected disabled>지역 선택</option>
 <%			
 	for (Location location : locations){
@@ -93,7 +93,7 @@
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">극장</label>
-					<select class="form-select" name="theaterNo" id="theaterNo" >
+					<select class="form-select required" name="theaterNo" id="theaterNo" required="required">
 						<option value="" selected disabled>극장 선택</option>
 
 					</select><br>

@@ -1,9 +1,119 @@
+<%@page import="java.nio.file.Paths"%>
+<%@page import="com.google.gson.GsonBuilder"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.google.gson.JsonArray"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="service.SampleService"%>
 <%@page import="vo.Movie"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.ManagerMovieDao"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@page import="java.io.*"%>
+
+<%
+ class Node {
+    List<String> data;
+    HashMap<Character,Node> childrens;
+   public Node(){
+    	 this.data = new ArrayList<>();
+    	 this.childrens=new HashMap<>();
+    }
+}
+class Trie{    
+   char[] choSet = { 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ',
+    		'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
+  char[] jungSet = { 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ',
+    		'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ',
+    		'ㅣ' };
+  char[] jongSet = {'\0', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ',
+    		'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ',
+    		'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
+    
+    
+    public List<Character> getJamo(String inputWord){
+    	List<Character> jamo=new ArrayList<>();
+    	int l=inputWord.length();
+    	for (int i=0; i<l; i++){
+    		 int uniCode = (int)( inputWord.charAt(i)& 0xFFFF);
+    		
+    		 if (uniCode==32){
+    			 jamo.add(' ');
+    			 continue;
+    		 }
+    	     if (uniCode < 0xAC00 || uniCode > 0xD7A3) { 
+    	        	jamo.add(inputWord.charAt(i));
+    	        	continue; 
+                    } 
+    	     uniCode-=0xAC00; 
+    	     
+    	     
+    	     int jong = uniCode % 28; 
+             int jung = ((uniCode - jong) / 28 ) % 21; 
+             int cho = (((uniCode - jong) / 28 ) - jung ) / 21 ;
+    	     
+             jamo.add(choSet[cho]);
+             jamo.add( (char) (0xAC00+(cho*588)+(jung*28)) );
+             if (jong != 0) { 
+            	 jamo.add( (char) (0xAC00+(cho*588)+(jung*28)+(jong)) );	 
+             }
+    	}
+    	return jamo;
+    }
+    public void getTrie(List<Movie> movies){
+    	Node head=new Node();
+    	String title;
+    	Node currentNode;
+    	HashMap<String, List<String>> map= new HashMap<>();
+    	for (Movie movie : movies){
+    		title=movie.getTitle();
+    		List<Character> jamo=getJamo(title);
+    		currentNode=head;
+    		String key="";
+    		for (char letter : jamo){
+    			key+=letter;
+    			if(!map.containsKey(key)){
+    				List<String> words= new ArrayList<>();
+    				map.put(key,words);
+    			}
+    			map.get(key).add(title);
+    			HashMap<Character,Node> currentChildrens = currentNode.childrens;
+    			Node currentChildren=null;
+    			if (!currentChildrens.containsKey(letter)){
+    				currentChildren=new Node();
+    				currentChildrens.put(letter,currentChildren );
+    			}
+    			currentChildren = currentChildrens.get(letter);
+    			currentChildren.data.add(title);
+    			currentNode=currentChildren;
+    		}
+    		
+    	}
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json=gson.toJson(map);
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("C:/Workspace/movie-open-api/trie.json"));
+			bw.write(json);
+			bw.flush();
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    return;   	
+    }
+   
+    
+    
+}
+ 
+
+
+%>
+
 <%
 /*
 		업무로직 1줄 요약
@@ -46,8 +156,9 @@
 		managerMovieDao.initChart(movieNo);
 	}
 	
-
+	movies= managerMovieDao.getMovies();
+	Trie trie=new Trie();
+	trie.getTrie(movies);
 	// 재요청URL 응답
 	response.sendRedirect("list.jsp");
-
 %>

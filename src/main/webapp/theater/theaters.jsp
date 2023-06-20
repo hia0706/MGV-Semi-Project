@@ -213,7 +213,6 @@
 	function insertFTList() {
 		let arr = JSON.stringify(curList);
 		let xhr = new XMLHttpRequest();
-		console.log(arr);
 		xhr.onreadystatechange = function () {
 			if(xhr.readyState == 4){
 				window.location.reload();				
@@ -254,7 +253,7 @@
 				<button style="border-radius: 10px; margin-left: 10px;" onclick="login()">로그인하기</button>
 <script type="text/javascript">
 	function login() {
-		window.location="../member/login/form.jsp";
+		window.location="/mgv/member/login/form.jsp ";
 	}
 </script>				
 <%
