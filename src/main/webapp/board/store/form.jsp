@@ -19,14 +19,15 @@
 	String loginId = (String) session.getAttribute("loginId");
 
 	if(loginId == null){
-		response.sendRedirect("../../member/login/form.jsp?err=req&job=" + URLEncoder.encode("게시물 등록", "utf-8"));
+		response.sendRedirect("/mgv/member/login/form.jsp?err=req&job=" + URLEncoder.encode("게시물 등록", "utf-8"));
 		return;
 	}
 %>
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>게시판 등록 | 스토어 &#60; 영화 그 이상의 감동. MGV</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +83,7 @@
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">품목</label>
-					<select class="form-select" name="catNo" id="cat" onchange="refreshProduct();">
+					<select class="form-select required" name="catNo" id="cat" onchange="refreshProduct();" required="required">
 						<option value= 0 selected disabled>품목 선택</option>
 <%
 	for (ProductCategory category : categories){
@@ -96,7 +97,7 @@
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">상품</label>
-					<select class="form-select" name="productNo" id="product">
+					<select class="form-select required" name="productNo" id="product" required="required">
 						<option value= 0 selected disabled>상품 선택</option>
 					</select><br>
 				</div>

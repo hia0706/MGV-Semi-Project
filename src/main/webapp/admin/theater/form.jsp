@@ -11,7 +11,8 @@
 %>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>극장 등록 &#60; 극장 관리</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -87,10 +88,10 @@
 				</div>
 				<div class="form-group mb-2 w-75">
    					<label class="form-label">주차정보</label>
-   					<input type="text" class="form-control" id="member-repwd" name="parkingInfo" style="width:300px" placeholder="주차정보를 입력해주세요." />
+   					<input type="text" class="form-control" id="member-repwd" name="parkingInfo" style="width:300px" placeholder="주차정보를 입력해주세요." required/>
    				</div><div class="form-group mb-2 w-75">
    					<label class="form-label">주차요금</label><br/>
-   					<textarea name="parkingFee" id="textarea11" style="width:300px" placeholder="주차요금 정보를 입력해주세요." ></textarea>
+   					<textarea name="parkingFee" id="textarea11" style="width:300px" placeholder="주차요금 정보를 입력해주세요." required></textarea>
    				</div>
    				
    				

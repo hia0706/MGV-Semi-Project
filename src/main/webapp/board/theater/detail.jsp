@@ -46,7 +46,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>게시판 상세 | 극장 &#60; 영화 그 이상의 감동. MGV</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -113,20 +114,20 @@
 			</div>
 			
 			<div class="text-end">
+				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
 <%
 	if (theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 				<a href="modifyform.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-warning btn-sm">수정</a>
+				<a href="delete.jsp?no=<%=theaterBoard.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 <%
 	} else if (loginId != null &&!theaterBoard.getMember().getId().equals(loginId)) {
 %>
-				<button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal">신고</button>
+				<button class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal">신고</button>
 				
 <%
 	}
 %>
-				<a href="list.jsp" class="btn btn-primary btn-sm">목록</a>
 			</div>
 		</div>
 	</div>

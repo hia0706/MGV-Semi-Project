@@ -23,7 +23,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>게시판 등록 | 극장 &#60; 영화 그 이상의 감동. MGV</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -78,7 +79,7 @@
 								
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">지역</label>
-					<select class="form-select" name="locationNo" id="locationNo" onchange="refreshTh();">
+					<select class="form-select required" name="locationNo" id="locationNo" onchange="refreshTh();" required="required">
 						<option value="" selected disabled>지역 선택</option>
 <%			
 	for (Location location : locations){
@@ -92,7 +93,7 @@
 				
 				<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 					<label class="form-label">극장</label>
-					<select class="form-select" name="theaterNo" id="theaterNo" >
+					<select class="form-select required" name="theaterNo" id="theaterNo" required="required">
 						<option value="" selected disabled>극장 선택</option>
 
 					</select><br>

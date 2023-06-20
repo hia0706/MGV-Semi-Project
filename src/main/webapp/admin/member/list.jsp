@@ -27,7 +27,7 @@
 <html lang="ko">
 <head>
 <link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
-<title>회원관리 &#60; 관리자</title>
+<title>회원 관리 &#60; 관리자</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -116,7 +116,6 @@ for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++)
 			</nav>
 			
 			<div class="text-end">
-				<a href="#" class="btn btn-primary btn-sm">판매내역</a>
 				<a href="../center/oneonone/list.jsp" class="btn btn-info btn-sm">문의내역</a>
 			</div>
 		</div>

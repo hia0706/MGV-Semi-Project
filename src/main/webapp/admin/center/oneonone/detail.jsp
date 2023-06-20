@@ -41,7 +41,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>상세페이지 | 1:1 문의내역 &#60; MGV 고객센터</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +64,7 @@
             		<div class="list-group">
   <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
   <a href="../lostitem/list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
-  <a href="insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
+  <a href="list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
     <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
@@ -131,7 +132,7 @@
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
-				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
+				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 		</div>
 	
 			

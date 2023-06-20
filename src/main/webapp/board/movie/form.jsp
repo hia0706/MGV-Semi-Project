@@ -19,7 +19,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title></title>
+<link rel="icon" href="/mgv/images/member/mgv.ico" type="images/x-icon">
+<title>게시글 등록 | 영화 &#60; 영화 그 이상의 감동. MGV</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -74,7 +75,7 @@
 					</div>	
 						<div class="form-group mb-2" style="float: left; width: 33%; padding:10px;">
 							<label class="form-label">영화제목</label>
-							<select class="form-select" name="no" id="MovieNo" >
+							<select class="form-select required" name="no" id="MovieNo" required="required">
 								<option value= 0 selected disabled>제목 선택</option>
 <%
 	for (Movie movie : movies){
