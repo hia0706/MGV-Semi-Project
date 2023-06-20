@@ -77,7 +77,7 @@
 	<div class="row mb-3">
 		<div class="col-12">
 			<p>제목과 내용을 입력하세요</p>		
-			<form class="border bg-light p-3" method="post" action="modify" enctype="multipart/form-data" >
+			<form class="border bg-light p-3" method="post" action="modify" enctype="multipart/form-data">
 				<input type="hidden" name="no" value="<%=boardNo %>">
 				<div class="form-group mb-2">
 					<label class="form-label">제목</label>

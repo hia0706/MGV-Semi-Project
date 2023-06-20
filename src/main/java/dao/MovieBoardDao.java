@@ -76,6 +76,7 @@ public class MovieBoardDao {
 			movieBoard.setCommentCnt(rs.getInt("board_comment_cnt"));
 			movieBoard.setDeleted(rs.getString("board_deleted"));
 			movieBoard.setReport(rs.getString("board_report"));
+			movieBoard.setFileName(rs.getString("BORAD_FILENAME"));
 			
 			Member member = new Member();
 			member.setId(rs.getString("member_id"));
@@ -99,7 +100,8 @@ public class MovieBoardDao {
 														   movieBoard.getContent(),
 														   movieBoard.getGrade(),
 														   movieBoard.getMember().getId(),
-														   movieBoard.getMovie().getNo());
+														   movieBoard.getMovie().getNo(),
+														   movieBoard.getFileName());
 	}
 	
 	public void updateMovieBoard(MovieBoard movieBoard) {
@@ -112,6 +114,20 @@ public class MovieBoardDao {
 													   	  movieBoard.getDeleted(),
 														  movieBoard.getReport(),
 														  movieBoard.getMovie().getNo(),
+														  movieBoard.getNo());
+	} 
+	
+	public void updateMovieBoardFile(MovieBoard movieBoard) {
+		
+		DaoHelper.update("movieBoardDao.updateBoardByNoFile", movieBoard.getName(),
+														  movieBoard.getContent(),
+														  movieBoard.getGrade(),
+														  movieBoard.getReadCnt(),
+														  movieBoard.getCommentCnt(),
+													   	  movieBoard.getDeleted(),
+														  movieBoard.getReport(),
+														  movieBoard.getMovie().getNo(),
+														  movieBoard.getFileName(),
 														  movieBoard.getNo());
 	} 
 	
