@@ -64,7 +64,7 @@
             		<div class="list-group">
   <a href="../home.jsp" class="list-group-item list-group-item-action">고객센터 홈</a>
   <a href="../lostitem/list.jsp" class="list-group-item list-group-item-action">분실물 문의</a>
-  <a href="insertform.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
+  <a href="list.jsp" class="list-group-item list-group-item-action">1:1 문의</a>
   <a href="../faq/list.jsp" class="list-group-item list-group-item-action">자주 묻는 질문</a>
   <a href="../notice/list.jsp" class="list-group-item list-group-item-action">공지사항</a>
     <a class="list-group-item list-group-item-action disabled" style="color:gray; font-size:15px;">
@@ -132,7 +132,7 @@
 		
 		<div style="text-align: center; padding:30px;">
 				<a href="list.jsp" class="btn btn-secondary btn-sm">목록</a>
-				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-secondary btn-sm">삭제</a>
+				<a href="delete.jsp?no=<%=oneonone.getNo() %>" class="btn btn-danger btn-sm">삭제</a>
 		</div>
 	
 			
