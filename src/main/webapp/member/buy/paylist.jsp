@@ -210,7 +210,7 @@
 				let paginationHtmlContent = `<nav>   
 					<ul class="pagination justify-content-center">
 					<li class="page-item \${pagination.page <= 1 ?  'disabled' : ''}">
-						<a href="paylist.jsp?page=\${pagination.pageNo -1}" onclick="goPage(event, \${pagination.page -1})" class="page-link">이전</a>
+						<a href="paylist.jsp?page=\${pagination.page -1}" onclick="goPage(event, \${pagination.page -1})" class="page-link">이전</a>
 					</li>`;
 			
 				for (let num = pagination.beginPage; num <= pagination.endPage; num++) {
