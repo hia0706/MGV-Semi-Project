@@ -24,7 +24,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="/mgv/common/checkUpdate.js"></script>
-<script src="../common/updatePostapi.js"></script>
+<script src="/mgv/common/postapi.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 	#box {
@@ -102,13 +102,13 @@
 								</div>
 							</div>
 							<div class="col-auto">
-								<button type="button" class="btn text-black btn-outline-primary btn-m mb-3" onclick="upPost();">우편번호검색</button>
+								<button type="button" class="btn text-black btn-outline-primary btn-m mb-3" onclick="post();">우편번호검색</button>
 							</div>
 						</div>							
 					</div>
 					<div class="form-group row mb-2" >
 						<div class="col-auto">
-							<input type="text" class="form-control" id="Addr" id="address1" name="address1" value="<%=member.getAddress1() %>" readonly="readonly">
+							<input type="text" class="form-control" id="Addr" name="address1" value="<%=member.getAddress1() %>" readonly="readonly">
 						</div>
 						<div class="col-auto" >
 							<input type="text" class="form-control" id="detailAddr" name="address2" value="<%=member.getAddress2() %>" required>

@@ -34,12 +34,10 @@ function post() {
 				fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ') ' : '');
 			}
 
-			// 입력창에 우편번호 넣기
-			document.form.zipcode.value = data.zonecode;
-			// 입력창에 전체 주소 넣기
-			document.form.address1.value = fullAddr;
-			// 우편번호, 전체주소 입력되면 상세주소로 커서 이동
-			document.form.address2.focus();
+			document.getElementById('zipcode').value = data.zonecode;
+            document.getElementById("Addr").value = fullAddr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("detailAddr").focus();
     	}
     }).open();
 }
