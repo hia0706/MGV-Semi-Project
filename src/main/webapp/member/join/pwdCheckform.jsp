@@ -40,20 +40,8 @@
 			<strong>이용제한</strong> 비밀번호가 일치하지 않습니다.
 		</div>
 <%
-	} else if ("disabled".equals(err)) {
-%>		
-		<div class="alert alert-danger">
-			<strong>이용제한</strong> 탈퇴한 회원은 이용할 수 없습니다.
-		</div>
-<%
-	} else if ("정보수정".equals(err)) {
-%>		
-		<div class="alert alert-danger">
-			<strong>이용제한</strong> [<%=job %>] 서비스는 로그인 후 사용가능한 서비스 입니다. 
-		</div>
-<%
 	} 
-%> 
+%>
    	<div class="row mb-3">
    		<div class="col-12">
    			<p>비밀번호를 입력하고 <strong style="font-size: 20px;"><%=member.getName() %></strong>님의 정보를 변경하세요</p>
