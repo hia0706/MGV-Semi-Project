@@ -42,18 +42,18 @@
 **feature**
 - develop브랜치에서 분기하여 만든다.
 - 각자 이름으로 feature브랜치를 만들며, 브랜치명은 `'feature/이름'`으로 한다.
-        - ex) feature/minsu
+  + ex) feature/minsu
 
 ### `Commit rule`
 
-- **Feat**: 기능 추가, 삭제, 변경(or ✨ emoji) - 제품 코드 수정 발생
-- **Fix**: 버그 수정(or 🚑 emoji) - 제품 코드 수정 발생
-- **Doc**: 문서 추가, 삭제, 변경(or 📚 emoji) - 코드 수정 없음
-- **Style**: 코드 형식, 정렬, 주석 등의 변경, eg; 세미콜론 추가(or 🎨 emoji) - 제품 코드 수정 발생, 하지만 동작에 영향을 주는 변경은 없음
-- **Refactor**: 코드 리펙토링, eg. renaming a variable(or 🚜 emoji) - 제품코드 수정 발생
-- **Test**: 테스트 코드 추가, 삭제, 변경 등(or 🔬 emoji) - 제품 코드 수정 없음. 테스트 코드에 관련된 모든 변경에 해당
-- **Etc**: 위에 해당하지 않는 모든 변경, eg. 빌드 스크립트 수정, 패키지 배포 설정 변경 - 코드 수정 없음
-- **Init**: 첫 프로젝트 커밋
+- `Feat`: 기능 추가, 삭제, 변경(or ✨ emoji) - 제품 코드 수정 발생
+- `Fix`: 버그 수정(or 🚑 emoji) - 제품 코드 수정 발생
+- `Doc`: 문서 추가, 삭제, 변경(or 📚 emoji) - 코드 수정 없음
+- `Style`: 코드 형식, 정렬, 주석 등의 변경, eg; 세미콜론 추가(or 🎨 emoji) - 제품 코드 수정 발생, 하지만 동작에 영향을 주는 변경은 없음
+- `Refactor`: 코드 리펙토링, eg. renaming a variable(or 🚜 emoji) - 제품코드 수정 발생
+- `Test`: 테스트 코드 추가, 삭제, 변경 등(or 🔬 emoji) - 제품 코드 수정 없음. 테스트 코드에 관련된 모든 변경에 해당
+- `Etc`: 위에 해당하지 않는 모든 변경, eg. 빌드 스크립트 수정, 패키지 배포 설정 변경 - 코드 수정 없음
+- `Init`: 첫 프로젝트 커밋
 
 ---
 
