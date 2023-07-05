@@ -10,8 +10,7 @@
 |![](https://avatars.githubusercontent.com/u/94761254?v=4)|![](https://avatars.githubusercontent.com/u/130030785?v=4)|![](https://avatars.githubusercontent.com/u/130140565?v=4)|![](https://avatars.githubusercontent.com/u/130448178?v=4)|![](https://avatars.githubusercontent.com/u/130140763?v=4)|![](https://avatars.githubusercontent.com/u/122660720?v=4)|
 
 ## 📚 STACKS
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><br/>
-<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
 
 ## 🛠Tools 
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/sourcetree-0052CC?style=for-the-badge&logo=sourcetree&logoColor=white">
@@ -72,17 +71,21 @@
 - 관리자는 DB에 등록되어있는 계정만 로그인 할 수 있다.
 
 #### 결제내역
+- 사용자는 결제한 전체내역과 구매/취소 내역을 확인할 수 있고, 취소내역 삭제가 가능하다.
 
 #### 영화
+
 
 #### 극장
 - 사용자는 지역별 극장 목록과 각 극장의 상세 정보를 확인할 수 있고, 자주가는 극장 등록, 삭제가 가능하다..
 - 관리자는 극장 등록, 수정, 삭제를 할 수 있다.
+
 #### 스토어
 - 카테고리 별로 상품을 분류해 해당 카테고리를 클릭 시 카테고리에 맞는 상품목록이 출력된다.
 - 원하는 상품을 클릭 시 해당 상품의 상세페이지를 출력하며 상품의 수량 및 결제금액을 확인할 수 있다.
 
 #### 결제
+
 
 #### 게시판
 - 사용자는 새 게시글을 등록하거나, 댓글 달기, 댓글 삭제, 게시물 수정, 삭제, 신고등을 할 수 있다.
