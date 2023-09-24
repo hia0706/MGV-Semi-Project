@@ -97,4 +97,4 @@
   - 관리자는 사용자가 등록한 분실물 문의, 1:1 문의글에 답변할 수 있고, 영화관 사이트에 자주 묻는 질문, 공지사항을 등록할 수 있다.
 
 ## 설계
-- DB ERD : [Link](https://www.erdcloud.com/d/4nYKSKxkRtdsYwCgh)
+- DB ERD : [Link](https://www.erdcloud.com/d/T3LauhQurW3cthijC)
